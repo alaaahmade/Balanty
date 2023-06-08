@@ -1,8 +1,8 @@
-import express, { Express, json, urlencoded } from "express";
-import cookieParser from "cookie-parser";
-import compression from "compression";
+import express, { Express, json, urlencoded } from 'express';
+import cookieParser from 'cookie-parser';
+import compression from 'compression';
 
-import { router } from "./routes/router";
+import { router } from './routes/router';
 
 const app: Express = express();
 
@@ -13,6 +13,6 @@ app.use([
   cookieParser(),
 ]);
 
-app.use("/api/v1", router);
+app.use('/api/v1', router);
 
 export default app;
