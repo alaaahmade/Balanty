@@ -1,15 +1,13 @@
 import express, { Express, json, urlencoded } from "express";
 import cookieParser from "cookie-parser";
 import compression from "compression";
-import {} from "dotenv/config";
 
 import { router } from "./routes/router";
-
-const PORT = process.env;
+import { PORT } from "./config/environment";
 
 const app: Express = express();
 
-app.set("PORT", 3030 || PORT);
+app.set("PORT", PORT);
 
 app.use([
   json(),
