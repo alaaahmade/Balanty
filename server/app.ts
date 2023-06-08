@@ -1,21 +1,23 @@
-import express, { Express } from 'express';
-import cookieParser from 'cookie-parser';
-import {} from 'dotenv/config';
+import express, { Express, json, urlencoded } from "express";
+import cookieParser from "cookie-parser";
+import compression from "compression";
+import {} from "dotenv/config";
 
-import { router } from './routes/router';
+import { router } from "./routes/router";
 
 const PORT = process.env;
 
-const app : Express = express();
+const app: Express = express();
 
+app.set("PORT", 3030 || PORT);
 
-app.set('PORT', 3030 || PORT );
+app.use([
+  json(),
+  urlencoded({ extended: false }),
+  compression(),
+  cookieParser(),
+]);
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use("/api/v1", router);
 
-app.use('/api/v1', router)
-
-export default app
-
+export default app;
