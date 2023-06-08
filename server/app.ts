@@ -3,11 +3,8 @@ import cookieParser from "cookie-parser";
 import compression from "compression";
 
 import { router } from "./routes/router";
-import { PORT } from "./config/environment";
 
 const app: Express = express();
-
-app.set("PORT", PORT);
 
 app.use([
   json(),

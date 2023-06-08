@@ -1,8 +1,9 @@
+import { ReactElement } from 'react';
 import reactLogo from './assets/react.svg';
 
 import './App.css';
 
-function App() {
+function App(): ReactElement {
   return (
     <>
       <div>
