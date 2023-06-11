@@ -10,7 +10,7 @@
     "build": "tsc",
     "start": "cross-env NODE_ENV=production node ./dist",
     "prepare": "husky install",
-    "postinstall": "cd client && npm i"
+    "postinstall": "git config advice.ignoredHook false && cd client && npm i"
   },
   "devDependencies": {
     "@types/compression": "^1.7.2",
