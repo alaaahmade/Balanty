@@ -14,6 +14,11 @@
     
   ],
   "rules": {
+    "react/function-component-definition": ["error", {
+      "namedComponents": "arrow-function"
+    }],
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
     "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
     "react/react-in-jsx-scope": "off",
     "prettier/prettier": [
