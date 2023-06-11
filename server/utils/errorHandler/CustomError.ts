@@ -3,7 +3,7 @@ class CustomeError extends Error {
 
   constructor(status: number, message: string) {
     super(message);
-    this.status = status
+    this.status = status;
   }
 }
 export default CustomeError;
