@@ -4,10 +4,11 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint server --ext .ts",
-    "format": "eslint server --fix --ext .ts",
-    "dev": "npx nodemon ./server/index.ts",
+    "lint-fix": "eslint server --fix --ext .ts",
+    "dev": "cross-env NODE_ENV=development npx nodemon ./server/index.ts",
     "test": "cross-env NODE_ENV=test jest --runInBand",
-    "start": "tsc && node ./dist",
+    "build": "tsc",
+    "start": "cross-env NODE_ENV=production node ./dist",
     "prepare": "husky install",
     "postinstall": "cd client && npm i"
   },
