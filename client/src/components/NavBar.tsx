@@ -1,6 +1,7 @@
 import { Box, Input, Typography } from '@mui/material';
 import { ReactElement, useState } from 'react';
-import SearchIcon from '@mui/icons-material/Search';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { GiHamburgerMenu } from 'react-icons/gi';
 
 const NavBar = (): ReactElement => {
   const [search, setSearch] = useState('');
@@ -42,8 +43,8 @@ const NavBar = (): ReactElement => {
           zIndex: 2,
         }}
       >
-        <SearchIcon
-          sx={{
+        <AiOutlineSearch
+          style={{
             color: '#3BB64B',
             fontWeight: 'bold',
             fontSize: '30px',
@@ -68,13 +69,11 @@ const NavBar = (): ReactElement => {
         onChange={e => setSearch(e.target.value)}
         placeholder="Search"
       />
-      <img
-        src="icons/burger.png"
-        alt="burger"
+      <GiHamburgerMenu
         style={{
+          color: '#D9D9D9',
           cursor: 'pointer',
-          width: '45px',
-          height: '55px',
+          fontSize: '40px',
         }}
       />
     </Box>
