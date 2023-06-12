@@ -2,16 +2,17 @@ import { Box, Button, Typography } from '@mui/material';
 import { AiFillHome } from 'react-icons/ai';
 import { BsPersonFillAdd, BsFillFilePersonFill } from 'react-icons/bs';
 import { MdStadium } from 'react-icons/md';
+import { ReactElement } from 'react';
 import UserComponent from './UserComponent';
 import SidBarLink from './SidBarLink';
 
-const LeftSideBar = () => {
+const LeftSideBar = (): ReactElement => {
   return (
     <Box
       sx={{
         position: 'absolute',
         width: '250px',
-        minHeight: '1000px',
+        minHeight: '100vh',
         left: '13%',
         top: '13%',
         backgroundColor: '#FFFFFF',
@@ -23,6 +24,7 @@ const LeftSideBar = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        paddingBottom: '20px',
       }}
     >
       <UserComponent />
@@ -43,7 +45,7 @@ const LeftSideBar = () => {
       <Box
         sx={{
           width: '80%',
-          height: '120px',
+          height: '110px',
           backgroundColor: '#D9D9D9',
           borderRadius: '5px',
           mt: '100px',
@@ -77,7 +79,7 @@ const LeftSideBar = () => {
             },
           }}
         >
-          انشاء مباراة{' '}
+          انشاء مباراة
         </Button>
       </Box>
     </Box>

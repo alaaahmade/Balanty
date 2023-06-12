@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
+import { ReactElement } from 'react';
 
-const UserComponent = () => {
+const UserComponent = (): ReactElement => {
   return (
     <Box
       sx={{

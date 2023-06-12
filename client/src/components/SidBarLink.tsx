@@ -1,11 +1,12 @@
 import { Box, Typography } from '@mui/material';
+import { ReactElement } from 'react';
 
 interface SidBarLinkProps {
   text: string;
   icon: React.ReactNode;
 }
 
-const SidBarLink = ({ text, icon }: SidBarLinkProps) => {
+const SidBarLink = ({ text, icon }: SidBarLinkProps): ReactElement => {
   return (
     <Box
       sx={{
