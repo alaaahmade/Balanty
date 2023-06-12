@@ -18,11 +18,6 @@ const TeamName = ({ text }: TeamNameProps): ReactElement => {
         justifyContent: 'center',
         color: '#fff',
         fontSize: '14px',
-        '&:hover': {
-          backgroundColor: 'transparent',
-          color: '#2CB674',
-          border: '1px solid #2CB674',
-        },
       }}
     >
       {text}
