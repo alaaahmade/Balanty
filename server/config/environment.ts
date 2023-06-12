@@ -4,6 +4,7 @@ import { Dialect } from 'sequelize';
 const { DEV_DB_URL, DATABASE_URL, TEST_URL, NODE_ENV } = process.env;
 
 export const { PORT } = process.env || 8080;
+
 export interface connectionOption {
   dialect: Dialect;
   dialictoption?: {
@@ -12,7 +13,7 @@ export interface connectionOption {
 }
 
 if (!NODE_ENV || !DATABASE_URL) {
-  throw new Error('Invalid Enviroment Variables');
+  throw new Error('Invalid Envirnoment Variables');
 }
 export const sequelizeOption: connectionOption = {
   dialect: 'postgres',

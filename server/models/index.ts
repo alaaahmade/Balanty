@@ -1,1 +1,3 @@
-export {};
+import Review from './review';
+
+export { Review };
