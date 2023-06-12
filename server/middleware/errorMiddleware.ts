@@ -1,24 +1,23 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from 'express';
+import { CustomError } from '../utils';
+
 const serverError = (
-  err: unknown,
+  err: CustomError,
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  const errorWithStatus = err as { status: number; message: string };
-  if (typeof err === 'object' && err !== null && 'status' in err) {
-    return res.status(errorWithStatus.status).json({
+  if (err.status) {
+    return res.status(err.status).json({
       error: true,
       data: {
-        status: errorWithStatus.status,
-        message: errorWithStatus.message,
+        status: err.status,
+        message: err.message,
       },
     });
   }
 
-  res
-    .status(500)
-    .json({ error: true, data: { message: errorWithStatus.message } });
+  res.status(500).json({ error: true, data: { message: err.message } });
 };
 export default serverError;
