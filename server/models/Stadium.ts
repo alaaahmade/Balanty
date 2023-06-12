@@ -26,6 +26,6 @@ export const Stadium = stadiumsAttributes.init(
   {
     sequelize,
     modelName: 'stadium',
-    tableName: 'stadium',
+    tableName: 'stadiums',
   },
 );

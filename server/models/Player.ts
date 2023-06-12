@@ -23,6 +23,6 @@ export const Player = playerAttributes.init(
   {
     sequelize,
     modelName: 'player',
-    tableName: 'player',
+    tableName: 'players',
   },
 );
