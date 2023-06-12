@@ -4,19 +4,10 @@ import NavBar from './components/NavBar';
 import './index.css';
 import LeftSideBar from './components/LeftSideBar';
 import RightSideBar from './components/RightSideBar';
+import RootLayout from './layouts/RootLayout';
 
 const App = (): ReactElement => {
-  return (
-    <Box
-      sx={{
-        width: '100%',
-      }}
-    >
-      <NavBar />
-      <LeftSideBar />
-      <RightSideBar />
-    </Box>
-  );
+  return <RootLayout />;
 };
 
 export default App;

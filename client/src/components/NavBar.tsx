@@ -8,7 +8,6 @@ const NavBar = (): ReactElement => {
   return (
     <Box
       sx={{
-        position: 'absolute',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
