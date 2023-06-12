@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
-import { router } from '../../routes/router';
 import CustomError from './CustomError';
 
 const errorMappings: { [name: string]: number } = {
@@ -16,10 +15,10 @@ const errorWrapper = (controller: RequestHandler) => {
     try {
       await controller(req, res, next);
     } catch (error: unknown) {
-      const customeError = error as ErrorType;
-      const status = errorMappings[customeError?.name as string];
-      customeError.status = status;
-      next(customeError);
+      const customError = error as ErrorType;
+      const status = errorMappings[customError?.name as string];
+      customError.status = status;
+      next(customError);
     }
   };
 };

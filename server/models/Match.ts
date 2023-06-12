@@ -1,4 +1,4 @@
-import { Model, DataTypes } from 'sequelize';
+// import { Model, DataTypes } from 'sequelize';
 
 // class Match extends Model {
 //   declare owner: string;
@@ -40,3 +40,4 @@ import { Model, DataTypes } from 'sequelize';
 // );
 
 // export default Match;
+export {};
