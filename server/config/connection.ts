@@ -1,6 +1,5 @@
 import { Sequelize } from 'sequelize';
 import 'dotenv/config';
+import { dbUrl, sequelizeOption } from './environment';
 
-export const sequelize = new Sequelize(
-  'postgres://ecommerce:123@localhost:5432/balanty',
-);
+export const sequelize = new Sequelize(dbUrl, sequelizeOption);

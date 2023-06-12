@@ -1,4 +1,4 @@
-import { stadiums } from './stadiums';
-import { players } from './players';
+import { Stadium } from './Stadium';
+import { Player } from './Player';
 
-export { players, stadiums };
+export { Player, Stadium };
