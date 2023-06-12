@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg';
 
 import './App.css';
 
-function App(): ReactElement {
+const App = (): ReactElement => {
   return (
     <>
       <div>
@@ -22,6 +22,6 @@ function App(): ReactElement {
       </p>
     </>
   );
-}
+};
 
 export default App;
