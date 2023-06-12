@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../config/connection';
+import { sequelize } from '../database';
 
 class playerAttributes extends Model {
   declare email: string;
@@ -10,7 +10,6 @@ class playerAttributes extends Model {
   declare position: string;
   declare cover: string;
 }
-
 export const Player = playerAttributes.init(
   {
     email: { type: DataTypes.STRING, allowNull: false },

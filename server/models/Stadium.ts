@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../config/connection';
+import { sequelize } from '../database';
 
 class stadiumsAttributes extends Model {
   declare name: string;
