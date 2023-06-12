@@ -5,15 +5,15 @@ const { DEV_DB_URL, DATABASE_URL, TEST_URL, NODE_ENV } = process.env;
 
 export const { PORT } = process.env || 8080;
 
-export interface connectionOption {
+interface connectionOption {
   dialect: Dialect;
-  dialictoption?: {
+  dialectOption?: {
     ssl: boolean | object;
   };
 }
 
 if (!NODE_ENV || !DATABASE_URL) {
-  throw new Error('Invalid Envirnoment Variables');
+  throw new Error('Invalid Environment Variables');
 }
 export const sequelizeOption: connectionOption = {
   dialect: 'postgres',
@@ -23,7 +23,7 @@ export let dbUrl = '';
 
 if (NODE_ENV === 'production' && DATABASE_URL) {
   dbUrl = DATABASE_URL;
-  sequelizeOption.dialictoption = { ssl: { rejectUnauthorized: false } };
+  sequelizeOption.dialectOption = { ssl: { rejectUnauthorized: false } };
 } else if (NODE_ENV === 'development' && DEV_DB_URL) {
   dbUrl = DEV_DB_URL;
 } else if (NODE_ENV === 'test' && TEST_URL) {

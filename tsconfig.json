@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+   
     "outDir": "./dist",
     "rootDir": "./server",
     "target": "es2021",
@@ -27,7 +28,7 @@
     "typeRoots": [
       "node_modules/@types"
     ],
-    "module": "commonjs",
+    "module": "CommonJS",
     "declaration": true,
 
   },
