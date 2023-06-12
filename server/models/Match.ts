@@ -1,6 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
 
-
 // class Match extends Model {
 //   declare owner: string;
 //   declare title: Text;
