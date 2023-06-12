@@ -19,7 +19,7 @@
 
 ### Stadium owner
 
-- As a stadium owner,I want to add my stadium to Balanty, providing detailed information such as location, facilities, pricing, and availability, to showcase my venue to potential users.
+- As a stadium owner, I want to add my stadium to Balanty, providing detailed information such as location, facilities, pricing, and availability, to showcase my venue to potential users.
 - As a stadium owner, I want to update the details of my stadium on Balanty, including any new features or amenities that have been added, to attract more users and provide accurate information.
 - As a stadium owner, I want to create a match on Balanty, specifying the date, time, and duration, to showcase my stadium as a venue for football matches and attract interested teams or players.
 - As a stadium owner, I want to receive booking requests through Balanty, allowing users to request to book my stadium for their matches, ensuring efficient management of the booking process.
@@ -77,8 +77,8 @@ Throughout their journey as a stadium owner on Balanty, the user benefits from t
 
 
 ## **Prototype**
+[View Prototype](https://www.figma.com/file/9sp7RCGi8lRZtMDkWyidPF/football-community?type=design&t=PqEwnnR8xFvnxz65-0)
 
-[View Prototype]()
 ## **SQL Scheme**
 ![](https://hackmd.io/_uploads/S1f4OLVw2.png)
 
@@ -124,4 +124,3 @@ Throughout their journey as a stadium owner on Balanty, the user benefits from t
 
 
 ## **Resources** 
-
