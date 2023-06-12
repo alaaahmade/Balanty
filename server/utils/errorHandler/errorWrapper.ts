@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
-import CustomError from './CustomError'
+import CustomError from './CustomError';
 
 const errorMappings: { [name: string]: number } = {
   JsonWebTokenError: 401,
@@ -8,7 +8,7 @@ const errorMappings: { [name: string]: number } = {
   NotFound: 404,
 };
 
-type ErrorType = InstanceType<typeof CustomError> 
+type ErrorType = InstanceType<typeof CustomError>;
 
 const errorWrapper = (controller: RequestHandler) => {
   return async (req: Request, res: Response, next: NextFunction) => {
