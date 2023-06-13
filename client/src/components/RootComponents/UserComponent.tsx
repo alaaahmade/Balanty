@@ -1,19 +1,11 @@
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { ReactElement } from 'react';
+import { StyledImag, StyledUserComponent } from '../index';
 
 const UserComponent = (): ReactElement => {
   return (
-    <Box
+    <StyledUserComponent
       sx={{
-        width: '190px',
-        height: '50px',
-        background: '#D9D9D9',
-        borderRadius: '5px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '15px',
-        border: '0.1px solid rgb(133 133 133)',
         mt: '25px',
       }}
     >
@@ -28,17 +20,11 @@ const UserComponent = (): ReactElement => {
       >
         نيمار مزيف
       </Typography>
-      <img
+      <StyledImag
         src="https://static.dw.com/image/54662995_101.jpg"
         alt="userImage"
-        style={{
-          width: '35px',
-          height: '35px',
-          borderRadius: '50%',
-          outline: '2px solid rgb(133 133 133)',
-        }}
       />
-    </Box>
+    </StyledUserComponent>
   );
 };
 

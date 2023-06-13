@@ -1,86 +1,46 @@
-import { Box, Button, Typography } from '@mui/material';
 import { AiFillHome } from 'react-icons/ai';
 import { BsPersonFillAdd, BsFillFilePersonFill } from 'react-icons/bs';
 import { MdStadium } from 'react-icons/md';
 import { ReactElement } from 'react';
 import UserComponent from './UserComponent';
 import SidBarLink from './SidBarLink';
+import {
+  CreateMatchBox,
+  Line,
+  SidBox,
+  StyledButton,
+  StyledTypography,
+} from '../index';
 
 const LeftSideBar = (): ReactElement => {
   return (
-    <Box
+    <SidBox
       sx={{
-        position: 'absolute',
-        width: '270px',
-        minHeight: 'calc(100vh - 65px)',
-        left: '0em',
-        top: '4.1em',
-        backgroundColor: '#FFFFFF',
+        left: 0,
         borderRight: '0.4px solid #ccc',
         boxShadow: '5px 4px 4px rgba(0, 0, 0, 0.15)',
-        borderTop: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        paddingBottom: '20px',
       }}
     >
       <UserComponent />
 
-      <p
-        style={{
-          width: '100%',
-          height: '0.5px',
-          backgroundColor: '#2CB674',
-          marginTop: '30px',
-        }}
-      />
+      <Line />
+
       <SidBarLink text="الصفحة الرئيسية" icon={<AiFillHome />} />
       <SidBarLink text="اللاعبين" icon={<BsPersonFillAdd />} />
       <SidBarLink text="الملاعب" icon={<MdStadium />} />
       <SidBarLink text="اخر اللاعبين" icon={<BsFillFilePersonFill />} />
 
-      <Box
+      <CreateMatchBox
         sx={{
-          width: '80%',
-          height: '110px',
-          backgroundColor: '#D9D9D9',
-          borderRadius: '5px',
           mt: '120px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
         }}
       >
-        <Typography
-          sx={{
-            fontSize: '12px',
-            width: '80%',
-            textAlign: 'center',
-          }}
-        >
+        <StyledTypography>
           يمكنك انشاء مباراة ودعوة اصدقائك للانضمام اليك
-        </Typography>
-        <Button
-          sx={{
-            width: '135px',
-            height: '35px',
-            background: '#2CB674',
-            borderRadius: '5px',
-            gap: '10px',
-            color: '#fff',
-            '&:hover': {
-              backgroundColor: 'transparent',
-              color: '#2CB674',
-              border: '1px solid #2CB674',
-            },
-          }}
-        >
-          انشاء مباراة
-        </Button>
-      </Box>
-    </Box>
+        </StyledTypography>
+        <StyledButton>انشاء مباراة</StyledButton>
+      </CreateMatchBox>
+    </SidBox>
   );
 };
 
