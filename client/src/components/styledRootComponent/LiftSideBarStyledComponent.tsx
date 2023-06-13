@@ -44,5 +44,6 @@ export const StyledSidBarLink = styled(Box)({
   '&:hover': {
     color: '#2CB674',
     outline: '1px solid #2CB674',
+    padding: '5px 10px',
   },
 });

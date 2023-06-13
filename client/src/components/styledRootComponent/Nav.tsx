@@ -40,7 +40,7 @@ export const StyledMnu = styled(GiHamburgerMenu)({
   color: '#D9D9D9',
   cursor: 'pointer',
   fontSize: '40px',
-  width: '100px',
+  marginRight: '70px',
 });
 
 export const StyledLabel = styled('label')({

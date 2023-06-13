@@ -12,7 +12,8 @@ const NavBar = (): ReactElement => {
   const [search, setSearch] = useState('');
   return (
     <StyledNavBox>
-      <StyledLogo>Logo</StyledLogo>
+      <StyledMnu />
+
       <StyledLabel htmlFor="search">
         <AiOutlineSearch
           style={{
@@ -30,7 +31,7 @@ const NavBar = (): ReactElement => {
         placeholder="Search"
       />
 
-      <StyledMnu />
+      <StyledLogo>Logo</StyledLogo>
     </StyledNavBox>
   );
 };

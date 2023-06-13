@@ -6,7 +6,12 @@ import { LeftSideBar, RightSideBar } from '../components';
 
 const RootLayout = () => {
   return (
-    <Box>
+    <Box
+      sx={{
+        position: 'fixed',
+        width: '100%',
+      }}
+    >
       <NavBar />
       <LeftSideBar />
       <RightSideBar />
