@@ -2,18 +2,23 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../database';
 
 class MatchAttributes extends Model {
-  declare owner: string;
+  declare owner_id: number;
   declare title: string;
   declare desctiption: string;
   declare time: Date;
-  declare seats: boolean;
+  declare seats: number;
+  declare is_player: boolean;
   declare players_id: number;
 }
 
 export const Match = MatchAttributes.init(
   {
-    owner: {
-      type: DataTypes.STRING(50),
+    is_player: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
+    owner_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     title: {
@@ -32,6 +37,7 @@ export const Match = MatchAttributes.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+
   },
   { sequelize, modelName: 'Match', tableName: 'matches' },
 );
