@@ -1,3 +1,3 @@
-import { sequelize } from './conection';
+import { sequelize } from './connection';
 
 export { sequelize };
