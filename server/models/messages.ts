@@ -2,7 +2,6 @@ import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../database/config/connection';
 
 class MessageDatatypes extends Model {
-  declare id: number;
   declare player_id: number;
   declare match_id: number;
   declare message: string;
@@ -11,21 +10,21 @@ class MessageDatatypes extends Model {
 export const Message = MessageDatatypes.init(
   {
     username: { type: DataTypes.STRING(50), allowNull: false },
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-      allowNull: false,
-    },
     player_id: {
       type: DataTypes.INTEGER,
-      autoIncrement: true,
       allowNull: false,
+      references: {
+        model: 'Player',
+        key: 'id',
+      },
     },
     match_id: {
       type: DataTypes.INTEGER,
-      autoIncrement: true,
       allowNull: false,
+      references: {
+        model: 'Match',
+        key: 'id',
+      },
     },
     message: {
       type: DataTypes.TEXT,
@@ -36,5 +35,6 @@ export const Message = MessageDatatypes.init(
     sequelize,
     modelName: 'Message',
     tableName: 'chat',
+    timestamps: true,
   },
 );
