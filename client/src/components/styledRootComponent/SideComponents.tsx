@@ -1,7 +1,7 @@
 import { Button, Typography } from '@mui/material';
 import { Box, styled } from '@mui/system';
 
-export const SidBox = styled(Box)({
+export const SideBox = styled(Box)({
   position: 'absolute',
   width: '270px',
   minHeight: 'calc(100vh - 65px)',

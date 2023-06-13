@@ -1,15 +1,15 @@
 import { Typography } from '@mui/material';
 import { ReactElement } from 'react';
-import { StyledSidBarLink } from '../../index';
+import { StyledSideBarLink } from '../../index';
 
-interface SidBarLinkProps {
+interface SideBarLinkProps {
   text: string;
   icon: React.ReactNode;
 }
 
-const SidBarLink = ({ text, icon }: SidBarLinkProps): ReactElement => {
+const SideBarLink = ({ text, icon }: SideBarLinkProps): ReactElement => {
   return (
-    <StyledSidBarLink
+    <StyledSideBarLink
       sx={{
         mt: '30px',
       }}
@@ -23,8 +23,8 @@ const SidBarLink = ({ text, icon }: SidBarLinkProps): ReactElement => {
         {text}
       </Typography>
       {icon}
-    </StyledSidBarLink>
+    </StyledSideBarLink>
   );
 };
 
-export default SidBarLink;
+export default SideBarLink;

@@ -1,11 +1,11 @@
 import { Typography } from '@mui/material';
 import { ReactElement } from 'react';
 
-interface RightSidBarTitleProps {
+interface RightSideBarTitleProps {
   title: string;
 }
 
-const RightSidBarTitle = ({ title }: RightSidBarTitleProps): ReactElement => {
+const RightSideBarTitle = ({ title }: RightSideBarTitleProps): ReactElement => {
   return (
     <Typography
       sx={{
@@ -19,4 +19,4 @@ const RightSidBarTitle = ({ title }: RightSidBarTitleProps): ReactElement => {
   );
 };
 
-export default RightSidBarTitle;
+export default RightSideBarTitle;

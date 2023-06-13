@@ -1,10 +1,10 @@
 import { Typography } from '@mui/material';
 import { ReactElement } from 'react';
-import { StyledImag, StyledUserComponent } from '../../index';
+import { StyledImag, StyledUserCart } from '../../index';
 
-const UserComponent = (): ReactElement => {
+const UserCart = (): ReactElement => {
   return (
-    <StyledUserComponent
+    <StyledUserCart
       sx={{
         mt: '25px',
       }}
@@ -24,8 +24,8 @@ const UserComponent = (): ReactElement => {
         src="https://static.dw.com/image/54662995_101.jpg"
         alt="userImage"
       />
-    </StyledUserComponent>
+    </StyledUserCart>
   );
 };
 
-export default UserComponent;
+export default UserCart;

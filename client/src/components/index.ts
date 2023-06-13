@@ -5,13 +5,13 @@ export {
   StyledTypography,
   StyledButton,
   Line,
-  SidBox,
+  SideBox,
 } from './styledRootComponent/SideComponents';
 
 export {
-  StyledSidBarLink,
+  StyledSideBarLink,
   StyledImag,
-  StyledUserComponent,
+  StyledUserCart,
   CreateMatchBox,
 } from './styledRootComponent/LiftSideBarStyledComponent';
 

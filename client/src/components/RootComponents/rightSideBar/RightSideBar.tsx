@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
 import MyMatches from './MyMatches';
-import RightSidBarTitle from './RightSidBarTitle';
+import RightSideBarTitle from './RightSideBarTitle';
 import WorldMatch from './WorldMatch';
-import { Line, SidBox } from '../../index';
+import { Line, SideBox } from '../../index';
 
 const matches = [
   {
@@ -21,14 +21,14 @@ const matches = [
 
 const RightSideBar = (): ReactElement => {
   return (
-    <SidBox
+    <SideBox
       sx={{
         right: '0px',
         borderLeft: '0.4px solid #ccc',
         boxShadow: '-5px 4px 4px rgba(0, 0, 0, 0.15)',
       }}
     >
-      <RightSidBarTitle title="مبارياتي" />
+      <RightSideBarTitle title="مبارياتي" />
 
       <Line />
       {matches.length &&
@@ -50,7 +50,7 @@ const RightSideBar = (): ReactElement => {
         }}
       />
 
-      <RightSidBarTitle title="المباريات العالمية" />
+      <RightSideBarTitle title="المباريات العالمية" />
       <Line
         sx={{
           mt: '15px',
@@ -59,7 +59,7 @@ const RightSideBar = (): ReactElement => {
 
       <WorldMatch />
       <WorldMatch />
-    </SidBox>
+    </SideBox>
   );
 };
 

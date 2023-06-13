@@ -13,7 +13,7 @@ export const CreateMatchBox = styled(Box)({
   justifyContent: 'center',
 });
 
-export const StyledUserComponent = styled(Box)({
+export const StyledUserCart = styled(Box)({
   width: '190px',
   height: '50px',
   background: '#D9D9D9',
@@ -32,7 +32,7 @@ export const StyledImag = styled('img')({
   outline: '2px solid rgb(133 133 133)',
 });
 
-export const StyledSidBarLink = styled(Box)({
+export const StyledSideBarLink = styled(Box)({
   width: '70%',
   display: 'flex',
   alignItems: 'center',
