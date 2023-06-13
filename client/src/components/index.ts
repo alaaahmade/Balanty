@@ -1,21 +1,31 @@
-export { default as LeftSideBar } from './RootComponents/LeftSideBar';
-export { default as RightSideBar } from './RootComponents/RightSideBar';
+export { default as LeftSideBar } from './RootComponents/leftSideBar/LeftSideBar';
+export { default as RightSideBar } from './RootComponents/rightSideBar/RightSideBar';
+
 export {
-  SidBox,
-  Line,
-  CreateMatchBox,
-  StyledButton,
   StyledTypography,
-  StyledUserComponent,
-  StyledImag,
+  StyledButton,
+  Line,
+  SidBox,
+} from './styledRootComponent/SideComponents';
+
+export {
   StyledSidBarLink,
-  StyledMyMatches,
-  StyledWorldMatches,
-  StyledTeamBox,
+  StyledImag,
+  StyledUserComponent,
+  CreateMatchBox,
+} from './styledRootComponent/LiftSideBarStyledComponent';
+
+export {
   StyledTeamName,
+  StyledTeamBox,
+  StyledWorldMatches,
+  StyledMyMatches,
+} from './styledRootComponent/RightSideBarStyldComponent';
+
+export {
   StyledNavBox,
   StyledLogo,
   StyledSearchInput,
   StyledMnu,
   StyledLabel,
-} from './styledComponent/styledComponent';
+} from './styledRootComponent/Nav';

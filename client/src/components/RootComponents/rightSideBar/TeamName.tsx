@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { StyledTeamName } from '../index';
+import { StyledTeamName } from '../../index';
 
 interface TeamNameProps {
   text: string;

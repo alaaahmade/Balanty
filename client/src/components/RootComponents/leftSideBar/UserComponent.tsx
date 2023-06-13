@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import { ReactElement } from 'react';
-import { StyledImag, StyledUserComponent } from '../index';
+import { StyledImag, StyledUserComponent } from '../../index';
 
 const UserComponent = (): ReactElement => {
   return (

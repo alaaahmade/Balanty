@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import { ReactElement } from 'react';
-import { StyledSidBarLink } from '../index';
+import { StyledSidBarLink } from '../../index';
 
 interface SidBarLinkProps {
   text: string;

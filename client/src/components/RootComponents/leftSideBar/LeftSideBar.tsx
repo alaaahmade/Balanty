@@ -10,7 +10,7 @@ import {
   SidBox,
   StyledButton,
   StyledTypography,
-} from '../index';
+} from '../../index';
 
 const LeftSideBar = (): ReactElement => {
   return (

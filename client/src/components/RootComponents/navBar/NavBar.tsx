@@ -6,7 +6,7 @@ import {
   StyledSearchInput,
   StyledMnu,
   StyledLabel,
-} from '../index';
+} from '../../index';
 
 const NavBar = (): ReactElement => {
   const [search, setSearch] = useState('');
@@ -29,6 +29,7 @@ const NavBar = (): ReactElement => {
         onChange={e => setSearch(e.target.value)}
         placeholder="Search"
       />
+
       <StyledMnu />
     </StyledNavBox>
   );

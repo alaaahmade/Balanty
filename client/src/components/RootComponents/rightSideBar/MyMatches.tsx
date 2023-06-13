@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import { ReactElement } from 'react';
-import { StyledButton, StyledMyMatches } from '../index';
+import { StyledButton, StyledMyMatches } from '../../index';
 
 interface MyMatchesProps {
   stadium: string;

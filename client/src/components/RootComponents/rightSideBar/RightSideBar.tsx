@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import MyMatches from './MyMatches';
 import RightSidBarTitle from './RightSidBarTitle';
 import WorldMatch from './WorldMatch';
-import { Line, SidBox } from '../index';
+import { Line, SidBox } from '../../index';
 
 const matches = [
   {

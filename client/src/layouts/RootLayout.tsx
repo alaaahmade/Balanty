@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
-import NavBar from '../components/RootComponents/NavBar';
+import NavBar from '../components/RootComponents/navBar/NavBar';
 import { LeftSideBar, RightSideBar } from '../components';
 
 const RootLayout = () => {

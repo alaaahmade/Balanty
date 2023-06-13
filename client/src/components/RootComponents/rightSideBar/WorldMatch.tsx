@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import { ReactElement } from 'react';
 import TeamName from './TeamName';
-import { StyledTeamBox, StyledWorldMatches } from '../index';
+import { StyledTeamBox, StyledWorldMatches } from '../../index';
 
 const WorldMatch = (): ReactElement => {
   return (
