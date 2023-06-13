@@ -13,7 +13,6 @@ Player.belongsToMany(Match, {
   foreignKey: 'player_id',
 });
 
-
 const build = () => {
   sequelize.sync({ force: true });
 };
