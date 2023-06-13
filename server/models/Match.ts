@@ -9,6 +9,7 @@ class MatchAttributes extends Model {
   declare seats: number;
   declare is_player: boolean;
   declare players_id: number;
+  declare conversation_id: number;
 }
 
 export const Match = MatchAttributes.init(
@@ -18,6 +19,10 @@ export const Match = MatchAttributes.init(
       allowNull: false,
     },
     owner_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    conversation_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
