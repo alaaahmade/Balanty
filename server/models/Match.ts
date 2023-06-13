@@ -1,7 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../database';
 
-
 class MatchAttributes extends Model {
   declare owner: string;
   declare title: string;
