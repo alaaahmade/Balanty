@@ -37,7 +37,6 @@ export const Match = MatchAttributes.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-
   },
   { sequelize, modelName: 'Match', tableName: 'matches' },
 );
