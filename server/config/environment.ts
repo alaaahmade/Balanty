@@ -4,6 +4,7 @@ import { Dialect } from 'sequelize';
 const { DEV_DB_URL, DATABASE_URL, TEST_URL, NODE_ENV } = process.env;
 
 export const { PORT } = process.env || 8080;
+
 interface connectionOption {
   dialect: Dialect;
   dialectOption?: {
