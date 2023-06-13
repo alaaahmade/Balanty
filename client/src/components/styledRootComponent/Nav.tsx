@@ -39,7 +39,7 @@ export const StyledSearchInput = styled(Input)({
 export const StyledMnu = styled(GiHamburgerMenu)({
   color: '#D9D9D9',
   cursor: 'pointer',
-  fontSize: '40px',
+  fontSize: '30px',
   marginRight: '70px',
 });
 
