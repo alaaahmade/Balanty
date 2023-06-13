@@ -6,7 +6,7 @@ const WorldMatch = (): ReactElement => {
   return (
     <Box
       sx={{
-        width: '204px',
+        width: '90%',
         height: '80px',
         backgroundColor: '#D9D9D9',
         borderRadius: '5px',
@@ -16,13 +16,21 @@ const WorldMatch = (): ReactElement => {
         mt: '15px',
       }}
     >
-      <Typography>الساعة: 12:00</Typography>
+      <Typography
+        sx={{
+          mt: '5px',
+        }}
+      >
+        الساعة: 12:00
+      </Typography>
       <Box
         sx={{
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          p: '8px',
+          justifyContent: 'space-evenly',
+          width: '100%',
+          p: '10px',
+          fontWeight: 'bold',
+          fontSize: '14px',
         }}
       >
         <TeamName text="ريال مدريد" />

@@ -20,7 +20,6 @@ const UserComponent = (): ReactElement => {
       <Typography
         sx={{
           fontWeight: 'bold',
-          textDecoration: 'underline',
           transition: '0.2s',
           '&:hover': {
             color: '#2CB674',

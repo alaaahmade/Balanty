@@ -1,13 +1,15 @@
 import { ReactElement } from 'react';
-import { Box } from '@mui/material';
-import NavBar from './components/NavBar';
 import './index.css';
-import LeftSideBar from './components/LeftSideBar';
-import RightSideBar from './components/RightSideBar';
+import { ThemeProvider } from '@emotion/react';
 import RootLayout from './layouts/RootLayout';
+import LightTheme from './themes/LightTheme';
 
 const App = (): ReactElement => {
-  return <RootLayout />;
+  return (
+    <ThemeProvider theme={LightTheme}>
+      <RootLayout />
+    </ThemeProvider>
+  );
 };
 
 export default App;

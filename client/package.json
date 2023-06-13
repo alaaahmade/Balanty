@@ -12,6 +12,7 @@
     "start": "vite"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.5",
     "@mui/types": "^7.2.4",

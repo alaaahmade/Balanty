@@ -17,7 +17,7 @@ const TeamName = ({ text }: TeamNameProps): ReactElement => {
         alignItems: 'center',
         justifyContent: 'center',
         color: '#fff',
-        fontSize: '14px',
+        fontSize: '12px',
       }}
     >
       {text}

@@ -37,7 +37,7 @@ const NavBar = (): ReactElement => {
         htmlFor="search"
         style={{
           position: 'absolute',
-          left: '67%',
+          left: '66%',
           top: '17px',
           zIndex: 2,
         }}
@@ -73,6 +73,7 @@ const NavBar = (): ReactElement => {
           color: '#D9D9D9',
           cursor: 'pointer',
           fontSize: '40px',
+          width: '100px',
         }}
       />
     </Box>

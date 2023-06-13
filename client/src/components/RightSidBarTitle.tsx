@@ -11,7 +11,6 @@ const RightSidBarTitle = ({ title }: RightSidBarTitleProps): ReactElement => {
       sx={{
         fontWeight: 'bold',
         fontSize: '18px',
-        textDecoration: 'underline',
         mt: '15px',
       }}
     >

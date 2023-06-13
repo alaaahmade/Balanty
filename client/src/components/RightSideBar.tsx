@@ -1,26 +1,38 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { ReactElement } from 'react';
+import { Link } from 'react-router-dom';
 import MyMatches from './MyMatches';
 import RightSidBarTitle from './RightSidBarTitle';
 import WorldMatch from './WorldMatch';
 
-const matches = ['الساحة', 'الساحة', 'الساحة', 'الساحة', 'الساحة'];
+const matches = [
+  {
+    id: 1,
+    title: 'الساحة',
+  },
+  {
+    id: 2,
+    title: 'الساحة',
+  },
+  {
+    id: 3,
+    title: 'الساحة',
+  },
+];
 
 const RightSideBar = (): ReactElement => {
   return (
     <Box
       sx={{
         position: 'absolute',
-        width: '250px',
-        minHeight: '100vh',
-        right: '10em',
-        top: '5em',
+        width: '270px',
+        minHeight: 'calc(100vh - 65px)',
+        right: '0em',
+        top: '4.1em',
         backgroundColor: '#FFFFFF',
-        borderWidth: ' 0.4px 0.4px 0.4px 0.4px',
-        borderStyle: 'solid',
-        borderColor: '#000000',
+        borderLeft: '0.4px solid #ccc',
         boxShadow: '-5px 4px 4px rgba(0, 0, 0, 0.15)',
-        borderRadius: '5px',
+        borderTop: 0,
         display: 'flex',
         flexDirection: 'column',
         paddingBottom: '20px',
@@ -37,7 +49,19 @@ const RightSideBar = (): ReactElement => {
           marginTop: '15px',
         }}
       />
-      {matches.length && matches.map(match => <MyMatches stadium={match} />)}
+      {matches.length &&
+        matches.map((match, i) => (
+          <MyMatches key={match.id} stadium={match.title} />
+        ))}
+      <a
+        href="myMatches"
+        style={{
+          color: '#2CB674',
+          marginTop: '15px',
+        }}
+      >
+        المزيد
+      </a>
       <p
         style={{
           width: '100%',
@@ -55,7 +79,6 @@ const RightSideBar = (): ReactElement => {
           marginTop: '15px',
         }}
       />
-      <WorldMatch />
       <WorldMatch />
       <WorldMatch />
     </Box>

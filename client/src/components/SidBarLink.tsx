@@ -15,7 +15,7 @@ const SidBarLink = ({ text, icon }: SidBarLinkProps): ReactElement => {
         alignItems: 'center',
         justifyContent: 'flex-end',
         gap: '20px',
-        mt: '20px',
+        mt: '30px',
         fontSize: '25px',
         cursor: 'pointer',
         transition: '0.2s',
@@ -27,7 +27,6 @@ const SidBarLink = ({ text, icon }: SidBarLinkProps): ReactElement => {
     >
       <Typography
         sx={{
-          textDecoration: 'underline',
           fontWeight: 'bold',
           fontSize: '16px',
         }}

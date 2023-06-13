@@ -9,7 +9,7 @@ const MyMatches = ({ stadium }: MyMatchesProps): ReactElement => {
   return (
     <Box
       sx={{
-        width: '204px',
+        width: '90%',
         height: '46px',
         backgroundColor: '#D9D9D9',
         borderRadius: '5px',
@@ -17,12 +17,12 @@ const MyMatches = ({ stadium }: MyMatchesProps): ReactElement => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 10px',
+        padding: '0 15px',
       }}
     >
       <Button
         sx={{
-          width: '58px',
+          width: '65px',
           height: '30px',
           background: '#2CB674',
           borderRadius: '5px',
@@ -39,7 +39,6 @@ const MyMatches = ({ stadium }: MyMatchesProps): ReactElement => {
       </Button>
       <Typography
         sx={{
-          textDecoration: 'underline',
           fontWeight: 'bold',
         }}
       >
