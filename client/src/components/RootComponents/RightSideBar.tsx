@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
 import { ReactElement } from 'react';
-import { Link } from 'react-router-dom';
 import MyMatches from './MyMatches';
 import RightSidBarTitle from './RightSidBarTitle';
 import WorldMatch from './WorldMatch';
@@ -50,7 +49,7 @@ const RightSideBar = (): ReactElement => {
         }}
       />
       {matches.length &&
-        matches.map((match, i) => (
+        matches.map(match => (
           <MyMatches key={match.id} stadium={match.title} />
         ))}
       <a
