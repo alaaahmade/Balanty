@@ -4,8 +4,8 @@ export { default as RightSideBar } from './RootComponents/rightSideBar/RightSide
 export {
   StyledTypography,
   StyledButton,
-  Line,
   SideBox,
+  BorderBox,
 } from './styledRootComponent/SideComponents';
 
 export {

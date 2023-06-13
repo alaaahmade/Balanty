@@ -28,6 +28,7 @@ export const StyledUserCart = styled(Box)({
 export const StyledImag = styled('img')({
   width: '35px',
   height: '35px',
+  cursor: 'pointer',
   borderRadius: '50%',
   outline: '2px solid rgb(133 133 133)',
 });

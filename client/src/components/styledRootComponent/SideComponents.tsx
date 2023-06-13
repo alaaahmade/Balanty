@@ -14,13 +14,6 @@ export const SideBox = styled(Box)({
   paddingBottom: '20px',
 });
 
-export const Line = styled('p')({
-  width: '100%',
-  height: '0.5px',
-  backgroundColor: '#2CB674',
-  marginTop: '30px',
-});
-
 export const StyledButton = styled(Button)({
   width: '135px',
   height: '35px',
@@ -39,4 +32,12 @@ export const StyledTypography = styled(Typography)({
   fontSize: '12px',
   width: '80%',
   textAlign: 'center',
+});
+
+export const BorderBox = styled(Box)({
+  width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderBottom: '1px solid #2CB674',
 });

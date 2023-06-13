@@ -1,30 +1,37 @@
 import { Typography } from '@mui/material';
 import { ReactElement } from 'react';
-import { StyledImag, StyledUserCart } from '../../index';
+import { BorderBox, StyledImag, StyledUserCart } from '../../index';
 
 const UserCart = (): ReactElement => {
   return (
-    <StyledUserCart
+    <BorderBox
       sx={{
-        mt: '25px',
+        pb: '30px',
       }}
     >
-      <Typography
+      <StyledUserCart
         sx={{
-          fontWeight: 'bold',
-          transition: '0.2s',
-          '&:hover': {
-            color: '#2CB674',
-          },
+          mt: '25px',
         }}
       >
-        نيمار مزيف
-      </Typography>
-      <StyledImag
-        src="https://static.dw.com/image/54662995_101.jpg"
-        alt="userImage"
-      />
-    </StyledUserCart>
+        <Typography
+          sx={{
+            fontWeight: 'bold',
+            transition: '0.2s',
+            cursor: 'pointer',
+            '&:hover': {
+              color: '#2CB674',
+            },
+          }}
+        >
+          نيمار مزيف
+        </Typography>
+        <StyledImag
+          src="https://static.dw.com/image/54662995_101.jpg"
+          alt="userImage"
+        />
+      </StyledUserCart>
+    </BorderBox>
   );
 };
 

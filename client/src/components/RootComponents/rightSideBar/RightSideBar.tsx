@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import MyMatches from './MyMatches';
 import RightSideBarTitle from './RightSideBarTitle';
 import WorldMatch from './WorldMatch';
-import { Line, SideBox } from '../../index';
+import { BorderBox, SideBox } from '../../index';
 
 const matches = [
   {
@@ -28,9 +28,14 @@ const RightSideBar = (): ReactElement => {
         boxShadow: '-5px 4px 4px rgba(0, 0, 0, 0.15)',
       }}
     >
-      <RightSideBarTitle title="مبارياتي" />
+      <BorderBox
+        sx={{
+          pb: '30px',
+        }}
+      >
+        <RightSideBarTitle title="مبارياتي" />
+      </BorderBox>
 
-      <Line />
       {matches.length &&
         matches.map(match => (
           <MyMatches key={match.id} stadium={match.title} />
@@ -44,18 +49,14 @@ const RightSideBar = (): ReactElement => {
       >
         المزيد
       </a>
-      <Line
+      <BorderBox
         sx={{
-          mt: '15px',
+          pb: '20px',
+          borderTop: '1px solid #2CB674',
         }}
-      />
-
-      <RightSideBarTitle title="المباريات العالمية" />
-      <Line
-        sx={{
-          mt: '15px',
-        }}
-      />
+      >
+        <RightSideBarTitle title="المباريات العالمية" />
+      </BorderBox>
 
       <WorldMatch />
       <WorldMatch />

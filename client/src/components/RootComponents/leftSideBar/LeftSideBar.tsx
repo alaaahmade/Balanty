@@ -6,7 +6,6 @@ import UserCart from './UserCart';
 import SideBarLink from './SideBarLink';
 import {
   CreateMatchBox,
-  Line,
   SideBox,
   StyledButton,
   StyledTypography,
@@ -22,8 +21,6 @@ const LeftSideBar = (): ReactElement => {
       }}
     >
       <UserCart />
-
-      <Line />
 
       <SideBarLink text="الصفحة الرئيسية" icon={<AiFillHome />} />
       <SideBarLink text="اللاعبين" icon={<BsPersonFillAdd />} />
