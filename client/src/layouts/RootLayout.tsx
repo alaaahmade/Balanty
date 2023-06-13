@@ -1,9 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
-import NavBar from '../components/NavBar';
-import LeftSideBar from '../components/LeftSideBar';
-import RightSideBar from '../components/RightSideBar';
+import NavBar from '../components/RootComponents/NavBar';
+import { LeftSideBar, RightSideBar } from '../components';
 
 const RootLayout = () => {
   return (
