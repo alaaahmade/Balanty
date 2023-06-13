@@ -34,7 +34,7 @@ export const Message = MessageDatatypes.init(
   {
     sequelize,
     modelName: 'Message',
-    tableName: 'chat',
+    tableName: 'messeges',
     timestamps: true,
   },
 );
