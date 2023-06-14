@@ -5,7 +5,7 @@ class MatchAttributes extends Model {
   declare owner_id: number;
   declare stadium_id: number;
   declare title: string;
-  declare desctiption: string;
+  declare description: string;
   declare time: Date;
   declare seats: number;
 }
@@ -16,7 +16,7 @@ const Match = MatchAttributes.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    desctiption: {
+    description: {
       type: DataTypes.STRING,
       allowNull: false,
     },

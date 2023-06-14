@@ -45,7 +45,7 @@ User.hasMany(Match, {
 });
 Match.belongsTo(User);
 
-//reveiews
+//revewis
 User.hasMany(Review, {
   as: 'userReview',
   foreignKey: 'player_id',

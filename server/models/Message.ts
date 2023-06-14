@@ -18,7 +18,7 @@ const Message = MessageDatatypes.init(
   {
     sequelize,
     modelName: 'Message',
-    tableName: 'messeges',
+    tableName: 'messages',
     timestamps: true,
   },
 );
