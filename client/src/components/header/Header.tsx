@@ -1,44 +1,39 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
+import React, { useState, FC, MouseEvent } from 'react';
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Button,
+  MenuItem,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import { styled } from '@mui/material';
 import { Link } from 'react-scroll';
+import { CustomizedButton, CustomizedTypography } from './Header.styles';
 
-const CustomizedButton = styled(Button)`
-  color: #2cb674;
-  border-color: #2cb674;
-  background: #fff;
+interface Page {
+  id: string;
+  key: string;
+}
 
-  :hover {
-    background: #fff;
-  }
-`;
-
-const pages = [
+const pages: Page[] = [
   { id: 'contact-us', key: 'تواصل معنا' },
   { id: 'services', key: 'خدماتنا' },
   { id: 'definition', key: 'من نحن' },
   { id: 'main', key: 'الرئيسية' },
 ];
 
-const Header = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null,
-  );
+const Header: FC<HTMLElement> = () => {
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>): void => {
     setAnchorElNav(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (): void => {
     setAnchorElNav(null);
   };
   return (
@@ -88,7 +83,6 @@ const Header = () => {
               {pages.map(page => (
                 <MenuItem key={page.id} onClick={handleCloseNavMenu}>
                   <Link
-                    // style={{ color: '#333', textDecoration: 'none' }}
                     to={page.id}
                     activeClass="active"
                     smooth
@@ -102,25 +96,6 @@ const Header = () => {
               ))}
             </Menu>
           </Box>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-              justifyContent: 'right',
-            }}
-          >
-            بلنتي
-          </Typography>
           <Box
             sx={{
               flexGrow: 1,
@@ -139,23 +114,9 @@ const Header = () => {
               </Button>
             ))}
           </Box>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
+          <CustomizedTypography component="a" href="/" variant="h6">
             بلنتي
-          </Typography>
+          </CustomizedTypography>
         </Toolbar>
       </Container>
     </AppBar>
