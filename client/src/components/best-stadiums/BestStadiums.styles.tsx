@@ -21,3 +21,11 @@ export const StadiumsWrap = styled.div`
   gap: 7%;
   justify-content: space-between;
 `;
+
+export const LocationWrap = styled.div`
+  display: flex;
+  direction: rtl;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+`;

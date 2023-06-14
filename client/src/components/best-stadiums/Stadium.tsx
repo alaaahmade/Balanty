@@ -8,6 +8,7 @@ import {
   Rating,
 } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { LocationWrap } from './BestStadiums.styles';
 
 interface Props {
   image: string;
@@ -46,20 +47,12 @@ const Stadium: FC<Props> = ({ image, name, rate, address, description }) => {
             readOnly
           />
         </div>
-        <div
-          style={{
-            display: 'flex',
-            direction: 'rtl',
-            gap: '0.5rem',
-            paddingTop: '1rem',
-            paddingBottom: '1rem',
-          }}
-        >
+        <LocationWrap>
           <LocationOnIcon />
           <Typography component="h3" sx={{ fontWeight: 'bold' }}>
             {address}
           </Typography>
-        </div>
+        </LocationWrap>
         <Typography
           sx={{ direction: 'rtl' }}
           variant="body2"
