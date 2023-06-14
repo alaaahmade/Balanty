@@ -18,8 +18,8 @@ User.init(
   },
   {
     sequelize,
-    modelName: 'Player',
-    tableName: 'players',
+    modelName: 'User',
+    tableName: 'users',
   },
 );
 
