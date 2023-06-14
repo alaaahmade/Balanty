@@ -1,6 +1,8 @@
 import { styled } from '@mui/system';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
-export const StyledBoxFeatures = styled('div')`
+export const StyledBoxFeatures = styled(Box)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,10 +14,11 @@ export const StyledImageFeatures = styled('img')`
   height: 176.6px;
 `;
 
-export const StyledDescriptionFeatures = styled('p')`
+export const StyledDescriptionFeatures = styled(Typography)`
   margin-top: 60px;
 `;
-export const StyledTitleF = styled('h2')`
+
+export const StyledTitleF = styled(Typography)`
   font-weight: 700;
   font-size: 48px;
   margin-bottom: 30px;
