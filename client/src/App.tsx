@@ -1,10 +1,14 @@
 import { ReactElement } from 'react';
-
-import './App.css';
-import Header from './components/header/Header';
+import { ThemeProvider } from '@emotion/react';
+import RootLayout from './layouts/RootLayout';
+import LightTheme from './themes';
 
 const App = (): ReactElement => {
-  return <Header />;
+  return (
+    <ThemeProvider theme={LightTheme}>
+      <RootLayout />
+    </ThemeProvider>
+  );
 };
 
 export default App;

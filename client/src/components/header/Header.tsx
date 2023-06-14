@@ -1,4 +1,4 @@
-import React, { useState, FC, MouseEvent } from 'react';
+import React, { useState, FC, MouseEvent, ReactElement } from 'react';
 import {
   AppBar,
   Box,
@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-scroll';
-import { CustomizedButton, CustomizedTypography } from './Header.styles';
+import { CustomizedButton, CustomizedTypography } from './Header.styled';
 
 interface Page {
   id: string;
@@ -26,7 +26,7 @@ const pages: Page[] = [
   { id: 'main', key: 'الرئيسية' },
 ];
 
-const Header: FC<HTMLElement> = () => {
+const Header: FC<ReactElement> = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>): void => {
