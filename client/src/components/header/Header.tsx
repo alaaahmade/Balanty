@@ -26,7 +26,7 @@ const pages: Page[] = [
   { id: 'main', key: 'الرئيسية' },
 ];
 
-const Header: FC<ReactElement> = () => {
+const Header: FC<ReactElement> = (): ReactElement => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>): void => {
