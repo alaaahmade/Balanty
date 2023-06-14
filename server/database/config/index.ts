@@ -1,3 +1,4 @@
 import { sequelize } from './connection';
+import build from './build';
 
-export { sequelize };
+export { sequelize, build };
