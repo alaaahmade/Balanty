@@ -1,13 +1,14 @@
 import React, { ReactElement } from 'react';
+import { Box } from '@mui/material';
 import feature from '../../assets/feature.svg';
 import FeatureSection from './FeatureSection';
 import { StyledTitleF } from '../index';
 
 const Feature: React.FC = (): ReactElement => {
   return (
-    <div>
+    <Box>
       <StyledTitleF>احجز, العب, شارك, شوت</StyledTitleF>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <FeatureSection
           imageSrc={feature}
           description="ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب "
@@ -20,8 +21,8 @@ const Feature: React.FC = (): ReactElement => {
           imageSrc={feature}
           description="ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب ملعب "
         />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 
