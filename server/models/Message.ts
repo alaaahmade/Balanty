@@ -7,25 +7,9 @@ class MessageDatatypes extends Model {
   declare message: string;
 }
 
-export const Message = MessageDatatypes.init(
+const Message = MessageDatatypes.init(
   {
     username: { type: DataTypes.STRING(50), allowNull: false },
-    player_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Player',
-        key: 'id',
-      },
-    },
-    match_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Match',
-        key: 'id',
-      },
-    },
     message: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -38,3 +22,5 @@ export const Message = MessageDatatypes.init(
     timestamps: true,
   },
 );
+
+export default Message;
