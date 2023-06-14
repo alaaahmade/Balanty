@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ReactElement } from 'react';
 
 import {
   Card,
@@ -8,7 +8,7 @@ import {
   Rating,
 } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { LocationWrap } from './BestStadiums.styles';
+import { LocationWrap } from './BestStadiums.styled';
 
 interface Props {
   image: string;
@@ -18,7 +18,13 @@ interface Props {
   description: string;
 }
 
-const Stadium: FC<Props> = ({ image, name, rate, address, description }) => {
+const Stadium: FC<Props> = ({
+  image,
+  name,
+  rate,
+  address,
+  description,
+}): ReactElement => {
   return (
     <Card
       sx={{

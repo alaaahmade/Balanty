@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { Container, StadiumsWrap, Title } from './BestStadiums.styles';
+import React, { FC, ReactElement } from 'react';
+import { Container, StadiumsWrap, Title } from './BestStadiums.styled';
 import Stadium from './Stadium';
 
 interface Props {
@@ -37,7 +37,7 @@ const STADIUMS: Props[] = [
   },
 ];
 
-const BestStadiums: FC = () => {
+const BestStadiums: FC = (): ReactElement => {
   return (
     <Container>
       <Title>أفضل الملاعب</Title>

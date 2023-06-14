@@ -1,10 +1,14 @@
 import { ReactElement } from 'react';
-
-import './App.css';
-import BestStadiums from './components/best-stadiums/BestStadiums';
+import { ThemeProvider } from '@emotion/react';
+import RootLayout from './layouts/RootLayout';
+import LightTheme from './themes';
 
 const App = (): ReactElement => {
-  return <BestStadiums />;
+  return (
+    <ThemeProvider theme={LightTheme}>
+      <RootLayout />
+    </ThemeProvider>
+  );
 };
 
 export default App;
