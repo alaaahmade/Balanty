@@ -1,7 +1,4 @@
 import { sign, Secret } from 'jsonwebtoken';
-import { promisify } from 'util';
-
-// const aa =  promisify()
 
 const generateToken = (payload: object): Promise<string> => {
   return new Promise<string>((resolve, reject) => {
