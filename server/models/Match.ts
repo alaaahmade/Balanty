@@ -1,7 +1,7 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '../database';
+import { sequelize } from '../dataBase';
 
-class MatchAttributes extends Model {
+class Match extends Model {
   declare owner_id: number;
   declare stadium_id: number;
   declare title: string;
@@ -10,14 +10,14 @@ class MatchAttributes extends Model {
   declare seats: number;
 }
 
-const Match = MatchAttributes.init(
+Match.init(
   {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     startDate: {

@@ -1,7 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../database';
+import { sequelize } from '../dataBase';
 
-class stadiumsAttributes extends Model {
+class Stadium extends Model {
   declare user_id: number;
   declare address: string;
   declare description: string;
@@ -9,7 +9,7 @@ class stadiumsAttributes extends Model {
   declare ground: string;
 }
 
-const Stadium = stadiumsAttributes.init(
+Stadium.init(
   {
     address: { type: DataTypes.STRING },
     description: { type: DataTypes.STRING },

@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../database/config/connection';
+import { sequelize } from '../dataBase';
 
 class Review extends Model {
   declare player_id: number;

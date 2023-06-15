@@ -35,7 +35,7 @@ User.belongsToMany(Match, {
 //matches
 User.hasMany(Match, {
   as: 'stadiumMatches',
-  foreignKey: 'stadium_id',
+  foreignKey: 'user_id',
 });
 Match.belongsTo(User);
 
@@ -54,7 +54,7 @@ Review.belongsTo(User);
 
 Stadium.hasMany(Review, {
   as: 'stadiumReview',
-  foreignKey: 'stadium_id',
+  foreignKey: 'Satd_id',
 });
 Review.belongsTo(Stadium);
 
