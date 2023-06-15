@@ -7,9 +7,12 @@ const createMatch: RequestHandler = async (
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
-  // await console.log('hi');
-  req.userData = { owner_id: 1 };
-  await createMatchService(req);
+  req.userData = { owner_id: 1 }; // this id will coming from checkAuth middleware
+  const data = await createMatchService(req);
+  res.json({
+    status: 202,
+    data: data,
+  });
 };
 
 export default createMatch;
