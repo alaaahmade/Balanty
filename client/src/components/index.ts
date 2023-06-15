@@ -2,6 +2,6 @@ export {
   StyledDefinitionSection,
   StyledTitle,
   StyledDescription,
-} from './styledRootComponent/DefinitionStyledComponent';
+} from './definition/Definition.styled';
 
 export {};

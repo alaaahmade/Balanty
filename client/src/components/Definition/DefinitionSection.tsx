@@ -3,7 +3,7 @@ import {
   StyledDefinitionSection,
   StyledDescription,
   StyledTitle,
-} from '../styledRootComponent/DefinitionStyledComponent';
+} from '../index';
 
 interface DefinitionProps {
   title: string;
