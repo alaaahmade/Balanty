@@ -14,8 +14,6 @@
     "postinstall": "git config advice.ignoredHook false && cd client && npm i"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.6.5",
-    "@commitlint/config-conventional": "^17.6.5",
     "@jest/globals": "^29.1.2",
     "@types/compression": "^1.7.2",
     "@types/cookie-parser": "^1.4.3",
