@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../database';
+import { sequelize } from '../dataBase';
 
 class Gallery extends Model {
   declare image: string;

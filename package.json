@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
+    "buildDB": " cross-env NODE_ENV=development ts-node server/database/config/build.ts",
     "lint": "eslint server --ext .ts",
     "lint-fix": "eslint server --fix --ext .ts",
     "dev": "cross-env NODE_ENV=development npx nodemon ./server/index.ts",
