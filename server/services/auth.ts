@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import bcrypt from 'bcrypt';
-// import { User } from '../models';
+import { User } from '../models';
 import { CustomError } from '../utils';
 import { signupSchema } from '../validations/schema';
 import { generateToken } from '../utils/jwt/generateToken';
