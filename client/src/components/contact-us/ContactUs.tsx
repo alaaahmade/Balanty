@@ -45,7 +45,9 @@ const Contact: React.FC = () => {
     <StyledContainer maxWidth="md">
       <div>
         <StyledBox>
-          <StyledTypographyContact variant="h2">تواصل معنا</StyledTypographyContact>
+          <StyledTypographyContact variant="h2">
+            تواصل معنا
+          </StyledTypographyContact>
           <Typography variant="body1">نحن نساعدك؟ كيف تحتاج مساعدة</Typography>
           <form onSubmit={handleFormSubmit}>
             <StyledTextField
@@ -69,7 +71,11 @@ const Contact: React.FC = () => {
               fullWidth
               margin="normal"
             />
-            <StyledButtonContact type="submit" variant="contained" color="primary">
+            <StyledButtonContact
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
               تواصل معنا
             </StyledButtonContact>
           </form>
