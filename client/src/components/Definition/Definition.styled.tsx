@@ -14,5 +14,5 @@ export const StyledTitle = styled(Typography)`
 `;
 
 export const StyledDescription = styled(Typography)`
-  /* Add your custom styles for the description here */
+  margin: 5px;
 `;
