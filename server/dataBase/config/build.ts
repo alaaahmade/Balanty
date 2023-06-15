@@ -1,8 +1,8 @@
-import { sequelize } from '../../dataBase';
+import { sequelize } from '..';
 import insertData from './InsertData';
 
 const build = async (): Promise<void> => {
-  await sequelize.sync({ force: true, logging: true });
+  await sequelize.sync({ force: true, logging: false });
   await insertData();
 };
 export default build;
