@@ -5,9 +5,9 @@ import imgContact from '../assets/imgContact.svg';
 import {
   StyledContainer,
   StyledBox,
-  StyledTypography,
+  StyledTypographyContact,
   StyledTextField,
-  StyledButton,
+  StyledButtonContact,
   StyledEmailIcon,
   StyledPhoneIcon,
 } from '../index';
@@ -45,7 +45,7 @@ const Contact: React.FC = () => {
     <StyledContainer maxWidth="md">
       <div>
         <StyledBox>
-          <StyledTypography variant="h2">تواصل معنا</StyledTypography>
+          <StyledTypographyContact variant="h2">تواصل معنا</StyledTypographyContact>
           <Typography variant="body1">نحن نساعدك؟ كيف تحتاج مساعدة</Typography>
           <form onSubmit={handleFormSubmit}>
             <StyledTextField
@@ -69,9 +69,9 @@ const Contact: React.FC = () => {
               fullWidth
               margin="normal"
             />
-            <StyledButton type="submit" variant="contained" color="primary">
+            <StyledButtonContact type="submit" variant="contained" color="primary">
               تواصل معنا
-            </StyledButton>
+            </StyledButtonContact>
           </form>
         </StyledBox>
       </div>

@@ -24,7 +24,7 @@ export const StyledBox = styled(Box)`
   margin-top: 10px;
 `;
 
-export const StyledTypography = styled(Typography)`
+export const StyledTypographyContact = styled(Typography)`
   font-size: 25px;
   padding-bottom: 8px;
   font-weight: bold;
@@ -42,7 +42,7 @@ export const StyledTextField = styled(TextField)`
   color: grey;
 `;
 
-export const StyledButton = styled(Button)`
+export const StyledButtonContact = styled(Button)`
   background-color: #2cb674;
   width: 100%;
   margin-top: 20px;
