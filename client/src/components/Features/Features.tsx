@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { Box } from '@mui/material';
 import feature from '../../assets/feature.svg';
 import FeatureSection from './FeatureSection';
-import { StyledTitleF } from '../index';
+import { StyledTitleF } from './Features.styled';
 
 const Feature: React.FC = (): ReactElement => {
   return (
