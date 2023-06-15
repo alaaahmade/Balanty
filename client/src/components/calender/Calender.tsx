@@ -2,6 +2,7 @@ import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { EventApi } from '@fullcalendar/core';
 import { Box } from '@mui/system';
+import { ReactElement } from 'react';
 
 // this events must be coming from api request
 const events = [
@@ -22,7 +23,7 @@ const events = [
   },
 ];
 
-const DemoApp = () => {
+const Calendar = (): ReactElement => {
   const handleEventMouseEnter = (arg: {
     event: EventApi;
     el: HTMLElement;
@@ -65,4 +66,4 @@ const DemoApp = () => {
   );
 };
 
-export default DemoApp;
+export default Calendar;
