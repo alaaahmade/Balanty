@@ -1,7 +1,8 @@
 
 # [Balanty]()
 ## **The Problem** : 
-- Many football enthusiasts face significant challenges when attempting to assemble a complete team of players for their matches. The process of finding suitable and reliable team members who share a passion for the sport and are available to participate in matches can often be time-consuming, frustrating, and unreliable. Currently, there is no centralized platform or efficient solution that effectively connects football enthusiasts and facilitates the formation of teams. As a result, individuals interested in organizing or participating in football matches often rely on word-of-mouth recommendations, social media groups, or local community networks. However, these methods are often unreliable, limited in scope, and lack a structured approach to team formation
+- Many football enthusiasts face significant challenges when attempting to assemble a complete team of players for their matches. The process of finding suitable and reliable team members who share a passion for the sport and are available to participate in matches can often be time-consuming, frustrating, and unreliable. Currently, there is no centralized platform or efficient solution that effectively connects football enthusiasts and facilitates the formation of teams. As a result, individuals interested in organizing or participating in football matches ofte
++-n rely on word-of-mouth recommendations, social media groups, or local community networks. However, these methods are often unreliable, limited in scope, and lack a structured approach to team formation
 
 ## **The solution** : 
 - Balanty is a cutting-edge website designed to address the challenges faced by football enthusiasts in finding team members for their matches. It serves as a comprehensive online community platform, providing a range of features and functionalities that streamline the team formation process and enhance the overall football experience.
