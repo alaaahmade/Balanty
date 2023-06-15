@@ -4,7 +4,7 @@ import {
   StyledBoxFeatures,
   StyledImageFeatures,
   StyledDescriptionFeatures,
-} from '../index';
+} from './Features.styled';
 
 interface FeatureSectionProps {
   imageSrc: string;
