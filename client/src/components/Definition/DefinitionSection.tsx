@@ -3,7 +3,7 @@ import {
   StyledDefinitionSection,
   StyledDescription,
   StyledTitle,
-} from '../index';
+} from './Definition.styled';
 
 interface DefinitionProps {
   title: string;
