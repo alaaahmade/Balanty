@@ -1,4 +1,4 @@
-import { sequelize } from '../../dataBase';
+import { sequelize } from '../config/connection';
 import insertData from './InsertData';
 
 const build = async (): Promise<void> => {
