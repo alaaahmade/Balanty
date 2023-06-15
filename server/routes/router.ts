@@ -1,6 +1,9 @@
 import { Router, Request, Response } from 'express';
+import matchRouter from './matchesRouter';
 
 export const router: Router = Router();
+
+router.use('/match', matchRouter);
 
 router.get('/', (req: Request, res: Response): void => {
   res.json({
