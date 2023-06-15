@@ -1,15 +1,11 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { signupService } from '../../services/auth';
+
 const signup = async (req: Request, res: Response) => {
-  const registerUser = await signupService(req.body);
-  if (registerUser) {
-    res.json({
-      error: false,
-      data: {
-        data: registerUser,
-      },
-    });
-  }
+  const newUser = await signupService(req.body, res);
+  if (newUser) {
+    res.status(200).json(newUser);
+  } else res.status(500).json({ error: true });
 };
 
 export default signup;

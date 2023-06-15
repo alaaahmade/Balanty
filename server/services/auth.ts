@@ -1,8 +1,9 @@
 import { Response } from 'express';
 import bcrypt from 'bcrypt';
-import { User } from '../models';
+// import { User } from '../models';
 import { CustomError } from '../utils';
 import { signupSchema } from '../validations/schema';
+import { generateToken } from '../utils/jwt/generateToken';
 
 interface userAttributes {
   username: string;
@@ -23,10 +24,8 @@ const signupService = async (userData: userAttributes, res: Response) => {
       throw new CustomError(422, 'Unprocessable Content');
     }
 
-    // Hash the password before saving it
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create a new user record in the database
     const newUser = await User.create({
       username,
       email,
@@ -34,7 +33,7 @@ const signupService = async (userData: userAttributes, res: Response) => {
       phone,
       role,
     });
-    // const token = await generateToken({ username, email, phone, role });
+    const token = await generateToken({ username, email, phone, role });
 
     res.cookie('token', token);
 
