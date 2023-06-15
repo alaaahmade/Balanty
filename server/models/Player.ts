@@ -1,24 +1,20 @@
 import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../database';
+import { sequelize } from '../dataBase';
 
-class playerAttributes extends Model {
-  declare email: string;
-  declare username: string;
-  declare password: string;
+class Player extends Model {
+  declare user_id: number;
   declare avatar: string;
   declare age: number;
   declare position: string;
   declare cover: string;
 }
-export const Player = playerAttributes.init(
+
+Player.init(
   {
-    email: { type: DataTypes.STRING, allowNull: false },
-    username: { type: DataTypes.STRING(50), allowNull: false },
-    password: { type: DataTypes.STRING, allowNull: false },
-    avatar: { type: DataTypes.STRING },
+    avatar: { type: DataTypes.TEXT },
     age: { type: DataTypes.INTEGER },
     position: { type: DataTypes.STRING(100) },
-    cover: { type: DataTypes.STRING },
+    cover: { type: DataTypes.TEXT },
   },
   {
     sequelize,
@@ -26,3 +22,5 @@ export const Player = playerAttributes.init(
     tableName: 'players',
   },
 );
+
+export default Player;
