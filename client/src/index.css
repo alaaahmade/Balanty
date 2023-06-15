@@ -4,3 +4,6 @@
   box-sizing: border-box;
   font-family: 'IBM Plex Sans Arabic', sans-serif;
 }
+.fc .fc-timegrid-slot{
+  height: 3rem;
+}
