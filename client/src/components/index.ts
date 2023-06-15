@@ -1,10 +1,3 @@
-export {
-  StyledDefinitionSection,
-  StyledTitle,
-  StyledDescription,
-} from './definition/Definition.styled';
-
-export {};
 export { default as LeftSideBar } from './RootComponents/leftSideBar/LeftSideBar';
 export { default as RightSideBar } from './RootComponents/rightSideBar/RightSideBar';
 
