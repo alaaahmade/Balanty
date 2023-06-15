@@ -1,10 +1,12 @@
 import app from './app';
 import { PORT } from './config';
+import { build } from './dataBase/config';
 import { sequelize } from './dataBase/config/connection';
 
 const startServer = async (): Promise<void> => {
   try {
     await sequelize.authenticate();
+    await build();
     console.log('Connection has been established successfully.');
     app.listen(PORT, (): void => {
       console.log(`server is running on http://localhost:${PORT}`);
