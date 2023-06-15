@@ -1,11 +1,5 @@
 export { default as LeftSideBar } from './RootComponents/leftSideBar/LeftSideBar';
 export { default as RightSideBar } from './RootComponents/rightSideBar/RightSideBar';
-export {
-  StyledBoxFeatures,
-  StyledTitleF,
-  StyledImageFeatures,
-  StyledDescriptionFeatures,
-} from './features/Features.styled';
 
 export {
   StyledTypography,
@@ -35,4 +29,3 @@ export {
   StyledMnu,
   StyledLabel,
 } from './styledRootComponent/Nav';
-export {};
