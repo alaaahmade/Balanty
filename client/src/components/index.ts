@@ -6,17 +6,6 @@ export {
   StyledButton,
   StyledEmailIcon,
   StyledPhoneIcon,
-} from './styledRootComponent/ContactUsStyledComponent';
+} from './contact-us/ContactUs.styled';
 
-export {
-  StyledDefinitionSection,
-  StyledTitle,
-  StyledDescription,
-} from './styledRootComponent/DefinitionStyledComponent';
-
-export {
-  StyledBoxFeatures,
-  StyledImageFeatures,
-  StyledDescriptionFeatures,
-} from './styledRootComponent/FeaturesStyledComponent';
 export {};

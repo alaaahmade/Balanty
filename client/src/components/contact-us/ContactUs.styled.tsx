@@ -1,15 +1,20 @@
-import styled from '@emotion/styled';
 import { Box } from '@mui/system';
-import { Container, Typography, TextField, Button } from '@mui/material';
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  styled,
+} from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 
-export const StyledContainer = styled(Container)`
-  display: flex;
-  justify-content: space-between;
-  gap: 130px;
-  text-align: right;
-`;
+export const StyledContainer = styled(Container)({
+  display: 'flex',
+  justifyContent: 'space-between',
+  gap: '130px',
+  textAlign: 'right',
+});
 
 export const StyledBox = styled(Box)`
   background-color: #f6f6f5;

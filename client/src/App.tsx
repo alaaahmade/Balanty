@@ -1,13 +1,14 @@
 import { ReactElement } from 'react';
+import './index.css';
+import { ThemeProvider } from '@emotion/react';
+import RootLayout from './layouts/RootLayout';
+import LightTheme from './themes';
 
-import './App.css';
-import Contact from './components/ContactUs';
-
-const App: React.FC = (): ReactElement => {
+const App = (): ReactElement => {
   return (
-    <div>
-      <Contact />
-    </div>
+    <ThemeProvider theme={LightTheme}>
+      <RootLayout />
+    </ThemeProvider>
   );
 };
 

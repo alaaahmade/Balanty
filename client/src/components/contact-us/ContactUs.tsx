@@ -10,7 +10,7 @@ import {
   StyledButton,
   StyledEmailIcon,
   StyledPhoneIcon,
-} from './index';
+} from '../index';
 
 interface ContactFormData {
   email: string;
