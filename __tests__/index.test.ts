@@ -2,8 +2,8 @@ import request from 'supertest';
 import app from '../server/app';
 import { build, sequelize } from '../server/database';
 
-beforeAll(done => {
-  done();
+beforeAll(async () => {
+  await build();
 });
 
 describe('test GitHub Actions CICD Pipelines', () => {
