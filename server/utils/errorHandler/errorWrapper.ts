@@ -10,8 +10,9 @@ const errorMappings: { [name: string]: number } = {
 
 type ErrorType = InstanceType<typeof CustomError>;
 
-const errorWrapper = (controller: RequestHandler) => {
-  return async (req: Request, res: Response, next: NextFunction) => {
+const errorWrapper =
+  (controller: RequestHandler) =>
+  async (req: Request, res: Response, next: NextFunction) => {
     try {
       await controller(req, res, next);
     } catch (error: unknown) {
@@ -21,6 +22,5 @@ const errorWrapper = (controller: RequestHandler) => {
       next(customError);
     }
   };
-};
 
 export default errorWrapper;

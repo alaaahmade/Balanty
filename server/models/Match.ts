@@ -6,7 +6,8 @@ class Match extends Model {
   declare stadium_id: number;
   declare title: string;
   declare description: string;
-  declare time: Date;
+  declare startDate: Date;
+  declare endDate: Date;
   declare seats: number;
 }
 
