@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../dataBase';
+import { sequelize } from '../database';
 
 class Stadium extends Model {
   declare user_id: number;
