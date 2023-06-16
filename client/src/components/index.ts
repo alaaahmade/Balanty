@@ -1,6 +1,13 @@
 export { default as BestStadiums } from './best-stadiums/BestStadiums';
-export { default as LeftSideBar } from './RootComponents/leftSideBar/LeftSideBar';
-export { default as RightSideBar } from './RootComponents/rightSideBar/RightSideBar';
+export {
+  StyledContainer,
+  StyledBox,
+  StyledTypographyContact,
+  StyledTextField,
+  StyledButtonContact,
+  StyledEmailIcon,
+  StyledPhoneIcon,
+} from './contact-us/ContactUs.styled';
 
 export {
   StyledTypography,
@@ -8,6 +15,9 @@ export {
   SideBox,
   BorderBox,
 } from './styledRootComponent/SideComponents';
+
+export { default as LeftSideBar } from './RootComponents/leftSideBar/LeftSideBar';
+export { default as RightSideBar } from './RootComponents/rightSideBar/RightSideBar';
 
 export {
   StyledSideBarLink,
@@ -30,3 +40,5 @@ export {
   StyledMnu,
   StyledLabel,
 } from './styledRootComponent/Nav';
+
+export {};

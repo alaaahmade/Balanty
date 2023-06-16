@@ -1,7 +1,7 @@
 import app from './app';
 import { PORT } from './config';
+import { sequelize } from './dataBase/config/connection';
 
-import { sequelize } from './database';
 const startServer = async (): Promise<void> => {
   try {
     await sequelize.authenticate();
@@ -13,5 +13,4 @@ const startServer = async (): Promise<void> => {
     console.error('Unable to connect to the database:', error);
   }
 };
-
 startServer();
