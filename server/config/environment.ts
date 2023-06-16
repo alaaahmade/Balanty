@@ -21,7 +21,7 @@ export const sequelizeOption: connectionOption = {
 
 export let dbUrl = '';
 
-if (NODE_ENV === 'production' && DATABASE_URL) {
+if (NODE_ENV === 'production') {
   dbUrl = DATABASE_URL;
   sequelizeOption.dialectOption = { ssl: { rejectUnauthorized: false } };
 } else if (NODE_ENV === 'development' && DEV_DB_URL) {
