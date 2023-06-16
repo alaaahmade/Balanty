@@ -35,8 +35,8 @@
   "include": [
     "server",
   ],
-  // "exclude": [
-  // "__tests__/**.ts"
-  // ],
+  "exclude": [
+  "__tests__/**.ts"
+  ],
 
 }
