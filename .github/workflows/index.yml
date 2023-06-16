@@ -59,3 +59,4 @@ jobs:
         env:
           # The hostname used to communicate with the PostgreSQL service container
           TEST_URL: postgres://balanty:123456@localhost:5432/balanty
+          Node_Env: test
