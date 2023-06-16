@@ -1,3 +1,4 @@
+export { default as BestStadiums } from './best-stadiums/BestStadiums';
 export {
   StyledContainer,
   StyledBox,
