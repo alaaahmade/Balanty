@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '../dataBase';
+import { sequelize } from '../database';
 
 class Match extends Model {
   declare owner_id: number;
