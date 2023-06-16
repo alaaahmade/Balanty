@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../server/app';
-import { build, sequelize } from '../server/database';
+import { sequelize } from '../server/database';
 
 beforeAll(done => {
   done();
