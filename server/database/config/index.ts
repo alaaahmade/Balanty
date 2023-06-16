@@ -1,4 +1,4 @@
 import { sequelize } from './connection';
-import build from '../../database/config/build';
+import build from './build';
 
 export { sequelize, build };
