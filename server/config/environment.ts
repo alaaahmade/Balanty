@@ -7,7 +7,7 @@ export const { PORT } = process.env || 8080;
 
 interface connectionOption {
   dialect: Dialect;
-  dialectOption?: {
+  dialectOptions?: {
     ssl: boolean | object;
   };
 }
@@ -23,10 +23,12 @@ export let dbUrl = '';
 
 if (NODE_ENV === 'production' && DATABASE_URL) {
   dbUrl = DATABASE_URL;
-  sequelizeOption.dialectOption = { ssl: { rejectUnauthorized: false } };
+  sequelizeOption.dialectOptions = { ssl: { rejectUnauthorized: false } };
 } else if (NODE_ENV === 'development' && DEV_DB_URL) {
+  sequelizeOption.dialectOptions = { ssl: false };
   dbUrl = DEV_DB_URL;
 } else if (NODE_ENV === 'test' && TEST_URL) {
+  sequelizeOption.dialectOptions = { ssl: false };
   dbUrl = TEST_URL;
 } else {
   throw new Error('Invalid NODE_ENV');
