@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../server/app';
-import { sequelize } from '../server/database';
+import { build, sequelize } from '../server/database';
 
 beforeAll(done => {
   done();
@@ -43,9 +43,25 @@ describe('POST /api/v1/match/create', () => {
         }
       });
   });
+
+  test('responds with JSON and 500 status code', done => {
+    request(app)
+      .post('/api/v1/match/create')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.status).toBe(500);
+        expect(res.type).toBe('text/html');
+        expect(typeof res).toBe('object');
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
 });
 
 afterAll(async () => {
-  // await build();
+  await build();
   sequelize.close();
 });
