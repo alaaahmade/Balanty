@@ -1,3 +1,11 @@
+export {
+  DialogBox,
+  StyledAutocomplete,
+  DialogInputsBox,
+  CreateMatchImg,
+  CreateMatchButtons,
+} from './createMatchStyled/createMatchStyled';
+
 export { default as BestStadiums } from './best-stadiums/BestStadiums';
 export { default as Header } from './header/Header';
 export {
@@ -41,5 +49,3 @@ export {
   StyledMnu,
   StyledLabel,
 } from './styledRootComponent/Nav';
-
-export {};

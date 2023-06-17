@@ -46,8 +46,8 @@ const Calendar = (): ReactElement => {
       sx={{
         backgroundColor: 'lightgray',
         borderRadius: '5px',
-        maxWidth: '600px',
-        height: '400px',
+        width: '100%',
+        height: '100%',
       }}
     >
       <FullCalendar

@@ -31,8 +31,10 @@ export const StyledSearchInput = styled(Input)({
   borderRadius: '5px',
   padding: '20px',
   br: '4px',
-  outline: '0',
   borderWidth: '1px',
+  '& input': {
+    textAlign: 'Right',
+  },
   borderStyle: 'solid',
 });
 
@@ -45,7 +47,7 @@ export const StyledMnu = styled(GiHamburgerMenu)({
 
 export const StyledLabel = styled('label')({
   position: 'absolute',
-  left: '66%',
+  right: '66%',
   top: '17px',
   zIndex: 2,
 });
