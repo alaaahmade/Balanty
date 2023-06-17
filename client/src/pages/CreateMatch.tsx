@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { TransitionProps } from '@mui/material/transitions';
 import { Box } from '@mui/system';
@@ -12,6 +12,8 @@ import {
   IconButton,
   Typography,
   TextField,
+  AutocompleteChangeReason,
+  AutocompleteChangeDetails,
 } from '@mui/material';
 import {
   CreateMatchButtons,
@@ -25,11 +27,14 @@ import {
 import Calendar from '../components/calender/Calender';
 import '../fullcalendar-custom.css';
 
-const playgrounds = ['الساحة', 'بيت لاهيا', ' الزيتون', 'رفح'];
-
 interface createMatchInterface {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   open: boolean;
+}
+
+interface Option {
+  id: number;
+  username: string;
 }
 
 const Transition = React.forwardRef(function Transition(
@@ -46,9 +51,36 @@ const CreateMatch: React.FC<createMatchInterface> = ({
   open,
   setOpen,
 }): ReactElement => {
+  const [Stadiums, setStadiums] = useState([]);
+  const [Details, setDetails] = useState();
+
   const handleClose = () => {
     setOpen(false);
   };
+
+  const getOptionLabel = (Stadium: Option) => Stadium.username;
+
+  const handleAutocompleteChange = (
+    event: React.ChangeEvent<object>,
+    value: Option | null,
+  ): void => {
+    if (value) {
+      fetch(`/api/v1/stadiums/details/${value?.id}`)
+        .then(data => data.json())
+        // eslint-disable-next-line dot-notation
+        .then(details => setDetails(details.data[0].image1))
+        .catch(console.log);
+    }
+  };
+
+  console.log(Details);
+
+  useEffect(() => {
+    fetch('/api/v1/stadiums')
+      .then(data => data.json())
+      .then(res => setStadiums(res.data))
+      .catch(console.log);
+  }, []);
 
   return (
     <Box>
@@ -103,17 +135,15 @@ const CreateMatch: React.FC<createMatchInterface> = ({
           <StyledAutocomplete
             disablePortal
             id="combo-box-demo"
-            options={playgrounds}
+            options={Stadiums}
+            getOptionLabel={getOptionLabel as (option: unknown) => string}
             sx={{ width: 300 }}
+            onChange={handleAutocompleteChange}
             renderInput={params => (
               <TextField {...params} placeholder="اسم الملعب" />
             )}
           />
-
-          <CreateMatchImg
-            src="https://ar.integralspor.com/wp-content/uploads/2022/06/%D9%85%D9%84%D8%B9%D8%A8-%D9%83%D8%B1%D8%A9-%D9%82%D8%AF%D9%85-%D8%B9%D8%A7%D8%AF%D9%8A.jpg"
-            alt="ملعب"
-          />
+          {Details && <CreateMatchImg src={Details} alt="ملعب" />}
           <Box
             sx={{
               width: '40%',
