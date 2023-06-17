@@ -61,7 +61,7 @@ Review.belongsTo(Stadium);
 //gallery
 Stadium.hasMany(Gallery, {
   as: 'stadiumGallery',
-  foreignKey: 'stadium_id',
+  // foreignKey: 'stadiumId',
 });
 Gallery.belongsTo(Stadium);
 
