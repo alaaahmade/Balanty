@@ -1,6 +1,12 @@
 import React, { ReactElement } from 'react';
 import { Box, Typography, Link } from '@mui/material';
 import { Facebook, Twitter, LinkedIn, Instagram } from '@mui/icons-material';
+import {
+  StyledFooter,
+  StyledLogo,
+  StyledLinks,
+  StyledIcons,
+} from './footer.styled';
 
 const Footer: React.FC = (): ReactElement => {
   return (
