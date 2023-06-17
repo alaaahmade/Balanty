@@ -1,7 +1,8 @@
 import 'dotenv/config';
 import { Dialect } from 'sequelize';
 
-const { DEV_DB_URL, DATABASE_URL, TEST_URL, NODE_ENV } = process.env;
+const { DEV_DB_URL, DATABASE_URL, TEST_URL, NODE_ENV, SECRET_KEY } =
+  process.env;
 
 export const { PORT } = process.env || 8080;
 
@@ -12,7 +13,7 @@ interface connectionOption {
   };
 }
 
-if (!NODE_ENV || !DATABASE_URL) {
+if (!NODE_ENV || !DATABASE_URL || !SECRET_KEY) {
   throw new Error('Invalid Environment Variables');
 }
 export const sequelizeOption: connectionOption = {
@@ -31,3 +32,5 @@ if (NODE_ENV === 'production' && DATABASE_URL) {
 } else {
   throw new Error('Invalid NODE_ENV');
 }
+
+export default { SECRET_KEY };
