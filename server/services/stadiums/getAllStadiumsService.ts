@@ -1,16 +1,13 @@
 import { Request } from 'express';
-import { Gallery, Stadium } from '../../models';
+import { Gallery, Stadium, User } from '../../models';
 
 const getAllStadiumsService = async (
   req: Request,
 ): Promise<object | undefined> => {
   try {
-    const res = await Gallery.findAll({
-      include: [
-        {
-          model: Stadium,
-        },
-      ],
+    const res = await User.findAll({
+      where: { role: 'STADIUM' },
+      attributes: ['username', 'id'],
     });
     return res;
   } catch (error) {
