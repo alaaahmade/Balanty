@@ -42,3 +42,35 @@ export const Title = styled(Typography)({
   textAlign: 'right',
   marginBottom: '1.5rem',
 });
+
+export const InputLabel = styled(Typography)({
+  fontWeight: '700',
+  fontSize: '18px',
+  lineHeight: '44px',
+});
+
+export const SignButton = styled(Button)({
+  background: '#2CB674',
+  fontWeight: '700',
+  width: '100%',
+  display: 'block',
+  fontSize: '16px',
+  marginBottom: '1rem',
+  '&:hover': {
+    background: '#2CB685',
+  },
+});
+
+export const OtherLink = styled('a')({
+  display: 'block',
+  fontWeight: '500',
+  fontSize: '1rem',
+  marginBottom: '0.5rem',
+  color: '#2CB674',
+  textAlign: 'right',
+  cursor: 'pointer',
+
+  '&:hover': {
+    textDecoration: 'underline',
+  },
+});
