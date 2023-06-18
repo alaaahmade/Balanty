@@ -24,3 +24,21 @@ export const ImageWrap = styled(Box)<Props>(({ isPlayer }) => ({
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
 }));
+
+export const Form = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexGrow: '1',
+  height: '100vh',
+});
+
+export const Title = styled(Typography)({
+  fontWeight: '700',
+  fontSize: '32px',
+  lineHeight: '44px',
+  color: '#2CB674',
+  textAlign: 'right',
+  marginBottom: '1.5rem',
+});
