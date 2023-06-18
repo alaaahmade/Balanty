@@ -44,12 +44,12 @@ describe('POST /api/v1/match/create', () => {
       });
   });
 
-  test('responds with JSON and 500 status code', done => {
+  test('test validation error ', done => {
     request(app)
       .post('/api/v1/match/create')
       .set('Accept', 'application/json')
       .end((err, res) => {
-        expect(res.status).toBe(500);
+        expect(res.status).toBe(422);
         expect(res.type).toBe('text/html');
         expect(typeof res).toBe('object');
         done();
