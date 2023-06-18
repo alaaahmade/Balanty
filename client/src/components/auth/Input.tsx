@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { FormControl, OutlinedInput } from '@mui/material';
-import { InputLabel } from './Login.styled';
+import { InputLabel } from './LoginWrapper.styled';
 
 interface Props {
   type: string;
