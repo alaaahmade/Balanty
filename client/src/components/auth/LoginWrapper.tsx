@@ -13,7 +13,11 @@ interface Props {
 }
 
 const LoginWrapper: FC<Props> = ({ isPlayer, isSignup }): ReactElement => {
-  return <Wrapper isPlayer={isPlayer} />;
+  return (
+    <Wrapper isPlayer={isPlayer}>
+      <ImageWrap isPlayer={isPlayer} />
+    </Wrapper>
+  );
 };
 
 export default LoginWrapper;
