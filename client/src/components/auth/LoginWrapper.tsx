@@ -16,6 +16,10 @@ const LoginWrapper: FC<Props> = ({ isPlayer, isSignup }): ReactElement => {
   return (
     <Wrapper isPlayer={isPlayer}>
       <ImageWrap isPlayer={isPlayer} />
+      <Form>
+        <TitleWrap isPlayer={isPlayer} isSignup={isSignup} />
+
+      </Form>
     </Wrapper>
   );
 };
