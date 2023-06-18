@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { OtherLink } from './Login.styled';
+import { OtherLink } from './LoginWrapper.styled';
 
 type Props = {
   isPlayer: boolean;
