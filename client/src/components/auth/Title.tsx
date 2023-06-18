@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Title } from './Login.styled';
+import { Title } from './LoginWrapper.styled';
 
 type Props = {
   isPlayer: boolean;
