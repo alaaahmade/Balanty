@@ -27,15 +27,14 @@ export const StyledLogo = styled(Typography)({
 export const StyledSearchInput = styled(Input)({
   width: '40%',
   height: '40px',
-  background: '#D9D9D9',
+  background: '#EDF7FF',
   borderRadius: '5px',
-  padding: '20px',
+  padding: '20px 40px',
   br: '4px',
-  borderWidth: '1px',
+  // borderWidth: '1px',
   '& input': {
     textAlign: 'Right',
   },
-  borderStyle: 'solid',
 });
 
 export const StyledMnu = styled(GiHamburgerMenu)({

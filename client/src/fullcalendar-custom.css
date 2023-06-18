@@ -1,4 +1,8 @@
 
+:root{
+  --fc-button-active-bg-color: #2CB674
+}
+
 .fc .fc-timegrid-slot{
   height: 3rem;
   }
@@ -30,3 +34,26 @@
 .fc-time-grid-container::-webkit-scrollbar-thumb {
   background-color: #ccc !important;
 }
+
+.fc .fc-toolbar-title {
+  font-size: 0.75em;
+}
+
+.fc {
+  color: #8b8b8b;
+}
+
+.fc .fc-button-primary{
+  background-color: #2CB674;
+  border-color:#6FCDA4
+}
+
+.fc .fc-button-primary:hover{
+  background-color: #6FCDA4;
+  border-color:#2CB674
+}
+
+.fc .fc-button-primary:disabled{
+  background-color: #2CB674;
+}
+

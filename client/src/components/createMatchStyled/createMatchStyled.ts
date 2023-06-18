@@ -3,12 +3,12 @@ import { Autocomplete } from '@mui/material';
 import { Box } from '@mui/system';
 
 export const StyledAutocomplete = styled(Autocomplete)({
-  width: '40%',
+  width: '80%',
   height: '39px',
-  background: '#D9D9D9',
+  background: '#EDF7FF',
   borderRadius: '5px',
   br: '4px',
-  marginTop: '30px',
+  marginTop: '25px',
   '& .MuiInputBase-input': {
     height: 6,
     textAlign: 'right',
@@ -19,7 +19,6 @@ export const StyledAutocomplete = styled(Autocomplete)({
 });
 
 export const DialogBox = styled(Box)({
-  backgroundColor: '#c1d2c1',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -27,22 +26,25 @@ export const DialogBox = styled(Box)({
 });
 
 export const DialogInputsBox = styled(Box)({
-  width: '40%',
+  width: '50%',
   display: 'flex',
+  flexDirection: 'column',
   alignItems: 'center',
-  justifyContent: 'space-between',
 });
 
 export const CreateMatchImg = styled('img')({
-  width: '40%',
-  marginTop: '30px',
+  width: '80%',
+  marginTop: '25px',
   border: '1px solid #01031C',
   borderRadius: '5px',
+  height: '180px',
 });
 
 export const CreateMatchButtons = styled(Box)({
-  width: '40%',
-  mt: '30px',
+  width: '80%',
+  marginTop: '30px',
   display: 'flex',
-  justifyContent: 'space-between',
+  justifyContent: 'space-evenly',
+  // flexDirection: 'column',
+  alignItems: 'center',
 });
