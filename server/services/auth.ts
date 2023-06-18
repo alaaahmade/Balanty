@@ -3,6 +3,7 @@ import { User } from '../models';
 import { CustomError } from '../utils';
 import { signupSchema } from '../validations/schema';
 import { generateToken } from '../utils/jwt/generateToken';
+import { UserData } from '../interfaces/auth';
 
 const signupService = async (userData: UserData) => {
   const { username, email, password, phone, role } = userData;
@@ -10,7 +11,7 @@ const signupService = async (userData: UserData) => {
   const validatedData = await signupSchema.validateAsync(userData);
 
   if (!validatedData) {
-    throw new CustomError(456, 'bad request');
+    throw new CustomError(422, 'UnproccableContent');
   }
 
   const userExists = await User.findOne({ where: { username } });
