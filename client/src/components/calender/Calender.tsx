@@ -3,6 +3,10 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { EventApi } from '@fullcalendar/core';
 import { Box } from '@mui/system';
 import { ReactElement } from 'react';
+import DateClickArg from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import listPlugin from '@fullcalendar/list';
 
 // this events must be coming from api request
 const events = [
@@ -51,7 +55,7 @@ const Calendar = (): ReactElement => {
       }}
     >
       <FullCalendar
-        plugins={[timeGridPlugin]}
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
         initialView="timeGridWeek"
         slotDuration="01:00"
         events={events}
@@ -61,6 +65,9 @@ const Calendar = (): ReactElement => {
         eventTextColor="#fff"
         eventMouseEnter={handleEventMouseEnter}
         eventMouseLeave={handleEventMouseLeave}
+        selectable
+        select={e => console.log(e)}
+        // dateClick={handleDateClick}
       />
     </Box>
   );
