@@ -1,6 +1,6 @@
-import CustomRequest from '../../interfaces';
-import { Match } from '../../models';
-import matchSchema from '../../validations';
+import CustomRequest from '../interfaces';
+import { Match } from '../models';
+import matchSchema from '../validations';
 
 const createMatchService = async (req: CustomRequest): Promise<unknown> => {
   const { body, userData } = req;

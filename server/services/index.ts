@@ -1,1 +1,1 @@
-export { default as createMatchService } from './matches/createMatchService';
+export { default as createMatchService } from './createMatchService';

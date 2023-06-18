@@ -1,1 +1,1 @@
-export { default as createMatch } from './matches/createMatch';
+export { default as createMatch } from './createMatch';
