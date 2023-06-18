@@ -4,15 +4,6 @@ import { CustomError } from '../utils';
 import { signupSchema } from '../validations/schema';
 import { generateToken } from '../utils/jwt/generateToken';
 
-interface UserData {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  phone: number;
-  role: string;
-}
-
 const signupService = async (userData: UserData) => {
   const { username, email, password, phone, role } = userData;
 
