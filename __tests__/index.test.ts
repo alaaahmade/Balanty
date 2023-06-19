@@ -2,7 +2,7 @@ import request from 'supertest';
 import app from '../server/app';
 import { build, sequelize } from '../server/database';
 
-beforeAll(async () => {
+beforeAll(async (): Promise<void> => {
   await build();
 });
 
@@ -34,6 +34,6 @@ describe('GET /api/v1/matches/stadium/5', () => {
   });
 });
 
-afterAll(async () => {
+afterAll((): void => {
   sequelize.close();
 });

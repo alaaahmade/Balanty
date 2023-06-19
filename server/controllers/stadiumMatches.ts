@@ -4,7 +4,7 @@ import { getStadiumMatchesService } from '../services';
 export const getStadiumMatches: RequestHandler = async (
   req: Request,
   res: Response,
-) => {
+): Promise<void> => {
   const matches = await getStadiumMatchesService(req);
   res.status(200).json({
     status: 200,
