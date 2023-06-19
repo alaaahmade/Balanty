@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import imgContact from '../assets/imgContact.svg';
+import imgContact from '../../assets/imgContact.svg';
 import {
   StyledContainer,
   StyledBox,
