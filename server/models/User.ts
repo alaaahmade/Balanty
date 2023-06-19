@@ -6,7 +6,7 @@ class User extends Model {
   declare username: string;
   declare password: string;
   declare phone: string;
-  declare role: 'PLAYER' | 'STADIUM';
+  declare role: 'player' | 'stadium';
 }
 User.init(
   {
@@ -14,7 +14,7 @@ User.init(
     phone: { type: DataTypes.STRING(50), allowNull: false, unique: true },
     email: { type: DataTypes.STRING, allowNull: false },
     password: { type: DataTypes.STRING, allowNull: false },
-    role: { type: DataTypes.ENUM('PLAYER', 'STADIUM') },
+    role: { type: DataTypes.STRING, allowNull: false },
   },
   {
     sequelize,
