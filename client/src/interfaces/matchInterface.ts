@@ -12,7 +12,7 @@ export interface createMatchInterface {
 
 export interface CalendarProps {
   Event: {
-    StadiumId: number;
+    UserId: number;
     title: string;
     startDate: string;
     endDate: string;
@@ -21,7 +21,7 @@ export interface CalendarProps {
   };
   setEvent: Dispatch<
     SetStateAction<{
-      StadiumId: number;
+      UserId: number;
       title: string;
       startDate: string;
       endDate: string;
@@ -32,7 +32,7 @@ export interface CalendarProps {
 }
 
 export interface prevInterface {
-  StadiumId: number;
+  UserId: number;
   title: string;
   startDate: string;
   endDate: string;

@@ -3,7 +3,7 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { TransitionProps } from '@mui/material/transitions';
 import { Box } from '@mui/system';
-import { object, string, number, date, InferType } from 'yup';
+import { object, string, number } from 'yup';
 import {
   Button,
   Dialog,
@@ -31,7 +31,7 @@ import { Option, createMatchInterface, prevInterface } from '../interfaces';
 const EventSchema = object({
   endDate: string().required('يجب حجز وقت المباراة'),
   startDate: string().required('يجب حجز وقت المباراة'),
-  StadiumId: number()
+  UserId: number()
     .min(1, '!يجب ادخال اسم الملعب')
     .required('!يجب ادخال اسم الملعب'),
   description: string()
@@ -68,8 +68,10 @@ const CreateMatch: React.FC<createMatchInterface> = ({
   setOpen,
 }): ReactElement => {
   const [Stadiums, setStadiums] = useState([]);
+  const [UserId, setUserId] = useState<number>(0);
   const [Details, setDetails] = useState();
   const [ValidateError, setValidateError] = useState('');
+  const [matches, setMatches] = useState<IEvent[]>([]);
   const [Event, setEvent] = useState<IEvent>({
     title: '',
     start: '',
@@ -82,7 +84,7 @@ const CreateMatch: React.FC<createMatchInterface> = ({
     endDate: '',
     seats: 0,
     description: '',
-    StadiumId: 0,
+    UserId: 0,
   });
   useEffect(() => {
     setMatch({
@@ -91,7 +93,7 @@ const CreateMatch: React.FC<createMatchInterface> = ({
       endDate: '',
       seats: 0,
       description: '',
-      StadiumId: 0,
+      UserId: 0,
     });
     setEvent({
       title: '',
@@ -114,14 +116,17 @@ const CreateMatch: React.FC<createMatchInterface> = ({
 
   const handleAutocompleteChange = async (
     event: React.ChangeEvent<object>,
-    value: Option | null,
+    // value: Option | null,
+    value: Option | unknown,
   ): Promise<void> => {
     if (value) {
+      const selectedValue = value as Option;
+      setUserId(+selectedValue.id);
       setMatch((prev: prevInterface) => ({
         ...prev,
-        StadiumId: +value.id,
+        UserId: +selectedValue.id,
       }));
-      const data = await fetch(`/api/v1/stadiums/details/${value?.id}`);
+      const data = await fetch(`/api/v1/stadiums/details/${selectedValue?.id}`);
       const stadDetails = await data.json();
       setDetails(stadDetails.data[0].image1);
       setValidateError('');
@@ -144,12 +149,17 @@ const CreateMatch: React.FC<createMatchInterface> = ({
   };
 
   const fetchEvent = async (data: prevInterface) => {
-    const matches = await fetch('/api/v1/matches', {
+    const matchesFetch = await fetch('/api/v1/matches', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(data),
     });
-    const matchesDetails = await matches.json();
+    const resultCreate = await matchesFetch.json();
+    if (resultCreate.status === 401) {
+      setValidateError(resultCreate.message);
+    } else if (resultCreate.status === 200) {
+      handleClose();
+    }
   };
 
   const HandleCreateEvent = async () => {
@@ -157,9 +167,9 @@ const CreateMatch: React.FC<createMatchInterface> = ({
       const result = await EventSchema.validateSync(match);
 
       await fetchEvent(result);
-      if (result) handleClose();
-    } catch (error: any) {
-      setValidateError(error.message);
+    } catch (error: unknown) {
+      const errorMessage = (error as Error).message || 'An error occurred.';
+      setValidateError(errorMessage);
     }
   };
 
@@ -170,12 +180,26 @@ const CreateMatch: React.FC<createMatchInterface> = ({
     }));
     setValidateError('');
   };
+  const getStadiumMatchs = async (id: number) => {
+    if (open) {
+      try {
+        const matchesFetch = await fetch('/api/v1/matches');
+        const stadMatches = await matchesFetch.json();
+        console.log(stadMatches);
+      } catch (error: unknown) {
+        console.log(error);
+      }
+    }
+  };
+  useEffect(() => {
+    getStadiumMatchs(UserId);
+  }, [UserId]);
 
   useEffect(() => {
     fetch('/api/v1/stadiums')
       .then(data => data.json())
       .then(res => setStadiums(res.data))
-      .catch(console.log);
+      .catch(() => setValidateError('لا يوجد ملاعب متاحة في الوقت الحالي'));
   }, []);
 
   return (
@@ -215,7 +239,7 @@ const CreateMatch: React.FC<createMatchInterface> = ({
           >
             <Box
               sx={{
-                width: '70%',
+                width: '90%',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'flex-end',
