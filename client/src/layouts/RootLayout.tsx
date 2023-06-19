@@ -1,19 +1,19 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useContext } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
 import NavBar from '../components/RootComponents/navBar/NavBar';
 import { LeftSideBar, RightSideBar } from '../components';
 import CreateMatch from '../pages/CreateMatch';
+import open from '../context';
 
-interface RootLayoutProps {
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  open: boolean;
-}
+const RootLayout: React.FC = (): ReactElement => {
+  const contextValue = useContext(open);
 
-const RootLayout: React.FC<RootLayoutProps> = ({
-  setOpen,
-  open,
-}): ReactElement => {
+  if (!contextValue) {
+    return <div>Loading...</div>;
+  }
+  const { openPage, setOpenPage } = contextValue;
+
   return (
     <Box
       sx={{
@@ -22,8 +22,11 @@ const RootLayout: React.FC<RootLayoutProps> = ({
       }}
     >
       <NavBar />
-      <LeftSideBar setOpen={setOpen} />
-      <CreateMatch open={open} setOpen={setOpen} />
+      <LeftSideBar setOpen={setOpenPage || (() => undefined)} />
+      <CreateMatch
+        open={openPage || false}
+        setOpen={setOpenPage || (() => undefined)}
+      />
       <RightSideBar />
       <Outlet />
     </Box>
