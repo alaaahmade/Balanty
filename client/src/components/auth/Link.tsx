@@ -2,26 +2,11 @@ import React, { FC } from 'react';
 import { OtherLink } from './LoginWrapper.styled';
 
 type Props = {
-  isPlayer: boolean;
-  isSignup: boolean;
+  url: string;
+  caption: string;
 };
 
-const LinkWrap: FC<Props> = ({ isPlayer, isSignup }) => {
-  let caption = '';
-  let url = '';
-  if (isPlayer && isSignup) {
-    caption = 'تسجيل كملعب';
-    url = '/signup/stadium';
-  } else if (isPlayer && !isSignup) {
-    caption = 'دخول كملعب';
-    url = '/login/stadium';
-  } else if (!isSignup) {
-    caption = 'الدخول كلاعب';
-    url = '/login/player';
-  } else {
-    caption = 'تسجيل كلاعب';
-    url = '/signup/player';
-  }
+const LinkWrap: FC<Props> = ({ url, caption }) => {
   return <OtherLink href={url}>{caption}</OtherLink>;
 };
 
