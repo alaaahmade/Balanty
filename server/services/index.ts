@@ -1,1 +1,1 @@
-export {};
+export { getStadiumMatchesService } from './matches';
