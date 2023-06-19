@@ -75,7 +75,6 @@ Message.belongsTo(User);
 // Math Messages
 Match.hasMany(Message, {
   as: 'matchMessage',
-  foreignKey: 'match_id',
 });
 Message.belongsTo(Match);
 

@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 const matchSchema = Joi.object({
-  stadium_id: Joi.number().min(1).required(),
+  StadiumId: Joi.number().min(1).required(),
   title: Joi.string().min(5).max(250).required(),
   description: Joi.string().min(5),
   startDate: Joi.string().required(),
