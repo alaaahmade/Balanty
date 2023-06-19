@@ -7,7 +7,7 @@ const createMatch: RequestHandler = async (
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
-  req.userData = { owner_id: 1 };
+  req.userData = { owner_id: 3 };
   const data = await createMatchService(req);
   res.json({
     status: 202,

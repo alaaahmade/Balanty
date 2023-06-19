@@ -4,6 +4,6 @@ import { errorWrapper } from '../utils';
 
 const matchRouter: Router = Router();
 
-matchRouter.post('/create', errorWrapper(createMatch));
+matchRouter.post('/', errorWrapper(createMatch));
 
 export default matchRouter;
