@@ -48,9 +48,6 @@ const SignupWrapper: FC<Props> = ({ isPlayer }): ReactElement => {
             label="تأكيد كلمة المرور"
             placeholder="قم بتأكيد كلمة المرور"
           />
-          <SignButton variant="contained" disableElevation>
-            تسجيل دخول
-          </SignButton>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {isPlayer ? (
               <LinkWrap url="/signup/stadium" caption="تسجيل كملعب" />
@@ -59,6 +56,9 @@ const SignupWrapper: FC<Props> = ({ isPlayer }): ReactElement => {
             )}
             <OtherLink href="/">عودة إلى الرئيسية</OtherLink>
           </div>
+          <SignButton variant="contained" disableElevation>
+            تسجيل دخول
+          </SignButton>
           <SignButton
             sx={{ background: '#E6E6E6 !important', color: '#868686' }}
             variant="contained"
