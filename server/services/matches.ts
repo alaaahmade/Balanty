@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import CustomRequest from '../interfaces';
 import { Match } from '../models';
 import { CustomError } from '../utils';
@@ -6,21 +7,38 @@ import matchSchema from '../validations';
 const createMatchService = async (req: CustomRequest): Promise<unknown> => {
   const { body, userData } = req;
   const owner_id = userData?.owner_id;
-  const { StadiumId, startDate } = body;
-
-  // console.log({ StadiumId, startDate });
+  const { StadiumId, startDate, endDate } = body;
+  const newStartTime = startDate;
+  const newEndTime = endDate;
   if (!StadiumId) {
     throw new CustomError(422, 'ValidationError Said Alaa');
   }
+
   const Exist = await Match.findOne({
-    where: { startDate, user_id: StadiumId },
+    where: {
+      [Op.or]: [
+        { startDate: { [Op.gte]: newStartTime, [Op.lt]: newEndTime } },
+        { endDate: { [Op.gt]: newStartTime, [Op.lte]: newEndTime } },
+        {
+          [Op.and]: [
+            { startDate: { [Op.lte]: newStartTime } },
+            { endDate: { [Op.gte]: newEndTime } },
+          ],
+        },
+      ],
+      UserId: StadiumId,
+    },
   });
+
   if (!Exist) {
     const data = await matchSchema.validateAsync(body);
-    const DBData = await Match.create({ ...data, owner_id });
+    const DBData = await Match.create({
+      ...data,
+      owner_id,
+      UserId: StadiumId,
+    });
     return DBData;
   }
-  // console.log(Exist);
 
   return '! هذا الوقت محجوز';
 };
