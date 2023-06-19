@@ -15,45 +15,48 @@ import LinkWrap from './Link';
 
 interface Props {
   isPlayer: boolean;
-  isSignup: boolean;
 }
 
-const SignupWrapper: FC<Props> = ({ isPlayer, isSignup }): ReactElement => {
+const SignupWrapper: FC<Props> = ({ isPlayer }): ReactElement => {
   return (
     <Wrapper isPlayer={isPlayer}>
       <ImageWrap isPlayer={isPlayer} />
       <Form>
-        <TitleWrap isPlayer={isPlayer} isSignup={isSignup} />
+        {isPlayer ? (
+          <TitleWrap caption="تسجيل كلاعب" />
+        ) : (
+          <TitleWrap caption="تسجيل كملعب" />
+        )}
         <Box component="form" noValidate autoComplete="off">
           <InputWrap
             type="text"
             label={isPlayer ? 'اسم اللاعب' : 'اسم الملعب'}
             placeholder={isPlayer ? 'ادخل اسم اللاعب' : 'ادخل اسم الملعب'}
           />
-          {isSignup && (
-            <InputWrap
-              type="email"
-              label="البريد الإلكتروني"
-              placeholder="ادخل البريد الإلكتروني"
-            />
-          )}
+          <InputWrap
+            type="email"
+            label="البريد الإلكتروني"
+            placeholder="ادخل البريد الإلكتروني"
+          />
           <InputWrap
             type="password"
             label="كلمة المرور"
             placeholder="ادخل كلمة المرور"
           />
-          {isSignup && (
-            <InputWrap
-              type="password"
-              label="تأكيد كلمة المرور"
-              placeholder="قم بتأكيد كلمة المرور"
-            />
-          )}
+          <InputWrap
+            type="password"
+            label="تأكيد كلمة المرور"
+            placeholder="قم بتأكيد كلمة المرور"
+          />
           <SignButton variant="contained" disableElevation>
-            {isSignup ? 'سجل الان' : 'تسجيل دخول'}
+            تسجيل دخول
           </SignButton>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <LinkWrap isPlayer={isPlayer} isSignup={isSignup} />
+            {isPlayer ? (
+              <LinkWrap url="/signup/stadium" caption="تسجيل كملعب" />
+            ) : (
+              <LinkWrap url="/signup/player" caption="تسجيل كلاعب" />
+            )}
             <OtherLink href="/">عودة إلى الرئيسية</OtherLink>
           </div>
           <SignButton
@@ -61,7 +64,7 @@ const SignupWrapper: FC<Props> = ({ isPlayer, isSignup }): ReactElement => {
             variant="contained"
             disableElevation
           >
-            {isSignup ? 'سجِل من خلال' : 'تسجيل دخول من خلال'}
+            سجٍل من خلال
             <img
               style={{
                 width: '20px',
