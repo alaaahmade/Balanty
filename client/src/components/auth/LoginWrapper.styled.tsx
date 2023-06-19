@@ -56,6 +56,8 @@ export const SignButton = styled(Button)({
   display: 'block',
   fontSize: '16px',
   marginBottom: '1rem',
+  padding: '0.5rem 1rem',
+
   '&:hover': {
     background: '#2CB685',
   },
@@ -69,6 +71,7 @@ export const OtherLink = styled('a')({
   color: '#2CB674',
   textAlign: 'right',
   cursor: 'pointer',
+  textDecoration: 'none',
 
   '&:hover': {
     textDecoration: 'underline',
