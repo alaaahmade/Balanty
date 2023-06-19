@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 import { Router, Request, Response } from 'express';
 import matchRouter from './matchesRouter';
+=======
+import { Router } from 'express';
+import { authRouter } from './auth';
+>>>>>>> main
 
-export const router: Router = Router();
+const router: Router = Router();
 
+<<<<<<< HEAD
 router.use('/match', matchRouter);
 
 router.get('/', (req: Request, res: Response): void => {
@@ -11,3 +17,8 @@ router.get('/', (req: Request, res: Response): void => {
     msg: 'ok',
   });
 });
+=======
+router.use('/user', authRouter);
+
+export { router };
+>>>>>>> main
