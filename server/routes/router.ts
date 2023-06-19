@@ -1,8 +1,10 @@
 import { Router, Request, Response } from 'express';
 import { stadiumRouter } from './staduimRouter';
+import { authRouter } from './auth';
 
-export const router: Router = Router();
+const router: Router = Router();
 
+router.use('/user', authRouter);
 router.use('/stadiums', stadiumRouter);
 
 router.get('/', (req: Request, res: Response): void => {
@@ -11,3 +13,5 @@ router.get('/', (req: Request, res: Response): void => {
     msg: 'ok',
   });
 });
+
+export { router };
