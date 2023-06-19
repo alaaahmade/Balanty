@@ -13,12 +13,12 @@ describe('test GitHub Actions CICD Pipelines', () => {
   });
 });
 
-describe('POST /api/v1/match/create', () => {
+describe('POST /api/v1/matches', () => {
   test('responds with JSON and 200 status code', done => {
     request(app)
-      .post('/api/v1/match/create')
+      .post('/api/v1/matches')
       .send({
-        stadium_id: 1,
+        StadiumId: 1,
         title: 'hi test',
         description: 'string',
         startDate: 'Date',
@@ -46,11 +46,18 @@ describe('POST /api/v1/match/create', () => {
 
   test('test validation error ', done => {
     request(app)
-      .post('/api/v1/match/create')
+      .post('/api/v1/matches')
       .set('Accept', 'application/json')
+      .send({
+        title: 'hi test',
+        description: 'string',
+        startDate: 'Date',
+        endDate: 'Date',
+        seats: 15,
+      })
       .end((err, res) => {
         expect(res.status).toBe(422);
-        expect(res.type).toBe('text/html');
+        expect(res.type).toBe('application/json');
         expect(typeof res).toBe('object');
         done();
 
@@ -62,6 +69,6 @@ describe('POST /api/v1/match/create', () => {
 });
 
 afterAll(async () => {
-  await build();
+  // await build();
   sequelize.close();
 });
