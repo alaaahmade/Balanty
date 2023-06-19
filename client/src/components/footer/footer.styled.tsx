@@ -48,6 +48,6 @@ export const StyledIcons = styled(Box)`
   margin-top: 30px;
 
   & > * {
-    margin: 0 5px;
+    margin: 0 6px;
   }
 `;
