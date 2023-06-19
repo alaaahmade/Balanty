@@ -18,8 +18,8 @@ export const ImageWrap = styled(Box)<Props>(({ isPlayer }) => ({
   width: '50vw',
   height: '100vh',
   backgroundImage: isPlayer
-    ? 'url(https://img.freepik.com/premium-photo/football-scene-with-soccer-players-stadium-with-technology-analysis_207634-6513.jpg)'
-    : 'url(https://img.freepik.com/premium-photo/close-up-soccer-ball-center-stadium-illuminated-by-headlights_207634-2741.jpg)',
+    ? 'url(https://res.cloudinary.com/df3ydvucj/image/upload/v1687159218/football-lj-studio_r5loci.gif)'
+    : 'url(https://res.cloudinary.com/df3ydvucj/image/upload/v1687159864/stadium_tsdye8.avif)',
   backgroundPosition: 'center',
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
