@@ -2,6 +2,7 @@ import React, { FC, ReactElement } from 'react';
 
 import { Box } from '@mui/material';
 // import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import {
   Form,
   ImageWrap,
@@ -14,11 +15,14 @@ import TitleWrap from './Title';
 import GoogleIcon from '../../assets/image-2.svg';
 import LinkWrap from './Link';
 
-interface Props {
-  isPlayer: boolean;
-}
+const LoginWrapper: FC = (): ReactElement => {
+  const { pathname } = useLocation();
+  let isPlayer = true;
 
-const LoginWrapper: FC<Props> = ({ isPlayer }): ReactElement => {
+  if (!(pathname.split('/')[1] === 'player')) {
+    isPlayer = false;
+  }
+
   return (
     <Wrapper isPlayer={isPlayer}>
       <ImageWrap isPlayer={isPlayer} />
@@ -41,9 +45,9 @@ const LoginWrapper: FC<Props> = ({ isPlayer }): ReactElement => {
           />
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {isPlayer ? (
-              <LinkWrap url="/login/stadium" caption="دخول كملعب" />
+              <LinkWrap url="/player/signup" caption="تسجيل كلاعب" />
             ) : (
-              <LinkWrap url="/login/player" caption="دخول كلاعب" />
+              <LinkWrap url="/stadium/signup" caption="تسجيل كملعب" />
             )}
             <OtherLink href="/">عودة إلى الرئيسية</OtherLink>
           </div>
