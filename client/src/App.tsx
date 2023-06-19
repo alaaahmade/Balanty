@@ -7,8 +7,8 @@ import SignupWrapper from './components/auth/SignupWrapper';
 const App = (): ReactElement => {
   return (
     <ThemeProvider theme={LightTheme}>
-      <LoginWrapper isPlayer={false} />
-      {/* <SignupWrapper isPlayer/> */}
+      <LoginWrapper isPlayer />
+      {/* <SignupWrapper isPlayer /> */}
     </ThemeProvider>
   );
 };
