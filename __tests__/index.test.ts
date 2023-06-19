@@ -69,6 +69,5 @@ describe('POST /api/v1/matches', () => {
 });
 
 afterAll(async () => {
-  // await build();
   sequelize.close();
 });
