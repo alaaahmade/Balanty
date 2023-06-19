@@ -1,7 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 
 import { Box } from '@mui/material';
-import { useLocation } from 'react-router-dom';
 import {
   Form,
   ImageWrap,
@@ -19,7 +18,7 @@ interface Props {
   isSignup: boolean;
 }
 
-const LoginWrapper: FC<Props> = ({ isPlayer, isSignup }): ReactElement => {
+const SignupWrapper: FC<Props> = ({ isPlayer, isSignup }): ReactElement => {
   return (
     <Wrapper isPlayer={isPlayer}>
       <ImageWrap isPlayer={isPlayer} />
@@ -80,4 +79,4 @@ const LoginWrapper: FC<Props> = ({ isPlayer, isSignup }): ReactElement => {
   );
 };
 
-export default LoginWrapper;
+export default SignupWrapper;
