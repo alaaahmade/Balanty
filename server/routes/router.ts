@@ -1,7 +1,8 @@
 import { Router, Request, Response } from 'express';
 import matchRouter from './matches';
+import { authRouter } from './auth';
 
-export const router: Router = Router();
+const router: Router = Router();
 
 router.get('/', (req: Request, res: Response): void => {
   res.json({
@@ -11,3 +12,6 @@ router.get('/', (req: Request, res: Response): void => {
 });
 
 router.use('/matches', matchRouter);
+router.use('/user', authRouter);
+
+export { router };
