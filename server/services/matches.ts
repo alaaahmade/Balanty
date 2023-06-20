@@ -10,9 +10,8 @@ const createMatchService = async (req: CustomRequest): Promise<unknown> => {
   const { StadiumId, startDate, endDate } = body;
   const newStartTime = startDate;
   const newEndTime = endDate;
-  if (!StadiumId) {
-    throw new CustomError(422, 'ValidationError Said Alaa');
-  }
+
+  const data = await matchSchema.validateAsync(body);
 
   const Exist = await Match.findOne({
     where: {
@@ -31,7 +30,6 @@ const createMatchService = async (req: CustomRequest): Promise<unknown> => {
   });
 
   if (!Exist) {
-    const data = await matchSchema.validateAsync(body);
     const DBData = await Match.create({
       ...data,
       owner_id,
