@@ -1,7 +1,6 @@
 import { Op } from 'sequelize';
 import CustomRequest from '../interfaces';
-import { Match } from '../models';
-import { CustomError } from '../utils';
+import { Match, Stadium } from '../models';
 import matchSchema from '../validations';
 
 const createMatchService = async (req: CustomRequest): Promise<unknown> => {
@@ -12,7 +11,11 @@ const createMatchService = async (req: CustomRequest): Promise<unknown> => {
   const newEndTime = endDate;
 
   const data = await matchSchema.validateAsync(body);
+  const ExisteStadium = await Stadium.findOne({ where: { UserId: StadiumId } });
 
+  if (!ExisteStadium) {
+    return 'هذا الملعب غير متاح';
+  }
   const Exist = await Match.findOne({
     where: {
       [Op.or]: [
