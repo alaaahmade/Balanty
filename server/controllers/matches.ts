@@ -6,7 +6,7 @@ const getMatchesController = async (
   res: Response,
 ): Promise<void> => {
   const matches = await Match.findAll();
-  console.log(matches);
+
 
   res.send(matches);
 };
