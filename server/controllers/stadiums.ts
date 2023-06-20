@@ -7,7 +7,7 @@ export const getAllStadiums: RequestHandler = async (
   res: Response,
 ): Promise<void> => {
   const response = await getAllStadiumsService(req);
-  res.json({
+  res.status(200).json({
     status: 200,
     data: response,
   });
@@ -18,7 +18,7 @@ export const getStadiumDetails: RequestHandler = async (
   res: Response,
 ): Promise<void> => {
   const response = await getStadiumDetailsService(req);
-  res.json({
+  res.status(200).json({
     status: 200,
     data: response,
   });
