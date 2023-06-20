@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { Match } from '../models';
 
-const getMatchesController = async (
+const getMatches = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
@@ -11,4 +11,4 @@ const getMatchesController = async (
   res.send(matches);
 };
 
-export default getMatchesController;
+export default getMatches;
