@@ -6,11 +6,11 @@ export const getAllStadiums: RequestHandler = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
-  const response = await getAllStadiumsService(req);
-  res.status(200).json({
-    status: 200,
-    data: response,
-  });
+  const response = (await getAllStadiumsService()) as {
+    status: number;
+    data: object;
+  };
+  res.status(response?.status).json(response);
 };
 
 export const getStadiumDetails: RequestHandler = async (
@@ -18,8 +18,5 @@ export const getStadiumDetails: RequestHandler = async (
   res: Response,
 ): Promise<void> => {
   const response = await getStadiumDetailsService(req);
-  res.status(200).json({
-    status: 200,
-    data: response,
-  });
+  res.status(response?.status).json(response);
 };
