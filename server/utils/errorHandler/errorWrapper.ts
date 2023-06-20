@@ -18,6 +18,8 @@ const errorWrapper = (controller: RequestHandler) => {
       const customError = error as ErrorType;
       const status = errorMappings[customError?.name as string];
       customError.status = status;
+      console.log(error, 'ERrorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+
       next(customError);
     }
   };
