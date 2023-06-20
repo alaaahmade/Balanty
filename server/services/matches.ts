@@ -44,7 +44,7 @@ const createMatchService = async (
       UserId: StadiumId,
     });
     return {
-      status: 202,
+      status: 201,
       data: DBData,
     };
   }

@@ -27,12 +27,12 @@ describe('POST /api/v1/matches', () => {
       })
       .set('Accept', 'application/json')
       .end((err, res) => {
-        expect(res.status).toBe(200);
+        expect(res.status).toBe(201);
         expect(res.type).toBe('application/json');
         expect(typeof res).toBe('object');
         const response = JSON.parse(res.text);
         const { data } = response;
-        expect(response.status).toBe(202);
+        expect(response.status).toBe(201);
         expect(data.title).toBe('hi test');
         expect(data.startDate).toBe('Date');
         expect(data.seats).toBe(15);
@@ -57,12 +57,12 @@ describe('POST /api/v1/matches', () => {
       })
       .set('Accept', 'application/json')
       .end((err, res) => {
-        expect(res.status).toBe(200);
+        expect(res.status).toBe(401);
         expect(res.type).toBe('application/json');
         expect(typeof res).toBe('object');
         const response = JSON.parse(res.text);
         const { data } = response;
-        expect(response.status).toBe(202);
+        expect(response.status).toBe(401);
         expect(data).toBe('هذا الملعب غير متاح');
         done();
 
