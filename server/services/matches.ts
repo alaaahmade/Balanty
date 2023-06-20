@@ -1,9 +1,11 @@
 import { Op } from 'sequelize';
-import CustomRequest from '../interfaces';
+import { CustomRequest, IServiceResponse } from '../interfaces';
 import { Match, Stadium } from '../models';
 import matchSchema from '../validations';
 
-const createMatchService = async (req: CustomRequest): Promise<unknown> => {
+const createMatchService = async (
+  req: CustomRequest,
+): Promise<IServiceResponse> => {
   const { body, userData } = req;
   const owner_id = userData?.owner_id;
   const { StadiumId, startDate, endDate } = body;
@@ -14,7 +16,10 @@ const createMatchService = async (req: CustomRequest): Promise<unknown> => {
   const ExisteStadium = await Stadium.findOne({ where: { UserId: StadiumId } });
 
   if (!ExisteStadium) {
-    return 'هذا الملعب غير متاح';
+    return {
+      status: 401,
+      data: 'هذا الملعب غير متاح',
+    };
   }
   const Exist = await Match.findOne({
     where: {
@@ -38,10 +43,15 @@ const createMatchService = async (req: CustomRequest): Promise<unknown> => {
       owner_id,
       UserId: StadiumId,
     });
-    return DBData;
+    return {
+      status: 202,
+      data: DBData,
+    };
   }
-
-  return '! هذا الوقت محجوز';
+  return {
+    status: 401,
+    data: '! هذا الوقت محجوز',
+  };
 };
 
 export default createMatchService;
