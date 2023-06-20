@@ -6,8 +6,5 @@ export const getStadiumMatches: RequestHandler = async (
   res: Response,
 ): Promise<void> => {
   const matches = await getStadiumMatchesService(req);
-  res.status(200).json({
-    status: 200,
-    data: matches,
-  });
+  res.status(matches.status).json(matches);
 };

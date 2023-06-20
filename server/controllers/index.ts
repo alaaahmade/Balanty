@@ -1,1 +1,1 @@
-export { getStadiumMatches } from './stadiumMatches';
+export { getStadiumMatches } from './stadiums';
