@@ -13,7 +13,7 @@ interface connectionOption {
   };
 }
 
-if (!NODE_ENV || !DATABASE_URL) {
+if (!NODE_ENV) {
   throw new Error('Invalid Environment Variables');
 }
 export const sequelizeOption: connectionOption = {
