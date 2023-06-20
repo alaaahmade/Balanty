@@ -1,8 +1,9 @@
-import express from 'express';
-import { errorWrapper } from '../utils';
-import login from '../controllers/auth/login';
-const authRouter = express.Router();
+import express, { Router } from 'express';
+export const authRouter: Router = express.Router();
 
-authRouter.post('/login', errorWrapper(login));
+import { errorWrapper } from '../utils/errorHandler';
+import signup from '../controllers/auth';
 
-export default authRouter;
+authRouter.post('/signup', errorWrapper(signup));
+
+export {};
