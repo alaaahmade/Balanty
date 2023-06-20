@@ -3,10 +3,10 @@ import React, { useContext } from 'react';
 import { Alert, Typography } from '@mui/material';
 import { statsContext } from '../../context/CreateMatch';
 import Calendar from '../calender/Calender';
+import { StyledFlexBox, StyledTypo } from './createMatchStyled';
 
 const CreateMatchCalendar = () => {
-  const states = useContext(statsContext);
-  const { ValidateError, Event, setEvent } = states;
+  const { ValidateError, Event, setEvent } = useContext(statsContext);
 
   return (
     <Box
@@ -14,27 +14,16 @@ const CreateMatchCalendar = () => {
         width: '90%',
         display: 'flex',
         flexDirection: 'column',
+        justifyContent: 'flex-start',
         alignItems: 'flex-end',
       }}
     >
       <Box
         sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-end',
           width: '90%',
-          textAlign: 'right',
         }}
       >
-        <Box
-          sx={{
-            width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            position: 'relative',
-          }}
-        >
+        <StyledFlexBox>
           {ValidateError && (
             <Alert
               sx={{
@@ -47,21 +36,16 @@ const CreateMatchCalendar = () => {
               {ValidateError}
             </Alert>
           )}
-          <Typography
+          <StyledTypo
             sx={{
-              color: '#2CB674',
-              mt: '85px',
-              textAlign: 'right',
-              p: '3px 30px ',
-              fontWeight: 'bold',
-              position: 'absolute',
-              right: '0',
+              mt: '105px',
+              p: '3px 3px 15px 3px',
             }}
             variant="h5"
           >
             وقت المبارة
-          </Typography>
-        </Box>
+          </StyledTypo>
+        </StyledFlexBox>
       </Box>
       <Box
         sx={{
