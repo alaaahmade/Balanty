@@ -66,6 +66,7 @@ const Calendar: FC<Props> = ({ Event, setEvent }): ReactElement => {
   };
 
   const AddNewEvent = (newEvent: newEventInterface) => {
+    if (!Event) return;
     if (Event.start !== newEvent.startStr) {
       setEvent((prev: IEvent) => ({
         ...prev,
@@ -81,8 +82,10 @@ const Calendar: FC<Props> = ({ Event, setEvent }): ReactElement => {
     }
   };
   useEffect(() => {
-    setEvents([...eve]);
-    setEvents((prev: IEvent[]) => [...prev, Event]);
+    if (Event) {
+      setEvents([...eve]);
+      setEvents((prev: IEvent[]) => [...prev, Event]);
+    }
   }, [Event]);
 
   return (

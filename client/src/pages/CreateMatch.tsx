@@ -76,7 +76,9 @@ const CreateMatch: React.FC<createMatchInterface> = ({
   const getStadiumMatchs = async (id: number) => {
     if (open) {
       try {
-        const matchesFetch = await fetch('/api/v1/matches');
+        const matchesFetch = await fetch(
+          `http://localhost:8081/api/v1/matches/stadium/${id}`,
+        );
         const stadMatches = await matchesFetch.json();
         console.log(stadMatches);
       } catch (error: unknown) {

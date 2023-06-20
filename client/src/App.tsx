@@ -6,6 +6,7 @@ import { LandingPage } from './pages';
 import LightTheme from './themes';
 import { open, useCustomOpen } from './context';
 import { StatsContextProvider } from './context/CreateMatch';
+import Calendar from './components/calender/Calender';
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,8 @@ const App = (): ReactElement => {
     <ThemeProvider theme={LightTheme}>
       <open.Provider value={useCustomOpen()}>
         <StatsContextProvider>
-          <RouterProvider router={router} />
+          <Calendar />
+          {/* <RouterProvider router={router} /> */}
         </StatsContextProvider>
       </open.Provider>
     </ThemeProvider>
