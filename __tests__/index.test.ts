@@ -18,7 +18,7 @@ describe('POST /api/v1/matches', () => {
     request(app)
       .post('/api/v1/matches')
       .send({
-        StadiumId: 1,
+        StadiumId: 6,
         title: 'hi test',
         description: 'string',
         startDate: 'Date',
@@ -36,6 +36,34 @@ describe('POST /api/v1/matches', () => {
         expect(data.title).toBe('hi test');
         expect(data.startDate).toBe('Date');
         expect(data.seats).toBe(15);
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
+
+  test('test for checking if tha stadium is exist', done => {
+    request(app)
+      .post('/api/v1/matches')
+      .send({
+        StadiumId: 1,
+        title: 'hi test',
+        description: 'string',
+        startDate: 'Date',
+        endDate: 'Date',
+        seats: 15,
+      })
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(response.status).toBe(202);
+        expect(data).toBe('هذا الملعب غير متاح');
         done();
 
         if (err) {
