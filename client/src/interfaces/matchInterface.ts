@@ -49,17 +49,16 @@ export interface newEventInterface {
 }
 
 export interface OpenContextValue {
-  openPage?: boolean;
-  updateOpen?: (newValue: boolean) => void;
-}
-
-export interface OpenContextValue2 {
-  Stadiums: any[];
-  setStadiums: React.Dispatch<React.SetStateAction<any[]>>;
+  Stadiums: { username: string; id: number }[];
+  setStadiums: React.Dispatch<
+    React.SetStateAction<{ username: string; id: number }[]>
+  >;
   UserId: number;
   setUserId: React.Dispatch<React.SetStateAction<number>>;
-  Details: any;
-  setDetails: React.Dispatch<React.SetStateAction<any>>;
+  Details: string;
+  openPage?: boolean;
+  updateOpen?: (newValue: boolean) => void;
+  setDetails: React.Dispatch<React.SetStateAction<string>>;
   ValidateError: string;
   setValidateError: React.Dispatch<React.SetStateAction<string>>;
   matches: IEvent[];

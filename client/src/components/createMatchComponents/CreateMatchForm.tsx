@@ -148,7 +148,6 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
         getOptionLabel={getOptionLabel as (option: unknown) => string}
         onChange={handleAutocompleteChange}
         renderInput={params => (
-          // eslint-disable-next-line react/jsx-props-no-spreading
           <TextField {...params} placeholder="اسم الملعب" />
         )}
       />
