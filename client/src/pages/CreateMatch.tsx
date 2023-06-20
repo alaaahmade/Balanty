@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useContext, useEffect, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { TransitionProps } from '@mui/material/transitions';
 import { Box } from '@mui/system';
@@ -27,25 +27,27 @@ import {
 import Calendar from '../components/calender/Calender';
 import '../fullcalendar-custom.css';
 import { Option, createMatchInterface, prevInterface } from '../interfaces';
+import { statsContext } from '../context/CreateMatch';
+import CreateMatchForm from '../components/createMatchComponents';
 
-const EventSchema = object({
-  endDate: string().required('يجب حجز وقت المباراة'),
-  startDate: string().required('يجب حجز وقت المباراة'),
-  UserId: number()
-    .min(1, '!يجب ادخال اسم الملعب')
-    .required('!يجب ادخال اسم الملعب'),
-  description: string()
-    .min(5, 'يجب ان يكون الوصف 5 احرف على الاقل')
-    .required('!يجب كتابة وصف للمباراة'),
-  seats: number()
-    .required('يجب ادخال عدد اللاعبين')
-    .min(5, 'يجب ان يكون عدد اللاعبين 5 على الاقل')
-    .max(50, 'يجب ان لا يزيد عدد اللاعبين عن 50'),
-  title: string()
-    .required('يجب كتابة عنوان للمباراة')
-    .min(5, 'يجب ان يكون العنوان 5 احرف على الاقل')
-    .max(50, 'يجب ان لا يزيد عدد الاحرف في العنوان عن 50'),
-});
+// const EventSchema = object({
+//   endDate: string().required('يجب حجز وقت المباراة'),
+//   startDate: string().required('يجب حجز وقت المباراة'),
+//   UserId: number()
+//     .min(1, '!يجب ادخال اسم الملعب')
+//     .required('!يجب ادخال اسم الملعب'),
+//   description: string()
+//     .min(5, 'يجب ان يكون الوصف 5 احرف على الاقل')
+//     .required('!يجب كتابة وصف للمباراة'),
+//   seats: number()
+//     .required('يجب ادخال عدد اللاعبين')
+//     .min(5, 'يجب ان يكون عدد اللاعبين 5 على الاقل')
+//     .max(50, 'يجب ان لا يزيد عدد اللاعبين عن 50'),
+//   title: string()
+//     .required('يجب كتابة عنوان للمباراة')
+//     .min(5, 'يجب ان يكون العنوان 5 احرف على الاقل')
+//     .max(50, 'يجب ان لا يزيد عدد الاحرف في العنوان عن 50'),
+// });
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -67,87 +69,19 @@ const CreateMatch: React.FC<createMatchInterface> = ({
   open,
   setOpen,
 }): ReactElement => {
-  const [Stadiums, setStadiums] = useState([]);
-  const [UserId, setUserId] = useState<number>(0);
-  const [Details, setDetails] = useState();
-  const [ValidateError, setValidateError] = useState('');
-  const [matches, setMatches] = useState<IEvent[]>([]);
-  const [Event, setEvent] = useState<IEvent>({
-    title: '',
-    start: '',
-    end: '',
-    backgroundColor: '',
-  });
-  const [match, setMatch] = useState({
-    title: '',
-    startDate: '',
-    endDate: '',
-    seats: 0,
-    description: '',
-    UserId: 0,
-  });
-  useEffect(() => {
-    setMatch({
-      title: '',
-      startDate: '',
-      endDate: '',
-      seats: 0,
-      description: '',
-      UserId: 0,
-    });
-    setEvent({
-      title: '',
-      start: '',
-      end: '',
-      backgroundColor: '',
-    });
-    setValidateError('');
-  }, [open]);
-
-  useEffect(() => {
-    setMatch(prv => ({ ...prv, startDate: Event.start, endDate: Event.end }));
-  }, [Event]);
+  const states = useContext(statsContext);
+  const {
+    setStadiums,
+    UserId,
+    ValidateError,
+    setValidateError,
+    Event,
+    setEvent,
+  } = states;
 
   const handleClose = () => {
     setOpen(false);
   };
-
-  const getOptionLabel = (Stadium: Option) => Stadium.username;
-
-  const handleAutocompleteChange = async (
-    event: React.ChangeEvent<object>,
-    // value: Option | null,
-    value: Option | unknown,
-  ): Promise<void> => {
-    if (value) {
-      const selectedValue = value as Option;
-      setUserId(+selectedValue.id);
-      setMatch((prev: prevInterface) => ({
-        ...prev,
-        UserId: +selectedValue.id,
-      }));
-      const data = await fetch(`/api/v1/stadiums/details/${selectedValue?.id}`);
-      const stadDetails = await data.json();
-      setDetails(stadDetails.data[0].image1);
-      setValidateError('');
-    }
-  };
-  const handlePlayersCount = (e: { target: { value: string } }) => {
-    setMatch((prev: prevInterface) => ({
-      ...prev,
-      seats: +e.target.value,
-    }));
-    setValidateError('');
-  };
-
-  const handleMatchName = (e: { target: { value: string } }) => {
-    setMatch((prev: prevInterface) => ({
-      ...prev,
-      title: e.target.value,
-    }));
-    setValidateError('');
-  };
-
   const fetchEvent = async (data: prevInterface) => {
     const matchesFetch = await fetch('/api/v1/matches', {
       method: 'POST',
@@ -161,10 +95,9 @@ const CreateMatch: React.FC<createMatchInterface> = ({
       handleClose();
     }
   };
-
   const HandleCreateEvent = async () => {
     try {
-      const result = await EventSchema.validateSync(match);
+      const result = await MatchSchema.validateSync(match);
 
       await fetchEvent(result);
     } catch (error: unknown) {
@@ -173,13 +106,6 @@ const CreateMatch: React.FC<createMatchInterface> = ({
     }
   };
 
-  const handleDescription = (e: { target: { value: string } }) => {
-    setMatch((prev: prevInterface) => ({
-      ...prev,
-      description: e.target.value,
-    }));
-    setValidateError('');
-  };
   const getStadiumMatchs = async (id: number) => {
     if (open) {
       try {
@@ -301,76 +227,7 @@ const CreateMatch: React.FC<createMatchInterface> = ({
                 <Calendar Event={Event} setEvent={setEvent} />
               </Box>
             </Box>
-            <DialogInputsBox>
-              <StyledSearchInput
-                sx={{ mt: '25px', width: '80%', border: '1px solid #ccc' }}
-                placeholder="عنوان المباراة"
-                onChange={handleMatchName}
-                disableUnderline
-              />
-              <StyledSearchInput
-                sx={{
-                  mt: '25px',
-                  width: '80%',
-                  p: '20px',
-                  border: '1px solid #ccc',
-                }}
-                placeholder="عدد اللاعبين"
-                type="number"
-                onChange={handlePlayersCount}
-                disableUnderline
-              />
-
-              <TextField
-                InputProps={{
-                  disableUnderline: true,
-                  inputProps: {
-                    style: {
-                      textAlign: 'right',
-                      padding: '7px 40px',
-                    },
-                  },
-                }}
-                color="primary"
-                variant="standard"
-                multiline
-                minRows={2}
-                placeholder="وصف المباراة"
-                sx={{
-                  width: '80%',
-                  mt: '25px',
-                  backgroundColor: '#EDF7FF',
-                  borderRadius: '5px',
-                  border: '1px solid #ccc',
-                }}
-                onChange={handleDescription}
-              />
-              <StyledAutocomplete
-                disablePortal
-                id="combo-box-demo"
-                options={Stadiums}
-                getOptionLabel={getOptionLabel as (option: unknown) => string}
-                onChange={handleAutocompleteChange}
-                renderInput={params => (
-                  <TextField {...params} placeholder="اسم الملعب" />
-                )}
-              />
-              <Box
-                sx={{
-                  width: '80%',
-                  display: 'flex',
-                  justifyContent: 'space-evenly',
-                }}
-              >
-                {Details && <CreateMatchImg src={Details} alt="ملعب" />}
-              </Box>
-              <CreateMatchButtons>
-                <StyledButton onClick={handleClose}> الغاء</StyledButton>
-                <StyledButton onClick={HandleCreateEvent}>
-                  انشاء المباراة
-                </StyledButton>
-              </CreateMatchButtons>
-            </DialogInputsBox>
+            <CreateMatchForm />
           </Box>
         </DialogBox>
       </Dialog>

@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import NavBar from '../components/RootComponents/navBar/NavBar';
 import { LeftSideBar, RightSideBar } from '../components';
 import CreateMatch from '../pages/CreateMatch';
-import open from '../context';
+import { open } from '../context';
 
 const RootLayout: React.FC = (): ReactElement => {
   const contextValue = useContext(open);
@@ -12,7 +12,7 @@ const RootLayout: React.FC = (): ReactElement => {
   if (!contextValue) {
     return <div>Loading...</div>;
   }
-  const { openPage, setOpenPage } = contextValue;
+  const { openPage, updateOpen } = contextValue;
 
   return (
     <Box
@@ -22,10 +22,10 @@ const RootLayout: React.FC = (): ReactElement => {
       }}
     >
       <NavBar />
-      <LeftSideBar setOpen={setOpenPage || (() => undefined)} />
+      <LeftSideBar setOpen={updateOpen || (() => undefined)} />
       <CreateMatch
         open={openPage || false}
-        setOpen={setOpenPage || (() => undefined)}
+        setOpen={updateOpen || (() => undefined)}
       />
       <RightSideBar />
       <Outlet />

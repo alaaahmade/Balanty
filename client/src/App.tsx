@@ -4,7 +4,7 @@ import { ThemeProvider } from '@emotion/react';
 import RootLayout from './layouts/RootLayout';
 import { LandingPage } from './pages';
 import LightTheme from './themes';
-import open from './context';
+import { open, useCustomOpen } from './context';
 
 const router = createBrowserRouter([
   {
@@ -25,15 +25,9 @@ const router = createBrowserRouter([
   { path: '*', element: <h1>error</h1> },
 ]);
 const App = (): ReactElement => {
-  const [openPage, setOpenPage] = useState(false);
-  const contextValue = useMemo(
-    () => ({ openPage, setOpenPage }),
-    [openPage, setOpenPage],
-  );
-
   return (
     <ThemeProvider theme={LightTheme}>
-      <open.Provider value={contextValue}>
+      <open.Provider value={useCustomOpen()}>
         <RouterProvider router={router} />
       </open.Provider>
     </ThemeProvider>

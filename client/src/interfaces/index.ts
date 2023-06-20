@@ -3,4 +3,7 @@ export type {
   Option,
   CalendarProps,
   prevInterface,
+  OpenContextValue,
+  LeftSideBarInterface,
+  OpenContextValue2,
 } from './matchInterface';

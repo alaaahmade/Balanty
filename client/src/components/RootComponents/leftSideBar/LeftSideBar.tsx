@@ -10,10 +10,7 @@ import {
   StyledButton,
   StyledTypography,
 } from '../../index';
-
-interface LeftSideBarInterface {
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { LeftSideBarInterface } from '../../../interfaces';
 
 const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
   const handleClickOpen = () => {
