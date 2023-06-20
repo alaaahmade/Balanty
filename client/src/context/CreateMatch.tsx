@@ -1,17 +1,14 @@
 import PropTypes from 'prop-types';
 
-import { ReactNode, createContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { IEvent } from '../pages/CreateMatch';
-import { OpenContextValue2 } from '../interfaces';
+import { OpenContextValue2, MyContextProviderProps } from '../interfaces';
+import { open } from './RootLayout';
 
-interface MyContextProviderProps {
-  children: ReactNode;
-}
-
-const statsContext = createContext<OpenContextValue2 | any>({});
+export const statsContext = createContext<OpenContextValue2 | any>({});
 statsContext.displayName = 'OpenContext';
 
-const OpenContextProvider = ({ children }: MyContextProviderProps) => {
+export const StatsContextProvider = ({ children }: MyContextProviderProps) => {
   const [Stadiums, setStadiums] = useState<any[]>([]);
   const [UserId, setUserId] = useState<number>(0);
   const [Details, setDetails] = useState<any>();
@@ -31,26 +28,26 @@ const OpenContextProvider = ({ children }: MyContextProviderProps) => {
     description: '',
     UserId: 0,
   });
-  // const contextValue = useContext(open);
-  // const { openPage, updateOpen } = contextValue;
+  const contextValue = useContext(open);
+  const { openPage } = contextValue;
 
-  // useEffect(() => {
-  //   setMatch({
-  //     title: '',
-  //     startDate: '',
-  //     endDate: '',
-  //     seats: 0,
-  //     description: '',
-  //     UserId: 0,
-  //   });
-  //   setEvent({
-  //     title: '',
-  //     start: '',
-  //     end: '',
-  //     backgroundColor: '',
-  //   });
-  //   setValidateError('');
-  // }, [openPage]);
+  useEffect(() => {
+    setMatch({
+      title: '',
+      startDate: '',
+      endDate: '',
+      seats: 0,
+      description: '',
+      UserId: 0,
+    });
+    setEvent({
+      title: '',
+      start: '',
+      end: '',
+      backgroundColor: '',
+    });
+    setValidateError('');
+  }, [openPage]);
 
   useEffect(() => {
     setMatch(prv => ({ ...prv, startDate: Event.start, endDate: Event.end }));
@@ -80,9 +77,6 @@ const OpenContextProvider = ({ children }: MyContextProviderProps) => {
     <statsContext.Provider value={values}>{children}</statsContext.Provider>
   );
 };
-
-export { statsContext, OpenContextProvider };
-
-OpenContextProvider.propTypes = {
+StatsContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };

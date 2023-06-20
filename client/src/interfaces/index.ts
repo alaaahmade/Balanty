@@ -6,4 +6,5 @@ export type {
   OpenContextValue,
   LeftSideBarInterface,
   OpenContextValue2,
+  MyContextProviderProps,
 } from './matchInterface';

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { FC, useContext } from 'react';
 import { TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import { StyledButton } from '../styledRootComponent/SideComponents';
@@ -12,27 +12,23 @@ import { StyledSearchInput } from '../styledRootComponent/Nav';
 import { Option, prevInterface } from '../../interfaces';
 import MatchSchema from '../../validation/MatchSchema';
 import { statsContext } from '../../context/CreateMatch';
+import { CreateMatchFormProps } from '../../interfaces/matchInterface';
 
-const CreateMatchForm = () => {
+const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
   const states = useContext(statsContext);
   const {
     Stadiums,
-    setStadiums,
-    UserId,
     setUserId,
     Details,
     setDetails,
-    ValidateError,
     setValidateError,
-    Event,
-    setEvent,
     match,
     setMatch,
   } = states;
   const getOptionLabel = (Stadium: Option) => Stadium.username;
 
   const handleClose = () => {
-    console.log(false);
+    setOpen(false);
   };
   const handleMatchName = (e: { target: { value: string } }) => {
     setMatch((prev: prevInterface) => ({

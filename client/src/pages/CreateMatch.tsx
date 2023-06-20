@@ -1,9 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { ReactElement, useContext, useEffect, useState } from 'react';
+import React, { ReactElement, useContext, useEffect } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { TransitionProps } from '@mui/material/transitions';
 import { Box } from '@mui/system';
-import { object, string, number } from 'yup';
 import {
   Button,
   Dialog,
@@ -12,42 +11,17 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  TextField,
   Alert,
 } from '@mui/material';
-import {
-  CreateMatchButtons,
-  CreateMatchImg,
-  DialogBox,
-  DialogInputsBox,
-  StyledAutocomplete,
-  StyledButton,
-  StyledSearchInput,
-} from '../components';
-import Calendar from '../components/calender/Calender';
+import { DialogBox } from '../components';
 import '../fullcalendar-custom.css';
-import { Option, createMatchInterface, prevInterface } from '../interfaces';
+import { createMatchInterface, prevInterface } from '../interfaces';
 import { statsContext } from '../context/CreateMatch';
-import CreateMatchForm from '../components/createMatchComponents';
-
-// const EventSchema = object({
-//   endDate: string().required('يجب حجز وقت المباراة'),
-//   startDate: string().required('يجب حجز وقت المباراة'),
-//   UserId: number()
-//     .min(1, '!يجب ادخال اسم الملعب')
-//     .required('!يجب ادخال اسم الملعب'),
-//   description: string()
-//     .min(5, 'يجب ان يكون الوصف 5 احرف على الاقل')
-//     .required('!يجب كتابة وصف للمباراة'),
-//   seats: number()
-//     .required('يجب ادخال عدد اللاعبين')
-//     .min(5, 'يجب ان يكون عدد اللاعبين 5 على الاقل')
-//     .max(50, 'يجب ان لا يزيد عدد اللاعبين عن 50'),
-//   title: string()
-//     .required('يجب كتابة عنوان للمباراة')
-//     .min(5, 'يجب ان يكون العنوان 5 احرف على الاقل')
-//     .max(50, 'يجب ان لا يزيد عدد الاحرف في العنوان عن 50'),
-// });
+import {
+  CreateMatchForm,
+  CreateMatchCalendar,
+} from '../components/createMatchComponents';
+import MatchSchema from '../validation/MatchSchema';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -70,14 +44,7 @@ const CreateMatch: React.FC<createMatchInterface> = ({
   setOpen,
 }): ReactElement => {
   const states = useContext(statsContext);
-  const {
-    setStadiums,
-    UserId,
-    ValidateError,
-    setValidateError,
-    Event,
-    setEvent,
-  } = states;
+  const { setStadiums, UserId, setValidateError, match } = states;
 
   const handleClose = () => {
     setOpen(false);
@@ -163,7 +130,8 @@ const CreateMatch: React.FC<createMatchInterface> = ({
               flexDirection: 'row',
             }}
           >
-            <Box
+            <CreateMatchCalendar />
+            {/* <Box
               sx={{
                 width: '90%',
                 display: 'flex',
@@ -226,8 +194,8 @@ const CreateMatch: React.FC<createMatchInterface> = ({
               >
                 <Calendar Event={Event} setEvent={setEvent} />
               </Box>
-            </Box>
-            <CreateMatchForm />
+            </Box> */}
+            <CreateMatchForm setOpen={setOpen} />
           </Box>
         </DialogBox>
       </Dialog>

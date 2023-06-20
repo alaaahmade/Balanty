@@ -5,6 +5,7 @@ import RootLayout from './layouts/RootLayout';
 import { LandingPage } from './pages';
 import LightTheme from './themes';
 import { open, useCustomOpen } from './context';
+import { StatsContextProvider } from './context/CreateMatch';
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,9 @@ const App = (): ReactElement => {
   return (
     <ThemeProvider theme={LightTheme}>
       <open.Provider value={useCustomOpen()}>
-        <RouterProvider router={router} />
+        <StatsContextProvider>
+          <RouterProvider router={router} />
+        </StatsContextProvider>
       </open.Provider>
     </ThemeProvider>
   );

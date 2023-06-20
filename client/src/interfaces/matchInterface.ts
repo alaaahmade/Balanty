@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 import { IEvent } from '../pages/CreateMatch';
 
 export interface Option {
@@ -68,4 +68,12 @@ export interface OpenContextValue2 {
   setEvent: React.Dispatch<React.SetStateAction<IEvent>>;
   match: prevInterface;
   setMatch: React.Dispatch<React.SetStateAction<prevInterface>>;
+}
+
+export interface MyContextProviderProps {
+  children: ReactNode;
+}
+
+export interface CreateMatchFormProps {
+  setOpen: (newValue: boolean) => void;
 }
