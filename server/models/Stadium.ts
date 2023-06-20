@@ -1,6 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../database';
-console.log(sequelize);
 
 class Stadium extends Model {
   declare user_id: number;
