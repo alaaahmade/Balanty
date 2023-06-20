@@ -1,7 +1,6 @@
 import app from './app';
 import { PORT } from './config';
-import { sequelize } from './database/config/connection';
-console.log(sequelize);
+// import { sequelize } from './database/config/connection';
 
 const startServer = async (): Promise<void> => {
   try {
