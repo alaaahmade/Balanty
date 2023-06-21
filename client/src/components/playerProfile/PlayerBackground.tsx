@@ -1,34 +1,34 @@
-import { Avatar, Box } from '@mui/material';
+import { Avatar } from '@mui/material';
 import React, { ReactElement } from 'react';
 import LeftSideBar from '../RootComponents/leftSideBar/LeftSideBar';
 import NavBar from '../RootComponents/navBar/NavBar';
+import { Cover, AvatarWrapper, MainWrapper } from './Player.Styled';
 
 const PlayerBackground: React.FC = (): ReactElement => {
   return (
-    <div>
+    <>
       <NavBar />
-      <div style={{ display: 'flex', right: 0 }}>
-        <div>
-          <Box
-            sx={{
-              width: 300,
-              height: 300,
-              backgroundColor: 'primary.dark',
-              '&:hover': {
-                backgroundColor: 'primary.main',
-                opacity: [0.9, 0.8, 0.7],
-              },
-            }}
+      <MainWrapper>
+        <AvatarWrapper>
+          <Cover
+            alt="backgroundimage"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1pTPIgF0WL3OISw6WCVR_BCDVX1BkT26V5l8kScTyk9fOu0PfZQdbk72ZT9pBIMYX7cg&usqp=CAU"
           />
           <Avatar
             alt="Remy Sharp"
-            src="/static/images/avatar/1.jpg"
-            sx={{ width: 56, height: 56 }}
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXKrxLlVyJ00ejbBf8gTGIA5HKb7Ewr1WgJA&usqp=CAU"
+            sx={{
+              width: 145,
+              height: 145,
+              marginTop: -10,
+              marginRight: '2.5em',
+              border: '6px solid #fff',
+            }}
           />
-        </div>
+        </AvatarWrapper>
         <LeftSideBar />
-      </div>
-    </div>
+      </MainWrapper>
+    </>
   );
 };
 
