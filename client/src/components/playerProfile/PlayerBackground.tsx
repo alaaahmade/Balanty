@@ -1,10 +1,15 @@
 import React, { ReactElement } from 'react';
+import LeftSideBar from '../RootComponents/leftSideBar/LeftSideBar';
+import NavBar from '../RootComponents/navBar/NavBar';
 
 const PlayerBackground: React.FC = (): ReactElement => {
   return (
     <div>
-      <h1>Player Background Component</h1>
-      <p>This is the content of the PlayerBackground component.</p>
+      <NavBar />
+      <div style={{ display: 'flex', right:0 }}>
+        hello
+        <LeftSideBar />
+      </div>
     </div>
   );
 };
