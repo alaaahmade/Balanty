@@ -18,7 +18,7 @@ const updatePlayer: RequestHandler = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
-  const playerId = req.params.id;
+  const playerId = Number(req.params.id);
   const updatedData = req.body;
 
   const updatedPlayer = await updatePlayerById(playerId, updatedData);
