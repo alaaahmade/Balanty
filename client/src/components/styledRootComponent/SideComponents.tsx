@@ -3,7 +3,7 @@ import { Box, styled } from '@mui/system';
 
 export const SideBox = styled(Box)({
   position: 'absolute',
-  width: '270px',
+  width: '240px',
   minHeight: 'calc(100vh - 65px)',
   top: '4.1em',
   backgroundColor: '#FFFFFF',
@@ -19,6 +19,7 @@ export const StyledButton = styled(Button)({
   height: '35px',
   background: '#2CB674',
   borderRadius: '5px',
+  marginTop: '12px',
   gap: '10px',
   color: '#fff',
   '&:hover': {
