@@ -11,7 +11,6 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  Alert,
 } from '@mui/material';
 import { DialogBox } from '../components';
 import '../fullcalendar-custom.css';
@@ -34,6 +33,9 @@ const Transition = React.forwardRef(function Transition(
 });
 
 export type IEvent = {
+  UserId: number;
+  Seats: number;
+  description: string;
   title: string;
   start: string;
   end: string;
@@ -44,7 +46,14 @@ const CreateMatch: React.FC<createMatchInterface> = ({
   setOpen,
 }): ReactElement => {
   const states = useContext(statsContext);
-  const { setStadiums, UserId, setValidateError, match } = states;
+  const {
+    setStadiums,
+    StadiumId,
+    setValidateError,
+    match,
+    setMatches,
+    matches,
+  } = states;
 
   const handleClose = () => {
     setOpen(false);
@@ -58,7 +67,7 @@ const CreateMatch: React.FC<createMatchInterface> = ({
     const resultCreate = await matchesFetch.json();
     if (resultCreate.status === 401) {
       setValidateError(resultCreate.message);
-    } else if (resultCreate.status === 200) {
+    } else if (resultCreate.status === 201) {
       handleClose();
     }
   };
@@ -76,19 +85,29 @@ const CreateMatch: React.FC<createMatchInterface> = ({
   const getStadiumMatchs = async (id: number) => {
     if (open) {
       try {
-        const matchesFetch = await fetch(
-          `http://localhost:8081/api/v1/matches/stadium/${id}`,
-        );
+        const matchesFetch = await fetch(`/api/v1/stadiums/matches/${id}`);
         const stadMatches = await matchesFetch.json();
-        console.log(stadMatches);
+
+        const convertedMatches = stadMatches.data.map(
+          (event: prevInterface) => {
+            return {
+              title: event.title,
+              start: event.startDate,
+              end: event.endDate,
+              description: event.description,
+              seats: event.seats,
+            };
+          },
+        );
+        await setMatches(convertedMatches);
       } catch (error: unknown) {
         console.log(error);
       }
     }
   };
   useEffect(() => {
-    getStadiumMatchs(UserId);
-  }, [UserId]);
+    getStadiumMatchs(StadiumId);
+  }, [StadiumId]);
 
   useEffect(() => {
     fetch('/api/v1/stadiums')

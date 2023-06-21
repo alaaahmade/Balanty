@@ -18,5 +18,4 @@ export const StyledFlexBox = styled(Box)({
   justifyContent: 'space-between',
   position: 'relative',
   textAlign: 'right',
-
 });

@@ -16,6 +16,9 @@ const errorWrapper =
     try {
       await controller(req, res, next);
     } catch (error: unknown) {
+      if (error instanceof CustomError) {
+        return next(error);
+      }
       const customError = error as ErrorType;
       const status = errorMappings[customError?.name as string];
       customError.status = status;

@@ -12,15 +12,18 @@ statsContext.displayName = 'OpenContext';
 
 export const StatsContextProvider = ({ children }: MyContextProviderProps) => {
   const [Stadiums, setStadiums] = useState<OpenContextValue['Stadiums']>([]);
-  const [UserId, setUserId] = useState<number>(0);
+  const [StadiumId, setStadiumId] = useState<number>(0);
   const [Details, setDetails] = useState<string>();
   const [ValidateError, setValidateError] = useState<string>('');
   const [matches, setMatches] = useState<IEvent[]>([]);
   const [Event, setEvent] = useState<IEvent>({
+    UserId: 0,
+    Seats: 0,
+    description: '',
+    backgroundColor: '#000',
     title: '',
     start: '',
     end: '',
-    backgroundColor: '',
   });
   const [match, setMatch] = useState({
     title: '',
@@ -28,7 +31,7 @@ export const StatsContextProvider = ({ children }: MyContextProviderProps) => {
     endDate: '',
     seats: 0,
     description: '',
-    UserId: 0,
+    StadiumId: 0,
   });
   const contextValue = useContext(open);
   const { openPage } = contextValue;
@@ -40,15 +43,20 @@ export const StatsContextProvider = ({ children }: MyContextProviderProps) => {
       endDate: '',
       seats: 0,
       description: '',
-      UserId: 0,
+      StadiumId: 0,
     });
     setEvent({
+      UserId: 0,
+      Seats: 0,
+      description: '',
+      backgroundColor: '#2CB674',
       title: '',
       start: '',
       end: '',
-      backgroundColor: '',
     });
+    setMatches([]);
     setValidateError('');
+    setDetails('');
   }, [openPage]);
 
   useEffect(() => {
@@ -59,8 +67,8 @@ export const StatsContextProvider = ({ children }: MyContextProviderProps) => {
     () => ({
       Stadiums,
       setStadiums,
-      UserId,
-      setUserId,
+      StadiumId,
+      setStadiumId,
       Details: Details || '',
       setDetails: setDetails as React.Dispatch<React.SetStateAction<string>>,
       ValidateError,
@@ -72,7 +80,7 @@ export const StatsContextProvider = ({ children }: MyContextProviderProps) => {
       match,
       setMatch,
     }),
-    [Stadiums, matches, Event, match, ValidateError, Details, UserId],
+    [Stadiums, matches, Event, match, ValidateError, Details, StadiumId],
   );
 
   return (

@@ -15,7 +15,7 @@ export interface createMatchInterface extends LeftSideBarInterface {
 
 export interface CalendarProps {
   Event: {
-    UserId: number;
+    StadiumId: number;
     title: string;
     startDate: string;
     endDate: string;
@@ -24,7 +24,7 @@ export interface CalendarProps {
   };
   setEvent: Dispatch<
     SetStateAction<{
-      UserId: number;
+      StadiumId: number;
       title: string;
       startDate: string;
       endDate: string;
@@ -35,7 +35,7 @@ export interface CalendarProps {
 }
 
 export interface prevInterface {
-  UserId: number;
+  StadiumId: number;
   title: string;
   startDate: string;
   endDate: string;
@@ -53,8 +53,8 @@ export interface OpenContextValue {
   setStadiums: React.Dispatch<
     React.SetStateAction<{ username: string; id: number }[]>
   >;
-  UserId: number;
-  setUserId: React.Dispatch<React.SetStateAction<number>>;
+  StadiumId: number;
+  setStadiumId: React.Dispatch<React.SetStateAction<number>>;
   openPage?: boolean;
   updateOpen?: (newValue: boolean) => void;
   Details: string;

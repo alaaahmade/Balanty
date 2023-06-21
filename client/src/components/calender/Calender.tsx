@@ -8,6 +8,7 @@ import {
   FC,
   ReactElement,
   SetStateAction,
+  useContext,
   useEffect,
   useState,
 } from 'react';
@@ -17,28 +18,29 @@ import listPlugin from '@fullcalendar/list';
 import { newEventInterface } from '../../interfaces/matchInterface';
 import { IEvent } from '../../pages/CreateMatch';
 import '../../fullcalendar-custom.css';
+import { statsContext } from '../../context';
 
 // this events must be coming from api request
-const eve = [
-  {
-    title: 'Event 1',
-    start: '2023-06-15T09:00',
-    end: '2023-06-15T10:00',
-    backgroundColor: '#2CB674',
-  },
-  {
-    title: 'Event 1',
-    start: '2023-07-15T07:00',
-    end: '2023-07-15T08:00',
-    backgroundColor: '#2CB674',
-  },
-  {
-    title: 'Event 1',
-    start: '2023-06-16T10:00',
-    end: '2023-06-16T11:00',
-    backgroundColor: '#2CB674',
-  },
-];
+// const eve = [
+//   {
+//     title: 'Event 1',
+//     start: '2023-06-22T09:00',
+//     end: '2023-06-22T10:00',
+//     backgroundColor: '#2CB674',
+//   },
+//   {
+//     title: 'Event 1',
+//     start: '2023-07-22T07:00',
+//     end: '2023-07-22T08:00',
+//     backgroundColor: '#2CB674',
+//   },
+//   {
+//     title: 'Event 1',
+//     start: '2023-06-22T10:00',
+//     end: '2023-06-22T11:00',
+//     backgroundColor: '#2CB674',
+//   },
+// ];
 
 type Props = {
   Event: IEvent;
@@ -46,7 +48,8 @@ type Props = {
 };
 
 const Calendar: FC<Props> = ({ Event, setEvent }): ReactElement => {
-  const [events, setEvents] = useState<IEvent[]>([...eve]);
+  const { matches } = useContext(statsContext);
+  const [events, setEvents] = useState<any>([...matches]);
   const handleEventMouseEnter = (arg: {
     event: EventApi;
     el: HTMLElement;
@@ -83,10 +86,10 @@ const Calendar: FC<Props> = ({ Event, setEvent }): ReactElement => {
   };
   useEffect(() => {
     if (Event) {
-      setEvents([...eve]);
+      setEvents([...matches]);
       setEvents((prev: IEvent[]) => [...prev, Event]);
     }
-  }, [Event]);
+  }, [matches]);
 
   return (
     <Box
@@ -101,7 +104,7 @@ const Calendar: FC<Props> = ({ Event, setEvent }): ReactElement => {
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
         initialView="timeGridWeek"
         slotDuration="01:00"
-        events={events}
+        events={[...events, Event]}
         height="100%"
         eventColor="#000"
         eventTextColor="#fff"

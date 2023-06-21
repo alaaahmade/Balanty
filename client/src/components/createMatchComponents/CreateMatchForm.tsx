@@ -18,7 +18,7 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
   const states = useContext(statsContext);
   const {
     Stadiums,
-    setUserId,
+    setStadiumId,
     Details,
     setDetails,
     setValidateError,
@@ -46,15 +46,19 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
     setValidateError('');
   };
   const fetchEvent = async (data: prevInterface) => {
+    console.log(data);
+
     const matchesFetch = await fetch('/api/v1/matches', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(data),
     });
     const resultCreate = await matchesFetch.json();
+    console.log(resultCreate);
+
     if (resultCreate.status === 401) {
       setValidateError(resultCreate.message);
-    } else if (resultCreate.status === 200) {
+    } else if (resultCreate.status === 201) {
       handleClose();
     }
   };
@@ -84,10 +88,10 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
   ): Promise<void> => {
     if (value) {
       const selectedValue = value as Option;
-      setUserId(+selectedValue.id);
+      setStadiumId(+selectedValue.id);
       setMatch((prev: prevInterface) => ({
         ...prev,
-        UserId: +selectedValue.id,
+        StadiumId: +selectedValue.id,
       }));
       const data = await fetch(`/api/v1/stadiums/details/${selectedValue?.id}`);
       const stadDetails = await data.json();

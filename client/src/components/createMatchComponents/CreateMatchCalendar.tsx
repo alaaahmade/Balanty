@@ -1,6 +1,6 @@
 import { Box } from '@mui/system';
 import React, { useContext } from 'react';
-import { Alert, Typography } from '@mui/material';
+import { Alert } from '@mui/material';
 import { statsContext } from '../../context/CreateMatch';
 import Calendar from '../calender/Calender';
 import { StyledFlexBox, StyledTypo } from './createMatchStyled';

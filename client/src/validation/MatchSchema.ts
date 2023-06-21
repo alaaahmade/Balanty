@@ -3,7 +3,7 @@ import { object, string, number } from 'yup';
 const MatchSchema = object({
   endDate: string().required('يجب حجز وقت المباراة'),
   startDate: string().required('يجب حجز وقت المباراة'),
-  UserId: number()
+  StadiumId: number()
     .min(1, '!يجب ادخال اسم الملعب')
     .required('!يجب ادخال اسم الملعب'),
   description: string()
