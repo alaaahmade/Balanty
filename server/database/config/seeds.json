@@ -1,6 +1,5 @@
 {
   "Users":[{
-    "UserId": 4,
     "username": "messi",
     "phone": "0591234577",
     "email": "messi@gmail.com",
@@ -8,7 +7,6 @@
     "role": "PLAYER"
   },
   {
-    "UserId": 1,
     "username": "Ronaldo",
     "phone": "0591234568",
     "email": "Ronaldo@gmail.com",
@@ -16,7 +14,6 @@
     "role": "PLAYER"
   },
   {
-    "UserId": 2,
     "username": "Neymar",
     "phone": "0591234569",
     "email": "Neymar@gmail.com",
@@ -24,7 +21,6 @@
     "role": "PLAYER"
   },
   {
-    "UserId": 3,
     "username": "benzema",
     "phone": "0591234562",
     "email": "benzema@gmail.com",
@@ -32,35 +28,30 @@
     "role": "PLAYER"
   },
   {
-    "UserId": 5,
     "username": "ملعب الساحة",
     "phone": "0591234563",
     "email": "AlsahaStad@gmail.com",
     "password": "AlsahaStad123",
     "role": "STADIUM"
   },{
-    "UserId": 6,
     "username": "نادي الاتحاد",
     "phone": "0591234564",
     "email": "AletehadStad@gmail.com",
     "password": "AletehadStad123",
     "role": "STADIUM"
   },{
-    "UserId": 7,
     "username": "نادي السلام",
     "phone": "0591234565",
     "email": "AlsalamStad@gmail.com",
     "password": "AlsalamStad123",
     "role": "STADIUM"
   },{
-    "UserId": 8,
     "username": "خدمات جباليا",
     "phone": "0591234566",
     "email": "JabalyaStad@gmail.com",
     "password": "JabalyaStad123",
     "role": "STADIUM"
   },{
-    "UserId": 9,
     "username": "خدمات بيت لاهيا",
     "phone": "0591234567",
     "email": "BitLahyaStad@gmail.com",
@@ -213,28 +204,28 @@
 
 ],
   "Message": [{
-    "player_id": 1,
+    "PlayerId": 1,
     "match_id": 1,
     "username": "messi",
     "message": "مرحبا",
     "timestamps": "2023/6/2 02:00"
   },
   {
-    "player_id": 1,
+    "PlayerId": 1,
     "match_id": 1,
     "username": "messi",
     "message": "كيف الحال",
     "timestamps": "2023/6/2 02:10"
   },
   {
-    "player_id": 2,
+    "PlayerId": 2,
     "match_id": 1,
     "username": "Ronaldo",
     "message": "مرحبا",
     "timestamps": "2023/6/2 02:00"
   },
   {
-    "player_id": 2,
+    "PlayerId": 2,
     "match_id": 1,
     "username": "Ronaldo",
     "message": "كيف الحال",
@@ -242,18 +233,18 @@
   }
 ],
   "Review": [{
-    "player_id": 1 ,
-    "Stadium_id": 2,
+    "PlayerId": 1 ,
+    "StadiumId": 2,
     "value": 4
   },
   {
-    "player_id": 2 ,
-    "Stadium_id": 2,
+    "PlayerId": 2 ,
+    "StadiumId": 2,
     "value": 1
   },
   {
-    "player_id": 4 ,
-    "Stadium_id": 2,
+    "PlayerId": 4 ,
+    "StadiumId": 2,
     "value": 3
   }
 
