@@ -49,7 +49,7 @@ type Props = {
 
 const Calendar: FC<Props> = ({ Event, setEvent }): ReactElement => {
   const { matches } = useContext(statsContext);
-  const [events, setEvents] = useState<any>([...matches]);
+  const [events, setEvents] = useState([...matches]);
   const handleEventMouseEnter = (arg: {
     event: EventApi;
     el: HTMLElement;

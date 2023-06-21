@@ -58,6 +58,17 @@ export const StatsContextProvider = ({ children }: MyContextProviderProps) => {
     setValidateError('');
     setDetails('');
   }, [openPage]);
+  useEffect(() => {
+    setEvent({
+      UserId: 0,
+      Seats: 0,
+      description: '',
+      backgroundColor: '#2CB674',
+      title: '',
+      start: '',
+      end: '',
+    });
+  }, [StadiumId]);
 
   useEffect(() => {
     setMatch(prv => ({ ...prv, startDate: Event.start, endDate: Event.end }));

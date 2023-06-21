@@ -46,14 +46,8 @@ const CreateMatch: React.FC<createMatchInterface> = ({
   setOpen,
 }): ReactElement => {
   const states = useContext(statsContext);
-  const {
-    setStadiums,
-    StadiumId,
-    setValidateError,
-    match,
-    setMatches,
-    matches,
-  } = states;
+  const { setStadiums, StadiumId, setValidateError, match, setMatches } =
+    states;
 
   const handleClose = () => {
     setOpen(false);
@@ -66,7 +60,7 @@ const CreateMatch: React.FC<createMatchInterface> = ({
     });
     const resultCreate = await matchesFetch.json();
     if (resultCreate.status === 401) {
-      setValidateError(resultCreate.message);
+      setValidateError(resultCreate.data);
     } else if (resultCreate.status === 201) {
       handleClose();
     }
@@ -84,25 +78,21 @@ const CreateMatch: React.FC<createMatchInterface> = ({
 
   const getStadiumMatchs = async (id: number) => {
     if (open) {
-      try {
-        const matchesFetch = await fetch(`/api/v1/stadiums/matches/${id}`);
-        const stadMatches = await matchesFetch.json();
-
-        const convertedMatches = stadMatches.data.map(
-          (event: prevInterface) => {
-            return {
-              title: event.title,
-              start: event.startDate,
-              end: event.endDate,
-              description: event.description,
-              seats: event.seats,
-            };
-          },
-        );
-        await setMatches(convertedMatches);
-      } catch (error: unknown) {
-        console.log(error);
+      const matchesFetch = await fetch(`/api/v1/stadiums/matches/${id}`);
+      const stadMatches = await matchesFetch.json();
+      if (stadMatches.status === 401) {
+        setValidateError(stadMatches.data);
       }
+      const convertedMatches = stadMatches.data.map((event: prevInterface) => {
+        return {
+          title: event.title,
+          start: event.startDate,
+          end: event.endDate,
+          description: event.description,
+          seats: event.seats,
+        };
+      });
+      setMatches(convertedMatches);
     }
   };
   useEffect(() => {

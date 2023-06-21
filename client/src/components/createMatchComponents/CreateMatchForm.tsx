@@ -46,18 +46,14 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
     setValidateError('');
   };
   const fetchEvent = async (data: prevInterface) => {
-    console.log(data);
-
     const matchesFetch = await fetch('/api/v1/matches', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(data),
     });
     const resultCreate = await matchesFetch.json();
-    console.log(resultCreate);
-
     if (resultCreate.status === 401) {
-      setValidateError(resultCreate.message);
+      setValidateError(resultCreate.data);
     } else if (resultCreate.status === 201) {
       handleClose();
     }
