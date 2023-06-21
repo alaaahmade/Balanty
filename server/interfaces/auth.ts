@@ -6,3 +6,8 @@ export interface UserData {
   phone: number;
   role: string;
 }
+
+export interface userLoginAttrs {
+  username: string;
+  password: string;
+}
