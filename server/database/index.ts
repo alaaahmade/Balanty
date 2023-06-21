@@ -1,3 +1,3 @@
-import { build, sequelize } from '../database/config';
+import { sequelize } from './config';
 
-export { sequelize, build };
+export { sequelize };
