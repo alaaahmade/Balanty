@@ -1,12 +1,12 @@
 import { Request, RequestHandler, Response } from 'express';
-import { playerService } from '../services/player';
+import { getPlayerById, updatePlayerById } from '../services/player';
 
 const getPlayer: RequestHandler = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
   const userId = Number(req.params.id);
-  const profileData = playerService(userId);
+  const profileData = getPlayerById(userId);
 
   res.json({
     status: 200,
@@ -14,4 +14,18 @@ const getPlayer: RequestHandler = async (
   });
 };
 
-export { getPlayer };
+const updatePlayer: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const playerId = req.params.id;
+  const updatedData = req.body;
+
+  const updatedPlayer = await updatePlayerById(playerId, updatedData);
+  res.json({
+    status: 200,
+    data: updatedPlayer,
+  });
+};
+
+export { getPlayer, updatePlayer };
