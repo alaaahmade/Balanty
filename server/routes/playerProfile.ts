@@ -1,6 +1,7 @@
 import { Router } from 'express';
+import { playerProfile } from '../controllers/playerProfile';
 import { errorWrapper } from '../utils';
 
-export const playerProfileRouter: Router = Router();
+export const playerRouter: Router = Router();
 
-playerProfileRouter.get('/users/:id', errorWrapper(playerProfile));
+playerRouter.get('/profile/:id', errorWrapper(getPlayer));
