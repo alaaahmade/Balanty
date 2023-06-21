@@ -13,7 +13,7 @@ interface connectionOption {
   };
 }
 
-if (!NODE_ENV || !DATABASE_URL) {
+if (!NODE_ENV) {
   throw new Error('Invalid Environment Variables');
 }
 export const sequelizeOption: connectionOption = {
@@ -28,9 +28,11 @@ if (NODE_ENV === 'production' && DATABASE_URL) {
 } else if (NODE_ENV === 'development' && DEV_DB_URL) {
   sequelizeOption.dialectOptions = { ssl: false };
   dbUrl = DEV_DB_URL;
+  sequelizeOption.dialectOptions = { ssl: false };
 } else if (NODE_ENV === 'test' && TEST_URL) {
   sequelizeOption.dialectOptions = { ssl: false };
   dbUrl = TEST_URL;
+  sequelizeOption.dialectOptions = { ssl: false };
 } else {
   throw new Error('Invalid NODE_ENV');
 }
