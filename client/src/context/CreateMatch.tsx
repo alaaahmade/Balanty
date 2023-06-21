@@ -5,13 +5,15 @@ import { IEvent } from '../pages/CreateMatch';
 import { OpenContextValue, MyContextProviderProps } from '../interfaces';
 import { open } from './RootLayout';
 
-export const statsContext = createContext<OpenContextValue | any>({});
+export const statsContext = createContext<OpenContextValue>(
+  {} as OpenContextValue,
+);
 statsContext.displayName = 'OpenContext';
 
 export const StatsContextProvider = ({ children }: MyContextProviderProps) => {
   const [Stadiums, setStadiums] = useState<OpenContextValue['Stadiums']>([]);
   const [UserId, setUserId] = useState<number>(0);
-  const [Details, setDetails] = useState<OpenContextValue['Details']>();
+  const [Details, setDetails] = useState<string>();
   const [ValidateError, setValidateError] = useState<string>('');
   const [matches, setMatches] = useState<IEvent[]>([]);
   const [Event, setEvent] = useState<IEvent>({
@@ -59,8 +61,8 @@ export const StatsContextProvider = ({ children }: MyContextProviderProps) => {
       setStadiums,
       UserId,
       setUserId,
-      Details,
-      setDetails,
+      Details: Details || '',
+      setDetails: setDetails as React.Dispatch<React.SetStateAction<string>>,
       ValidateError,
       setValidateError,
       matches,

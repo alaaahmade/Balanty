@@ -55,9 +55,9 @@ export interface OpenContextValue {
   >;
   UserId: number;
   setUserId: React.Dispatch<React.SetStateAction<number>>;
-  Details: string;
   openPage?: boolean;
   updateOpen?: (newValue: boolean) => void;
+  Details: string;
   setDetails: React.Dispatch<React.SetStateAction<string>>;
   ValidateError: string;
   setValidateError: React.Dispatch<React.SetStateAction<string>>;
