@@ -1,8 +1,17 @@
 import { Player } from '../models';
 
-const playerService = async (userId: number) => {
+const getPlayerById = async (userId: number) => {
   const player = await Player.findByPk(userId);
   return player;
 };
 
-export { playerService };
+const updatePlayerById = async (playerId: number, updatedData: object) => {
+  const [updatedPlayer] = await Player.update(updatedData, {
+    where: { id: playerId },
+    returning: true,
+  });
+
+  return updatedPlayer;
+};
+
+export { getPlayerById, updatePlayerById };
