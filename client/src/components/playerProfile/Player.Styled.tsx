@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import { styled } from '@mui/system';
 
 export const Cover = styled('img')({
@@ -22,8 +23,16 @@ export const MainWrapper = styled('div')({
 
 export const ActionsWrapper = styled('div')({
   display: 'flex',
-  justifyContent: 'flex-start',
+  justifyContent: 'center',
+  alignContent: 'center',
+  alignItems: 'center',
   marginTop: -60,
   marginLeft: 12,
   gap: 8,
+});
+
+export const UserName = styled(Typography)({
+  fontSize: '22px',
+  marginBottom: '30px',
+  // marginRight: 'px',
 });
