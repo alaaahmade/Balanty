@@ -1,5 +1,10 @@
-export { default as BestStadiums } from './best-stadiums/BestStadiums';
 export { default as Header } from './header/Header';
+export { default as HeroSection } from './hero/HeroSection';
+export { default as Definition } from './Definition/Definition';
+export { default as Features } from './Features/Features';
+export { default as BestStadiums } from './best-stadiums/BestStadiums';
+export { default as Contact } from './contact-us/ContactUs';
+
 export {
   StyledContainer,
   StyledBox,
