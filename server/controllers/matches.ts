@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction, RequestHandler } from 'express';
+import { Response, NextFunction, RequestHandler } from 'express';
 import { createMatchService } from '../services';
 import { CustomRequest, IServiceResponse } from '../interfaces';
 
