@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { playerProfile } from '../controllers/playerProfile';
+import { getPlayer } from '../controllers/player';
 import { errorWrapper } from '../utils';
 
 export const playerRouter: Router = Router();
