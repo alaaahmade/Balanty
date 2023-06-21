@@ -1,1 +1,1 @@
-export { default as loginService } from './loginService';
+export { signupService, loginService } from './auth';
