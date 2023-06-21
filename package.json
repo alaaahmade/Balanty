@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
-    "buildDB": " cross-env NODE_ENV=development ts-node server/database/config/build.ts",
+    "buildDB-dev": " cross-env NODE_ENV=development BUILD_DB=true ts-node server/database/config/build.ts",
+    "buildDB-production": " cross-env NODE_ENV=production BUILD_DB=true ts-node server/database/config/build.ts",
+    "buildDB-test": " cross-env NODE_ENV=test BUILD_DB=true ts-node server/database/config/build.ts",
     "lint": "eslint server --ext .ts",
     "lint-fix": "eslint server --fix --ext .ts",
     "dev": "cross-env NODE_ENV=development npx nodemon ./server/index.ts",
@@ -45,6 +47,8 @@
     "typescript": "^4.0.2"
   },
   "dependencies": {
+    "@types/jest": "^29.1.2",
+    "@types/supertest": "^2.0.12",
     "bcrypt": "^5.1.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
@@ -56,6 +60,8 @@
     "pg": "^8.11.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.32.0",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1"
   }
 }

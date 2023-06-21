@@ -1,2 +1,3 @@
-import { build, sequelize } from './config';
-export { sequelize, build };
+import { sequelize } from './config';
+
+export { sequelize };
