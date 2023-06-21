@@ -1,5 +1,6 @@
 import { Request } from 'express';
-import { Gallery, Stadium, User } from '../models';
+import { Gallery, Stadium, User, Match } from '../models';
+import { Op } from 'sequelize';
 
 export const getAllStadiumsService = async (): Promise<{
   status: number;
@@ -38,5 +39,33 @@ export const getStadiumDetailsService = async (
   return {
     status: 200,
     data: res,
+  };
+};
+
+export const getStadiumMatchesService = async (
+  req: Request,
+): Promise<{ status: number; data: string | Match[] }> => {
+  const { stadiumId } = req.params;
+
+  const ExistStadium = await Stadium.findOne({ where: { UserId: +stadiumId } });
+  if (!ExistStadium) {
+    return {
+      status: 401,
+      data: 'هذا الملعب غير متاح',
+    };
+  }
+  const currentDate = new Date();
+  const matches = await Match.findAll({
+    where: {
+      UserId: stadiumId,
+      startDate: {
+        [Op.gt]: currentDate,
+      },
+    },
+  });
+
+  return {
+    status: 200,
+    data: matches,
   };
 };

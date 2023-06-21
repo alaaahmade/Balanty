@@ -1,4 +1,4 @@
-import { getAllStadiumsService } from '../services';
+import { getAllStadiumsService, getStadiumMatchesService } from '../services';
 import { RequestHandler, Request, Response } from 'express';
 import { getStadiumDetailsService } from '../services/';
 
@@ -19,4 +19,12 @@ export const getStadiumDetails: RequestHandler = async (
 ): Promise<void> => {
   const response = await getStadiumDetailsService(req);
   res.status(response?.status).json(response);
+};
+
+export const getStadiumMatches: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const matches = await getStadiumMatchesService(req);
+  res.status(matches.status).json(matches);
 };
