@@ -29,7 +29,6 @@
     "react-router-dom": "^6.12.1"
   },
   "devDependencies": {
-    "@mui/types": "^7.2.4",
     "@mui/styled-engine": "^5.13.2",
     "@mui/types": "^7.2.4",
     "@types/react": "^18.2.9",

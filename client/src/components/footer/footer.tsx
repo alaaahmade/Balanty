@@ -10,7 +10,12 @@ import {
 
 const Footer: React.FC = (): ReactElement => {
   return (
-    <StyledFooter>
+    <StyledFooter
+      sx={{
+        mt: '30px',
+        mb: '-30px',
+      }}
+    >
       <StyledLogo variant="h6">بلنتي لوغو</StyledLogo>
       <StyledLinks>
         <Link href="https://example.com/contact" color="inherit">
