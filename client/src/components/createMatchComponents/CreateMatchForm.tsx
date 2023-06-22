@@ -63,6 +63,7 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
       const result = await MatchSchema.validateSync(match);
 
       await fetchEvent(result);
+      setStadiumId(0);
     } catch (error: unknown) {
       const errorMessage = (error as Error).message || 'An error occurred.';
       setValidateError(errorMessage);
@@ -95,6 +96,10 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
       setValidateError('');
     }
   };
+
+  // useEffect(async () => {
+  //   setValidateError('');
+  // }, [StadiumId]);
 
   return (
     <DialogInputsBox>

@@ -20,28 +20,6 @@ import { IEvent } from '../../pages/CreateMatch';
 import '../../fullcalendar-custom.css';
 import { statsContext } from '../../context';
 
-// this events must be coming from api request
-// const eve = [
-//   {
-//     title: 'Event 1',
-//     start: '2023-06-22T09:00',
-//     end: '2023-06-22T10:00',
-//     backgroundColor: '#2CB674',
-//   },
-//   {
-//     title: 'Event 1',
-//     start: '2023-07-22T07:00',
-//     end: '2023-07-22T08:00',
-//     backgroundColor: '#2CB674',
-//   },
-//   {
-//     title: 'Event 1',
-//     start: '2023-06-22T10:00',
-//     end: '2023-06-22T11:00',
-//     backgroundColor: '#2CB674',
-//   },
-// ];
-
 type Props = {
   Event: IEvent;
   setEvent: Dispatch<SetStateAction<IEvent>>;

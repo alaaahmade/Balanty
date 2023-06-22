@@ -46,8 +46,14 @@ const CreateMatch: React.FC<createMatchInterface> = ({
   setOpen,
 }): ReactElement => {
   const states = useContext(statsContext);
-  const { setStadiums, StadiumId, setValidateError, match, setMatches } =
-    states;
+  const {
+    setStadiums,
+    StadiumId,
+    setValidateError,
+    match,
+    setMatches,
+    setStadiumId,
+  } = states;
 
   const handleClose = () => {
     setOpen(false);
@@ -70,6 +76,7 @@ const CreateMatch: React.FC<createMatchInterface> = ({
       const result = await MatchSchema.validateSync(match);
 
       await fetchEvent(result);
+      setStadiumId(0);
     } catch (error: unknown) {
       const errorMessage = (error as Error).message || 'An error occurred.';
       setValidateError(errorMessage);
@@ -77,23 +84,21 @@ const CreateMatch: React.FC<createMatchInterface> = ({
   };
 
   const getStadiumMatchs = async (id: number) => {
-    if (open) {
-      const matchesFetch = await fetch(`/api/v1/stadiums/matches/${id}`);
-      const stadMatches = await matchesFetch.json();
-      if (stadMatches.status === 401) {
-        setValidateError(stadMatches.data);
-      }
-      const convertedMatches = stadMatches.data.map((event: prevInterface) => {
-        return {
-          title: event.title,
-          start: event.startDate,
-          end: event.endDate,
-          description: event.description,
-          seats: event.seats,
-        };
-      });
-      setMatches(convertedMatches);
+    const matchesFetch = await fetch(`/api/v1/stadiums/matches/${id}`);
+    const stadMatches = await matchesFetch.json();
+    if (stadMatches.status === 401) {
+      setValidateError(stadMatches.data);
     }
+    const convertedMatches = stadMatches.data.map((event: prevInterface) => {
+      return {
+        title: event.title,
+        start: event.startDate,
+        end: event.endDate,
+        description: event.description,
+        seats: event.seats,
+      };
+    });
+    setMatches(convertedMatches);
   };
   useEffect(() => {
     getStadiumMatchs(StadiumId);
