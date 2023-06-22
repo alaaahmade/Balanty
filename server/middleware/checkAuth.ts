@@ -12,6 +12,7 @@ const checkAuth = async (req: any, res: Response, next: NextFunction) => {
     req.user = decoded;
     next();
   } catch (error) {
+    res.clearCookie('token');
     next(error);
   }
 };
