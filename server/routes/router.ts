@@ -5,7 +5,6 @@ import matchRouter from './matches';
 
 const router: Router = Router();
 
-router.use('/matches', matchRouter);
 router.use('/user', authRouter);
 router.use('/user', authRouter);
 router.use('/stadiums', stadiumRouter);
