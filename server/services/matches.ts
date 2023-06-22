@@ -1,37 +1,79 @@
 import { Op } from 'sequelize';
 import { CustomRequest, IServiceResponse } from '../interfaces';
-import { Match } from '../models';
+import { Match, Stadium } from '../models';
+import matchSchema from '../validations';
 
-const getMatchService = async (
+export const createMatchService = async (
   req: CustomRequest,
 ): Promise<IServiceResponse> => {
-  const { startDate, endDate } = req.query;
-  const existingMatch = await Match.findOne({
+  const { body, userData } = req;
+  const owner_id = userData?.owner_id;
+  const { StadiumId, startDate, endDate } = body;
+  const newStartTime = startDate;
+  const newEndTime = endDate;
+
+  const data = await matchSchema.validateAsync(body);
+  const ExisteStadium = await Stadium.findOne({ where: { UserId: StadiumId } });
+
+  if (!ExisteStadium) {
+    return {
+      status: 401,
+      data: 'هذا الملعب غير متاح',
+    };
+  }
+  const Exist = await Match.findOne({
     where: {
       [Op.or]: [
-        { startDate: { [Op.between]: [startDate, endDate] } },
-        { endDate: { [Op.between]: [startDate, endDate] } },
+        { startDate: { [Op.gte]: newStartTime, [Op.lt]: newEndTime } },
+        { endDate: { [Op.gt]: newStartTime, [Op.lte]: newEndTime } },
         {
           [Op.and]: [
-            { startDate: { [Op.lte]: startDate } },
-            { endDate: { [Op.gte]: endDate } },
+            { startDate: { [Op.lte]: newStartTime } },
+            { endDate: { [Op.gte]: newEndTime } },
           ],
         },
       ],
+      UserId: StadiumId,
     },
   });
 
-  if (!existingMatch) {
+  if (!Exist) {
+    const DBData = await Match.create({
+      ...data,
+      owner_id,
+      UserId: StadiumId,
+    });
     return {
-      status: 401,
-      data: '! هذا الوقت محجوز',
+      status: 201,
+      data: DBData,
     };
   }
-
   return {
-    status: 200,
-    data: existingMatch,
+    status: 401,
+    data: '! هذا الوقت محجوز',
   };
 };
 
-export default getMatchService;
+export const getAllMatches = async () => {
+  const currentDate = Date.now();
+  const currentDateObject = new Date(currentDate);
+  const currentDateFormated = currentDateObject.toISOString();
+
+  const matches = await Match.findAll({
+    where: {
+      [Op.or]: [{ startDate: { [Op.gt]: currentDateFormated } }],
+    },
+  });
+
+  if (matches.length > 0) {
+    return {
+      status: 200,
+      data: matches,
+    };
+  } else {
+    return {
+      status: 404,
+      data: 'لا يوجد مباريات',
+    };
+  }
+};

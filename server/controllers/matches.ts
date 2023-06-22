@@ -1,13 +1,20 @@
-import { Request, Response } from 'express';
-import getMatchService from '../services/matches';
-const matchController = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const serviceResponse = await getMatchService(req);
+import { Response, RequestHandler } from 'express';
+import { CustomRequest, IServiceResponse } from '../interfaces';
+import { createMatchService, getAllMatches } from '../services';
 
-    res.status(serviceResponse.status).json(serviceResponse.data);
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+export const createMatch: RequestHandler = async (
+  req: CustomRequest,
+  res: Response,
+): Promise<void> => {
+  req.userData = { owner_id: 3 };
+  const data = (await createMatchService(req)) as IServiceResponse;
+
+  res.status(data?.status).json(data);
 };
-
-export default matchController;
+export const getMatches: RequestHandler = async (
+  req: CustomRequest,
+  res: Response,
+): Promise<void> => {
+  const data = await getAllMatches();
+  res.status(data.status).json(data);
+};
