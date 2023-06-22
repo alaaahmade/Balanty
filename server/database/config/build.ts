@@ -1,4 +1,4 @@
-mport { sequelize } from '..';
+import { sequelize } from '..';
 import { BUILD_DB } from '../../config';
 import insertData from './insertData';
 

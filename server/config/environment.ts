@@ -4,8 +4,7 @@ import { Dialect } from 'sequelize';
 const { DEV_DB_URL, DATABASE_URL, TEST_URL, NODE_ENV } = process.env;
 
 export const { PORT } = process.env || 8080;
-export const { SECRET_KEY } = process.env;
-
+export const { SECRET_KEY, BUILD_DB } = process.env;
 interface connectionOption {
   dialect: Dialect;
   dialectOptions?: {

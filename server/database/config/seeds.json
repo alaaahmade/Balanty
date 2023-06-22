@@ -1,6 +1,5 @@
 {
   "Users":[{
-    "UserId": 4,
     "username": "messi",
     "phone": "0591234577",
     "email": "messi@gmail.com",
@@ -8,7 +7,6 @@
     "role": "PLAYER"
   },
   {
-    "UserId": 1,
     "username": "Ronaldo",
     "phone": "0591234568",
     "email": "Ronaldo@gmail.com",
@@ -16,7 +14,6 @@
     "role": "PLAYER"
   },
   {
-    "UserId": 2,
     "username": "Neymar",
     "phone": "0591234569",
     "email": "Neymar@gmail.com",
@@ -24,7 +21,6 @@
     "role": "PLAYER"
   },
   {
-    "UserId": 3,
     "username": "benzema",
     "phone": "0591234562",
     "email": "benzema@gmail.com",
@@ -32,35 +28,30 @@
     "role": "PLAYER"
   },
   {
-    "UserId": 5,
     "username": "ملعب الساحة",
     "phone": "0591234563",
     "email": "AlsahaStad@gmail.com",
     "password": "AlsahaStad123",
     "role": "STADIUM"
   },{
-    "UserId": 6,
     "username": "نادي الاتحاد",
     "phone": "0591234564",
     "email": "AletehadStad@gmail.com",
     "password": "AletehadStad123",
     "role": "STADIUM"
   },{
-    "UserId": 7,
     "username": "نادي السلام",
     "phone": "0591234565",
     "email": "AlsalamStad@gmail.com",
     "password": "AlsalamStad123",
     "role": "STADIUM"
   },{
-    "UserId": 8,
     "username": "خدمات جباليا",
     "phone": "0591234566",
     "email": "JabalyaStad@gmail.com",
     "password": "JabalyaStad123",
     "role": "STADIUM"
   },{
-    "UserId": 9,
     "username": "خدمات بيت لاهيا",
     "phone": "0591234567",
     "email": "BitLahyaStad@gmail.com",
@@ -114,8 +105,7 @@
     "address": "الزيتون",
     "description": "يحتوي الملعب المصغر على عشب صناعي غير حشو ومنصات صدمات. يعتمد حجم ملعب كرة القدم المصغر على حجم القاعدة. اتصل بنا للحصول على التفاصيل",
     "price": 40,
-    "ground": "انجيل"
-  },
+    "ground": "انجيل" },
   {
     "UserId": 8,
     "address": "جباليا",
@@ -135,8 +125,8 @@
      "UserId": 5,
      "title": "دوريابطال غزة",
      "description": "يتم هذا الدوري بين فريقين يتكون كل منهما من خمسة لاعبين ، أحدهم هو حارس المرمى. يسمح بدائل غير محدودة.",
-     "startDate": "2023/6/2 12:00",
-     "endDate": "2023/6/2 02:00",
+     "startDate": "2023-06-21T11:00:00+03:00",
+     "endDate": "2023-06-19T12:00:00+03:00",
      "seats": 10
   },
   {
@@ -144,8 +134,8 @@
     "UserId": 6,
     "title": "دوريابطال الشمال",
     "description": "يتم هذا الدوري بين فريقين يتكون كل منهما من خمسة لاعبين ، أحدهم هو حارس المرمى. يسمح بدائل غير محدودة.",
-    "startDate": "2023/6/2 12:00",
-    "endDate": "2023/6/2 02:00",
+    "startDate": "2023-06-19T11:00:00+03:00",
+    "endDate": "2023-06-19T12:00:00+03:00",
     "seats": 15
  },
  {
@@ -153,8 +143,8 @@
   "UserId": 7,
   "title": "دوريابطال الجنوب",
   "description": "يتم هذا الدوري بين فريقين يتكون كل منهما من خمسة لاعبين ، أحدهم هو حارس المرمى. يسمح بدائل غير محدودة.",
-  "startDate": "2023/6/2 12:00",
-  "endDate": "2023/6/2 02:00",
+  "startDate": "2023-06-19T11:00:00+03:00",
+  "endDate": "2023-06-19T12:00:00+03:00",
   "seats": 20
 },
 {
@@ -162,98 +152,80 @@
   "UserId": 8,
   "title": "دوريابطال الوسطى",
   "description": "يتم هذا الدوري بين فريقين يتكون كل منهما من خمسة لاعبين ، أحدهم هو حارس المرمى. يسمح بدائل غير محدودة.",
-  "startDate": "2023/6/2 12:00",
-  "endDate": "2023/6/2 02:00",
+  "startDate": "2023-06-19T11:00:00+03:00",
+  "endDate": "2023-06-19T12:00:00+03:00",
   "seats": 15
 }
 ],
   "Gallery": [{
-    "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYJ-nWD5VjEF_jRSg725sQelSW0jcMsN2NxDj6iov5UIz9LdJydcC-lCFSm_VQyUFZ6vU&usqp=CAU",
-    "stadium_id": 1
+  "image1": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYJ-nWD5VjEF_jRSg725sQelSW0jcMsN2NxDj6iov5UIz9LdJydcC-lCFSm_VQyUFZ6vU&usqp=CAU",
+ "image2": "https://www.aljazeera.net/wp-content/uploads/2022/10/RTXIBSJG.jpg?resize=1920%2C1440",
+  "image3":"https://assets.nn.najah.edu/CACHE/images/uploads/weblog/2019/09/01/2017-05-17t174817z_230520521_rc15d5471a60_rtrmadp_3_soccer-wor_4yYPMaZ/46bc15140d75b0b20bf8c6b4e96b6d31.jpg",
+  "image4":"https://assets.nn.najah.edu/CACHE/images/uploads/weblog/2019/09/01/2017-05-17t174817z_230520521_rc15d5471a60_rtrmadp_3_soccer-wor_4yYPMaZ/46bc15140d75b0b20bf8c6b4e96b6d31.jpg",
+    "StadiumId": 1
   },
+
+
   {
-    "image":"https://www.aljazeera.net/wp-content/uploads/2022/10/RTXIBSJG.jpg?resize=1920%2C1440",
-    "stadium_id": 1
-  },
-  {
-    "image":"https://assets.nn.najah.edu/CACHE/images/uploads/weblog/2019/09/01/2017-05-17t174817z_230520521_rc15d5471a60_rtrmadp_3_soccer-wor_4yYPMaZ/46bc15140d75b0b20bf8c6b4e96b6d31.jpg",
-    "stadium_id": 1
-  },{
-    "image":"https://assets.nn.najah.edu/CACHE/images/uploads/weblog/2019/09/01/2017-05-17t174817z_230520521_rc15d5471a60_rtrmadp_3_soccer-wor_4yYPMaZ/46bc15140d75b0b20bf8c6b4e96b6d31.jpg",
-    "stadium_id": 1
+    "image1":"https://upload.wikimedia.org/wikipedia/commons/5/51/Beijing_National_Stadium_2014_2.jpg",
+    "image2":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUUtXDjMpcwpMYvNEtp72n_RAZqEejc6mK5XIxKioC1kjvzMGY_tSq_W6c0Vf5bc_QNus&usqp=CAU",
+    "image3":"https://egy-green.com/wp-content/uploads/2021/09/gallery-3-964.jpg",
+    "image4":"https://arbreviews.com/wp-content/uploads/2023/01/pexels-jonathan-petersson-399187-scaled-e1676145546757.jpg",
+    "StadiumId": 2
   },
 
   {
-    "image":"https://upload.wikimedia.org/wikipedia/commons/5/51/Beijing_National_Stadium_2014_2.jpg",
-    "stadium_id": 2
-  },
-  {
-    "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUUtXDjMpcwpMYvNEtp72n_RAZqEejc6mK5XIxKioC1kjvzMGY_tSq_W6c0Vf5bc_QNus&usqp=CAU",
-    "stadium_id": 2
-  },
-  {
-    "image":"https://egy-green.com/wp-content/uploads/2021/09/gallery-3-964.jpg",
-    "stadium_id": 2
-  },{
-    "image":"https://arbreviews.com/wp-content/uploads/2023/01/pexels-jonathan-petersson-399187-scaled-e1676145546757.jpg",
-    "stadium_id": 2
+    "image1":"https://read.opensooq.com/wp-content/uploads/2022/02/%D8%AF%D9%84%D9%8A%D9%84-%D8%B4%D8%A7%D9%85%D9%84-%D8%B9%D9%86-%D8%A3%D9%83%D8%A8%D8%B1-%D9%85%D9%84%D8%A7%D8%B9%D8%A8-%D9%83%D8%B1%D8%A9-%D8%A7%D9%84%D9%82%D8%AF%D9%85-%D9%81%D9%8A-%D8%A7%D9%84%D8%B9%D8%A7%D9%84%D9%85.webp",
+    "image2":"https://www.sayidaty.net/sites/default/files/styles/900_scale/public/2019/07/21/5577486-324873312.jpg",
+    "image3":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdFN77KEfiF0zrFXlmrN8FxWjGuweqC2YtyiFCa8_P9Ir2qgwohUsddd0ksWmLyoubMuw&usqp=CAU",
+    "image4":"https://ar.reformsports.com/axemudsy/2022/10/%D8%A7%D9%95%D8%B6%D8%A7%D8%A1%D8%A9-%D8%A7%D9%84%D9%85%D9%84%D8%A7%D8%B9%D8%A8.jpeg",
+    
+    "StadiumId": 3
   },
 
   {
-    "image":"https://read.opensooq.com/wp-content/uploads/2022/02/%D8%AF%D9%84%D9%8A%D9%84-%D8%B4%D8%A7%D9%85%D9%84-%D8%B9%D9%86-%D8%A3%D9%83%D8%A8%D8%B1-%D9%85%D9%84%D8%A7%D8%B9%D8%A8-%D9%83%D8%B1%D8%A9-%D8%A7%D9%84%D9%82%D8%AF%D9%85-%D9%81%D9%8A-%D8%A7%D9%84%D8%B9%D8%A7%D9%84%D9%85.webp",
-    "stadium_id": 3
-  },
-  {
-    "image":"https://www.sayidaty.net/sites/default/files/styles/900_scale/public/2019/07/21/5577486-324873312.jpg",
-    "stadium_id": 3
-  },
-  {
-    "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdFN77KEfiF0zrFXlmrN8FxWjGuweqC2YtyiFCa8_P9Ir2qgwohUsddd0ksWmLyoubMuw&usqp=CAU",
-    "stadium_id": 3
-  },{
-    "image":"https://ar.reformsports.com/axemudsy/2022/10/%D8%A7%D9%95%D8%B6%D8%A7%D8%A1%D8%A9-%D8%A7%D9%84%D9%85%D9%84%D8%A7%D8%B9%D8%A8.jpeg",
-    "stadium_id": 3
-  },
+    "image1":"https://paltodaytv.com/img/VLE0C.jpg",
+    "image2":"https://felesteen.news/thumb/w920/uploads/images/2021/04/6q4Oo.jpeg",
+    "image3":"https://www.aljazeera.net/wp-content/uploads/2020/01/245797c9-958d-4081-8104-8acc8c3a4029.jpeg?resize=770%2C513&quality=80",
+    "image4":"https://evrak.co/uploads/images/2022/10/ERjNq.jpg",
 
-  {
-    "image":"https://paltodaytv.com/img/VLE0C.jpg",
-    "stadium_id": 4
+    "StadiumId": 4
   },
+ 
   {
-    "image":"https://felesteen.news/thumb/w920/uploads/images/2021/04/6q4Oo.jpeg",
-    "stadium_id": 4
-  },
-  {
-    "image":"https://www.aljazeera.net/wp-content/uploads/2020/01/245797c9-958d-4081-8104-8acc8c3a4029.jpeg?resize=770%2C513&quality=80",
-    "stadium_id": 4
-  },{
-    "image":"https://evrak.co/uploads/images/2022/10/ERjNq.jpg",
-    "stadium_id": 4
+    "image1":"https://paltodaytv.com/img/VLE0C.jpg",
+    "image2":"https://felesteen.news/thumb/w920/uploads/images/2021/04/6q4Oo.jpeg",
+    "image3":"https://www.aljazeera.net/wp-content/uploads/2020/01/245797c9-958d-4081-8104-8acc8c3a4029.jpeg?resize=770%2C513&quality=80",
+    "image4":"https://evrak.co/uploads/images/2022/10/ERjNq.jpg",
+
+    "StadiumId": 5
   }
+ 
+
 ],
   "Message": [{
-    "player_id": 1,
+    "PlayerId": 1,
     "match_id": 1,
     "username": "messi",
     "message": "مرحبا",
-    "timestamps": "2023/6/2 02:00"
+    "timestamps": "2023-06-19T12:00:00+03:00"
   },
   {
-    "player_id": 1,
+    "PlayerId": 1,
     "match_id": 1,
     "username": "messi",
     "message": "كيف الحال",
     "timestamps": "2023/6/2 02:10"
   },
   {
-    "player_id": 2,
+    "PlayerId": 2,
     "match_id": 1,
     "username": "Ronaldo",
     "message": "مرحبا",
-    "timestamps": "2023/6/2 02:00"
+    "timestamps": "2023-06-19T12:00:00+03:00"
   },
   {
-    "player_id": 2,
+    "PlayerId": 2,
     "match_id": 1,
     "username": "Ronaldo",
     "message": "كيف الحال",
@@ -261,18 +233,18 @@
   }
 ],
   "Review": [{
-    "player_id": 1 ,
-    "Stadium_id": 2,
+    "PlayerId": 1 ,
+    "StadiumId": 2,
     "value": 4
   },
   {
-    "player_id": 2 ,
-    "Stadium_id": 2,
+    "PlayerId": 2 ,
+    "StadiumId": 2,
     "value": 1
   },
   {
-    "player_id": 4 ,
-    "Stadium_id": 2,
+    "PlayerId": 4 ,
+    "StadiumId": 2,
     "value": 3
   }
 

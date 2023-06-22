@@ -1,41 +1,32 @@
 import request from 'supertest';
 import app from '../server/app';
-import { build, sequelize } from '../server/database';
+import { sequelize } from '../server/database';
+import build from '../server/database/config/build';
 
 beforeAll(async () => {
   await build();
 });
 
-describe('test GitHub Actions CICD Pipelines', () => {
-  test('test for husky', done => {
+describe('test GitHub Actions CICD Piplines', () => {
+  test('test for husky', () => {
     expect(3).toBe(3);
-    done();
   });
 });
 
-describe('POST /api/v1/matches', () => {
-  test('responds with JSON and 200 status code', done => {
+describe('GET /api/v1/stadiums', () => {
+  test('responds from /api/v1/stadiums with JSON and 200 status code', done => {
     request(app)
-      .post('/api/v1/matches')
-      .send({
-        StadiumId: 6,
-        title: 'hi test',
-        description: 'string',
-        startDate: 'Date',
-        endDate: 'Date',
-        seats: 15,
-      })
+      .get('/api/v1/stadiums')
       .set('Accept', 'application/json')
       .end((err, res) => {
-        expect(res.status).toBe(201);
+        expect(res.status).toBe(200);
         expect(res.type).toBe('application/json');
         expect(typeof res).toBe('object');
         const response = JSON.parse(res.text);
         const { data } = response;
-        expect(response.status).toBe(201);
-        expect(data.title).toBe('hi test');
-        expect(data.startDate).toBe('Date');
-        expect(data.seats).toBe(15);
+        expect(response.status).toBe(200);
+        expect(data[0].username).toBe('ملعب الساحة');
+        expect(data[0].id).toBe(5);
         done();
 
         if (err) {
@@ -44,17 +35,30 @@ describe('POST /api/v1/matches', () => {
       });
   });
 
-  test('test for checking if tha stadium is exist', done => {
+  test('responds from /api/v1/stadiums/details/5 with JSON and 200 status code', done => {
     request(app)
-      .post('/api/v1/matches')
-      .send({
-        StadiumId: 1,
-        title: 'hi test',
-        description: 'string',
-        startDate: 'Date',
-        endDate: 'Date',
-        seats: 15,
-      })
+      .get('/api/v1/stadiums/details/5')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(response.status).toBe(200);
+        expect(data[0].Stadium.address).toBe('الزيتون');
+        expect(data[0].Stadium.UserId).toBe(5);
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
+
+  test('responds from /api/v1/stadiums/details/2 with JSON and 200 status code', done => {
+    request(app)
+      .get('/api/v1/stadiums/details/2')
       .set('Accept', 'application/json')
       .end((err, res) => {
         expect(res.status).toBe(401);
@@ -72,27 +76,26 @@ describe('POST /api/v1/matches', () => {
       });
   });
 
-  test('test validation error ', done => {
-    request(app)
-      .post('/api/v1/matches')
-      .set('Accept', 'application/json')
-      .send({
-        title: 'hi test',
-        description: 'string',
-        startDate: 'Date',
-        endDate: 'Date',
-        seats: 15,
-      })
-      .end((err, res) => {
-        expect(res.status).toBe(422);
-        expect(res.type).toBe('application/json');
-        expect(typeof res).toBe('object');
-        done();
+  describe('GET /api/v1/stadiums/matches/5', () => {
+    test('responds with JSON and 200 status code', done => {
+      request(app)
+        .get('/api/v1/stadiums/matches/5')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.status).toBe(200);
+          expect(res.type).toBe('application/json');
+          expect(typeof res).toBe('object');
+          const response = JSON.parse(res.text);
+          const { data } = response;
+          expect(response.status).toBe(200);
+          expect(Array.isArray(data)).toBe(true);
+          done();
 
-        if (err) {
-          done(err);
-        }
-      });
+          if (err) {
+            done(err);
+          }
+        });
+    });
   });
 });
 
