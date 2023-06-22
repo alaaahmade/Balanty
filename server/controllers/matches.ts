@@ -6,7 +6,7 @@ const matchController = async (req: Request, res: Response): Promise<void> => {
 
     res.status(serviceResponse.status).json(serviceResponse.data);
   } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
