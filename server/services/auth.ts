@@ -42,13 +42,13 @@ const loginService = async (userData: userLoginAttrs) => {
     where: { username },
   });
   if (!user) {
-    throw new CustomError(404, 'User Not Found');
+    throw new CustomError(404, 'هناك خطأ في اسم المستخدم');
   }
 
   const result = await bcrypt.compare(password, user.dataValues.password);
 
   if (!result) {
-    throw new CustomError(401, 'Invalid Email or Password');
+    throw new CustomError(401, 'خطأ في البريد الإلكتروني أو كلمة المرور');
   }
 
   const userName = user.username;
