@@ -14,6 +14,7 @@ export const StatsContextProvider = ({ children }: MyContextProviderProps) => {
   const [Stadiums, setStadiums] = useState<OpenContextValue['Stadiums']>([]);
   const [StadiumId, setStadiumId] = useState<number>(0);
   const [Details, setDetails] = useState<string>();
+  const [date, setDate] = useState<string>('');
   const [ValidateError, setValidateError] = useState<string>('');
   const [matches, setMatches] = useState<IEvent[]>([]);
   const [Event, setEvent] = useState<IEvent>({
@@ -90,6 +91,8 @@ export const StatsContextProvider = ({ children }: MyContextProviderProps) => {
       setEvent,
       match,
       setMatch,
+      date,
+      setDate,
     }),
     [Stadiums, matches, Event, match, ValidateError, Details, StadiumId],
   );

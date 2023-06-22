@@ -67,6 +67,8 @@ export interface OpenContextValue {
   setEvent: React.Dispatch<React.SetStateAction<IEvent>>;
   match: prevInterface;
   setMatch: React.Dispatch<React.SetStateAction<prevInterface>>;
+  date: string;
+  setDate: Dispatch<SetStateAction<string>>;
 }
 
 export interface MyContextProviderProps {

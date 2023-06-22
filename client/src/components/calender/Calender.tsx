@@ -26,7 +26,7 @@ type Props = {
 };
 
 const Calendar: FC<Props> = ({ Event, setEvent }): ReactElement => {
-  const { matches } = useContext(statsContext);
+  const { matches, date, setDate } = useContext(statsContext);
   const [events, setEvents] = useState([...matches]);
   const handleEventMouseEnter = (arg: {
     event: EventApi;
@@ -46,13 +46,19 @@ const Calendar: FC<Props> = ({ Event, setEvent }): ReactElement => {
     modifiedArg.el.style.backgroundColor = '#2CB674';
   };
 
-  const AddNewEvent = (newEvent: newEventInterface) => {
-    if (!Event) return;
+  const AddNewEvent = async (newEvent: newEventInterface) => {
+    await setDate(
+      `${new Date(newEvent.startStr)
+        .getHours()
+        .toString()
+        .padStart(2, '0')}:00:00`,
+    );
     if (Event.start !== newEvent.startStr) {
       setEvent((prev: IEvent) => ({
         ...prev,
         start: newEvent.startStr,
         end: newEvent.endStr,
+        id: 'pp',
       }));
     } else {
       setEvent((prev: IEvent) => ({
@@ -62,6 +68,7 @@ const Calendar: FC<Props> = ({ Event, setEvent }): ReactElement => {
       }));
     }
   };
+
   useEffect(() => {
     if (Event) {
       setEvents([...matches]);
@@ -79,6 +86,7 @@ const Calendar: FC<Props> = ({ Event, setEvent }): ReactElement => {
       }}
     >
       <FullCalendar
+        scrollTime={date}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
         initialView="timeGridWeek"
         slotDuration="01:00"
