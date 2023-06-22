@@ -23,16 +23,40 @@ export const MainWrapper = styled('div')({
 
 export const ActionsWrapper = styled('div')({
   display: 'flex',
-  justifyContent: 'center',
-  alignContent: 'center',
+  justifyContent: 'space-between',
   alignItems: 'center',
-  marginTop: -60,
+  marginTop: -56,
   marginLeft: 12,
   gap: 8,
+  marginRight: '32%',
+  padding: '0 1rem',
+});
+export const ButtonsWrapper = styled('div')({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  gap: '8px',
 });
 
 export const UserName = styled(Typography)({
+  display: 'block',
   fontSize: '22px',
-  marginBottom: '30px',
-  // marginRight: 'px',
+  justifyContent: 'center',
+  alignItems: 'stretch',
+});
+
+export const ActionButton = styled('button')({
+  width: '80px',
+  height: '35px',
+  outline: 0,
+  border: 0,
+  background: '#2CB674',
+  borderRadius: '5px',
+  cursor: 'pointer',
+  color: '#fff',
+  '&:hover': {
+    backgroundColor: 'transparent',
+    color: '#2CB674',
+    border: '1px solid #2CB674',
+  },
 });

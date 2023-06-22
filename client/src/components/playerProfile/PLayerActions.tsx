@@ -1,17 +1,20 @@
-import { Typography } from '@mui/material';
 import React, { ReactElement } from 'react';
-import { StyledButton } from '../styledRootComponent/SideComponents';
-import { ActionsWrapper, UserName } from './Player.Styled';
+import {
+  ActionButton,
+  ActionsWrapper,
+  UserName,
+  ButtonsWrapper,
+} from './Player.Styled';
 
 const PlayerActions: React.FC = (): ReactElement => {
   return (
     <ActionsWrapper>
+      <ButtonsWrapper>
+        <ActionButton>متابعة</ActionButton>
+        <ActionButton>مراسلة</ActionButton>
+      </ButtonsWrapper>
       <div>
-        <StyledButton>متابعة</StyledButton>
-        <StyledButton>مراسلة</StyledButton>
-      </div>
-      <div>
-        <UserName>عبدالله</UserName>
+        <UserName variant="h3"> أحمد عبدالله</UserName>
       </div>
     </ActionsWrapper>
   );
