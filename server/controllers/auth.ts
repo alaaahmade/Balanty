@@ -16,12 +16,21 @@ const login = async (req: Request, res: Response) => {
   const { loggedUser, token } = await loginService(req.body);
 
   res.cookie('token', token).json({
+    status: 200,
     data: {
-      error: false,
       message: 'Successfully Login',
       user: loggedUser,
     },
   });
 };
 
-export { signup, login };
+const logout = (req: Request, res: Response) => {
+  res.clearCookie('token').json({
+    status: 200,
+    data: {
+      message: 'تم تسجيل الخروج بنجاح',
+    },
+  });
+};
+
+export { signup, login, logout };
