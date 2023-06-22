@@ -18,6 +18,9 @@ interface connectionOption {
 if (!NODE_ENV || !SECRET_KEY) {
   throw new Error('Invalid Environment Variables');
 }
+
+export { SECRET_KEY };
+
 export const sequelizeOption: connectionOption = {
   dialect: 'postgres',
   dialectOptions: {
@@ -42,5 +45,4 @@ if (NODE_ENV === 'production' && DATABASE_URL) {
 } else {
   throw new Error('Invalid NODE_ENV');
 }
-
 export default { SECRET_KEY };
