@@ -1,20 +1,13 @@
 import { Request, Response } from 'express';
-import { Match } from '../models';
+import getMatchService from '../services/matches';
+const matchController = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const serviceResponse = await getMatchService(req);
 
-const getMatches = (req: Request, res: Response): void => {
-  Match.findAll()
-    .then(Match => {
-      res.status(200).json({
-        status: 200,
-        data: Match,
-      });
-    })
-    .catch(error => {
-      res.status(400).json({
-        status: 400,
-        message: 'Bad request',
-      });
-    });
+    res.status(serviceResponse.status).json(serviceResponse.data);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
 };
 
-export default getMatches;
+export default matchController;
