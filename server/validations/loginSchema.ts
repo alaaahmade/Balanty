@@ -2,17 +2,17 @@ import Joi from 'joi';
 
 const loginSchema = Joi.object({
   username: Joi.string().alphanum().min(4).max(50).required().messages({
-    'string.empty': 'This field must has a value',
-    'string.min': 'This field must be at least 5 characters',
-    'string.max': 'This field must be at max 25 characters',
-    'any.required': 'Username is required field',
+    'string.empty': 'هذا الحقل لا يمكن أن يكون فارغ',
+    'string.min': 'يجب ألا يقل هذا الحقل عن 5 أحرف',
+    'string.max': 'يجب ألا يزيد هذا الحقل عن 25 حرفًا',
+    'any.required': 'اسم المسخدم حقل مطلوب',
   }),
   password: Joi.string().alphanum().min(4).max(50).required().messages({
-    'string.empty': 'This field must has a value',
+    'string.empty': 'هذا الحقل لا يمكن أن يكون فارغ',
     'string.base': 'This field must be a password',
-    'string.min': 'This field must be at least 5 characters',
-    'string.max': 'This field must be at max 25 characters',
-    'any.required': 'Password is required field',
+    'string.min': 'يجب ألا يقل هذا الحقل عن 5 أحرف',
+    'string.max': 'يجب ألا يزيد هذا الحقل عن 25 حرفًا',
+    'any.required': 'كلمة المرور حقل مطلوب',
   }),
 });
 export default loginSchema;
