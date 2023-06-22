@@ -58,6 +58,7 @@ export const StatsContextProvider = ({ children }: MyContextProviderProps) => {
     setMatches([]);
     setValidateError('');
     setDetails('');
+    setDate('');
   }, [openPage]);
   useEffect(() => {
     setEvent({

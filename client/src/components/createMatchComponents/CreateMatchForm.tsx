@@ -97,10 +97,6 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
     }
   };
 
-  // useEffect(async () => {
-  //   setValidateError('');
-  // }, [StadiumId]);
-
   return (
     <DialogInputsBox>
       <StyledSearchInput

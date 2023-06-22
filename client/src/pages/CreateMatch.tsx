@@ -89,19 +89,25 @@ const CreateMatch: React.FC<createMatchInterface> = ({
     if (stadMatches.status === 401) {
       setValidateError(stadMatches.data);
     }
-    const convertedMatches = stadMatches.data.map((event: prevInterface) => {
-      return {
-        title: event.title,
-        start: event.startDate,
-        end: event.endDate,
-        description: event.description,
-        seats: event.seats,
-      };
-    });
+    let convertedMatches;
+    if (Array.isArray(stadMatches.data)) {
+      convertedMatches = stadMatches?.data?.map((event: prevInterface) => {
+        return {
+          title: event.title,
+          start: event.startDate,
+          end: event.endDate,
+          description: event.description,
+          seats: event.seats,
+        };
+      });
+    }
+
     setMatches(convertedMatches);
   };
   useEffect(() => {
-    getStadiumMatchs(StadiumId);
+    if (StadiumId > 0) {
+      getStadiumMatchs(StadiumId);
+    }
   }, [StadiumId]);
 
   useEffect(() => {
