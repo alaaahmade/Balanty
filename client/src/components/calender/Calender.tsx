@@ -46,8 +46,8 @@ const Calendar: FC<Props> = ({ Event, setEvent }): ReactElement => {
     modifiedArg.el.style.backgroundColor = '#2CB674';
   };
 
-  const AddNewEvent = async (newEvent: newEventInterface) => {
-    await setDate(
+  const AddNewEvent = (newEvent: newEventInterface) => {
+    setDate(
       `${new Date(newEvent.startStr)
         .getHours()
         .toString()
