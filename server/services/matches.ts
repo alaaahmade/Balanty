@@ -11,7 +11,15 @@ const createMatchService = async (
   const { StadiumId, startDate, endDate } = body;
   const newStartTime = startDate;
   const newEndTime = endDate;
+  const currentDate = new Date();
+  const newDate = new Date(newStartTime);
 
+  if (newDate < currentDate) {
+    return {
+      status: 401,
+      data: 'هذا الوقت غير متاح',
+    };
+  }
   const data = await matchSchema.validateAsync(body);
   const ExisteStadium = await Stadium.findOne({ where: { UserId: StadiumId } });
 
