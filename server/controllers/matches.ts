@@ -7,6 +7,7 @@ export const createMatch: RequestHandler = async (
   res: Response,
 ): Promise<void> => {
   req.userData = { owner_id: 3 };
+
   const data = (await createMatchService(req)) as IServiceResponse;
   res.status(data?.status).json(data);
 };
