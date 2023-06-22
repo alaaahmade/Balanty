@@ -18,18 +18,20 @@
     "@fullcalendar/daygrid": "^6.1.8",
     "@fullcalendar/react": "^6.1.8",
     "@fullcalendar/timegrid": "^6.1.8",
+    "@hookform/resolvers": "^3.1.1",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.5",
     "@mui/system": "^5.13.5",
-    "react-scroll": "^1.8.9",
     "@mui/types": "^7.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.45.0",
     "react-icons": "^4.9.0",
-    "react-router-dom": "^6.12.1"
+    "react-router-dom": "^6.12.1",
+    "react-scroll": "^1.8.9",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
-    "@mui/types": "^7.2.4",
     "@mui/styled-engine": "^5.13.2",
     "@mui/types": "^7.2.4",
     "@types/react": "^18.2.9",

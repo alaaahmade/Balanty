@@ -1,8 +1,11 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useState } from 'react';
 
-import { Box } from '@mui/material';
-// import { useLocation } from 'react-router-dom';
+import { Box, TextField } from '@mui/material';
 import { useLocation } from 'react-router-dom';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import {
   Form,
   ImageWrap,
@@ -15,7 +18,42 @@ import TitleWrap from './Title';
 import GoogleIcon from '../../assets/image-2.svg';
 import LinkWrap from './Link';
 
+interface userDataProps {
+  username?: string;
+  password?: string;
+}
+
+const schema = yup.object<userDataProps>().shape({
+  username: yup
+    .string()
+    .min(4, 'Username must be at least 8 characters')
+    .required('Username is required'),
+  password: yup
+    .string()
+    .required('Password is required')
+    .min(4, 'Password must be at least 8 characters')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+      'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
+    ),
+});
+
 const LoginWrapper: FC = (): ReactElement => {
+  // const [userData, setUserData] = useState<userDataProps>({
+  // username: '',
+  // password: '',
+  // });
+  const { register, control, handleSubmit } = useForm({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+    defaultValues: {
+      username: '',
+      password: '',
+    },
+  });
+  const onSubmit = (data: userDataProps) =>
+    console.log('onSubmited data', data);
+
   const { pathname } = useLocation();
   let isPlayer = true;
 
@@ -23,6 +61,9 @@ const LoginWrapper: FC = (): ReactElement => {
     isPlayer = false;
   }
 
+  // const handleChanges = e => {
+  //   setUserData({ useusername: e.target.value, ...userData });
+  // };
   return (
     <Wrapper isPlayer={isPlayer}>
       <ImageWrap isPlayer={isPlayer} />
@@ -33,7 +74,20 @@ const LoginWrapper: FC = (): ReactElement => {
           <TitleWrap caption="دخول كملعب" />
         )}
         <Box component="form" noValidate autoComplete="off">
+          {/* <Controller
+            name="username"
+            control={control}
+            render={({ formState, fieldState }) => ( */}
+          <TextField
+            inputRef={register}
+            title="username"
+            error={!!formState.errors?.username}
+          />
+          {/* )} */}
+          {/* /> */}
           <InputWrap
+            // value={userData.username}
+            // onChange={handleChanges}
             type="text"
             label={isPlayer ? 'اسم اللاعب' : 'اسم الملعب'}
             placeholder={isPlayer ? 'ادخل اسم اللاعب' : 'ادخل اسم الملعب'}
@@ -51,7 +105,11 @@ const LoginWrapper: FC = (): ReactElement => {
             )}
             <OtherLink href="/">عودة إلى الرئيسية</OtherLink>
           </div>
-          <SignButton variant="contained" disableElevation>
+          <SignButton
+            onClick={handleSubmit(onSubmit)}
+            variant="contained"
+            disableElevation
+          >
             تسجيل دخول
           </SignButton>
           <SignButton
