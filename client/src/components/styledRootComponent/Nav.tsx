@@ -6,9 +6,8 @@ export const StyledNavBox = styled(Box)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  padding: '0 30px',
+  padding: '2px 10px',
   width: '100%',
-  height: '58px',
   left: 0,
   top: 0,
   backgroundColor: '#01031C',
@@ -26,7 +25,7 @@ export const StyledLogo = styled(Typography)({
 });
 export const StyledSearchInput = styled(Input)({
   width: '40%',
-  height: '40px',
+  height: '12px',
   background: '#D9D9D9',
   borderRadius: '5px',
   padding: '18px',
@@ -46,6 +45,6 @@ export const StyledMnu = styled(GiHamburgerMenu)({
 export const StyledLabel = styled('label')({
   position: 'absolute',
   left: '66%',
-  top: '17px',
+  top: '6px',
   zIndex: 2,
 });
