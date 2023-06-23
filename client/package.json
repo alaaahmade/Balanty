@@ -31,6 +31,7 @@
     "react-icons": "^4.9.0",
     "react-router-dom": "^6.12.1",
     "react-scroll": "^1.8.9",
+    "react-slideshow-image": "^4.2.1",
     "yup": "^1.2.0"
   },
   "devDependencies": {

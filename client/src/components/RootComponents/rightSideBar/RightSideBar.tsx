@@ -23,9 +23,9 @@ const RightSideBar = (): ReactElement => {
   return (
     <SideBox
       sx={{
-        right: '0px',
-        borderLeft: '0.4px solid #ccc',
-        boxShadow: '-5px 4px 4px rgba(0, 0, 0, 0.15)',
+        left: '0px',
+        borderRight: '0.4px solid #ccc',
+        boxShadow: '5px 4px 4px rgba(0, 0, 0, 0.15)',
       }}
     >
       <BorderBox
