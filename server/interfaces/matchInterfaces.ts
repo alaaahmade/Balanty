@@ -8,3 +8,10 @@ export interface IServiceResponse {
   status: number;
   data: string | object;
 }
+
+export interface IMatchMessage {
+  senderId: number;
+  matchId: number;
+  message: string;
+  username: string;
+}

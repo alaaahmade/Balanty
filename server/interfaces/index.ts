@@ -1,3 +1,7 @@
-import { CustomRequest, IServiceResponse } from './matchInterfaces';
+import {
+  CustomRequest,
+  IServiceResponse,
+  IMatchMessage,
+} from './matchInterfaces';
 
-export type { CustomRequest, IServiceResponse };
+export type { CustomRequest, IServiceResponse, IMatchMessage };
