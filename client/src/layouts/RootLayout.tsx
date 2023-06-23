@@ -16,8 +16,6 @@ const RootLayout: React.FC = (): ReactElement => {
   }
   const { openPage, updateOpen } = contextValue;
   useEffect(() => {
-    console.log(pathname);
-
     if (pathname.startsWith('/profile')) {
       setProfile(true);
     } else {
