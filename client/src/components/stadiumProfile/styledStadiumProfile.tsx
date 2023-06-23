@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 export const arrowStyle = {};
@@ -61,4 +62,31 @@ export const SliderBox = styled(Box)({
   borderRadius: '5px',
 
   height: '100vh',
+});
+
+export const BioBox = styled(Box)({
+  width: '300px',
+  mt: '-160px',
+  ml: '3%',
+  padding: '10px',
+  border: '1px solid #ccc',
+  backgroundColor: '#F2FCF5',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '15px',
+  borderRadius: '3px',
+});
+
+export const FlexBox = styled(Box)({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
+
+export const LocationTypo = styled(Typography)({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexDirection: 'row',
+  fontWeight: 'bold',
 });

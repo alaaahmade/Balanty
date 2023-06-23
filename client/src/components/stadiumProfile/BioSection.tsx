@@ -3,27 +3,13 @@ import { Box } from '@mui/system';
 import PlaceIcon from '@mui/icons-material/Place';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import { BioBox, FlexBox, LocationTypo } from './styledStadiumProfile';
 
 const BioSection = () => {
   return (
-    <Box
-      sx={{
-        width: '300px',
-        mt: '-160px',
-        ml: '3%',
-        padding: '10px',
-        border: '1px solid #ccc',
-        backgroundColor: '#F2FCF5',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '15px',
-        borderRadius: '3px',
-      }}
-    >
-      <Box
+    <BioBox>
+      <FlexBox
         sx={{
-          display: 'flex',
-          alignItems: 'center',
           justifyContent: 'space-between',
         }}
       >
@@ -38,17 +24,17 @@ const BioSection = () => {
           <StarIcon />
           <StarIcon />
         </Box>
-        <Typography variant="h5">ملعب الاتحاد</Typography>
-      </Box>
+        <Typography variant="h5" sx={{ ml: '5px' }}>
+          ملعب الاتحاد
+        </Typography>
+      </FlexBox>
       <Typography sx={{ p: '10px', textAlign: 'right' }}>
         ملعب الاتحاد هو ملعب كرة قدم مميز يحمل اسم نادي الاتحاد. يتميز ببنيته
         الحديثة والمرافق الرياضية المتطورة. يعتبر محطة هامة للفرق والأندية
         المحلية في تنظيم المباريات والمسابقات الرياضية.
       </Typography>
-      <Box
+      <FlexBox
         sx={{
-          display: 'flex',
-          alignItems: 'center',
           justifyContent: 'flex-end',
         }}
       >
@@ -60,11 +46,9 @@ const BioSection = () => {
         >
           : السعر بالساعة
         </Typography>
-      </Box>
-      <Box
+      </FlexBox>
+      <FlexBox
         sx={{
-          display: 'flex',
-          alignItems: 'center',
           justifyContent: 'flex-end',
         }}
       >
@@ -76,24 +60,13 @@ const BioSection = () => {
         >
           : الأرضية
         </Typography>
-      </Box>
-      <Box
+      </FlexBox>
+      <FlexBox
         sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
           flexDirection: 'column',
         }}
       >
-        <Typography
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'row',
-            fontWeight: 'bold',
-          }}
-        >
+        <LocationTypo>
           غزة-الرمال-شارع الوحدة
           <PlaceIcon
             sx={{
@@ -101,13 +74,8 @@ const BioSection = () => {
               mb: '15px',
             }}
           />
-        </Typography>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
+        </LocationTypo>
+        <FlexBox>
           <Box
             sx={{
               color: 'yellow',
@@ -120,7 +88,7 @@ const BioSection = () => {
             <StarBorderIcon />
             <StarBorderIcon />
             <StarBorderIcon />
-          </Box>{' '}
+          </Box>
           <Typography
             sx={{
               fontWeight: 'bold',
@@ -128,9 +96,9 @@ const BioSection = () => {
           >
             : اضافة تقييم
           </Typography>
-        </Box>
-      </Box>
-    </Box>
+        </FlexBox>
+      </FlexBox>
+    </BioBox>
   );
 };
 
