@@ -25,7 +25,6 @@ const RootLayout: React.FC = (): ReactElement => {
   return (
     <Box
       sx={{
-        position: 'fixed',
         width: '100%',
       }}
     >

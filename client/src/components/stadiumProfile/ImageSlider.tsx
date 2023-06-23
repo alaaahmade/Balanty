@@ -44,7 +44,7 @@ const ImageSlider = () => {
     <SliderBox
       sx={{
         ml: '3%',
-        mt: '2%',
+        mt: 'calc(2% + 70px)',
       }}
     >
       <Slide
