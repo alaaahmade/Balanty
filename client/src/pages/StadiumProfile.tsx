@@ -1,10 +1,11 @@
 import { Box } from '@mui/system';
-import ImageSlider from '../components/stadiumProfile/ImageSlider';
+import { BioSection, ImageSlider } from '../components/stadiumProfile';
 
 const StadiumProfile = () => {
   return (
     <Box>
       <ImageSlider />
+      <BioSection />
     </Box>
   );
 };
