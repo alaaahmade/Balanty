@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Typography } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 export const arrowStyle = {};
@@ -89,4 +89,24 @@ export const LocationTypo = styled(Typography)({
   justifyContent: 'center',
   flexDirection: 'row',
   fontWeight: 'bold',
+});
+
+export const EditInputs = styled(TextField)({
+  '& input': {
+    color: 'blue',
+    textAlign: 'right',
+  },
+  width: '90%',
+  mr: '10px',
+
+  '& .css-66dh3a-MuiInputBase-input-MuiInput-input': {
+    color: 'blue',
+  },
+  '& .css-66dh3a-MuiInputBase-input-MuiInput-input.Mui-disabled': {
+    color: 'red',
+    '-webkit-text-fill-color': '#01031C',
+  },
+  '& .css-1x51dt5-MuiInputBase-input-MuiInput-input.Mui-disabled': {
+    '-webkit-text-fill-color': '#01031C',
+  },
 });

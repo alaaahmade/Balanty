@@ -1,6 +1,7 @@
 import { Edit } from '@mui/icons-material';
-import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
+import { Button, IconButton, InputAdornment } from '@mui/material';
 import { useState } from 'react';
+import { EditInputs } from './styledStadiumProfile';
 
 const isEditable = true;
 
@@ -46,7 +47,7 @@ const EditInput: React.FC<Props> = ({ lastValue, multiline }: Props) => {
     <>
       {editMode ? <Button onClick={handleUpdate}>Save</Button> : null}
 
-      <TextField
+      <EditInputs
         name="text"
         value={value}
         margin="normal"
@@ -56,22 +57,6 @@ const EditInput: React.FC<Props> = ({ lastValue, multiline }: Props) => {
         onMouseLeave={handleMouseOut}
         variant="standard"
         multiline={multiline}
-        sx={{
-          '& input': {
-            color: 'blue',
-            textAlign: 'right',
-          },
-          width: '90%',
-          mr: '10px',
-
-          '& .css-66dh3a-MuiInputBase-input-MuiInput-input.Mui-disabled': {
-            color: 'red',
-            '-webkit-text-fill-color': '#01031C',
-          },
-          '& .css-1x51dt5-MuiInputBase-input-MuiInput-input.Mui-disabled': {
-            '-webkit-text-fill-color': '#01031C',
-          },
-        }}
         InputProps={{
           disableUnderline: true,
           startAdornment: hov && (
