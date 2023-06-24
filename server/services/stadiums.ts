@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { Gallery, Stadium, User, Match } from '../models';
+import { Gallery, Stadium, User, Match, Review } from '../models';
 import { Op } from 'sequelize';
 
 export const getAllStadiumsService = async (): Promise<{
@@ -95,6 +95,10 @@ export const getStadiumProfileService = async (
             as: 'stadiumGallery',
           },
         ],
+      },
+      {
+        model: Review,
+        as: 'userReview',
       },
     ],
   });
