@@ -3,8 +3,6 @@ import { Button, IconButton, InputAdornment } from '@mui/material';
 import { useState } from 'react';
 import { EditInputs } from './styledStadiumProfile';
 
-const isEditable = true;
-
 interface Props {
   lastValue: string | number;
   multiline: boolean;
@@ -15,6 +13,7 @@ const EditInput: React.FC<Props> = ({ lastValue, multiline }: Props) => {
   const [mouseOver, setMouseOver] = useState(false);
   const [value, setValue] = useState(lastValue);
   const [hov, setHove] = useState(false);
+  const [EditAble, setEditAble] = useState(true);
 
   const handleMouseOver = () => {
     if (!mouseOver) {
@@ -61,7 +60,7 @@ const EditInput: React.FC<Props> = ({ lastValue, multiline }: Props) => {
           disableUnderline: true,
           startAdornment: hov && (
             <InputAdornment position="end">
-              {isEditable && (
+              {EditAble && (
                 <IconButton onClick={handleClick}>
                   <Edit />
                 </IconButton>
