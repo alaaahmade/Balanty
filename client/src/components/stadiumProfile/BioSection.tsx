@@ -7,7 +7,11 @@ import { BioBox, FlexBox, LocationTypo } from './styledStadiumProfile';
 
 const BioSection = () => {
   return (
-    <BioBox>
+    <BioBox
+      sx={{
+        mt: '-90px',
+      }}
+    >
       <FlexBox
         sx={{
           justifyContent: 'space-between',

@@ -1,11 +1,16 @@
 import { Box } from '@mui/system';
-import { BioSection, ImageSlider } from '../components/stadiumProfile';
+import {
+  BioSection,
+  ImageSlider,
+  ProfileCalender,
+} from '../components/stadiumProfile';
 
 const StadiumProfile = () => {
   return (
     <Box>
       <ImageSlider />
       <BioSection />
+      <ProfileCalender />
     </Box>
   );
 };

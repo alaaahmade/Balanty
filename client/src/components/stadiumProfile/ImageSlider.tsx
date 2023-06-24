@@ -90,6 +90,7 @@ const ImageSlider = () => {
       >
         {images.map(e => (
           <ThumbnailImage
+            key={e.id}
             sx={{
               backgroundImage: `url(${e.url})`,
               scale: e.id === Active ? ' 1.2' : '1',

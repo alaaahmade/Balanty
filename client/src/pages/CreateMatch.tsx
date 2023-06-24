@@ -46,14 +46,7 @@ const CreateMatch: React.FC<createMatchInterface> = ({
   setOpen,
 }): ReactElement => {
   const states = useContext(statsContext);
-  const {
-    setStadiums,
-    StadiumId,
-    setValidateError,
-    match,
-    setMatches,
-    setStadiumId,
-  } = states;
+  const { setStadiums, setValidateError, match, setStadiumId } = states;
 
   const handleClose = () => {
     setOpen(false);
@@ -82,33 +75,6 @@ const CreateMatch: React.FC<createMatchInterface> = ({
       setValidateError(errorMessage);
     }
   };
-
-  const getStadiumMatchs = async (id: number) => {
-    const matchesFetch = await fetch(`/api/v1/stadiums/matches/${id}`);
-    const stadMatches = await matchesFetch.json();
-    if (stadMatches.status === 401) {
-      setValidateError(stadMatches.data);
-    }
-    let convertedMatches;
-    if (Array.isArray(stadMatches.data)) {
-      convertedMatches = stadMatches?.data?.map((event: prevInterface) => {
-        return {
-          title: event.title,
-          start: event.startDate,
-          end: event.endDate,
-          description: event.description,
-          seats: event.seats,
-        };
-      });
-    }
-
-    setMatches(convertedMatches);
-  };
-  useEffect(() => {
-    if (StadiumId > 0) {
-      getStadiumMatchs(StadiumId);
-    }
-  }, [StadiumId]);
 
   useEffect(() => {
     fetch('/api/v1/stadiums')

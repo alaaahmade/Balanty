@@ -66,7 +66,6 @@ export const SliderBox = styled(Box)({
 
 export const BioBox = styled(Box)({
   width: '300px',
-  mt: '-160px',
   ml: '3%',
   padding: '10px',
   border: '1px solid #ccc',

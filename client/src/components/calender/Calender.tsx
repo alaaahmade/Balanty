@@ -3,30 +3,34 @@ import { startOfDay } from '@fullcalendar/core/internal';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { EventApi } from '@fullcalendar/core';
 import { Box } from '@mui/system';
-import {
-  Dispatch,
-  FC,
-  ReactElement,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { FC, ReactElement, useContext, useEffect, useState } from 'react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
-import { newEventInterface } from '../../interfaces/matchInterface';
+import { useParams } from 'react-router-dom';
+import {
+  newEventInterface,
+  prevInterface,
+} from '../../interfaces/matchInterface';
 import { IEvent } from '../../pages/CreateMatch';
 import '../../fullcalendar-custom.css';
 import { statsContext } from '../../context';
 
 type Props = {
-  Event: IEvent;
-  setEvent: Dispatch<SetStateAction<IEvent>>;
+  type: string;
 };
 
-const Calendar: FC<Props> = ({ Event, setEvent }): ReactElement => {
-  const { matches, date, setDate } = useContext(statsContext);
+const Calendar: FC<Props> = ({ type }): ReactElement => {
+  const {
+    matches,
+    date,
+    setDate,
+    Event,
+    setEvent,
+    setMatches,
+    StadiumId,
+    setValidateError,
+  } = useContext(statsContext);
   const [events, setEvents] = useState([...matches]);
   const handleEventMouseEnter = (arg: {
     event: EventApi;
@@ -47,6 +51,7 @@ const Calendar: FC<Props> = ({ Event, setEvent }): ReactElement => {
   };
 
   const AddNewEvent = (newEvent: newEventInterface) => {
+    if (type === 'profile') return;
     setDate(
       `${new Date(newEvent.startStr)
         .getHours()
@@ -68,13 +73,46 @@ const Calendar: FC<Props> = ({ Event, setEvent }): ReactElement => {
       }));
     }
   };
+  const validMatches = [...events, Event];
 
+  const getStadiumMatchs = async (id: number | undefined) => {
+    const matchesFetch = await fetch(`/api/v1/stadiums/matches/${id}`);
+    const stadMatches = await matchesFetch.json();
+    if (stadMatches.status === 401) {
+      setValidateError(stadMatches.data);
+    }
+    let convertedMatches;
+    if (Array.isArray(stadMatches.data)) {
+      convertedMatches = stadMatches?.data?.map((event: prevInterface) => {
+        return {
+          title: event.title,
+          start: event.startDate,
+          end: event.endDate,
+          description: event.description,
+          seats: event.seats,
+        };
+      });
+    }
+
+    setMatches(convertedMatches);
+  };
+
+  const { id } = useParams();
   useEffect(() => {
     if (Event) {
       setEvents([...matches]);
       setEvents((prev: IEvent[]) => [...prev, Event]);
     }
   }, [matches]);
+  useEffect(() => {
+    if (type === 'create') {
+      if (StadiumId > 0) {
+        getStadiumMatchs(StadiumId);
+      }
+    } else if (type === 'profile') {
+      getStadiumMatchs(parseInt(id ?? '', 10));
+    }
+  }, [StadiumId]);
 
   return (
     <Box
@@ -90,7 +128,7 @@ const Calendar: FC<Props> = ({ Event, setEvent }): ReactElement => {
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
         initialView="timeGridWeek"
         slotDuration="01:00"
-        events={[...events, Event]}
+        events={validMatches}
         height="100%"
         eventColor="#000"
         eventTextColor="#fff"
