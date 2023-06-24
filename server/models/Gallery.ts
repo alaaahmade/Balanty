@@ -17,7 +17,7 @@ Gallery.init(
   },
   {
     sequelize,
-    modelName: 'Gallery',
+    modelName: 'gallery',
     tableName: 'gallery',
   },
 );

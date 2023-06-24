@@ -69,3 +69,49 @@ export const getStadiumMatchesService = async (
     data: matches,
   };
 };
+
+export const getStadiumProfileService = async (
+  req: Request,
+): Promise<{ status: number; data: User | string | null }> => {
+  const { id } = req.params;
+
+  const ExistStadium = await Stadium.findOne({ where: { UserId: id } });
+  if (!ExistStadium) {
+    return {
+      status: 401,
+      data: 'هذا الملعب غير متاح',
+    };
+  }
+
+  const currentDate = new Date();
+  const stadium = await User.findOne({
+    where: { id },
+    attributes: ['username', 'phone', 'id'],
+    include: [
+      {
+        model: Stadium,
+        where: { UserId: id },
+        include: [
+          {
+            model: Gallery,
+            as: 'stadiumGallery',
+          },
+        ],
+      },
+      {
+        model: Match,
+        as: 'stadiumMatches',
+        where: {
+          startDate: {
+            [Op.gt]: currentDate,
+          },
+        },
+      },
+    ],
+  });
+
+  return {
+    status: 200,
+    data: stadium,
+  };
+};
