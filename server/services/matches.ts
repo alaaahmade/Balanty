@@ -22,6 +22,7 @@ const createMatchService = async (
   }
   const data = await matchSchema.validateAsync(body);
   const ExisteStadium = await Stadium.findOne({ where: { UserId: StadiumId } });
+  console.log(data);
 
   if (!ExisteStadium) {
     return {
@@ -41,7 +42,7 @@ const createMatchService = async (
           ],
         },
       ],
-      UserId: StadiumId,
+      stadiumId: StadiumId,
     },
   });
 
@@ -49,7 +50,7 @@ const createMatchService = async (
     const DBData = await Match.create({
       ...data,
       owner_id,
-      UserId: StadiumId,
+      stadiumId: StadiumId,
     });
     return {
       status: 201,

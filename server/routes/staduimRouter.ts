@@ -3,7 +3,6 @@ import { errorWrapper } from '../utils';
 import {
   getAllStadiums,
   getStadiumDetails,
-  getStadiumMatches,
   getStadiumProfile,
 } from '../controllers';
 
