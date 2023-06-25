@@ -1,5 +1,19 @@
-export { default as BestStadiums } from './best-stadiums/BestStadiums';
+export {
+  DialogBox,
+  StyledAutocomplete,
+  DialogInputsBox,
+  CreateMatchImg,
+  CreateMatchButtons,
+} from './createMatchStyled/createMatchStyled';
+
 export { default as Header } from './header/Header';
+export { default as HeroSection } from './hero/HeroSection';
+export { default as Definition } from './Definition/Definition';
+export { default as Features } from './Features/Features';
+export { default as BestStadiums } from './best-stadiums/BestStadiums';
+export { default as Contact } from './contact-us/ContactUs';
+// export { default as CreateMatchForm } from './createMatchComponents';
+
 export {
   StyledContainer,
   StyledBox,
@@ -41,5 +55,3 @@ export {
   StyledMnu,
   StyledLabel,
 } from './styledRootComponent/Nav';
-
-export {};

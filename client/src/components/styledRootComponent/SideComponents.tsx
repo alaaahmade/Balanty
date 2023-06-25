@@ -2,7 +2,7 @@ import { Button, Typography } from '@mui/material';
 import { Box, styled } from '@mui/system';
 
 export const SideBox = styled(Box)({
-  position: 'absolute',
+  position: 'fixed',
   width: '240px',
   minHeight: 'calc(100vh - 65px)',
   top: '4.1em',
@@ -22,6 +22,7 @@ export const StyledButton = styled(Button)({
   marginTop: '12px',
   gap: '10px',
   color: '#fff',
+  // marginBottom: '30px',
   '&:hover': {
     backgroundColor: 'transparent',
     color: '#2CB674',

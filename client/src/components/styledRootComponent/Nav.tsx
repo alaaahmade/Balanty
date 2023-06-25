@@ -3,6 +3,7 @@ import { styled } from '@mui/system';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
 export const StyledNavBox = styled(Box)({
+  position: 'fixed',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -12,6 +13,7 @@ export const StyledNavBox = styled(Box)({
   top: 0,
   backgroundColor: '#01031C',
   borderBottom: '0.5px solid #000000',
+  zIndex: '11',
 });
 
 export const StyledLogo = styled(Typography)({
@@ -30,9 +32,10 @@ export const StyledSearchInput = styled(Input)({
   borderRadius: '5px',
   padding: '18px',
   br: '4px',
-  outline: '0',
-  borderWidth: '1px',
-  borderStyle: 'solid',
+  // borderWidth: '1px',
+  '& input': {
+    textAlign: 'Right',
+  },
 });
 
 export const StyledMnu = styled(GiHamburgerMenu)({
