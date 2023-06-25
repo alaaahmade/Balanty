@@ -1,14 +1,21 @@
-import { Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { ReactElement } from 'react';
+
+import { Typography, Box } from '@mui/material';
+
 import PlaceIcon from '@mui/icons-material/Place';
 import StarIcon from '@mui/icons-material/Star';
+
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { FC, ReactElement } from 'react';
 import { BioBox, FlexBox, LocationTypo } from './styledStadiumProfile';
-import { UserData } from '../../interfaces/StadiumProfile';
+
 import EditInput from './EditInput';
 
-const BioSection: FC<UserData> = ({ userData }): ReactElement => {
+import { UserData } from '../../interfaces/StadiumProfile';
+
+type Props = {
+  userData: UserData | undefined;
+};
+const BioSection = ({ userData }: Props): ReactElement => {
   return (
     <BioBox
       sx={{

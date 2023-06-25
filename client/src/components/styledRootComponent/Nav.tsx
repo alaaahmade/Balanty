@@ -9,7 +9,7 @@ export const StyledNavBox = styled(Box)({
   justifyContent: 'space-between',
   padding: '0 40px',
   width: '100%',
-  height: '65px',
+  height: '50px',
   left: 0,
   top: 0,
   backgroundColor: '#01031C',
@@ -42,7 +42,7 @@ export const StyledSearchInput = styled(Input)({
 export const StyledMnu = styled(GiHamburgerMenu)({
   color: '#D9D9D9',
   cursor: 'pointer',
-  fontSize: '30px',
+  fontSize: '25px',
   marginRight: '70px',
 });
 
