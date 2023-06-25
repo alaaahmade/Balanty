@@ -1,5 +1,5 @@
-import React, { ReactElement, useContext } from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { ReactElement, useContext, useEffect, useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 import NavBar from '../components/RootComponents/navBar/NavBar';
 import { LeftSideBar, RightSideBar } from '../components';
@@ -7,17 +7,24 @@ import CreateMatch from '../pages/CreateMatch';
 import { open } from '../context';
 
 const RootLayout: React.FC = (): ReactElement => {
+  const [Profile, setProfile] = useState(false);
+  const { pathname } = useLocation();
   const contextValue = useContext(open);
 
   if (!contextValue) {
     return <div>Loading...</div>;
   }
   const { openPage, updateOpen } = contextValue;
-
+  useEffect(() => {
+    if (pathname.startsWith('/profile')) {
+      setProfile(true);
+    } else {
+      setProfile(false);
+    }
+  }, [pathname]);
   return (
     <Box
       sx={{
-        position: 'fixed',
         width: '100%',
       }}
     >
@@ -27,7 +34,8 @@ const RootLayout: React.FC = (): ReactElement => {
         open={openPage || false}
         setOpen={updateOpen || (() => undefined)}
       />
-      <RightSideBar />
+      {!Profile && <RightSideBar />}
+
       <Outlet />
     </Box>
   );

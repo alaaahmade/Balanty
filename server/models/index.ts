@@ -6,74 +6,59 @@ import Review from './Review';
 import Gallery from './Gallery';
 import User from './User';
 
+// user has one Player
 User.hasOne(Player);
 Player.belongsTo(User);
-
+// user has one Stadium
 User.hasOne(Stadium);
 Stadium.belongsTo(User);
 
-Match.belongsToMany(User, {
-  through: 'matchUsers',
-  as: 'users',
-});
+// User Model relations start
+
+// Establish the first one-to-many relationship with custom association names
+User.hasMany(Match, { foreignKey: 'ownerId', as: 'ownersMatches' });
+Match.belongsTo(User, { foreignKey: 'ownerId', as: 'ownerUser' });
+
+// Establish the second one-to-many relationship with custom association names
+User.hasMany(Match, { foreignKey: 'stadiumId', as: 'StadiumsMatches' });
+Match.belongsTo(User, { foreignKey: 'stadiumId', as: 'stadiumMatch' });
 
 User.belongsToMany(Match, {
-  through: 'matchUsers',
-  as: 'matches',
+  through: 'MatchPlayer',
+  as: 'Matches',
+  foreignKey: 'userId',
+});
+Match.belongsToMany(User, {
+  through: 'MatchPlayer',
+  as: 'Players',
+  foreignKey: 'matchId',
 });
 
-//matches
-User.hasMany(Match, {
-  as: 'stadiumMatches',
-});
-Match.belongsTo(User);
+// User with Message
 
-User.hasMany(Match, {
-  as: 'ownerMatches',
+User.hasMany(Message, {
+  as: 'userMessage',
 });
-Match.belongsTo(User);
+Message.belongsTo(User);
 
-//revewis
-User.hasMany(Review, {
-  as: 'userReview',
+// Match with Message
+Match.hasMany(Message, {
+  as: 'matchMessage',
 });
-Review.belongsTo(User);
+Message.belongsTo(Match);
 
-Stadium.hasMany(Review, {
-  as: 'stadiumReview',
-});
-Review.belongsTo(Stadium);
+// User as reviewer relationship between User and Review
+User.hasMany(Review, { foreignKey: 'playerId', as: 'playersReviews' });
+Review.belongsTo(User, { foreignKey: 'playerId', as: 'Reviewers' });
+
+// User as Stadium relationship between User and Review
+User.hasMany(Review, { foreignKey: 'stadiumId', as: 'StadiumsReviews' });
+Review.belongsTo(User, { foreignKey: 'stadiumId', as: 'ReviewedStadium' });
 
 //gallery
 Stadium.hasMany(Gallery, {
   as: 'stadiumGallery',
 });
 Gallery.belongsTo(Stadium);
-
-//User Messeges
-User.hasMany(Message, {
-  as: 'userMessage',
-  foreignKey: {
-    allowNull: false,
-  },
-});
-Message.belongsTo(User, {
-  foreignKey: {
-    allowNull: false,
-  },
-});
-
-// Math Messages
-Match.hasMany(Message, {
-  as: 'matchMessage',
-  foreignKey: {
-    allowNull: false,
-  },
-});
-Message.belongsTo(Match, {
-  foreignKey: {
-    allowNull: false,
-  },
-});
 
 export { Player, Stadium, Review, Match, Message, Gallery, User };
