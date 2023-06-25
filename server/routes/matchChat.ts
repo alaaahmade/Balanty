@@ -10,5 +10,6 @@ import {
 const chatRouter: Router = Router();
 
 chatRouter.get('/', getAllMessages);
+chatRouter.get('/:id', getMessageById);
 
 export default chatRouter;
