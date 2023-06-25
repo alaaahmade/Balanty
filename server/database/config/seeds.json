@@ -57,6 +57,12 @@
     "email": "BitLahyaStad@gmail.com",
     "password": "BitLahyaStad123",
     "role": "STADIUM"
+  },{
+    "username": "نادي الحارة",
+    "phone": "0591239995",
+    "email": "AlharaStad@gmail.com",
+    "password": "AlharaStad123",
+    "role": "STADIUM"
   }],
   "Players": [{
      "UserId": 1,
@@ -119,6 +125,8 @@
     "description": "يحتوي الملعب المصغر على عشب صناعي غير حشو ومنصات صدمات. يعتمد حجم ملعب كرة القدم المصغر على حجم القاعدة. اتصل بنا للحصول على التفاصيل",
     "price": 80,
     "ground": "انجيل"
+  },{
+    "UserId": 10
   }],
   "Matches": [{
      "ownerId": 1,
@@ -208,6 +216,10 @@
     "image4":"https://evrak.co/uploads/images/2022/10/ERjNq.jpg",
 
     "StadiumId": 5
+  }
+  , {
+
+    "StadiumId": 6
   }
  
 
