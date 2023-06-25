@@ -41,12 +41,7 @@ const ImageSlider = () => {
   };
 
   return (
-    <SliderBox
-      sx={{
-        ml: '3%',
-        mt: 'calc(2% + 70px)',
-      }}
-    >
+    <SliderBox>
       <Slide
         prevArrow={
           <ArrowStyle
@@ -71,7 +66,7 @@ const ImageSlider = () => {
               key={image.id}
               sx={{
                 width: '100%',
-                height: '400px',
+                height: '85vh',
               }}
             >
               <SliderImage
