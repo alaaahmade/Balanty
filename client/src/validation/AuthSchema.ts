@@ -19,15 +19,19 @@ const loginSchema = yup.object<loginProps>().shape({
 const signupSchema = yup.object<signupProps>().shape({
   username: yup
     .string()
-    .min(4, 'يجب ألا يقل اسم المستخدم عن 8 أحرف')
+    .min(4, 'يجب ألا يقل اسم المستخدم عن 4 أحرف')
     .required('اسم المستخدم حقل مطلوب'),
   email: yup
     .string()
     .email('يجب أن تكون قيمة الحقل عبارة عن بريد إلكتروني فعَال')
-    .min(4, 'يجب أن يكون البريد الإلكتروني مكَون من 8 أحرف على الأقل')
+    .min(4, 'يجب أن يكون البريد الإلكتروني مكَون من 4 أحرف على الأقل')
     .required('البريد الإلكتروني حقل مطلوب'),
   role: yup.string().oneOf(['player', 'stadium']).required('هذا الحقل مطلوب'),
-  phone: yup.number().min(7).max(10).required('حقل رقم الهاتف مطلوب'),
+  phone: yup
+    .number()
+    .min(7, 'يجب أن يكون البريد الإلكتروني مكَون من 7 أرقام على الأقل')
+    .max(10)
+    .required('حقل رقم الهاتف مطلوب'),
   password: yup
     .string()
     .min(4, 'يجب أن تكون كلمة المرور 8 أحرف على الأقل')
