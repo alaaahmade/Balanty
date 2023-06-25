@@ -62,10 +62,24 @@ const deleteMessage = async (req: Request, res: Response) => {
   });
 };
 
+const editMessage = async (req: Request, res: Response) => {
+  const { id, updatedMessage } = req.body;
+
+  const newMessage = await editMessageService(id, updatedMessage);
+
+  res.status(200).json({
+    status: 200,
+    data: {
+      message: 'Message updated successfully',
+      newMessage,
+    },
+  });
+};
+
 export {
   addMessage,
   getMessageById,
   getAllMessages,
   deleteMessage,
-  // editMessage,
+  editMessage,
 };
