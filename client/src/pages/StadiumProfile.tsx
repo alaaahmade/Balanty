@@ -9,7 +9,7 @@ import {
 import { UserData } from '../interfaces/StadiumProfile';
 
 const StadiumProfile = () => {
-  const [userData, setUserData] = useState<UserData | undefined>();
+  const [userData, setUserData] = useState<UserData | null>(null);
   const [gallery, setGallery] = useState({
     id: 0,
     image1: '',
@@ -42,7 +42,7 @@ const StadiumProfile = () => {
           m: '17% 3% 3% 3%',
         }}
       >
-        <BioSection userData={userData} />
+        {userData && <BioSection userData={userData} />}
         <ProfileCalender />
       </Box>
     </Box>

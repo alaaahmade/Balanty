@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 
 import { Typography, Box } from '@mui/material';
 
@@ -6,16 +6,21 @@ import PlaceIcon from '@mui/icons-material/Place';
 import StarIcon from '@mui/icons-material/Star';
 
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { BioBox, FlexBox, LocationTypo } from './styledStadiumProfile';
+import { BioBox, FlexBox, LocationTypo } from './StadiumProfile.styled';
 
 import EditInput from './EditInput';
 
 import { UserData } from '../../interfaces/StadiumProfile';
 
 type Props = {
-  userData: UserData | undefined;
+  userData: UserData;
 };
 const BioSection = ({ userData }: Props): ReactElement => {
+  const { description } = userData.Stadium;
+  const { price } = userData.Stadium;
+  const { ground } = userData.Stadium;
+  const { address } = userData.Stadium;
+  const { username } = userData;
   return (
     <BioBox
       sx={{
@@ -41,22 +46,17 @@ const BioSection = ({ userData }: Props): ReactElement => {
           <StarIcon />
         </Box>
         <Typography variant="h5" sx={{ ml: '5px' }}>
-          {userData?.username}
+          {username}
         </Typography>
       </FlexBox>
-      <EditInput
-        lastValue="ملعب الاتحاد هو ملعب كرة قدم مميز يحمل اسم نادي الاتحاد. يتميز ببنيته
-        الحديثة والمرافق الرياضية المتطورة. يعتبر محطة هامة للفرق والأندية
-        المحلية في تنظيم المباريات والمسابقات الرياضية."
-        multiline
-      />
+      <EditInput lastValue={description} multiline />
 
       <FlexBox
         sx={{
           justifyContent: 'flex-end',
         }}
       >
-        <EditInput lastValue="35 شيكل" multiline={false} />
+        <EditInput lastValue={`شيكل${price}`} multiline={false} />
 
         <Typography
           sx={{
@@ -72,7 +72,7 @@ const BioSection = ({ userData }: Props): ReactElement => {
           justifyContent: 'flex-end',
         }}
       >
-        <EditInput lastValue="عشبية" multiline={false} />
+        <EditInput lastValue={ground} multiline={false} />
         <Typography
           sx={{
             fontWeight: 'bold',
@@ -95,7 +95,7 @@ const BioSection = ({ userData }: Props): ReactElement => {
             alignItems: 'center',
           }}
         >
-          <EditInput lastValue="غزة-الرمال-شارع الوحدة" multiline={false} />
+          <EditInput lastValue={address} multiline={false} />
 
           <LocationTypo
             sx={{

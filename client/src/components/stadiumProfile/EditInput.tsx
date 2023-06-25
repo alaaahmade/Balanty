@@ -1,7 +1,7 @@
 import { Edit } from '@mui/icons-material';
 import { Button, IconButton, InputAdornment } from '@mui/material';
 import { useState } from 'react';
-import { EditInputs } from './styledStadiumProfile';
+import { EditInputs } from './StadiumProfile.styled';
 
 interface Props {
   lastValue: string | number;

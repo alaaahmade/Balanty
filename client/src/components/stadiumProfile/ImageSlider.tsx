@@ -10,7 +10,7 @@ import {
   SliderImage,
   ThumbnailBox,
   ThumbnailImage,
-} from './styledStadiumProfile';
+} from './StadiumProfile.styled';
 import { galleryTypes } from '../../interfaces/StadiumProfile';
 
 const ImageSlider: FC<galleryTypes> = ({ gallery }) => {
@@ -22,21 +22,6 @@ const ImageSlider: FC<galleryTypes> = ({ gallery }) => {
     { id: 4, url: '' },
   ]);
 
-  // useEffect(() => {
-  //   console.log('hi');
-
-  //   // if (gallery) {
-  //   //   const imageArray = [];
-  //   //   for (let i = 1; i <= 4; i + 1) {
-  //   //     const image = {
-  //   //       id: i,
-  //   //       url: gallery[`image${i}`],
-  //   //     };
-  //   //     imageArray.push(image);
-  //   //   }
-  //   //   console.log(imageArray);
-  //   // }
-  // }, []);
   useEffect(() => {
     if (gallery) {
       setImages([
@@ -53,14 +38,7 @@ const ImageSlider: FC<galleryTypes> = ({ gallery }) => {
   };
 
   return (
-    <SliderBox
-      sx={
-        {
-          // ml: '3%',
-          // mt: 'calc(2% + 70px)',
-        }
-      }
-    >
+    <SliderBox>
       <Slide
         prevArrow={
           <ArrowStyle
