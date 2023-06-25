@@ -1,12 +1,11 @@
-import { IMatchMessage } from '../interfaces';
+import { IMatchMessage, IResponseProps } from '../interfaces';
 import { Message } from '../models';
-import { CustomError } from '../utils';
 
 const addMessageService = async ({
   message,
   senderId,
   matchId,
-}: IMatchMessage) => {
+}: IMatchMessage): Promise<IResponseProps> => {
   const newMessage = await Message.create({
     UserId: senderId,
     MatchId: matchId,
@@ -22,7 +21,9 @@ const addMessageService = async ({
   };
 };
 
-const getMessageByIdService = async (messageId: number) => {
+const getMessageByIdService = async (
+  messageId: number,
+): Promise<IResponseProps> => {
   const message = await Message.findOne({ where: { id: messageId } });
 
   if (message) {
@@ -42,7 +43,7 @@ const getMessageByIdService = async (messageId: number) => {
   }
 };
 
-const getAllMessagesService = async () => {
+const getAllMessagesService = async (): Promise<IResponseProps> => {
   const messages = await Message.findAll();
 
   if (messages) {
@@ -62,10 +63,13 @@ const getAllMessagesService = async () => {
   }
 };
 
-const deleteMessageService = async (id: number) => {
-  const message = await Message.findOne({ where: { id } });
+const deleteMessageService: (
+  id: string,
+) => Promise<IResponseProps> = async id => {
+  const message = await Message.findOne({ where: { id: Number(id) } });
+
   if (message) {
-    await Message.destroy({ where: { id } });
+    await Message.destroy({ where: { id: Number(id) } });
     return {
       status: 200,
       data: {
@@ -82,7 +86,10 @@ const deleteMessageService = async (id: number) => {
   }
 };
 
-const editMessageService = async (id: number, newMessage: string) => {
+const editMessageService = async (
+  id: number,
+  newMessage: string,
+): Promise<IResponseProps> => {
   const [updatedRows, [updatedMessage]] = await Message.update(
     { message: newMessage },
     { where: { id }, returning: true },

@@ -14,3 +14,13 @@ export interface IMatchMessage {
   matchId: number;
   message: string;
 }
+
+export interface IResponseProps {
+  status: number;
+  data: {
+    message?: string | object;
+    newMessage?: object;
+    messages?: object[];
+    updatedMessage?: object;
+  };
+}

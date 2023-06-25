@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, RequestHandler, Response } from 'express';
 import {
   addMessageService,
   deleteMessageService,
@@ -7,7 +7,10 @@ import {
   editMessageService,
 } from '../services';
 
-const addMessage = async (req: Request, res: Response) => {
+const addMessage: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
   const { message, senderId, matchId } = req.body;
 
   const data = await addMessageService({
@@ -19,7 +22,10 @@ const addMessage = async (req: Request, res: Response) => {
   res.status(data?.status).json(data);
 };
 
-const getMessageById = async (req: Request, res: Response) => {
+const getMessageById: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
   const { id } = req.params;
 
   const data = await getMessageByIdService(+id);
@@ -27,21 +33,30 @@ const getMessageById = async (req: Request, res: Response) => {
   res.status(data?.status).json(data);
 };
 
-const getAllMessages = async (req: Request, res: Response) => {
+const getAllMessages: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
   const data = await getAllMessagesService();
 
   res.status(data?.status).json(data);
 };
 
-const deleteMessage = async (req: Request, res: Response) => {
+const deleteMessage: RequestHandler<{ id: string }> = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
   const { id } = req.params;
 
-  const data = await deleteMessageService(+id);
+  const data = await deleteMessageService(id);
 
   res.status(data?.status).json(data);
 };
 
-const editMessage = async (req: Request, res: Response) => {
+const editMessage: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
   const { id, newMessage } = req.body;
 
   const data = await editMessageService(id, newMessage);
