@@ -28,10 +28,19 @@ const getAllMessagesService = async () => {
   return messages;
 };
 
+const deleteMessageService = async (id: number) => {
+  const message = await Message.findOne({ where: { id } });
+  if (message) {
+    await Message.destroy({ where: { id } });
+    return message;
+  }
+  throw new CustomError(404, 'Message not found');
+};
+
 export {
   addMessageService,
   getMessageByIdService,
   getAllMessagesService,
-  // deleteMessageService,
+  deleteMessageService,
   // editMessageService,
 };
