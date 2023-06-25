@@ -13,8 +13,7 @@ const BioSection = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-end',
-        // ml: '3%',
-        mt: '-98px',
+        mt: '180px',
       }}
     >
       <FlexBox
