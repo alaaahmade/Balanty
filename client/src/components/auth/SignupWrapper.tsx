@@ -2,6 +2,8 @@ import React, { FC, ReactElement } from 'react';
 
 import { Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Form,
   ImageWrap,
@@ -13,14 +15,44 @@ import InputWrap from './Input';
 import TitleWrap from './Title';
 import GoogleIcon from '../../assets/image-2.svg';
 import LinkWrap from './Link';
+import { signupProps } from '../../interfaces';
+import { signupSchema } from '../../validation';
 
 const SignupWrapper: FC = (): ReactElement => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<signupProps>({
+    resolver: yupResolver(signupSchema),
+    mode: 'onChange',
+    defaultValues: {
+      username: '',
+      email: '',
+      phone: '',
+      password: '',
+      confirmPassword: '',
+    },
+  });
   const { pathname } = useLocation();
   let isPlayer = true;
 
   if (!(pathname.split('/')[1] === 'player')) {
     isPlayer = false;
   }
+  const onSubmit: SubmitHandler<signupProps> = data => {
+    try {
+      fetch(
+        `http://localhost:8080/api/v1/${
+          isPlayer ? 'player/signup' : 'stadium/signup'
+        }`,
+      );
+      window.location.href = '/home';
+    } catch (error) {
+      // eslint-disable-next-line no-alert
+      alert('There an error when logging a user');
+    }
+  };
   return (
     <Wrapper isPlayer={isPlayer}>
       <ImageWrap isPlayer={isPlayer} />
@@ -32,24 +64,44 @@ const SignupWrapper: FC = (): ReactElement => {
         )}
         <Box component="form" noValidate autoComplete="off">
           <InputWrap
+            name="username"
             type="text"
             label={isPlayer ? 'اسم اللاعب' : 'اسم الملعب'}
             placeholder={isPlayer ? 'ادخل اسم اللاعب' : 'ادخل اسم الملعب'}
+            errors={errors}
+            control={control}
           />
           <InputWrap
+            name="email"
             type="email"
             label="البريد الإلكتروني"
             placeholder="ادخل البريد الإلكتروني"
+            errors={errors}
+            control={control}
           />
           <InputWrap
+            name="phone"
+            type="tel"
+            label="رقم الهاتف"
+            placeholder="ادخل رقم الهاتف"
+            errors={errors}
+            control={control}
+          />
+          <InputWrap
+            name="password"
             type="password"
             label="كلمة المرور"
             placeholder="ادخل كلمة المرور"
+            errors={errors}
+            control={control}
           />
           <InputWrap
+            name="confirmPassword"
             type="password"
             label="تأكيد كلمة المرور"
             placeholder="قم بتأكيد كلمة المرور"
+            errors={errors}
+            control={control}
           />
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {isPlayer ? (
@@ -59,7 +111,11 @@ const SignupWrapper: FC = (): ReactElement => {
             )}
             <OtherLink href="/">عودة إلى الرئيسية</OtherLink>
           </div>
-          <SignButton variant="contained" disableElevation>
+          <SignButton
+            onClick={handleSubmit(onSubmit)}
+            variant="contained"
+            disableElevation
+          >
             تسجيل دخول
           </SignButton>
           <SignButton
