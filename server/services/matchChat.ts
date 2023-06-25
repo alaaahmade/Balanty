@@ -22,10 +22,16 @@ const getMessageByIdService = async (messageId: number) => {
   return message;
 };
 
+const getAllMessagesService = async () => {
+  const messages = await Message.findAll();
+
+  return messages;
+};
+
 export {
   addMessageService,
   getMessageByIdService,
-  // getAllMessagesService,
+  getAllMessagesService,
   // deleteMessageService,
   // editMessageService,
 };
