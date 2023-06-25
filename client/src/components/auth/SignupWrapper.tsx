@@ -4,6 +4,8 @@ import { Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import axios from 'axios';
+
 import {
   Form,
   ImageWrap,
@@ -40,12 +42,19 @@ const SignupWrapper: FC = (): ReactElement => {
   if (!(pathname.split('/')[1] === 'player')) {
     isPlayer = false;
   }
-  const onSubmit: SubmitHandler<signupProps> = data => {
+  const onSubmit: SubmitHandler<signupProps> = async data => {
     try {
-      fetch(
+      const user = await axios.post(
         `http://localhost:8080/api/v1/${
           isPlayer ? 'player/signup' : 'stadium/signup'
         }`,
+        {
+          username: data.username,
+          email: data.email,
+          phone: data.phone,
+          password: data.password,
+          confirmPassword: data.confirmPassword,
+        },
       );
       window.location.href = '/home';
     } catch (error) {

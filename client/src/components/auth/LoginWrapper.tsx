@@ -4,6 +4,7 @@ import { Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import axios from 'axios';
 
 import {
   Form,
@@ -39,12 +40,18 @@ const LoginWrapper: FC = (): ReactElement => {
   if (!(pathname.split('/')[1] === 'player')) {
     isPlayer = false;
   }
-  const onSubmit: SubmitHandler<loginProps> = () => {
+  const onSubmit: SubmitHandler<loginProps> = async data => {
+    console.log(data);
+
     try {
-      fetch(
+      const user = await axios.post(
         `http://localhost:8080/api/v1/${
           isPlayer ? 'player/login' : 'stadium/login'
         }`,
+        {
+          username: data.username,
+          password: data.password,
+        },
       );
       window.location.href = '/home';
     } catch (error) {
