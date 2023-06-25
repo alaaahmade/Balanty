@@ -1,8 +1,8 @@
-import React, { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactElement } from 'react';
 
-import { Box, TextField } from '@mui/material';
+import { Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import {
@@ -16,13 +16,15 @@ import InputWrap from './Input';
 import TitleWrap from './Title';
 import GoogleIcon from '../../assets/image-2.svg';
 import LinkWrap from './Link';
+import { loginSchema } from '../../validation';
+import { loginProps } from '../../interfaces';
 
 const LoginWrapper: FC = (): ReactElement => {
-  // const [userData, setUserData] = useState<userDataProps>({
-  // username: '',
-  // password: '',
-  // });
-  const { register, control, handleSubmit } = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<loginProps>({
     resolver: yupResolver(loginSchema),
     mode: 'onChange',
     defaultValues: {
@@ -30,8 +32,8 @@ const LoginWrapper: FC = (): ReactElement => {
       password: '',
     },
   });
-  const onSubmit = (data: userDataProps) =>
-    console.log('onSubmited data', data);
+  const onSubmit: SubmitHandler<loginProps> = data =>
+    console.log('onSubmitted data', data);
 
   const { pathname } = useLocation();
   let isPlayer = true;
@@ -40,12 +42,9 @@ const LoginWrapper: FC = (): ReactElement => {
     isPlayer = false;
   }
 
-  // const handleChanges = e => {
-  //   setUserData({ useusername: e.target.value, ...userData });
-  // };
   return (
     <Wrapper isPlayer={isPlayer}>
-      <ImageWrap isPlayer={isPlayer} />
+      {/* <ImageWrap isPlayer={isPlayer} /> */}
       <Form>
         {isPlayer ? (
           <TitleWrap caption="دخول كلاعب" />
@@ -53,28 +52,21 @@ const LoginWrapper: FC = (): ReactElement => {
           <TitleWrap caption="دخول كملعب" />
         )}
         <Box component="form" noValidate autoComplete="off">
-          {/* <Controller
-            name="username"
-            control={control}
-            render={({ formState, fieldState }) => ( */}
-          <TextField
-            inputRef={register}
-            title="username"
-            error={!!formState.errors?.username}
-          />
-          {/* )} */}
-          {/* /> */}
           <InputWrap
-            // value={userData.username}
-            // onChange={handleChanges}
+            name="username"
             type="text"
             label={isPlayer ? 'اسم اللاعب' : 'اسم الملعب'}
             placeholder={isPlayer ? 'ادخل اسم اللاعب' : 'ادخل اسم الملعب'}
+            errors={errors}
+            control={control}
           />
           <InputWrap
+            control={control}
+            name="password"
             type="password"
             label="كلمة المرور"
             placeholder="ادخل كلمة المرور"
+            errors={errors}
           />
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {isPlayer ? (
