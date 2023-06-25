@@ -10,7 +10,7 @@ import {
   SliderImage,
   ThumbnailBox,
   ThumbnailImage,
-} from './styledStadiumProfile';
+} from './StadiumProfile.styled';
 
 // This set we will get from backend response
 const images = [

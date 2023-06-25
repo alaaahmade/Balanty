@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import PlaceIcon from '@mui/icons-material/Place';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { BioBox, FlexBox, LocationTypo } from './styledStadiumProfile';
+import { BioBox, FlexBox, LocationTypo } from './StadiumProfile.styled';
 import EditInput from './EditInput';
 
 const BioSection = () => {
