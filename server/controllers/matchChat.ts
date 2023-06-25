@@ -10,70 +10,43 @@ import {
 const addMessage = async (req: Request, res: Response) => {
   const { message, senderId, matchId } = req.body;
 
-  const newMessage = await addMessageService({
+  const data = await addMessageService({
     message,
     senderId,
     matchId,
   });
 
-  res.status(201).json({
-    status: 201,
-    data: {
-      message: 'Message added successfully',
-      newMessage,
-    },
-  });
+  res.status(data?.status).json(data);
 };
 
 const getMessageById = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const message = await getMessageByIdService(+id);
+  const data = await getMessageByIdService(+id);
 
-  res.status(200).json({
-    status: 200,
-    data: {
-      message,
-    },
-  });
+  res.status(data?.status).json(data);
 };
 
 const getAllMessages = async (req: Request, res: Response) => {
-  const messages = await getAllMessagesService();
+  const data = await getAllMessagesService();
 
-  res.status(200).json({
-    status: 200,
-    data: {
-      messages,
-    },
-  });
+  res.status(data?.status).json(data);
 };
 
 const deleteMessage = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  await deleteMessageService(+id);
+  const data = await deleteMessageService(+id);
 
-  res.status(200).json({
-    status: 200,
-    data: {
-      message: 'Message deleted successfully',
-    },
-  });
+  res.status(data?.status).json(data);
 };
 
 const editMessage = async (req: Request, res: Response) => {
-  const { id, updatedMessage } = req.body;
+  const { id, newMessage } = req.body;
 
-  const newMessage = await editMessageService(id, updatedMessage);
+  const data = await editMessageService(id, newMessage);
 
-  res.status(200).json({
-    status: 200,
-    data: {
-      message: 'Message updated successfully',
-      newMessage,
-    },
-  });
+  res.status(data?.status).json(data);
 };
 
 export {

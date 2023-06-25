@@ -13,28 +13,73 @@ const addMessageService = async ({
     message,
   });
 
-  return newMessage;
+  return {
+    status: 201,
+    data: {
+      message: 'Message added successfully',
+      newMessage,
+    },
+  };
 };
 
 const getMessageByIdService = async (messageId: number) => {
   const message = await Message.findOne({ where: { id: messageId } });
 
-  return message;
+  if (message) {
+    return {
+      status: 200,
+      data: {
+        message,
+      },
+    };
+  } else {
+    return {
+      status: 404,
+      data: {
+        message: 'No message found',
+      },
+    };
+  }
 };
 
 const getAllMessagesService = async () => {
   const messages = await Message.findAll();
 
-  return messages;
+  if (messages) {
+    return {
+      status: 200,
+      data: {
+        messages,
+      },
+    };
+  } else {
+    return {
+      status: 404,
+      data: {
+        message: 'No messages found',
+      },
+    };
+  }
 };
 
 const deleteMessageService = async (id: number) => {
   const message = await Message.findOne({ where: { id } });
   if (message) {
     await Message.destroy({ where: { id } });
-    return message;
+    return {
+      status: 200,
+      data: {
+        message: 'Message deleted successfully',
+      },
+    };
+  } else {
+    return {
+      status: 404,
+      data: {
+        message: 'No message found',
+      },
+    };
   }
-  throw new CustomError(404, 'Message not found');
 };
 
 const editMessageService = async (id: number, newMessage: string) => {
@@ -44,9 +89,21 @@ const editMessageService = async (id: number, newMessage: string) => {
   );
 
   if (updatedRows) {
-    return updatedMessage;
+    return {
+      status: 200,
+      data: {
+        message: 'Message updated successfully',
+        updatedMessage,
+      },
+    };
+  } else {
+    return {
+      status: 404,
+      data: {
+        message: 'Message not found',
+      },
+    };
   }
-  throw new CustomError(404, 'Message not found');
 };
 
 export {
