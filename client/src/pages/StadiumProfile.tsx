@@ -1,6 +1,7 @@
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import {
   BioSection,
   ImageSlider,
@@ -20,10 +21,9 @@ const StadiumProfile = () => {
 
   const { id } = useParams();
   const fetchProfileData = async (stadiumId: string) => {
-    const res = await fetch(`/api/v1/stadiums/profile/${stadiumId}`);
-    const jsonData = await res.json();
-    setGallery(jsonData.data.Stadium.stadiumGallery[0]);
-    setUserData(jsonData.data as UserData);
+    const { data } = await axios.get(`/api/v1/stadiums/profile/${stadiumId}`);
+    setGallery(data.data.Stadium.stadiumGallery[0]);
+    setUserData(data.data as UserData);
   };
 
   useEffect(() => {
