@@ -4,7 +4,7 @@ import { Box, Typography, Button } from '@mui/material';
 export const HeroSectionWrapper = styled(Box)({
   display: 'flex',
   height: '80vh',
-  width: '100vw',
+  width: '100%',
 });
 
 export const DescriptionWrap = styled(Box)({
