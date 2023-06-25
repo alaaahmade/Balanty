@@ -4,11 +4,11 @@ import { loginProps, signupProps } from '../interfaces';
 const loginSchema = yup.object<loginProps>().shape({
   username: yup
     .string()
-    .min(4, 'يجب ألا يقل اسم المستخدم عن 8 أحرف')
+    .min(4, 'يجب ألا يقل اسم المستخدم عن 4 أحرف')
     .required('اسم المستخدم حقل مطلوب'),
   password: yup
     .string()
-    .min(4, 'يجب أن تكون كلمة المرور 8 أحرف على الأقل')
+    .min(4, 'يجب أن تكون كلمة المرور 4 أحرف على الأقل')
     .required('كلمة المرور حقل مطلوب')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
@@ -34,7 +34,7 @@ const signupSchema = yup.object<signupProps>().shape({
     .required('حقل رقم الهاتف مطلوب'),
   password: yup
     .string()
-    .min(4, 'يجب أن تكون كلمة المرور 8 أحرف على الأقل')
+    .min(4, 'يجب أن تكون كلمة المرور 4 أحرف على الأقل')
     .required('كلمة المرور حقل مطلوب')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
@@ -42,7 +42,7 @@ const signupSchema = yup.object<signupProps>().shape({
     ),
   confirmPassword: yup
     .string()
-    .min(4, 'يجب أن تكون كلمة المرور 8 أحرف على الأقل')
+    .min(4, 'يجب أن تكون كلمة المرور 4 أحرف على الأقل')
     .required('كلمة المرور حقل مطلوب')
     .oneOf([yup.ref('password')], 'كلمة المرور غير متطابقة'),
 });
