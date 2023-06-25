@@ -13,9 +13,7 @@ const PlayerActions: React.FC = (): ReactElement => {
         <ActionButton>متابعة</ActionButton>
         <ActionButton>مراسلة</ActionButton>
       </ButtonsWrapper>
-      <div>
-        <UserName variant="h3"> أحمد عبدالله</UserName>
-      </div>
+      <UserName variant="h3"> أحمد عبدالله</UserName>
     </ActionsWrapper>
   );
 };

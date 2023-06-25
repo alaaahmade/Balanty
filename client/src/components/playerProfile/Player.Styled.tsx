@@ -1,9 +1,9 @@
-import { Typography } from '@mui/material';
+import { Typography, Tab } from '@mui/material';
 import { styled } from '@mui/system';
 
 export const Cover = styled('img')({
   width: '100%',
-  height: 250,
+  height: 220,
 });
 export const AvatarWrapper = styled('div')({
   width: '100%',
@@ -59,4 +59,31 @@ export const ActionButton = styled('button')({
     color: '#2CB674',
     border: '1px solid #2CB674',
   },
+});
+export const StyledTab = styled(Tab)({
+  color: 'black',
+  '&:hover': {
+    color: 'black',
+  },
+});
+export const ContentWrapper = styled('div')({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  gap: '10px',
+  padding: '4px',
+});
+
+export const Text = styled(Typography)({});
+
+export const FollowsInfoWrapper = styled('div')({
+  display: 'flex',
+  justifyContent: 'space-between',
+});
+
+export const FollowsWrapper = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  paddingBottom: 28,
 });
