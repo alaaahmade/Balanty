@@ -2,6 +2,7 @@ import { Op } from 'sequelize';
 import { CustomRequest, IServiceResponse } from '../interfaces';
 import { Match, Stadium } from '../models';
 import matchSchema from '../validations';
+import { matchesInterface } from '../interfaces/matchInterfaces';
 
 export const createMatchService = async (
   req: CustomRequest,
@@ -61,8 +62,7 @@ export const createMatchService = async (
     data: '! هذا الوقت محجوز',
   };
 };
-
-export const getAllMatches = async () => {
+export const getAllMatches = async (): Promise<matchesInterface> => {
   const currentDate = Date.now();
   const currentDateObject = new Date(currentDate);
   const currentDateFormated = currentDateObject.toISOString();
@@ -71,6 +71,12 @@ export const getAllMatches = async () => {
     where: {
       [Op.or]: [{ startDate: { [Op.gt]: currentDateFormated } }],
     },
+    include: [
+      {
+        model: Stadium,
+        required: false,
+      },
+    ],
   });
 
   if (matches.length > 0) {
