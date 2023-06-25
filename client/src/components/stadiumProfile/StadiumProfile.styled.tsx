@@ -106,9 +106,9 @@ export const EditInputs = styled(TextField)({
     color: 'red',
     textAlign: 'right',
 
-    '-webkit-text-fill-color': '#01031C',
+    WebkitTextFillColor: '#01031C',
   },
   '& .css-1x51dt5-MuiInputBase-input-MuiInput-input.Mui-disabled': {
-    '-webkit-text-fill-color': '#01031C',
+    WebkitTextFillColor: '#01031C',
   },
 });

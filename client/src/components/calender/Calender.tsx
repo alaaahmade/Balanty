@@ -1,20 +1,27 @@
+import { FC, ReactElement, useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
 import FullCalendar from '@fullcalendar/react';
 import { startOfDay } from '@fullcalendar/core/internal';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { EventApi } from '@fullcalendar/core';
-import { Box } from '@mui/system';
-import { FC, ReactElement, useContext, useEffect, useState } from 'react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
-import { useParams } from 'react-router-dom';
+
+import { Box } from '@mui/system';
+
+import axios from 'axios';
+
 import {
   newEventInterface,
   prevInterface,
 } from '../../interfaces/matchInterface';
 import { IEvent } from '../../pages/CreateMatch';
-import '../../fullcalendar-custom.css';
+
 import { statsContext } from '../../context';
+
+import '../../fullcalendar-custom.css';
 
 type Props = {
   type: string;
@@ -75,15 +82,14 @@ const Calendar: FC<Props> = ({ type }): ReactElement => {
   };
   const validMatches = [...events, Event];
 
-  const getStadiumMatchs = async (id: number | undefined) => {
-    const matchesFetch = await fetch(`/api/v1/stadiums/matches/${id}`);
-    const stadMatches = await matchesFetch.json();
-    if (stadMatches.status === 401) {
-      setValidateError(stadMatches.data);
+  const getStadiumMatches = async (id: number | undefined) => {
+    const { data } = await axios.get(`/api/v1/matches/stadium/${id}`);
+    if (data.status === 401) {
+      setValidateError(data.data);
     }
     let convertedMatches;
-    if (Array.isArray(stadMatches.data)) {
-      convertedMatches = stadMatches?.data?.map((event: prevInterface) => {
+    if (Array.isArray(data.data)) {
+      convertedMatches = data?.data?.map((event: prevInterface) => {
         return {
           title: event.title,
           start: event.startDate,
@@ -107,10 +113,10 @@ const Calendar: FC<Props> = ({ type }): ReactElement => {
   useEffect(() => {
     if (type === 'create') {
       if (StadiumId > 0) {
-        getStadiumMatchs(StadiumId);
+        getStadiumMatches(StadiumId);
       }
     } else if (type === 'profile') {
-      getStadiumMatchs(parseInt(id ?? '', 10));
+      getStadiumMatches(parseInt(id ?? '', 10));
     }
   }, [StadiumId]);
 

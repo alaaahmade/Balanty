@@ -22,6 +22,7 @@ const StadiumProfile = () => {
   const { id } = useParams();
   const fetchProfileData = async (stadiumId: string) => {
     const { data } = await axios.get(`/api/v1/stadiums/profile/${stadiumId}`);
+
     setGallery(data.data.Stadium.stadiumGallery[0]);
     setUserData(data.data as UserData);
   };
