@@ -13,5 +13,6 @@ chatRouter.get('/', getAllMessages);
 chatRouter.get('/:id', getMessageById);
 chatRouter.post('/add', addMessage);
 chatRouter.delete('/:id', deleteMessage);
+chatRouter.put('/', editMessage);
 
 export default chatRouter;
