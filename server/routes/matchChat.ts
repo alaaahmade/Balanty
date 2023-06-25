@@ -11,7 +11,7 @@ const chatRouter: Router = Router();
 
 chatRouter.get('/', getAllMessages);
 chatRouter.get('/:id', getMessageById);
-chatRouter.post('/add', addMessage);
+chatRouter.post('/', addMessage);
 chatRouter.delete('/:id', deleteMessage);
 chatRouter.put('/', editMessage);
 
