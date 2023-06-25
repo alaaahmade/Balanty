@@ -46,7 +46,7 @@ export const Title = styled(Typography)({
 export const InputLabel = styled(Typography)({
   fontWeight: '700',
   fontSize: '18px',
-  lineHeight: '44px',
+  lineHeight: '30px',
 });
 
 export const SignButton = styled(Button)({
