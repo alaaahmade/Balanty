@@ -13,5 +13,4 @@ export interface IMatchMessage {
   senderId: number;
   matchId: number;
   message: string;
-  username: string;
 }
