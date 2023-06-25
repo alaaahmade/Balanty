@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import { TextField, Box } from '@mui/material';
 
+import { useNavigate } from 'react-router-dom';
 import {
   CreateMatchButtons,
   DialogInputsBox,
@@ -49,14 +50,18 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
     }));
     setValidateError('');
   };
+
+  const navigate = useNavigate();
+
   const fetchEvent = async (matchData: prevInterface) => {
     try {
       await axios.post('/api/v1/matches', matchData);
+      handleClose();
     } catch (error) {
       if ((error as createMatchError).response.status === 401) {
         setValidateError((error as createMatchError).response.data.data);
-      } else if ((error as createMatchError).response.status === 201) {
-        handleClose();
+      } else {
+        navigate('/serverError');
       }
     }
   };
@@ -92,10 +97,16 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
         ...prev,
         StadiumId: +selectedValue.id,
       }));
-      const data = await fetch(`/api/v1/stadiums/details/${selectedValue?.id}`);
-      const stadDetails = await data.json();
-      setDetails(stadDetails.data[0].image1);
-      setValidateError('');
+      try {
+        const { data } = await axios.get(
+          `/api/v1/stadiums/details/${selectedValue?.id}`,
+        );
+        const stadDetails = data.data[0];
+        setDetails(stadDetails.image);
+        setValidateError('');
+      } catch (error) {
+        navigate('/serverError');
+      }
     }
   };
 

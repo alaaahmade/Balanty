@@ -13,9 +13,14 @@ import {
   Typography,
 } from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { DialogBox } from '../components';
 import '../fullcalendar-custom.css';
-import { createMatchInterface, prevInterface } from '../interfaces';
+import {
+  createMatchError,
+  createMatchInterface,
+  prevInterface,
+} from '../interfaces';
 import { statsContext } from '../context/CreateMatch';
 import {
   CreateMatchForm,
@@ -52,17 +57,19 @@ const CreateMatch: React.FC<createMatchInterface> = ({
   const handleClose = () => {
     setOpen(false);
   };
-  const fetchEvent = async (data: prevInterface) => {
-    const matchesFetch = await fetch('/api/v1/matches', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    const resultCreate = await matchesFetch.json();
-    if (resultCreate.status === 401) {
-      setValidateError(resultCreate.data);
-    } else if (resultCreate.status === 201) {
+
+  const navigate = useNavigate();
+
+  const fetchEvent = async (matchData: prevInterface) => {
+    try {
+      await axios.post('/api/v1/matches', matchData);
       handleClose();
+    } catch (error) {
+      if ((error as createMatchError).response.status === 401) {
+        setValidateError((error as createMatchError).response.data.data);
+      } else {
+        navigate('/serverError');
+      }
     }
   };
   const HandleCreateEvent = async () => {
