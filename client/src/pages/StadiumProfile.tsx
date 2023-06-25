@@ -7,11 +7,8 @@ import {
   ImageSlider,
   ProfileCalender,
 } from '../components/stadiumProfile';
-import { UserData } from '../interfaces/StadiumProfile';
+import { UserData, errorI } from '../interfaces';
 
-interface errorI {
-  response: { status: number; data: object };
-}
 const StadiumProfile = (): ReactElement => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [gallery, setGallery] = useState([

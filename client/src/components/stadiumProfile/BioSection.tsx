@@ -16,12 +16,8 @@ type Props = {
   userData: UserData;
 };
 const BioSection = ({ userData }: Props): ReactElement => {
-  const { description } = userData.Stadium;
-  const { price } = userData.Stadium;
-  const { ground } = userData.Stadium;
-  const { address } = userData.Stadium;
-  const { username } = userData;
-  const { phone } = userData;
+  const { description, price, ground, address } = userData.Stadium;
+  const { username, phone } = userData;
 
   return (
     <BioBox

@@ -22,3 +22,11 @@ export interface UserData {
   id: number;
   Stadium: Stadium;
 }
+
+export interface errorI {
+  response: { status: number; data: object };
+}
+
+export interface createMatchError {
+  response: { status: number; data: { data: string } };
+}

@@ -1,18 +1,22 @@
 import React, { FC, useContext } from 'react';
-import { TextField } from '@mui/material';
-import { Box } from '@mui/system';
-import { StyledButton } from '../styledRootComponent/SideComponents';
+
+import axios from 'axios';
+
+import { TextField, Box } from '@mui/material';
+
 import {
   CreateMatchButtons,
   DialogInputsBox,
   StyledAutocomplete,
   CreateMatchImg,
-} from '../createMatchStyled/createMatchStyled';
-import { StyledSearchInput } from '../styledRootComponent/Nav';
-import { Option, prevInterface } from '../../interfaces';
+} from '../createMatchStyled';
+import { StyledSearchInput } from '../styledRootComponent';
 import MatchSchema from '../../validation/MatchSchema';
 import { statsContext } from '../../context/CreateMatch';
+import { StyledButton } from '../styledRootComponent/SideComponents';
+
 import { CreateMatchFormProps } from '../../interfaces/matchInterface';
+import { Option, createMatchError, prevInterface } from '../../interfaces';
 
 const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
   const states = useContext(statsContext);
@@ -45,17 +49,15 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
     }));
     setValidateError('');
   };
-  const fetchEvent = async (data: prevInterface) => {
-    const matchesFetch = await fetch('/api/v1/matches', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    const resultCreate = await matchesFetch.json();
-    if (resultCreate.status === 401) {
-      setValidateError(resultCreate.data);
-    } else if (resultCreate.status === 201) {
-      handleClose();
+  const fetchEvent = async (matchData: prevInterface) => {
+    try {
+      await axios.post('/api/v1/matches', matchData);
+    } catch (error) {
+      if ((error as createMatchError).response.status === 401) {
+        setValidateError((error as createMatchError).response.data.data);
+      } else if ((error as createMatchError).response.status === 201) {
+        handleClose();
+      }
     }
   };
   const HandleCreateEvent = async () => {

@@ -12,6 +12,7 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
+import axios from 'axios';
 import { DialogBox } from '../components';
 import '../fullcalendar-custom.css';
 import { createMatchInterface, prevInterface } from '../interfaces';
@@ -76,11 +77,17 @@ const CreateMatch: React.FC<createMatchInterface> = ({
     }
   };
 
+  const getStadiums = async () => {
+    try {
+      const { data } = await axios.get('/api/v1/stadiums');
+      setStadiums(data.data);
+    } catch (error) {
+      setValidateError('لا يوجد ملاعب متاحة في الوقت الحالي');
+    }
+  };
+
   useEffect(() => {
-    fetch('/api/v1/stadiums')
-      .then(data => data.json())
-      .then(res => setStadiums(res.data))
-      .catch(() => setValidateError('لا يوجد ملاعب متاحة في الوقت الحالي'));
+    getStadiums();
   }, []);
 
   return (
