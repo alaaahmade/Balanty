@@ -2,7 +2,6 @@ import request from 'supertest';
 import app from '../server/app';
 import { sequelize } from '../server/database';
 import build from '../server/database/config/build';
-
 beforeAll(async () => {
   await build();
 });
@@ -99,6 +98,28 @@ describe('GET /api/v1/stadiums', () => {
   });
 });
 
-afterAll(async () => {
+describe('GET /api/v1/matches', () => {
+  test('responds from /api/v1/matches with JSON and 200 status code', done => {
+    request(app)
+      .get('/api/v1/matches')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(response.status).toBe(200);
+        expect(Array.isArray(data)).toBe(true);
+        expect(data[0].UserId).toBe(5);
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
+});
+afterAll(() => {
   sequelize.close();
 });

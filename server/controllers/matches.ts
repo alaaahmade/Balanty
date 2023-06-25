@@ -11,6 +11,7 @@ export const createMatch: RequestHandler = async (
   const data = (await createMatchService(req)) as IServiceResponse;
   res.status(data?.status).json(data);
 };
+
 export const getMatches: RequestHandler = async (
   req: CustomRequest,
   res: Response,
