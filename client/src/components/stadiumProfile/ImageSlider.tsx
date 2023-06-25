@@ -11,7 +11,7 @@ import {
   ThumbnailBox,
   ThumbnailImage,
 } from './StadiumProfile.styled';
-import { galleryTypes } from '../../interfaces/StadiumProfile';
+import { galleryTypes, images } from '../../interfaces';
 
 const ImageSlider: FC<galleryTypes> = ({ gallery }) => {
   const [Active, setActive] = useState(0);
@@ -24,12 +24,14 @@ const ImageSlider: FC<galleryTypes> = ({ gallery }) => {
 
   useEffect(() => {
     if (gallery) {
-      setImages([
-        { id: 1, url: gallery.image1 },
-        { id: 2, url: gallery.image2 },
-        { id: 3, url: gallery.image3 },
-        { id: 4, url: gallery.image4 },
-      ]);
+      const galleryArray: images[] = [];
+      Object.entries(gallery).forEach(([key, value]) => {
+        if (key.startsWith('image')) {
+          const id = Number(key.slice(5));
+          galleryArray.push({ id, url: value as string });
+        }
+      });
+      setImages(galleryArray);
     }
   }, [gallery]);
   const handleSlideChange = (currentSlide: number, e: number) => {
