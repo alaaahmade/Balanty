@@ -23,7 +23,6 @@ Match.belongsTo(User, { foreignKey: 'ownerId', as: 'ownerUser' });
 User.hasMany(Match, { foreignKey: 'stadiumId', as: 'StadiumsMatches' });
 Match.belongsTo(User, { foreignKey: 'stadiumId', as: 'stadiumMatch' });
 
-// Establish the many-to-many relationship
 User.belongsToMany(Match, {
   through: 'MatchPlayer',
   as: 'Matches',
@@ -34,8 +33,6 @@ Match.belongsToMany(User, {
   as: 'Players',
   foreignKey: 'matchId',
 });
-
-// User Model relations end
 
 // User with Message
 
