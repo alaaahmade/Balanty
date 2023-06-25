@@ -14,13 +14,12 @@ interface errorI {
 }
 const StadiumProfile = (): ReactElement => {
   const [userData, setUserData] = useState<UserData | null>(null);
-  const [gallery, setGallery] = useState({
-    id: 0,
-    image1: '',
-    image2: '',
-    image3: '',
-    image4: '',
-  });
+  const [gallery, setGallery] = useState([
+    {
+      id: 0,
+      image: '',
+    },
+  ]);
 
   const navigate = useNavigate();
 
@@ -29,7 +28,7 @@ const StadiumProfile = (): ReactElement => {
     try {
       const { data } = await axios.get(`/api/v1/stadiums/profile/${stadiumId}`);
 
-      setGallery(data.data.Stadium.stadiumGallery[0]);
+      setGallery(data.data.Stadium.stadiumGallery);
       setUserData(data.data as UserData);
     } catch (error) {
       if ((error as errorI).response?.status === 401) {

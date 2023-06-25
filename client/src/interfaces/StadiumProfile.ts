@@ -1,14 +1,11 @@
 export interface StadiumGallery {
   id: number;
-  image1: string;
-  image2: string;
-  image3: string;
-  image4: string;
-  createdAt: string;
-  updatedAt: string;
-  StadiumId: number;
+  image: string;
 }
 
+export interface StadiumProfileProps {
+  gallery: StadiumGallery[];
+}
 export interface Stadium {
   id: number;
   address: string;
@@ -24,19 +21,4 @@ export interface UserData {
   phone: string;
   id: number;
   Stadium: Stadium;
-}
-
-export interface galleryTypes {
-  gallery: {
-    id: number;
-    image1: string;
-    image2: string;
-    image3: string;
-    image4: string;
-  };
-}
-
-export interface images {
-  id: number;
-  url: string;
 }

@@ -3,7 +3,7 @@ import { Slide } from 'react-slideshow-image';
 import { Box } from '@mui/system';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { FC, ReactElement, useEffect, useState } from 'react';
+import { FC, ReactElement, useState } from 'react';
 import {
   ArrowStyle,
   SliderBox,
@@ -11,31 +11,16 @@ import {
   ThumbnailBox,
   ThumbnailImage,
 } from './StadiumProfile.styled';
-import { galleryTypes, images } from '../../interfaces';
+import {
+  StadiumGallery,
+  StadiumProfileProps,
+} from '../../interfaces/StadiumProfile';
 
-const ImageSlider: FC<galleryTypes> = ({ gallery }): ReactElement => {
+const ImageSlider: FC<StadiumProfileProps> = ({ gallery }): ReactElement => {
   const [Active, setActive] = useState(0);
-  const [Images, setImages] = useState([
-    { id: 1, url: '' },
-    { id: 2, url: '' },
-    { id: 3, url: '' },
-    { id: 4, url: '' },
-  ]);
 
-  useEffect(() => {
-    if (gallery) {
-      const galleryArray: images[] = [];
-      Object.entries(gallery).forEach(([key, value]) => {
-        if (key.startsWith('image')) {
-          const id = Number(key.slice(5));
-          galleryArray.push({ id, url: value as string });
-        }
-      });
-      setImages(galleryArray);
-    }
-  }, [gallery]);
   const handleSlideChange = (currentSlide: number, e: number) => {
-    const { id } = Images[e];
+    const { id } = gallery[e];
     setActive(id);
   };
 
@@ -59,7 +44,7 @@ const ImageSlider: FC<galleryTypes> = ({ gallery }): ReactElement => {
         }
         onChange={handleSlideChange}
       >
-        {Images.map(image => {
+        {gallery.map((image: StadiumGallery) => {
           return (
             <Box
               key={image.id}
@@ -70,7 +55,7 @@ const ImageSlider: FC<galleryTypes> = ({ gallery }): ReactElement => {
             >
               <SliderImage
                 sx={{
-                  backgroundImage: `url(${image.url})`,
+                  backgroundImage: `url(${image.image})`,
                 }}
               />
             </Box>
@@ -82,12 +67,12 @@ const ImageSlider: FC<galleryTypes> = ({ gallery }): ReactElement => {
           mt: '5px',
         }}
       >
-        {Images.map(e => (
+        {gallery.map((e: StadiumGallery) => (
           <ThumbnailImage
             key={e.id}
             sx={{
               p: '0 20px',
-              backgroundImage: `url(${e.url})`,
+              backgroundImage: `url(${e.image})`,
               scale: e.id === Active ? ' 1.2' : '1',
             }}
           />
