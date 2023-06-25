@@ -112,7 +112,7 @@ describe('GET /api/v1/matches', () => {
         const { data } = response;
         expect(response.status).toBe(200);
         expect(Array.isArray(data)).toBe(true);
-        expect(data[0].UserId).toBe(5);
+        expect(data[0].ownerId).toBe(5);
         done();
 
         if (err) {
