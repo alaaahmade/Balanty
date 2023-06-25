@@ -21,6 +21,8 @@ const BioSection = ({ userData }: Props): ReactElement => {
   const { ground } = userData.Stadium;
   const { address } = userData.Stadium;
   const { username } = userData;
+  const { phone } = userData;
+
   return (
     <BioBox
       sx={{
@@ -49,14 +51,33 @@ const BioSection = ({ userData }: Props): ReactElement => {
           {username}
         </Typography>
       </FlexBox>
-      <EditInput lastValue={description} multiline />
 
+      <EditInput lastValue={description} multiline />
       <FlexBox
         sx={{
           justifyContent: 'flex-end',
         }}
       >
-        <EditInput lastValue={`شيكل${price}`} multiline={false} />
+        <EditInput lastValue={phone} multiline={false} />
+
+        <Typography
+          sx={{
+            width: '200px',
+            fontWeight: 'bold',
+          }}
+        >
+          : رقم الهاتف
+        </Typography>
+      </FlexBox>
+      <FlexBox
+        sx={{
+          justifyContent: 'flex-end',
+        }}
+      >
+        <EditInput
+          lastValue={price ? `شيكل${price}` : 'قم بكتابة السعر'}
+          multiline={false}
+        />
 
         <Typography
           sx={{
@@ -67,6 +88,7 @@ const BioSection = ({ userData }: Props): ReactElement => {
           : السعر الساعة
         </Typography>
       </FlexBox>
+
       <FlexBox
         sx={{
           justifyContent: 'flex-end',

@@ -111,10 +111,8 @@ const Calendar: FC<Props> = ({ type }): ReactElement => {
     }
   }, [matches]);
   useEffect(() => {
-    if (type === 'create') {
-      if (StadiumId > 0) {
-        getStadiumMatches(StadiumId);
-      }
+    if (StadiumId > 0 && type === 'create') {
+      getStadiumMatches(StadiumId);
     } else if (type === 'profile') {
       getStadiumMatches(parseInt(id ?? '', 10));
     }

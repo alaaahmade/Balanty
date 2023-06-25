@@ -1,6 +1,6 @@
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import {
   BioSection,
@@ -9,6 +9,9 @@ import {
 } from '../components/stadiumProfile';
 import { UserData } from '../interfaces/StadiumProfile';
 
+interface errorI {
+  response: { status: number; data: object };
+}
 const StadiumProfile = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [gallery, setGallery] = useState({
@@ -19,17 +22,27 @@ const StadiumProfile = () => {
     image4: '',
   });
 
+  const navigate = useNavigate();
+
   const { id } = useParams();
   const fetchProfileData = async (stadiumId: string) => {
-    const { data } = await axios.get(`/api/v1/stadiums/profile/${stadiumId}`);
+    try {
+      const { data } = await axios.get(`/api/v1/stadiums/profile/${stadiumId}`);
 
-    setGallery(data.data.Stadium.stadiumGallery[0]);
-    setUserData(data.data as UserData);
+      setGallery(data.data.Stadium.stadiumGallery[0]);
+      setUserData(data.data as UserData);
+    } catch (error) {
+      if ((error as errorI).response?.status === 401) {
+        navigate('/pageNotFound');
+      } else {
+        navigate('/serverError');
+      }
+    }
   };
 
   useEffect(() => {
     fetchProfileData(id ?? '');
-  }, []);
+  }, [id]);
   return (
     <Box>
       <ImageSlider gallery={gallery} />

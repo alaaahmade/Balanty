@@ -35,3 +35,8 @@ export interface galleryTypes {
     image4: string;
   };
 }
+
+export interface images {
+  id: number;
+  url: string;
+}
