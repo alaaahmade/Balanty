@@ -36,10 +36,10 @@ const StadiumProfile = () => {
         sx={{
           display: 'flex',
           alignItems: 'center',
-          width: 'calc(100% - 240px)',
-          height: '380px',
+          width: 'calc(100% - 310px)',
+          height: '480px',
           gap: '30px',
-          m: '2% 3%',
+          m: '17% 3% 3% 3%',
         }}
       >
         <BioSection userData={userData} />

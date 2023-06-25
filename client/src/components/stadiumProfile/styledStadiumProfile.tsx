@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Typography } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 export const arrowStyle = {};
@@ -32,7 +32,7 @@ export const ThumbnailImage = styled(Box)({
   backgroundSize: 'cover',
   gap: '3%',
   backgroundRepeat: 'no-repeat',
-  width: '20%',
+  width: '23%',
   height: '80px',
   transition: '0.4s',
   borderRadius: '5px',
@@ -61,12 +61,11 @@ export const SliderBox = styled(Box)({
   width: 'calc(100% - 240px)',
   // width: 'calc(100% - 320px)',
   borderRadius: '5px',
-
-  height: '100vh',
+  height: '75vh',
 });
 
 export const BioBox = styled(Box)({
-  width: '300px',
+  width: '350px',
   ml: '3%',
   padding: '10px',
   border: '1px solid #ccc',
@@ -89,4 +88,27 @@ export const LocationTypo = styled(Typography)({
   justifyContent: 'center',
   flexDirection: 'row',
   fontWeight: 'bold',
+});
+
+export const EditInputs = styled(TextField)({
+  '& input': {
+    color: 'blue',
+    textAlign: 'right',
+    paddingRight: '10px',
+  },
+  width: '90%',
+  mr: '10px',
+
+  '& .css-66dh3a-MuiInputBase-input-MuiInput-input': {
+    color: 'blue',
+  },
+  '& .css-66dh3a-MuiInputBase-input-MuiInput-input.Mui-disabled': {
+    color: 'red',
+    textAlign: 'right',
+
+    '-webkit-text-fill-color': '#01031C',
+  },
+  '& .css-1x51dt5-MuiInputBase-input-MuiInput-input.Mui-disabled': {
+    '-webkit-text-fill-color': '#01031C',
+  },
 });

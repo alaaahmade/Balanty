@@ -6,10 +6,17 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { FC, ReactElement } from 'react';
 import { BioBox, FlexBox, LocationTypo } from './styledStadiumProfile';
 import { UserData } from '../../interfaces/StadiumProfile';
+import EditInput from './EditInput';
 
 const BioSection: FC<UserData> = ({ userData }): ReactElement => {
   return (
-    <BioBox sx={{}}>
+    <BioBox
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+      }}
+    >
       <FlexBox
         sx={{
           justifyContent: 'space-between',
@@ -30,23 +37,27 @@ const BioSection: FC<UserData> = ({ userData }): ReactElement => {
           {userData?.username}
         </Typography>
       </FlexBox>
-      <Typography sx={{ p: '10px', textAlign: 'right' }}>
-        ملعب الاتحاد هو ملعب كرة قدم مميز يحمل اسم نادي الاتحاد. يتميز ببنيته
+      <EditInput
+        lastValue="ملعب الاتحاد هو ملعب كرة قدم مميز يحمل اسم نادي الاتحاد. يتميز ببنيته
         الحديثة والمرافق الرياضية المتطورة. يعتبر محطة هامة للفرق والأندية
-        المحلية في تنظيم المباريات والمسابقات الرياضية.
-      </Typography>
+        المحلية في تنظيم المباريات والمسابقات الرياضية."
+        multiline
+      />
+
       <FlexBox
         sx={{
           justifyContent: 'flex-end',
         }}
       >
-        <Typography>{userData?.Stadium.price} شيكل</Typography>
+        <EditInput lastValue="35 شيكل" multiline={false} />
+
         <Typography
           sx={{
+            width: '200px',
             fontWeight: 'bold',
           }}
         >
-          : السعر بالساعة
+          : السعر الساعة
         </Typography>
       </FlexBox>
       <FlexBox
@@ -54,10 +65,11 @@ const BioSection: FC<UserData> = ({ userData }): ReactElement => {
           justifyContent: 'flex-end',
         }}
       >
-        <Typography>{userData?.Stadium.ground}</Typography>
+        <EditInput lastValue="عشبية" multiline={false} />
         <Typography
           sx={{
             fontWeight: 'bold',
+            width: '100px',
           }}
         >
           : الأرضية
@@ -66,17 +78,31 @@ const BioSection: FC<UserData> = ({ userData }): ReactElement => {
       <FlexBox
         sx={{
           flexDirection: 'column',
+          width: '100%',
         }}
       >
-        <LocationTypo>
-          {userData?.Stadium.address}
-          <PlaceIcon
+        <FlexBox
+          sx={{
+            width: '100%',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <EditInput lastValue="غزة-الرمال-شارع الوحدة" multiline={false} />
+
+          <LocationTypo
             sx={{
-              color: 'green',
-              mb: '15px',
+              width: '100px',
             }}
-          />
-        </LocationTypo>
+          >
+            <PlaceIcon
+              sx={{
+                color: 'green',
+                mb: '15px',
+              }}
+            />
+          </LocationTypo>
+        </FlexBox>
         <FlexBox>
           <Box
             sx={{
