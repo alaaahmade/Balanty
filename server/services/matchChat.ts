@@ -37,10 +37,22 @@ const deleteMessageService = async (id: number) => {
   throw new CustomError(404, 'Message not found');
 };
 
+const editMessageService = async (id: number, newMessage: string) => {
+  const [updatedRows, [updatedMessage]] = await Message.update(
+    { message: newMessage },
+    { where: { id }, returning: true },
+  );
+
+  if (updatedRows) {
+    return updatedMessage;
+  }
+  throw new CustomError(404, 'Message not found');
+};
+
 export {
   addMessageService,
   getMessageByIdService,
   getAllMessagesService,
   deleteMessageService,
-  // editMessageService,
+  editMessageService,
 };
