@@ -88,7 +88,6 @@ export const getStadiumProfileService = async (
     include: [
       {
         model: Stadium,
-        where: { UserId: id },
         include: [
           {
             model: Gallery,
@@ -98,7 +97,7 @@ export const getStadiumProfileService = async (
       },
       {
         model: Review,
-        as: 'userReview',
+        as: 'StadiumsReviews',
       },
     ],
   });

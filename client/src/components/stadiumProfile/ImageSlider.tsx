@@ -10,7 +10,7 @@ import {
   SliderImage,
   ThumbnailBox,
   ThumbnailImage,
-} from './styledStadiumProfile';
+} from './StadiumProfile.styled';
 
 // This set we will get from backend response
 const images = [
@@ -41,12 +41,7 @@ const ImageSlider = () => {
   };
 
   return (
-    <SliderBox
-      sx={{
-        ml: '3%',
-        mt: '2%',
-      }}
-    >
+    <SliderBox>
       <Slide
         prevArrow={
           <ArrowStyle
@@ -71,7 +66,7 @@ const ImageSlider = () => {
               key={image.id}
               sx={{
                 width: '100%',
-                height: '400px',
+                height: '85vh',
               }}
             >
               <SliderImage

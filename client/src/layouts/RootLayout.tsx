@@ -21,11 +21,10 @@ const RootLayout: React.FC = (): ReactElement => {
     } else {
       setProfile(false);
     }
-  }, []);
+  }, [pathname]);
   return (
     <Box
       sx={{
-        position: 'fixed',
         width: '100%',
       }}
     >

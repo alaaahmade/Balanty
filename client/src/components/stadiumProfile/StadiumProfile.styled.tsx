@@ -31,7 +31,7 @@ export const ThumbnailImage = styled(Box)({
   backgroundSize: 'cover',
   gap: '3%',
   backgroundRepeat: 'no-repeat',
-  width: '20%',
+  width: '23%',
   height: '80px',
   transition: '0.4s',
   borderRadius: '5px',
@@ -41,7 +41,7 @@ export const ThumbnailImage = styled(Box)({
 export const ThumbnailBox = styled(Box)({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-evenly',
+  justifyContent: 'space-between',
 });
 
 export const SliderImage = styled(Box)({
@@ -57,8 +57,7 @@ export const SliderImage = styled(Box)({
 });
 
 export const SliderBox = styled(Box)({
-  width: 'calc(100% - 320px)',
+  width: 'calc(100% - 240px)',
   borderRadius: '5px',
-
-  height: '100vh',
+  height: '75vh',
 });
