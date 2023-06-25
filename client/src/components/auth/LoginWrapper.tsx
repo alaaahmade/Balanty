@@ -32,8 +32,6 @@ const LoginWrapper: FC = (): ReactElement => {
       password: '',
     },
   });
-  const onSubmit: SubmitHandler<loginProps> = data =>
-    console.log('onSubmitted data', data);
 
   const { pathname } = useLocation();
   let isPlayer = true;
@@ -41,7 +39,19 @@ const LoginWrapper: FC = (): ReactElement => {
   if (!(pathname.split('/')[1] === 'player')) {
     isPlayer = false;
   }
-
+  const onSubmit: SubmitHandler<loginProps> = () => {
+    try {
+      fetch(
+        `http://localhost:8080/api/v1/${
+          isPlayer ? 'player/login' : 'stadium/login'
+        }`,
+      );
+      window.location.href = '/home';
+    } catch (error) {
+      // eslint-disable-next-line no-alert
+      alert('There an error when logging a user');
+    }
+  };
   return (
     <Wrapper isPlayer={isPlayer}>
       {/* <ImageWrap isPlayer={isPlayer} /> */}
