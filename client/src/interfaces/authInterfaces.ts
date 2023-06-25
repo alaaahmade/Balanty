@@ -1,12 +1,11 @@
-export interface loginProps {
-  username: string;
-  password: string;
-}
-
 // eslint-disable-next-line no-shadow
 enum IRoleEnum {
   player = 'player',
   stadium = 'stadium',
+}
+export interface loginProps {
+  username: string;
+  password: string;
 }
 
 export interface signupProps {
