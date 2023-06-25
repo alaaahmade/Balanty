@@ -1,8 +1,14 @@
-import express, { Router } from 'express';
-import { addMessage } from '../controllers';
+import { Router } from 'express';
+import {
+  addMessage,
+  deleteMessage,
+  editMessage,
+  getAllMessages,
+  getMessageById,
+} from '../controllers';
 
-const chatRouter: Router = express.Router();
+const chatRouter: Router = Router();
 
-chatRouter.post('/add', addMessage);
+chatRouter.get('/', getAllMessages);
 
 export default chatRouter;
