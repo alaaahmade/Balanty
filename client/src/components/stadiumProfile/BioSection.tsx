@@ -3,15 +3,13 @@ import { Box } from '@mui/system';
 import PlaceIcon from '@mui/icons-material/Place';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import { FC, ReactElement } from 'react';
 import { BioBox, FlexBox, LocationTypo } from './styledStadiumProfile';
+import { UserData } from '../../interfaces/StadiumProfile';
 
-const BioSection = () => {
+const BioSection: FC<UserData> = ({ userData }): ReactElement => {
   return (
-    <BioBox
-      sx={{
-        mt: '-90px',
-      }}
-    >
+    <BioBox sx={{}}>
       <FlexBox
         sx={{
           justifyContent: 'space-between',
@@ -29,7 +27,7 @@ const BioSection = () => {
           <StarIcon />
         </Box>
         <Typography variant="h5" sx={{ ml: '5px' }}>
-          ملعب الاتحاد
+          {userData?.username}
         </Typography>
       </FlexBox>
       <Typography sx={{ p: '10px', textAlign: 'right' }}>
@@ -42,7 +40,7 @@ const BioSection = () => {
           justifyContent: 'flex-end',
         }}
       >
-        <Typography>35 شيكل</Typography>
+        <Typography>{userData?.Stadium.price} شيكل</Typography>
         <Typography
           sx={{
             fontWeight: 'bold',
@@ -56,7 +54,7 @@ const BioSection = () => {
           justifyContent: 'flex-end',
         }}
       >
-        <Typography>عشبية</Typography>
+        <Typography>{userData?.Stadium.ground}</Typography>
         <Typography
           sx={{
             fontWeight: 'bold',
@@ -71,7 +69,7 @@ const BioSection = () => {
         }}
       >
         <LocationTypo>
-          غزة-الرمال-شارع الوحدة
+          {userData?.Stadium.address}
           <PlaceIcon
             sx={{
               color: 'green',

@@ -3,7 +3,7 @@ import { Slide } from 'react-slideshow-image';
 import { Box } from '@mui/system';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
   ArrowStyle,
   SliderBox,
@@ -11,41 +11,55 @@ import {
   ThumbnailBox,
   ThumbnailImage,
 } from './styledStadiumProfile';
+import { galleryTypes } from '../../interfaces/StadiumProfile';
 
-// This set we will get from backend response
-const images = [
-  {
-    url: 'https://uploads-ssl.webflow.com/624377e20c9e225e2e55e2ed/63da5edbf5049c7b148898d4_soccer-players-action-professional-stadium.jpg',
-    id: 0,
-  },
-  {
-    url: 'https://images.livemint.com/img/2022/12/06/1600x900/Stadium_974_1670308763958_1670308770302_1670308770302.jpg',
-    id: 1,
-  },
-  {
-    url: 'https://populous.com/wp-content/uploads/2018/01/Populous_Tottenham-Hotspur-Stadium_Credit-Edward-Hill_3-1504x846.jpg',
-    id: 2,
-  },
-  {
-    url: 'https://hips.hearstapps.com/hmg-prod/images/tottenham-stadium-plans-3-1531502457.jpg?crop=1xw:0.7995594713656388xh;center,top&resize=1200:*',
-    id: 3,
-  },
-];
-
-const ImageSlider = () => {
+const ImageSlider: FC<galleryTypes> = ({ gallery }) => {
   const [Active, setActive] = useState(0);
+  const [Images, setImages] = useState([
+    { id: 1, url: '' },
+    { id: 2, url: '' },
+    { id: 3, url: '' },
+    { id: 4, url: '' },
+  ]);
 
+  // useEffect(() => {
+  //   console.log('hi');
+
+  //   // if (gallery) {
+  //   //   const imageArray = [];
+  //   //   for (let i = 1; i <= 4; i + 1) {
+  //   //     const image = {
+  //   //       id: i,
+  //   //       url: gallery[`image${i}`],
+  //   //     };
+  //   //     imageArray.push(image);
+  //   //   }
+  //   //   console.log(imageArray);
+  //   // }
+  // }, []);
+  useEffect(() => {
+    if (gallery) {
+      setImages([
+        { id: 1, url: gallery.image1 },
+        { id: 2, url: gallery.image2 },
+        { id: 3, url: gallery.image3 },
+        { id: 4, url: gallery.image4 },
+      ]);
+    }
+  }, [gallery]);
   const handleSlideChange = (currentSlide: number, e: number) => {
-    const { id } = images[e];
+    const { id } = Images[e];
     setActive(id);
   };
 
   return (
     <SliderBox
-      sx={{
-        ml: '3%',
-        mt: 'calc(2% + 70px)',
-      }}
+      sx={
+        {
+          // ml: '3%',
+          // mt: 'calc(2% + 70px)',
+        }
+      }
     >
       <Slide
         prevArrow={
@@ -65,13 +79,13 @@ const ImageSlider = () => {
         }
         onChange={handleSlideChange}
       >
-        {images.map(image => {
+        {Images.map(image => {
           return (
             <Box
               key={image.id}
               sx={{
                 width: '100%',
-                height: '400px',
+                height: '85vh',
               }}
             >
               <SliderImage
@@ -88,10 +102,11 @@ const ImageSlider = () => {
           mt: '5px',
         }}
       >
-        {images.map(e => (
+        {Images.map(e => (
           <ThumbnailImage
             key={e.id}
             sx={{
+              p: '0 20px',
               backgroundImage: `url(${e.url})`,
               scale: e.id === Active ? ' 1.2' : '1',
             }}

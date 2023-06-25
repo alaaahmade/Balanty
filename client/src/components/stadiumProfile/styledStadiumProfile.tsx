@@ -42,7 +42,7 @@ export const ThumbnailImage = styled(Box)({
 export const ThumbnailBox = styled(Box)({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-evenly',
+  justifyContent: 'space-between',
 });
 
 export const SliderImage = styled(Box)({
@@ -58,7 +58,8 @@ export const SliderImage = styled(Box)({
 });
 
 export const SliderBox = styled(Box)({
-  width: 'calc(100% - 320px)',
+  width: 'calc(100% - 240px)',
+  // width: 'calc(100% - 320px)',
   borderRadius: '5px',
 
   height: '100vh',

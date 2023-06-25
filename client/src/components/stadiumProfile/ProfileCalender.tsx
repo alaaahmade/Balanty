@@ -6,9 +6,9 @@ const ProfileCalender = () => {
   return (
     <Box
       sx={{
-        width: 'calc(100% - 400px)',
-        height: '500px',
-        m: '40px 0 40px 80px',
+        width: '700px',
+        height: '100%',
+        // m: '40px 0 40px 80px',
       }}
     >
       <Calendar type="profile" />
