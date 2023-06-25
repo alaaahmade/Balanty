@@ -25,9 +25,23 @@ const addMessage = async (req: Request, res: Response) => {
   });
 };
 
+const getMessageById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const message = await getMessageByIdService(+id);
+
+  res.status(200).json({
+    status: 200,
+    data: {
+      message,
+    },
+  });
+};
+
+
 export {
   addMessage,
-  // getMessageById,
+  getMessageById,
   // getAllMessages,
   // deleteMessage,
   // editMessage,
