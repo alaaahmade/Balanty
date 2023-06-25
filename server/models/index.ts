@@ -53,13 +53,27 @@ Gallery.belongsTo(Stadium);
 //User Messeges
 User.hasMany(Message, {
   as: 'userMessage',
+  foreignKey: {
+    allowNull: false,
+  },
 });
-Message.belongsTo(User);
+Message.belongsTo(User, {
+  foreignKey: {
+    allowNull: false,
+  },
+});
 
 // Math Messages
 Match.hasMany(Message, {
   as: 'matchMessage',
+  foreignKey: {
+    allowNull: false,
+  },
 });
-Message.belongsTo(Match);
+Message.belongsTo(Match, {
+  foreignKey: {
+    allowNull: false,
+  },
+});
 
 export { Player, Stadium, Review, Match, Message, Gallery, User };
