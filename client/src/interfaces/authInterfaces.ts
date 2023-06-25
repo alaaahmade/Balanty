@@ -16,3 +16,14 @@ export interface signupProps {
   password: string;
   confirmPassword: string;
 }
+
+export interface InputProps {
+  type: string;
+  label: string;
+  placeholder: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  errors: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  control: any;
+  name: string;
+}

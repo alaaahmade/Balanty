@@ -2,16 +2,9 @@ import React, { FC } from 'react';
 import { FormControl, OutlinedInput } from '@mui/material';
 import { Controller } from 'react-hook-form';
 import { InputLabel } from './LoginWrapper.styled';
+import { InputProps } from '../../interfaces';
 
-interface Props {
-  type: string;
-  label: string;
-  placeholder: string;
-  errors: any;
-  control: any;
-  name: string;
-}
-const InputWrap: FC<Props> = ({
+const InputWrap: FC<InputProps> = ({
   type,
   label,
   placeholder,

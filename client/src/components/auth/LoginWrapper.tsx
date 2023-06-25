@@ -54,7 +54,7 @@ const LoginWrapper: FC = (): ReactElement => {
   };
   return (
     <Wrapper isPlayer={isPlayer}>
-      {/* <ImageWrap isPlayer={isPlayer} /> */}
+      <ImageWrap isPlayer={isPlayer} />
       <Form>
         {isPlayer ? (
           <TitleWrap caption="دخول كلاعب" />

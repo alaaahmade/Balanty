@@ -8,4 +8,4 @@ export type {
   MyContextProviderProps,
 } from './matchInterface';
 
-export type { loginProps, signupProps } from './authInterfaces';
+export type { loginProps, signupProps, InputProps } from './authInterfaces';
