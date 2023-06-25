@@ -38,11 +38,22 @@ const getMessageById = async (req: Request, res: Response) => {
   });
 };
 
+const getAllMessages = async (req: Request, res: Response) => {
+  const messages = await getAllMessagesService();
+
+  res.status(200).json({
+    status: 200,
+    data: {
+      messages,
+    },
+  });
+};
+
 
 export {
   addMessage,
   getMessageById,
-  // getAllMessages,
+  getAllMessages,
   // deleteMessage,
   // editMessage,
 };
