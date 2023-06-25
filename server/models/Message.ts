@@ -4,6 +4,7 @@ import { sequelize } from '../database';
 class Message extends Model {
   declare message: string;
 }
+
 Message.init(
   {
     message: {
