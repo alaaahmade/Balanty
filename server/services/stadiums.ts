@@ -57,7 +57,7 @@ export const getStadiumMatchesService = async (
   const currentDate = new Date();
   const matches = await Match.findAll({
     where: {
-      UserId: stadiumId,
+      stadiumId: stadiumId,
       startDate: {
         [Op.gt]: currentDate,
       },
