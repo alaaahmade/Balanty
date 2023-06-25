@@ -16,9 +16,15 @@ const addMessageService = async ({
   return newMessage;
 };
 
+const getMessageByIdService = async (messageId: number) => {
+  const message = await Message.findOne({ where: { id: messageId } });
+
+  return message;
+};
+
 export {
   addMessageService,
-  // getMessageByIdService,
+  getMessageByIdService,
   // getAllMessagesService,
   // deleteMessageService,
   // editMessageService,
