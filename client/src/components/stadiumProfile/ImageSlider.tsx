@@ -3,7 +3,7 @@ import { Slide } from 'react-slideshow-image';
 import { Box } from '@mui/system';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { FC, useEffect, useState } from 'react';
+import { FC, ReactElement, useEffect, useState } from 'react';
 import {
   ArrowStyle,
   SliderBox,
@@ -13,7 +13,7 @@ import {
 } from './StadiumProfile.styled';
 import { galleryTypes, images } from '../../interfaces';
 
-const ImageSlider: FC<galleryTypes> = ({ gallery }) => {
+const ImageSlider: FC<galleryTypes> = ({ gallery }): ReactElement => {
   const [Active, setActive] = useState(0);
   const [Images, setImages] = useState([
     { id: 1, url: '' },

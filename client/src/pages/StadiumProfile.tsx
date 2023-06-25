@@ -1,5 +1,5 @@
 import { Box } from '@mui/system';
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import {
@@ -12,7 +12,7 @@ import { UserData } from '../interfaces/StadiumProfile';
 interface errorI {
   response: { status: number; data: object };
 }
-const StadiumProfile = () => {
+const StadiumProfile = (): ReactElement => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [gallery, setGallery] = useState({
     id: 0,
