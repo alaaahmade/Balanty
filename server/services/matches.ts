@@ -1,6 +1,6 @@
 import { Op } from 'sequelize';
 import { CustomRequest, IServiceResponse } from '../interfaces';
-import { Match, Stadium } from '../models';
+import { Match, Stadium, User } from '../models';
 import matchSchema from '../validations';
 import { matchesInterface } from '../interfaces/matchInterfaces';
 
@@ -72,10 +72,8 @@ export const getAllMatches = async (): Promise<matchesInterface> => {
       [Op.or]: [{ startDate: { [Op.gt]: currentDateFormated } }],
     },
     include: [
-      {
-        model: Stadium,
-        required: false,
-      },
+      { model: User, as: 'ownerUser' },
+      { model: User, as: 'stadiumMatch' },
     ],
   });
 
@@ -91,3 +89,5 @@ export const getAllMatches = async (): Promise<matchesInterface> => {
     };
   }
 };
+
+//l want to git the stadium left joined whit matches
