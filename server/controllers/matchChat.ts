@@ -49,11 +49,23 @@ const getAllMessages = async (req: Request, res: Response) => {
   });
 };
 
+const deleteMessage = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  await deleteMessageService(+id);
+
+  res.status(200).json({
+    status: 200,
+    data: {
+      message: 'Message deleted successfully',
+    },
+  });
+};
 
 export {
   addMessage,
   getMessageById,
   getAllMessages,
-  // deleteMessage,
+  deleteMessage,
   // editMessage,
 };
