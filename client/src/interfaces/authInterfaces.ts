@@ -11,8 +11,7 @@ export interface loginProps {
 export interface signupProps {
   username: string;
   email: string;
-  role: IRoleEnum;
-  phone: number;
+  phone: string;
   password: string;
   confirmPassword: string;
 }
