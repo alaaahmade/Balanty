@@ -1,9 +1,10 @@
 import { Op } from 'sequelize';
 import { CustomRequest, IServiceResponse } from '../interfaces';
-import { Match, Stadium } from '../models';
+import { Match, Stadium, User } from '../models';
 import matchSchema from '../validations';
+import { matchesInterface } from '../interfaces/matchInterfaces';
 
-const createMatchService = async (
+export const createMatchService = async (
   req: CustomRequest,
 ): Promise<IServiceResponse> => {
   const { body, userData } = req;
@@ -21,9 +22,11 @@ const createMatchService = async (
     };
   }
   const data = await matchSchema.validateAsync(body);
-  const ExisteStadium = await Stadium.findOne({ where: { UserId: StadiumId } });
+  const isStadiumExist = await Stadium.findOne({
+    where: { UserId: StadiumId },
+  });
 
-  if (!ExisteStadium) {
+  if (!isStadiumExist) {
     return {
       status: 401,
       data: 'هذا الملعب غير متاح',
@@ -41,7 +44,7 @@ const createMatchService = async (
           ],
         },
       ],
-      UserId: StadiumId,
+      stadiumId: StadiumId,
     },
   });
 
@@ -49,7 +52,7 @@ const createMatchService = async (
     const DBData = await Match.create({
       ...data,
       owner_id,
-      UserId: StadiumId,
+      stadiumId: StadiumId,
     });
     return {
       status: 201,
@@ -61,5 +64,30 @@ const createMatchService = async (
     data: '! هذا الوقت محجوز',
   };
 };
+export const getAllMatches = async (): Promise<matchesInterface> => {
+  const currentDate = Date.now();
+  const currentDateObject = new Date(currentDate);
+  const currentDateFormatted = currentDateObject.toISOString();
 
-export default createMatchService;
+  const matches = await Match.findAll({
+    where: {
+      [Op.or]: [{ startDate: { [Op.gt]: currentDateFormatted } }],
+    },
+    include: [
+      { model: User, as: 'ownerUser' },
+      { model: User, as: 'stadiumMatch' },
+    ],
+  });
+
+  if (matches.length > 0) {
+    return {
+      status: 200,
+      data: matches,
+    };
+  } else {
+    return {
+      status: 404,
+      data: 'لا يوجد مباريات',
+    };
+  }
+};

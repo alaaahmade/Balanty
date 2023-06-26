@@ -1,16 +1,21 @@
-import { Response, NextFunction, RequestHandler } from 'express';
-import { createMatchService } from '../services';
+import { Response, RequestHandler } from 'express';
 import { CustomRequest, IServiceResponse } from '../interfaces';
+import { createMatchService, getAllMatches } from '../services';
 
-const createMatch: RequestHandler = async (
+export const createMatch: RequestHandler = async (
   req: CustomRequest,
   res: Response,
-  next: NextFunction,
 ): Promise<void> => {
-  req.userData = { owner_id: 3 }; //user data will coming from checkAuth Middleware
-  const data = (await createMatchService(req)) as IServiceResponse;
+  req.userData = { owner_id: 3 };
 
+  const data = (await createMatchService(req)) as IServiceResponse;
   res.status(data?.status).json(data);
 };
 
-export default createMatch;
+export const getMatches: RequestHandler = async (
+  req: CustomRequest,
+  res: Response,
+): Promise<void> => {
+  const data = await getAllMatches();
+  res.status(data.status).json(data);
+};

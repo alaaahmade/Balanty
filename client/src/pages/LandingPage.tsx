@@ -7,6 +7,7 @@ import {
   Features,
   Contact,
 } from '../components';
+import Footer from '../components/footer/footer';
 
 const LandingPage: FC = (): ReactElement => {
   return (
@@ -17,6 +18,7 @@ const LandingPage: FC = (): ReactElement => {
       <Features />
       <BestStadiums />
       <Contact />
+      <Footer />
     </>
   );
 };

@@ -1,7 +1,13 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { ReactElement } from 'react';
+import { ThemeProvider } from '@emotion/react';
 import RootLayout from './layouts/RootLayout';
 import { LandingPage } from './pages';
 import MatchRoomPage from './pages/MatchRoomPage';
+import LightTheme from './themes';
+import { open, useCustomOpen } from './context';
+import { StatsContextProvider } from './context/CreateMatch';
+import StadiumProfile from './pages/StadiumProfile';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +26,23 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [],
   },
+  {
+    path: '/profile',
+    element: <RootLayout />,
+    children: [{ path: 'stadium/:id', element: <StadiumProfile /> }],
+  },
   { path: '*', element: <h1>error</h1> },
 ]);
+const App = (): ReactElement => {
+  return (
+    <ThemeProvider theme={LightTheme}>
+      <open.Provider value={useCustomOpen()}>
+        <StatsContextProvider>
+          <RouterProvider router={router} />
+        </StatsContextProvider>
+      </open.Provider>
+    </ThemeProvider>
+  );
+};
 
-export default router;
+export default App;

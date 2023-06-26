@@ -1,7 +1,7 @@
 import { AiFillHome } from 'react-icons/ai';
 import { BsPersonFillAdd, BsFillFilePersonFill } from 'react-icons/bs';
 import { MdStadium } from 'react-icons/md';
-import { ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
 import UserCart from './UserCart';
 import SideBarLink from './SideBarLink';
 import {
@@ -10,14 +10,19 @@ import {
   StyledButton,
   StyledTypography,
 } from '../../index';
+import { LeftSideBarInterface } from '../../../interfaces';
 
-const LeftSideBar = (): ReactElement => {
+const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <SideBox
       sx={{
-        left: 0,
-        borderRight: '0.4px solid #ccc',
-        boxShadow: '5px 4px 4px rgba(0, 0, 0, 0.15)',
+        right: 0,
+        borderLeft: '0.4px solid #ccc',
+        boxShadow: '-5px 4px 4px rgba(0, 0, 0, 0.15)',
       }}
     >
       <UserCart />
@@ -35,7 +40,8 @@ const LeftSideBar = (): ReactElement => {
         <StyledTypography>
           يمكنك انشاء مباراة ودعوة اصدقائك للانضمام اليك
         </StyledTypography>
-        <StyledButton>انشاء مباراة</StyledButton>
+
+        <StyledButton onClick={handleClickOpen}>انشاء مباراة</StyledButton>
       </CreateMatchBox>
     </SideBox>
   );

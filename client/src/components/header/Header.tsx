@@ -37,10 +37,7 @@ const Header: FC = (): ReactElement => {
     setAnchorElNav(null);
   };
   return (
-    <AppBar
-      sx={{ background: '#01031C', width: '100vw', padding: '0 40px' }}
-      position="sticky"
-    >
+    <AppBar sx={{ background: '#01031C', width: '100%', padding: '0 40px' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <Link to="/login"> this will uncommint when routes get ready */}
