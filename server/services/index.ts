@@ -1,4 +1,11 @@
 export {
+  addMessageService,
+  getMessageByIdService,
+  getAllMessagesService,
+  deleteMessageService,
+  editMessageService,
+} from './matchChat';
+export {
   getAllStadiumsService,
   getStadiumDetailsService,
   getStadiumProfileService,
