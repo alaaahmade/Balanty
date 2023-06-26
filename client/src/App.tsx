@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import RootLayout from './layouts/RootLayout';
 import { LandingPage } from './pages';
-import MatchChat from './components/matchChat/MatchChat';
+import MatchRoomPage from './pages/MatchRoomPage';
 
 const router = createBrowserRouter([
   {
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
       { path: '/stadium/login', element: <h1>stadium login</h1> },
       { path: '/player/signup', element: <h1>player signup</h1> },
       { path: '/stadium/signup', element: <h1>stadium signup</h1> },
-      { path: '/match', element: <MatchChat /> },
+      { path: '/match', element: <MatchRoomPage /> },
     ],
   },
   {
