@@ -142,6 +142,28 @@ const MatchChat = () => {
             />
           </Fab>
         </div>
+        <MessageInput placeholder="اكتب رسالتك" />
+        <Fab
+          style={{
+            width: '43px',
+            height: '43px',
+            background: '#2CB674',
+            boxShadow:
+              '0px 3px 5px -1px rgba(0,0,0,0.1), 0px 6px 10px 0px rgba(0,0,0,0.1), 0px 1px 5px 0px rgba(0,0,0,0.1)',
+          }}
+          aria-label="add"
+          size="medium"
+        >
+          <SendIcon
+            style={{
+              fill: '#fff',
+              transform: 'rotate(-30deg)',
+              transformOrigin: 'center',
+              marginTop: '-5px',
+              marginRight: '-3px',
+            }}
+          />
+        </Fab>
       </AddMessageBar>
     </Wrapper>
   );
