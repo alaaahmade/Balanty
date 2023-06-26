@@ -65,6 +65,8 @@ const MatchChat = () => {
           </Fab>
         </div>
       </section>
+      <EmojiPicker />
+
     </Wrapper>
   );
 };
