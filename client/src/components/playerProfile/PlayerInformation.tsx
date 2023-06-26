@@ -2,19 +2,21 @@ import React, { ReactElement } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { ContentWrapper, Text } from './Player.Styled';
+import { ContentWrapper } from './Player.Styled';
+import EditInput from '../stadiumProfile/EditInput';
 
 const PlayerInformation: React.FC = (): ReactElement => {
   return (
     <Card
       sx={{
         maxWidth: '280px',
-        height: '300px',
+        height: '320px',
         display: 'flex',
         flexDirection: 'flex-start',
-        border: '1px solid #d9d9d9', // Change this to your desired border color
-        borderRadius: '5px', // Change this to your desired border radius
-        marginLeft: '22px',
+        border: '1px solid #d9d9d9',
+        borderRadius: '5px',
+        marginLeft: '42px',
+        marginTop: '70px',
         boxShadow: 2,
       }}
     >
@@ -22,7 +24,6 @@ const PlayerInformation: React.FC = (): ReactElement => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          gap: '10px',
           borderColor: 'red',
           border: '2px',
           color: 'black',
@@ -33,41 +34,29 @@ const PlayerInformation: React.FC = (): ReactElement => {
           معلومات شخصية
         </Typography>
         <ContentWrapper>
-          <Text color="textSecondary" sx={{ flexGrow: 5, textAlign: 'right' }}>
-            واحد ضايع مش عارف وين هوا
-          </Text>
-          <Typography sx={{ minWidth: '45px', textAlign: 'right' }}>
-            الوصف
-          </Typography>
+          <EditInput lastValue="مجروح بنزف طموح" multiline={false} />
+          <Typography>الوصف</Typography>
         </ContentWrapper>
         <ContentWrapper>
-          <Text sx={{ flexGrow: 5, textAlign: 'right' }} color="textSecondary">
-            056978226
-          </Text>
+          <EditInput lastValue="025896311" multiline={false} />
           <Typography sx={{ minWidth: '45px', textAlign: 'right' }}>
             الهاتف
           </Typography>
         </ContentWrapper>
         <ContentWrapper>
-          <Text color="textSecondary" sx={{ flexGrow: 5, textAlign: 'right' }}>
-            قطاع غزة{' '}
-          </Text>
+          <EditInput lastValue="قطاع غزة" multiline={false} />
           <Typography sx={{ minWidth: '45px', textAlign: 'right' }}>
             العنوان
           </Typography>
         </ContentWrapper>
         <ContentWrapper>
-          <Text color="textSecondary" sx={{ flexGrow: 5, textAlign: 'right' }}>
-            مهاجم{' '}
-          </Text>
+          <EditInput lastValue="مهاجم" multiline={false} />
           <Typography sx={{ minWidth: '45px', textAlign: 'right' }}>
             المركز
           </Typography>
         </ContentWrapper>
         <ContentWrapper>
-          <Text color="textSecondary" sx={{ flexGrow: 5, textAlign: 'right' }}>
-            24{' '}
-          </Text>
+          <EditInput lastValue="24" multiline={false} />
           <Typography sx={{ minWidth: '45px', textAlign: 'right' }}>
             العمر
           </Typography>
@@ -76,4 +65,5 @@ const PlayerInformation: React.FC = (): ReactElement => {
     </Card>
   );
 };
+
 export default PlayerInformation;

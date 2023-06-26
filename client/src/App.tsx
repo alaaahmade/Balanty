@@ -6,6 +6,7 @@ import { LandingPage } from './pages';
 import LightTheme from './themes';
 import { open, useCustomOpen } from './context';
 import { StatsContextProvider } from './context/CreateMatch';
+import Profile from './components/playerProfile/Profile';
 import StadiumProfile from './pages/StadiumProfile';
 
 const router = createBrowserRouter([
@@ -33,13 +34,14 @@ const router = createBrowserRouter([
 ]);
 const App = (): ReactElement => {
   return (
-    <ThemeProvider theme={LightTheme}>
-      <open.Provider value={useCustomOpen()}>
-        <StatsContextProvider>
-          <RouterProvider router={router} />
-        </StatsContextProvider>
-      </open.Provider>
-    </ThemeProvider>
+    // <ThemeProvider theme={LightTheme}>
+    //   <open.Provider value={useCustomOpen()}>
+    //     <StatsContextProvider>
+    //       <RouterProvider router={router} />
+    //     </StatsContextProvider>
+    //   </open.Provider>
+    // </ThemeProvider>
+    <Profile />
   );
 };
 

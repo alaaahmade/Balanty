@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react';
+import { Box } from '@mui/material';
 import { FollowsInfoWrapper, FollowsWrapper } from './Player.Styled';
 import PlayerActions from './PLayerActions';
 import PlayerBackground from './PlayerBackground';
@@ -11,12 +12,9 @@ const Profile: React.FC = (): ReactElement => {
     <>
       <PlayerBackground />
       <PlayerActions />
-      <PlayerStats />
       <FollowsInfoWrapper>
         <PlayerInformation />
-        <FollowsWrapper>
-          {/* <PlayerFollows action="إلغاء المتابعة" username="eman alabsi" /> */}
-        </FollowsWrapper>
+        <PlayerStats />
       </FollowsInfoWrapper>
     </>
   );

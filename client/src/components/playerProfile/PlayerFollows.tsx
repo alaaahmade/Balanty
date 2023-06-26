@@ -14,12 +14,14 @@ const PlayerFollows: React.FC<{ action: string; username: string }> = ({
         justifyContent: 'space-between',
         alignItems: 'center',
         gap: '12px',
-        width: '400px',
         height: '100px',
         marginTop: '20px',
-        marginRight: '412px',
-        border: '1px solid black',
-        padding: '0 1rem',
+        border: 'none',
+        boxShadow:
+          '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 1px rgb(222 222 222), 0px 1px 3px 0px #2cb67400',
+        padding: '0 2rem',
+        borderTop: '0.1px solid #0000002b',
+        width: '500px',
       }}
     >
       <Button

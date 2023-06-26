@@ -26,7 +26,7 @@ export const ActionsWrapper = styled('div')({
   justifyContent: 'space-between',
   alignItems: 'center',
   marginTop: -56,
-  marginLeft: 12,
+  marginLeft: '32px',
   gap: 8,
   marginRight: '32%',
   padding: '0 1rem',
@@ -70,15 +70,13 @@ export const ContentWrapper = styled('div')({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  gap: '10px',
-  padding: '4px',
 });
 
 export const Text = styled(Typography)({});
 
 export const FollowsInfoWrapper = styled('div')({
   display: 'flex',
-  justifyContent: 'space-between',
+  flexDirection: 'row',
 });
 
 export const FollowsWrapper = styled('div')({
