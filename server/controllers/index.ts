@@ -1,4 +1,8 @@
-export { getMatches, createMatch } from './matches';
+export {
+  getAllStadiums,
+  getStadiumDetails,
+  getStadiumProfile,
+  getStadiumMatches,
+} from './stadiums';
 
-export { getStadiumMatches } from './stadiums';
-export { getAllStadiums, getStadiumDetails } from './stadiums';
+export { getMatches, createMatch } from './matches';
