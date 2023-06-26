@@ -99,6 +99,25 @@ describe('test GitHub Actions CICD Piplines', () => {
 //     });
 //   });
 // });
+test('test for not exist Stadium should return 404 with "هذا الملعب غير متاح"', done => {
+  request(app)
+    .get('/api/v1/stadiums/profile/500')
+    .set('Accept', 'application/json')
+    .end((err, res) => {
+      if (err) {
+        done(err);
+      }
+      expect(res.status).toBe(401);
+      expect(res.type).toBe('application/json');
+      expect(typeof res).toBe('object');
+      const response = JSON.parse(res.text);
+      const { data } = response;
+      expect(response.status).toBe(401);
+      expect(data).toBe('هذا الملعب غير متاح');
+      done();
+    });
+});
+
 describe('GET /api/v1/stadiums/profiles', () => {
   test('responds from /api/v1/stadiums/profile/id with JSON and 200 status code', done => {
     request(app)
@@ -117,33 +136,36 @@ describe('GET /api/v1/stadiums/profiles', () => {
         expect(Array.isArray(data.Stadium.stadiumGallery)).toBe(true);
         expect(typeof data.Stadium.stadiumGallery[0]).toBe('object');
         done();
-
         if (err) {
           done(err);
         }
-      });
-  });
-
-  test('test for not exist Stadium should return 404 with "هذا الملعب غير متاح"', done => {
-    request(app)
-      .get('/api/v1/stadiums/profile/500')
-      .set('Accept', 'application/json')
-      .end((err, res) => {
-        if (err) {
-          done(err);
-        }
-        expect(res.status).toBe(401);
-        expect(res.type).toBe('application/json');
-        expect(typeof res).toBe('object');
-        const response = JSON.parse(res.text);
-        const { data } = response;
-        expect(response.status).toBe(401);
-        expect(data).toBe('هذا الملعب غير متاح');
-        done();
       });
   });
 });
 
-afterAll(async () => {
+describe('GET /api/v1/matches', () => {
+  test('responds from /api/v1/matches with JSON and 200 status code', done => {
+    request(app)
+      .get('/api/v1/matches')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(response.status).toBe(200);
+        expect(Array.isArray(data)).toBe(true);
+        expect(data[0].ownerId).toBe(5);
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
+});
+
+afterAll(() => {
   sequelize.close();
 });

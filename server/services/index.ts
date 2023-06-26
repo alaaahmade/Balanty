@@ -4,4 +4,4 @@ export {
   getStadiumProfileService,
   getStadiumMatchesService,
 } from './stadiums';
-export { default as createMatchService } from './matches';
+export { createMatchService, getAllMatches } from './matches';

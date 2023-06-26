@@ -5,4 +5,4 @@ export {
   getStadiumMatches,
 } from './stadiums';
 
-export { default as createMatch } from './matches';
+export { getMatches, createMatch } from './matches';
