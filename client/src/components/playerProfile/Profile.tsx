@@ -1,6 +1,5 @@
 import React, { ReactElement, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { LineAxisOutlined } from '@mui/icons-material';
 import axios from 'axios';
 import { FollowsInfoWrapper } from './Player.Styled';
 import PlayerActions from './PLayerActions';
