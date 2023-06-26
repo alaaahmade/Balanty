@@ -12,9 +12,15 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { DialogBox } from '../components';
 import '../fullcalendar-custom.css';
-import { createMatchInterface, prevInterface } from '../interfaces';
+import {
+  createMatchError,
+  createMatchInterface,
+  prevInterface,
+} from '../interfaces';
 import { statsContext } from '../context/CreateMatch';
 import {
   CreateMatchForm,
@@ -46,29 +52,24 @@ const CreateMatch: React.FC<createMatchInterface> = ({
   setOpen,
 }): ReactElement => {
   const states = useContext(statsContext);
-  const {
-    setStadiums,
-    StadiumId,
-    setValidateError,
-    match,
-    setMatches,
-    setStadiumId,
-  } = states;
+  const { setStadiums, setValidateError, match, setStadiumId } = states;
 
   const handleClose = () => {
     setOpen(false);
   };
-  const fetchEvent = async (data: prevInterface) => {
-    const matchesFetch = await fetch('/api/v1/matches', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    const resultCreate = await matchesFetch.json();
-    if (resultCreate.status === 401) {
-      setValidateError(resultCreate.data);
-    } else if (resultCreate.status === 201) {
+
+  const navigate = useNavigate();
+
+  const fetchEvent = async (matchData: prevInterface) => {
+    try {
+      await axios.post('/api/v1/matches', matchData);
       handleClose();
+    } catch (error) {
+      if ((error as createMatchError).response.status === 401) {
+        setValidateError((error as createMatchError).response.data.data);
+      } else {
+        navigate('/serverError');
+      }
     }
   };
   const HandleCreateEvent = async () => {
@@ -83,38 +84,17 @@ const CreateMatch: React.FC<createMatchInterface> = ({
     }
   };
 
-  const getStadiumMatchs = async (id: number) => {
-    const matchesFetch = await fetch(`/api/v1/stadiums/matches/${id}`);
-    const stadMatches = await matchesFetch.json();
-    if (stadMatches.status === 401) {
-      setValidateError(stadMatches.data);
+  const getStadiums = async () => {
+    try {
+      const { data } = await axios.get('/api/v1/stadiums');
+      setStadiums(data.data);
+    } catch (error) {
+      setValidateError('لا يوجد ملاعب متاحة في الوقت الحالي');
     }
-    let convertedMatches;
-    if (Array.isArray(stadMatches.data)) {
-      convertedMatches = stadMatches?.data?.map((event: prevInterface) => {
-        return {
-          title: event.title,
-          start: event.startDate,
-          end: event.endDate,
-          description: event.description,
-          seats: event.seats,
-        };
-      });
-    }
-
-    setMatches(convertedMatches);
   };
-  useEffect(() => {
-    if (StadiumId > 0) {
-      getStadiumMatchs(StadiumId);
-    }
-  }, [StadiumId]);
 
   useEffect(() => {
-    fetch('/api/v1/stadiums')
-      .then(data => data.json())
-      .then(res => setStadiums(res.data))
-      .catch(() => setValidateError('لا يوجد ملاعب متاحة في الوقت الحالي'));
+    getStadiums();
   }, []);
 
   return (
