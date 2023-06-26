@@ -8,4 +8,5 @@ export type {
   MyContextProviderProps,
   IMatchDataProps,
 } from './matchInterface';
+
 export type { errorI, UserData, createMatchError } from './StadiumProfile';

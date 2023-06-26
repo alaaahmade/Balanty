@@ -70,6 +70,24 @@ export const Wrapper = styled(Box)({
   flexGrow: '2',
   padding: '0 1rem 0',
   margin: '1rem 0',
+  height: '60vh',
+  maxHeight: '60vh',
+  overflow: 'auto !important',
+
+  '&::-webkit-scrollbar-track': {
+    webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.3)',
+    backgroundColor: '#F2FCF5',
+  },
+
+  '&::-webkit-scrollbar': {
+    width: '10px',
+    backgroundColor: '#2CB674',
+  },
+
+  '&::-webkit-scrollbar-thumb': {
+    borderRadius: '999px',
+    backgroundColor: '#2CB674',
+  },
 });
 
 export const AddMessageBar = styled(Box)({

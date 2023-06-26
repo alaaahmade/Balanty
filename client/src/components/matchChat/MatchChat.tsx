@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ChangeEvent, KeyboardEvent } from 'react';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import SendIcon from '@mui/icons-material/Send';
@@ -39,6 +39,10 @@ const MatchChat = () => {
       },
     },
   });
+  const [messageInput, setMessageInput] = useState<string>('');
+
+  const fakeLoggedUserId = 1;
+  const matchMessages = matchData?.data?.match?.MatchMessages;
 
   useEffect(() => {
     (async () => {
@@ -54,7 +58,38 @@ const MatchChat = () => {
     })();
   }, []);
 
-  console.log(matchData?.data?.match.id);
+  const addMessage = () => {
+    if (messageInput.trim()) {
+      (async () => {
+        try {
+          const { data } = await axios.post(
+            `http://localhost:8080/api/v1/message`,
+            {
+              senderId: 5,
+              matchId: matchData?.data?.match?.id,
+              message: messageInput.trim(),
+            },
+          );
+          console.log(data, 'add message function');
+
+          // setMatchData(data);
+        } catch (error) {
+          // eslint-disable-next-line no-alert
+          alert('Error when accessing match');
+        }
+      })();
+    }
+  };
+  const handleInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setMessageInput(e.target.value);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter') {
+      addMessage();
+      setMessageInput('');
+    }
+  };
 
   return (
     <Wrapper>
@@ -93,7 +128,25 @@ const MatchChat = () => {
         </div>
       </section>
       {/* <EmojiPicker /> */}
-      <Message
+
+      {matchMessages.length &&
+        matchMessages.map((message, i, arr) => {
+          return (
+            <Message
+              key={message.id}
+              message={message.message}
+              time={message.createdAt}
+              senderAvatar={
+                message.UserId !== arr[i - 1]?.UserId
+                  ? 'https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj'
+                  : null
+              }
+              sender={message.UserId}
+              isReceived={message.UserId === fakeLoggedUserId}
+            />
+          );
+        })}
+      {/* <Message
         message="Hi G13 aaaaaaaaaaaaaaaa"
         time={Date.now().toString()}
         sender="ahmed"
@@ -105,6 +158,7 @@ const MatchChat = () => {
         time={Date.now().toString()}
         sender="ahmed"
         isReceived
+        senderAvatar={null}
       />
       <Message
         message="Hi G13 fffffffffffffffff"
@@ -126,7 +180,7 @@ const MatchChat = () => {
         sender="ahmed"
         senderAvatar="https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj"
         isReceived={false}
-      />
+      /> */}
 
       <AddMessageBar>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
@@ -149,7 +203,12 @@ const MatchChat = () => {
             />
           </IconBackground>
         </div>
-        <MessageInput placeholder="اكتب رسالتك" />
+        <MessageInput
+          value={messageInput}
+          onChange={handleInput}
+          onKeyDown={handleKeyDown}
+          placeholder="اكتب رسالتك"
+        />
         <IconBackground
           style={{
             width: '43px',
@@ -158,6 +217,7 @@ const MatchChat = () => {
           }}
         >
           <SendIcon
+            onClick={addMessage}
             style={{
               fill: '#fff',
               transform: 'rotate(-30deg)',

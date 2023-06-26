@@ -5,9 +5,9 @@ import { Avatar } from '@mui/material';
 interface Props {
   message: string;
   time: string;
-  sender: string;
+  sender: string | number;
   // eslint-disable-next-line react/require-default-props
-  senderAvatar?: string;
+  senderAvatar: string | null;
   isReceived: boolean;
 }
 
@@ -26,52 +26,32 @@ const Message = ({
         justifyContent: isReceived ? 'left' : 'right',
       }}
     >
-      {isReceived ? (
-        <div
-          style={{
-            display: 'flex',
-            gap: '0.5rem',
-            alignItems: 'center',
+      <div
+        style={{
+          display: 'flex',
+          gap: '0.5rem',
+          alignItems: 'center',
+        }}
+      >
+        {senderAvatar && <Avatar src={senderAvatar} />}
+        <Box
+          sx={{
+            background: isReceived ? '#F2FCF5' : '#2CB674',
+            color: isReceived ? '#000' : '#fff',
+            textAlign: isReceived ? 'left' : 'right',
+            direction: isReceived ? 'ltr' : 'rtl',
+            alignSelf: isReceived ? 'left' : 'right',
+            marginBottom: '4px',
+            padding: '5px 10px',
+            width: 'fit-content',
+            maxWidth: '300px',
+            wordWrap: 'break-word',
+            borderRadius: '20px',
           }}
         >
-          {senderAvatar ? (
-            <Avatar src={senderAvatar} />
-          ) : (
-            <div style={{ width: '40px', height: '40px' }} />
-          )}
-          <Box
-            sx={{
-              background: '#F2FCF5',
-              textAlign: 'left',
-              marginBottom: '4px',
-              padding: '5px 10px',
-              width: 'fit-content',
-              borderRadius: '20px',
-            }}
-          >
-            {message}
-          </Box>
-        </div>
-      ) : (
-        <>
-          {/* <p>{time}</p> */}
-          <Box
-            sx={{
-              background: '#2CB674',
-              color: '#fff',
-              borderRadius: '20px',
-              textAlign: 'right',
-              marginBottom: '4px',
-              padding: '5px 10px',
-              width: 'fit-content',
-              direction: 'rtl',
-              alignSelf: 'right',
-            }}
-          >
-            {message}
-          </Box>
-        </>
-      )}
+          {message}
+        </Box>
+      </div>
     </section>
   );
 };
