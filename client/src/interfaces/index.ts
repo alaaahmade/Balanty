@@ -7,4 +7,9 @@ export type {
   LeftSideBarInterface,
   MyContextProviderProps,
 } from './matchInterface';
-export type { errorI, UserData, createMatchError } from './StadiumProfile';
+export type {
+  errorI,
+  UserData,
+  createMatchError,
+  Props,
+} from './StadiumProfile';

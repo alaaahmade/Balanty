@@ -48,13 +48,13 @@ const BioSection = ({ userData }: Props): ReactElement => {
         </Typography>
       </FlexBox>
 
-      <EditInput lastValue={description} multiline />
+      <EditInput name="description" lastValue={description} multiline />
       <FlexBox
         sx={{
           justifyContent: 'flex-end',
         }}
       >
-        <EditInput lastValue={phone} multiline={false} />
+        <EditInput name="phone" lastValue={phone} multiline={false} />
 
         <Typography
           sx={{
@@ -71,6 +71,7 @@ const BioSection = ({ userData }: Props): ReactElement => {
         }}
       >
         <EditInput
+          name="price"
           lastValue={price ? `شيكل${price}` : 'قم بكتابة السعر'}
           multiline={false}
         />
@@ -90,7 +91,7 @@ const BioSection = ({ userData }: Props): ReactElement => {
           justifyContent: 'flex-end',
         }}
       >
-        <EditInput lastValue={ground} multiline={false} />
+        <EditInput name="ground" lastValue={ground} multiline={false} />
         <Typography
           sx={{
             fontWeight: 'bold',
@@ -113,7 +114,7 @@ const BioSection = ({ userData }: Props): ReactElement => {
             alignItems: 'center',
           }}
         >
-          <EditInput lastValue={address} multiline={false} />
+          <EditInput name="address" lastValue={address} multiline={false} />
 
           <LocationTypo
             sx={{

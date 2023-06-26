@@ -30,3 +30,9 @@ export interface errorI {
 export interface createMatchError {
   response: { status: number; data: { data: string } };
 }
+
+export interface Props {
+  lastValue: string | number;
+  multiline: boolean;
+  name: string;
+}

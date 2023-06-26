@@ -2,15 +2,12 @@ import { Edit } from '@mui/icons-material';
 import { Button, IconButton, InputAdornment } from '@mui/material';
 import { ReactElement, useState } from 'react';
 import { EditInputs } from './StadiumProfile.styled';
-
-interface Props {
-  lastValue: string | number;
-  multiline: boolean;
-}
+import { Props } from '../../interfaces';
 
 const EditInput: React.FC<Props> = ({
   lastValue,
   multiline,
+  name,
 }: Props): ReactElement => {
   const [editMode, setEditMode] = useState(false);
   const [mouseOver, setMouseOver] = useState(false);
@@ -50,7 +47,7 @@ const EditInput: React.FC<Props> = ({
       {editMode ? <Button onClick={handleUpdate}>Save</Button> : null}
 
       <EditInputs
-        name="text"
+        name={name}
         value={value}
         margin="normal"
         onChange={onChange}
