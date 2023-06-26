@@ -1,5 +1,5 @@
 import { IMatchMessage, IResponseProps } from '../interfaces';
-import { Message } from '../models';
+import { Match, Message } from '../models';
 
 const addMessageService = async ({
   message,
@@ -46,26 +46,30 @@ const getMessageByIdService = async (
 const getAllMessagesService = async (
   matchId: number,
 ): Promise<IResponseProps> => {
-  console.log(matchId, 'iddddddd');
+  const match = await Match.findOne({
+    where: { id: matchId },
+    include: [
+      {
+        model: Message,
+        as: 'MatchMessages',
+      },
+    ],
+  });
 
-  const messages = await Message.findAll({ where: { MatchId: matchId } });
-  console.log('messages', messages);
-
-  if (messages) {
+  if (match) {
     return {
       status: 200,
       data: {
-        messages,
-      },
-    };
-  } else {
-    return {
-      status: 404,
-      data: {
-        message: 'No messages found',
+        match,
       },
     };
   }
+  return {
+    status: 404,
+    data: {
+      message: 'Match not found',
+    },
+  };
 };
 
 const deleteMessageService: (

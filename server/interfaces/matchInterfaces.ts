@@ -22,5 +22,6 @@ export interface IResponseProps {
     newMessage?: object;
     messages?: object[];
     updatedMessage?: object;
+    match?: object;
   };
 }

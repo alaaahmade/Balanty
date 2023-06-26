@@ -43,7 +43,7 @@ Message.belongsTo(User);
 
 // Match with Message
 Match.hasMany(Message, {
-  as: 'matchMessage',
+  as: 'MatchMessages',
 });
 Message.belongsTo(Match);
 

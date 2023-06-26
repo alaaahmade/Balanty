@@ -40,7 +40,7 @@ const getAllMatchMessages: RequestHandler = async (
   const { id } = req.params;
   const data = await getAllMessagesService(+id);
 
-  res.status(data?.status).json(data);
+  res.json(data);
 };
 
 const deleteMessage: RequestHandler<{ id: string }> = async (
