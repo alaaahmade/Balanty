@@ -12,4 +12,5 @@ export type {
   UserData,
   createMatchError,
   Props,
+  updatedValue,
 } from './StadiumProfile';

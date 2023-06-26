@@ -1,16 +1,25 @@
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 
-import { Typography, Box } from '@mui/material';
+import {
+  Typography,
+  Box,
+  InputAdornment,
+  IconButton,
+  Button,
+} from '@mui/material';
 
-import PlaceIcon from '@mui/icons-material/Place';
 import StarIcon from '@mui/icons-material/Star';
 
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import { Edit } from '@mui/icons-material';
+
+import axios from 'axios';
+
 import { BioBox, FlexBox, LocationTypo } from './StadiumProfile.styled';
 
 import EditInput from './EditInput';
 
-import { UserData } from '../../interfaces/StadiumProfile';
+import { UserData, updatedValue } from '../../interfaces';
 
 type Props = {
   userData: UserData;
@@ -18,123 +27,207 @@ type Props = {
 const BioSection = ({ userData }: Props): ReactElement => {
   const { description, price, ground, address } = userData.Stadium;
   const { username, phone } = userData;
+  const [editMode, setEditMode] = useState(false);
+  const [EditAble, setEditAble] = useState(true);
+  const [hov, setHove] = useState(false);
+  const [mouseOver, setMouseOver] = useState(false);
+  const [newData, setNewData] = useState<updatedValue>({});
+
+  const handleClick = () => {
+    setEditMode(true);
+    setMouseOver(false);
+  };
+  const handleUpdate = async () => {
+    const { data } = await axios.patch('/api/v1/stadiums/edit', newData);
+    console.log(data);
+
+    // setEditMode(false);
+  };
+
+  const handleCancel = async () => {
+    setEditMode(false);
+  };
+
+  const handleMouseOut = () => {
+    if (mouseOver) {
+      setMouseOver(false);
+    }
+    setHove(false);
+  };
+
+  const handleMouseOver = () => {
+    if (!mouseOver) {
+      setMouseOver(true);
+    }
+    setHove(true);
+  };
 
   return (
-    <BioBox
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'flex-end',
-      }}
-    >
-      <FlexBox
+    <Box>
+      <BioBox
         sx={{
-          justifyContent: 'space-between',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'flex-end',
         }}
-      >
-        <Box
-          sx={{
-            color: 'yellow',
-          }}
-        >
-          <StarIcon />
-          <StarIcon />
-          <StarIcon />
-          <StarIcon />
-          <StarIcon />
-        </Box>
-        <Typography variant="h5" sx={{ ml: '5px' }}>
-          {username}
-        </Typography>
-      </FlexBox>
-
-      <EditInput name="description" lastValue={description} multiline />
-      <FlexBox
-        sx={{
-          justifyContent: 'flex-end',
-        }}
-      >
-        <EditInput name="phone" lastValue={phone} multiline={false} />
-
-        <Typography
-          sx={{
-            width: '200px',
-            fontWeight: 'bold',
-          }}
-        >
-          : رقم الهاتف
-        </Typography>
-      </FlexBox>
-      <FlexBox
-        sx={{
-          justifyContent: 'flex-end',
-        }}
-      >
-        <EditInput
-          name="price"
-          lastValue={price ? `شيكل${price}` : 'قم بكتابة السعر'}
-          multiline={false}
-        />
-
-        <Typography
-          sx={{
-            width: '200px',
-            fontWeight: 'bold',
-          }}
-        >
-          : السعر الساعة
-        </Typography>
-      </FlexBox>
-
-      <FlexBox
-        sx={{
-          justifyContent: 'flex-end',
-        }}
-      >
-        <EditInput name="ground" lastValue={ground} multiline={false} />
-        <Typography
-          sx={{
-            fontWeight: 'bold',
-            width: '100px',
-          }}
-        >
-          : الأرضية
-        </Typography>
-      </FlexBox>
-      <FlexBox
-        sx={{
-          flexDirection: 'column',
-          width: '100%',
-        }}
+        onMouseEnter={handleMouseOver}
+        onMouseLeave={handleMouseOut}
       >
         <FlexBox
           sx={{
-            width: '100%',
             justifyContent: 'space-between',
-            alignItems: 'center',
           }}
         >
-          <EditInput name="address" lastValue={address} multiline={false} />
-
-          <LocationTypo
-            sx={{
-              width: '100px',
-            }}
-          >
-            <PlaceIcon
+          {hov && !editMode && (
+            <InputAdornment
               sx={{
-                color: 'green',
-                mb: '15px',
+                mr: '30px',
               }}
-            />
-          </LocationTypo>
-        </FlexBox>
-        <FlexBox>
+              position="end"
+            >
+              {EditAble && (
+                <IconButton onClick={handleClick}>
+                  <Edit />
+                </IconButton>
+              )}
+            </InputAdornment>
+          )}
           <Box
             sx={{
               color: 'yellow',
-              display: 'flex',
-              alignItems: 'center',
+            }}
+          >
+            <StarIcon />
+            <StarIcon />
+            <StarIcon />
+            <StarIcon />
+            <StarIcon />
+          </Box>
+
+          <Typography variant="h5" sx={{ ml: '5px' }}>
+            {username}
+          </Typography>
+        </FlexBox>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-evenly',
+            width: '100%',
+          }}
+        />
+        <EditInput
+          setNewData={setNewData}
+          name="description"
+          editMode={editMode}
+          lastValue={description}
+          multiline
+        />
+        <FlexBox
+          sx={{
+            justifyContent: 'flex-end',
+          }}
+        >
+          <EditInput
+            setNewData={setNewData}
+            name="phone"
+            editMode={editMode}
+            lastValue={phone}
+            multiline={false}
+          />
+
+          <Typography
+            sx={{
+              width: '7rem',
+              textAlign: 'right',
+            }}
+          >
+            : رقم الهاتف
+          </Typography>
+        </FlexBox>
+        <FlexBox
+          sx={{
+            justifyContent: 'flex-end',
+          }}
+        >
+          <EditInput
+            setNewData={setNewData}
+            name="price"
+            editMode={editMode}
+            lastValue={price ? `${price}` : 'قم بكتابة السعر'}
+            multiline={false}
+          />
+
+          <Typography
+            sx={{
+              width: '8rem',
+              textAlign: 'right',
+            }}
+          >
+            : السعر الساعة
+          </Typography>
+        </FlexBox>
+
+        <FlexBox
+          sx={{
+            justifyContent: 'flex-end',
+          }}
+        >
+          <EditInput
+            setNewData={setNewData}
+            name="ground"
+            editMode={editMode}
+            lastValue={ground}
+            multiline={false}
+          />
+          <Typography
+            sx={{
+              width: '5rem',
+              textAlign: 'right',
+            }}
+          >
+            : الأرضية
+          </Typography>
+        </FlexBox>
+        <FlexBox
+          sx={{
+            flexDirection: 'column',
+            width: '100%',
+          }}
+        >
+          <FlexBox
+            sx={{
+              width: '100%',
+              justifyContent: 'space-between',
+            }}
+          >
+            <EditInput
+              setNewData={setNewData}
+              name="address"
+              editMode={editMode}
+              lastValue={address}
+              multiline={false}
+            />
+
+            <LocationTypo
+              sx={{
+                width: '5rem',
+                alignItems: 'center',
+              }}
+            >
+              : الموقع
+            </LocationTypo>
+          </FlexBox>
+        </FlexBox>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+          }}
+        >
+          <Box
+            sx={{
+              color: 'yellow',
             }}
           >
             <StarBorderIcon />
@@ -145,14 +238,25 @@ const BioSection = ({ userData }: Props): ReactElement => {
           </Box>
           <Typography
             sx={{
-              fontWeight: 'bold',
+              width: '7rem',
+              textAlign: 'right',
             }}
           >
             : اضافة تقييم
           </Typography>
-        </FlexBox>
-      </FlexBox>
-    </BioBox>
+        </Box>
+        {editMode ? (
+          <Box
+            sx={{
+              display: 'flex',
+            }}
+          >
+            <Button onClick={handleCancel}>الغاء</Button>
+            <Button onClick={handleUpdate}>حفظ</Button>
+          </Box>
+        ) : null}
+      </BioBox>
+    </Box>
   );
 };
 

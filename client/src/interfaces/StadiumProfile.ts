@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export interface StadiumGallery {
   id: number;
   image: string;
@@ -35,4 +37,14 @@ export interface Props {
   lastValue: string | number;
   multiline: boolean;
   name: string;
+  editMode: boolean;
+  setNewData: Dispatch<SetStateAction<object>>;
+}
+
+export interface updatedValue {
+  description?: string;
+  phone?: string;
+  price?: number;
+  ground?: string;
+  address?: string;
 }
