@@ -55,7 +55,7 @@ import TextareaAutosize from '@mui/base/TextareaAutosize';
 
 import { Box } from '@mui/system';
 
-const Wrapper = styled(Box)({
+export const Wrapper = styled(Box)({
   width: '50%',
   maxWidth: '700px',
   position: 'absolute',
@@ -70,4 +70,13 @@ const Wrapper = styled(Box)({
   padding: '0 1rem 0',
   margin: '1rem 0',
 });
-export default Wrapper;
+
+export const AddMessageBar = styled(Box)({
+  width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.6rem',
+  padding: '0.5rem 0',
+  borderTop: '1px solid #eee',
+  marginTop: '1rem',
+});
