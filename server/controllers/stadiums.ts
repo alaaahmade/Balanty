@@ -1,4 +1,5 @@
 import {
+  UpdateStadiumDataService,
   getAllStadiumsService,
   getStadiumDetailsService,
   getStadiumMatchesService,
@@ -39,4 +40,13 @@ export const getStadiumProfile: RequestHandler = async (
 ): Promise<void> => {
   const matches = await getStadiumProfileService(req);
   res.status(matches.status).json(matches);
+};
+
+export const UpdateStadiumData: RequestHandler = async (
+  req: Request,
+  res: Response,
+) => {
+  const response = await UpdateStadiumDataService(req);
+
+  res.status(200).json(response);
 };
