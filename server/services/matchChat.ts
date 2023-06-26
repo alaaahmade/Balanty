@@ -43,8 +43,13 @@ const getMessageByIdService = async (
   }
 };
 
-const getAllMessagesService = async (): Promise<IResponseProps> => {
-  const messages = await Message.findAll();
+const getAllMessagesService = async (
+  matchId: number,
+): Promise<IResponseProps> => {
+  console.log(matchId, 'iddddddd');
+
+  const messages = await Message.findAll({ where: { MatchId: matchId } });
+  console.log('messages', messages);
 
   if (messages) {
     return {

@@ -33,11 +33,12 @@ const getMessageById: RequestHandler = async (
   res.status(data?.status).json(data);
 };
 
-const getAllMessages: RequestHandler = async (
+const getAllMatchMessages: RequestHandler = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
-  const data = await getAllMessagesService();
+  const { id } = req.params;
+  const data = await getAllMessagesService(+id);
 
   res.status(data?.status).json(data);
 };
@@ -67,7 +68,7 @@ const editMessage: RequestHandler = async (
 export {
   addMessage,
   getMessageById,
-  getAllMessages,
+  getAllMatchMessages,
   deleteMessage,
   editMessage,
 };

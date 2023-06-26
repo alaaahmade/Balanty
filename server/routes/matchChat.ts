@@ -3,13 +3,13 @@ import {
   addMessage,
   deleteMessage,
   editMessage,
-  getAllMessages,
+  getAllMatchMessages,
   getMessageById,
 } from '../controllers';
 
 const chatRouter: Router = Router();
 
-chatRouter.get('/', getAllMessages);
+chatRouter.get('/match/:id', getAllMatchMessages);
 chatRouter.get('/:id', getMessageById);
 chatRouter.post('/', addMessage);
 chatRouter.delete('/:id', deleteMessage);

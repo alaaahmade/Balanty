@@ -1,7 +1,7 @@
 export {
   addMessage,
   getMessageById,
-  getAllMessages,
+  getAllMatchMessages,
   deleteMessage,
   editMessage,
 } from './matchChat';
