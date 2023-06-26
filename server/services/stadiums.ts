@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { Gallery, Stadium, User, Match } from '../models';
+import { Gallery, Stadium, User, Match, Review } from '../models';
 import { Op } from 'sequelize';
 
 export const getAllStadiumsService = async (): Promise<{
@@ -20,8 +20,8 @@ export const getStadiumDetailsService = async (
   req: Request,
 ): Promise<{ status: number; data: string | object }> => {
   const userId = req.params.id;
-  const ExisteStadium = await Stadium.findOne({ where: { UserId: +userId } });
-  if (!ExisteStadium) {
+  const isStadiumExist = await Stadium.findOne({ where: { UserId: +userId } });
+  if (!isStadiumExist) {
     return {
       status: 401,
       data: 'هذا الملعب غير متاح',
@@ -47,8 +47,10 @@ export const getStadiumMatchesService = async (
 ): Promise<{ status: number; data: string | Match[] }> => {
   const { stadiumId } = req.params;
 
-  const ExistStadium = await Stadium.findOne({ where: { UserId: +stadiumId } });
-  if (!ExistStadium) {
+  const isStadiumExist = await Stadium.findOne({
+    where: { UserId: +stadiumId },
+  });
+  if (!isStadiumExist) {
     return {
       status: 401,
       data: 'هذا الملعب غير متاح',
@@ -57,7 +59,7 @@ export const getStadiumMatchesService = async (
   const currentDate = new Date();
   const matches = await Match.findAll({
     where: {
-      UserId: stadiumId,
+      stadiumId: stadiumId,
       startDate: {
         [Op.gt]: currentDate,
       },
@@ -67,5 +69,43 @@ export const getStadiumMatchesService = async (
   return {
     status: 200,
     data: matches,
+  };
+};
+
+export const getStadiumProfileService = async (
+  req: Request,
+): Promise<{ status: number; data: User | null | string }> => {
+  const { id } = req.params;
+
+  const isStadiumExist = await Stadium.findOne({ where: { UserId: id } });
+  if (!isStadiumExist) {
+    return {
+      status: 401,
+      data: 'هذا الملعب غير متاح',
+    };
+  }
+  const stadium = await User.findOne({
+    where: { id },
+    attributes: ['username', 'phone', 'id'],
+    include: [
+      {
+        model: Stadium,
+        include: [
+          {
+            model: Gallery,
+            as: 'stadiumGallery',
+          },
+        ],
+      },
+      {
+        model: Review,
+        as: 'StadiumsReviews',
+      },
+    ],
+  });
+
+  return {
+    status: 200,
+    data: stadium,
   };
 };

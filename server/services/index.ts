@@ -5,7 +5,10 @@ export {
   deleteMessageService,
   editMessageService,
 } from './matchChat';
+export {
+  getAllStadiumsService,
+  getStadiumDetailsService,
+  getStadiumProfileService,
+  getStadiumMatchesService,
+} from './stadiums';
 export { createMatchService, getAllMatches } from './matches';
-
-export { getStadiumMatchesService } from './stadiums';
-export { getAllStadiumsService, getStadiumDetailsService } from './stadiums';
