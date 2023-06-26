@@ -100,6 +100,49 @@ const MatchChat = () => {
         senderAvatar="https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj"
         isReceived={false}
       /> */}
+
+      <AddMessageBar>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+          <Fab
+            style={{
+              width: '35px',
+              height: '35px',
+              background: '#F2FCF5',
+              boxShadow:
+                '0px 3px 5px -1px rgba(0,0,0,0.1), 0px 6px 10px 0px rgba(0,0,0,0.1), 0px 1px 5px 0px rgba(0,0,0,0.1)',
+            }}
+            aria-label="add"
+            size="small"
+          >
+            <AttachFileIcon
+              style={{
+                fill: '#2CB674',
+                width: '23px',
+                height: '23px',
+              }}
+            />
+          </Fab>
+          <Fab
+            style={{
+              width: '35px',
+              height: '35px',
+              background: '#F2FCF5',
+              boxShadow:
+                '0px 3px 5px -1px rgba(0,0,0,0.1), 0px 6px 10px 0px rgba(0,0,0,0.1), 0px 1px 5px 0px rgba(0,0,0,0.1)',
+            }}
+            aria-label="add"
+            size="small"
+          >
+            <InsertEmoticonIcon
+              style={{
+                fill: '#2CB674',
+                width: '23px',
+                height: '23px',
+              }}
+            />
+          </Fab>
+        </div>
+      </AddMessageBar>
     </Wrapper>
   );
 };
