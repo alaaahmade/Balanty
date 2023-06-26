@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import SendIcon from '@mui/icons-material/Send';
@@ -5,6 +6,8 @@ import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
 import { Fab, Typography } from '@mui/material';
 import EmojiPicker from 'emoji-picker-react';
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 import {
   AddMessageBar,
   IconBackground,
@@ -14,6 +17,26 @@ import {
 import Message from './Message';
 
 const MatchChat = () => {
+  const { pathname } = useLocation();
+  const matchId = Number(pathname.split('/')[2]);
+
+  const [matchData, setMatchData] = useState(null);
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:8080/api/v1/message/match/${matchId}`,
+        );
+        setMatchData(data);
+      } catch (error) {
+        // eslint-disable-next-line no-alert
+        alert('Error when accessing match');
+      }
+    })();
+  }, []);
+
+  console.log(matchData);
+
   return (
     <Wrapper>
       <section

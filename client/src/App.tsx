@@ -18,7 +18,7 @@ const router = createBrowserRouter([
       { path: '/stadium/login', element: <h1>stadium login</h1> },
       { path: '/player/signup', element: <h1>player signup</h1> },
       { path: '/stadium/signup', element: <h1>stadium signup</h1> },
-      { path: '/match', element: <MatchRoomPage /> },
+      { path: '/match/:matchId', element: <MatchRoomPage /> },
     ],
   },
   {
