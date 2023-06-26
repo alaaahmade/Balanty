@@ -6,7 +6,7 @@ import Calendar from '../calender/Calender';
 import { StyledFlexBox, StyledTypo } from './createMatchStyled';
 
 const CreateMatchCalendar = () => {
-  const { ValidateError, Event, setEvent } = useContext(statsContext);
+  const { ValidateError } = useContext(statsContext);
 
   return (
     <Box
@@ -54,7 +54,7 @@ const CreateMatchCalendar = () => {
           mt: '90px',
         }}
       >
-        <Calendar Event={Event} setEvent={setEvent} />
+        <Calendar type="create" />
       </Box>
     </Box>
   );

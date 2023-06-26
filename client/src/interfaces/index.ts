@@ -7,3 +7,4 @@ export type {
   LeftSideBarInterface,
   MyContextProviderProps,
 } from './matchInterface';
+export type { errorI, UserData, createMatchError } from './StadiumProfile';

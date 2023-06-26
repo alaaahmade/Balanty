@@ -3,7 +3,7 @@ import { Slide } from 'react-slideshow-image';
 import { Box } from '@mui/system';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useState } from 'react';
+import { FC, ReactElement, useState } from 'react';
 import {
   ArrowStyle,
   SliderBox,
@@ -11,32 +11,16 @@ import {
   ThumbnailBox,
   ThumbnailImage,
 } from './StadiumProfile.styled';
+import {
+  StadiumGallery,
+  StadiumProfileProps,
+} from '../../interfaces/StadiumProfile';
 
-// This set we will get from backend response
-const images = [
-  {
-    url: 'https://uploads-ssl.webflow.com/624377e20c9e225e2e55e2ed/63da5edbf5049c7b148898d4_soccer-players-action-professional-stadium.jpg',
-    id: 0,
-  },
-  {
-    url: 'https://images.livemint.com/img/2022/12/06/1600x900/Stadium_974_1670308763958_1670308770302_1670308770302.jpg',
-    id: 1,
-  },
-  {
-    url: 'https://populous.com/wp-content/uploads/2018/01/Populous_Tottenham-Hotspur-Stadium_Credit-Edward-Hill_3-1504x846.jpg',
-    id: 2,
-  },
-  {
-    url: 'https://hips.hearstapps.com/hmg-prod/images/tottenham-stadium-plans-3-1531502457.jpg?crop=1xw:0.7995594713656388xh;center,top&resize=1200:*',
-    id: 3,
-  },
-];
-
-const ImageSlider = () => {
+const ImageSlider: FC<StadiumProfileProps> = ({ gallery }): ReactElement => {
   const [Active, setActive] = useState(0);
 
   const handleSlideChange = (currentSlide: number, e: number) => {
-    const { id } = images[e];
+    const { id } = gallery[e];
     setActive(id);
   };
 
@@ -60,7 +44,7 @@ const ImageSlider = () => {
         }
         onChange={handleSlideChange}
       >
-        {images.map(image => {
+        {gallery.map((image: StadiumGallery) => {
           return (
             <Box
               key={image.id}
@@ -71,7 +55,7 @@ const ImageSlider = () => {
             >
               <SliderImage
                 sx={{
-                  backgroundImage: `url(${image.url})`,
+                  backgroundImage: `url(${image.image})`,
                 }}
               />
             </Box>
@@ -83,10 +67,12 @@ const ImageSlider = () => {
           mt: '5px',
         }}
       >
-        {images.map(e => (
+        {gallery.map((e: StadiumGallery) => (
           <ThumbnailImage
+            key={e.id}
             sx={{
-              backgroundImage: `url(${e.url})`,
+              p: '0 20px',
+              backgroundImage: `url(${e.image})`,
               scale: e.id === Active ? ' 1.2' : '1',
             }}
           />
