@@ -1,19 +1,30 @@
-import { Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { ReactElement } from 'react';
+
+import { Typography, Box } from '@mui/material';
+
 import PlaceIcon from '@mui/icons-material/Place';
 import StarIcon from '@mui/icons-material/Star';
+
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { BioBox, FlexBox, LocationTypo } from './StadiumProfile.styled';
+
 import EditInput from './EditInput';
 
-const BioSection = () => {
+import { UserData } from '../../interfaces/StadiumProfile';
+
+type Props = {
+  userData: UserData;
+};
+const BioSection = ({ userData }: Props): ReactElement => {
+  const { description, price, ground, address } = userData.Stadium;
+  const { username, phone } = userData;
+
   return (
     <BioBox
       sx={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-end',
-        mt: '180px',
       }}
     >
       <FlexBox
@@ -33,22 +44,36 @@ const BioSection = () => {
           <StarIcon />
         </Box>
         <Typography variant="h5" sx={{ ml: '5px' }}>
-          ملعب الاتحاد
+          {username}
         </Typography>
       </FlexBox>
-      <EditInput
-        lastValue="ملعب الاتحاد هو ملعب كرة قدم مميز يحمل اسم نادي الاتحاد. يتميز ببنيته
-        الحديثة والمرافق الرياضية المتطورة. يعتبر محطة هامة للفرق والأندية
-        المحلية في تنظيم المباريات والمسابقات الرياضية."
-        multiline
-      />
 
+      <EditInput lastValue={description} multiline />
       <FlexBox
         sx={{
           justifyContent: 'flex-end',
         }}
       >
-        <EditInput lastValue="35 شيكل" multiline={false} />
+        <EditInput lastValue={phone} multiline={false} />
+
+        <Typography
+          sx={{
+            width: '200px',
+            fontWeight: 'bold',
+          }}
+        >
+          : رقم الهاتف
+        </Typography>
+      </FlexBox>
+      <FlexBox
+        sx={{
+          justifyContent: 'flex-end',
+        }}
+      >
+        <EditInput
+          lastValue={price ? `شيكل${price}` : 'قم بكتابة السعر'}
+          multiline={false}
+        />
 
         <Typography
           sx={{
@@ -59,12 +84,13 @@ const BioSection = () => {
           : السعر الساعة
         </Typography>
       </FlexBox>
+
       <FlexBox
         sx={{
           justifyContent: 'flex-end',
         }}
       >
-        <EditInput lastValue="عشبية" multiline={false} />
+        <EditInput lastValue={ground} multiline={false} />
         <Typography
           sx={{
             fontWeight: 'bold',
@@ -87,7 +113,7 @@ const BioSection = () => {
             alignItems: 'center',
           }}
         >
-          <EditInput lastValue="غزة-الرمال-شارع الوحدة" multiline={false} />
+          <EditInput lastValue={address} multiline={false} />
 
           <LocationTypo
             sx={{

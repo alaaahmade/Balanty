@@ -5,7 +5,7 @@ export const SideBox = styled(Box)({
   position: 'fixed',
   width: '240px',
   minHeight: 'calc(100vh - 65px)',
-  top: '4.1em',
+  top: '3.2em',
   backgroundColor: '#FFFFFF',
   borderTop: 0,
   display: 'flex',

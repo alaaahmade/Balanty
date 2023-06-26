@@ -27,7 +27,7 @@ const router = createBrowserRouter([
   {
     path: '/profile',
     element: <RootLayout />,
-    children: [{ path: 'stadium', element: <StadiumProfile /> }],
+    children: [{ path: 'stadium/:id', element: <StadiumProfile /> }],
   },
   { path: '*', element: <h1>error</h1> },
 ]);
