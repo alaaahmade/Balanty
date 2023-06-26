@@ -52,6 +52,7 @@
 
 import styled from '@emotion/styled';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
+import { Fab } from '@mui/material';
 
 import { Box } from '@mui/system';
 
@@ -112,4 +113,14 @@ export const MessageInput = styled(TextareaAutosize)({
     borderRadius: '999px',
     backgroundColor: '#2CB674',
   },
+});
+
+export const IconBackground = styled(Fab)({
+  ariaLabel: 'add',
+  size: 'small',
+  width: '35px',
+  height: '35px',
+  background: '#F2FCF5',
+  boxShadow:
+    '0px 3px 5px -1px rgba(0,0,0,0.1), 0px 6px 10px 0px rgba(0,0,0,0.1), 0px 1px 5px 0px rgba(0,0,0,0.1)',
 });

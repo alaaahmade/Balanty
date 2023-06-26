@@ -5,8 +5,13 @@ import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
 import { Fab, Typography } from '@mui/material';
 import EmojiPicker from 'emoji-picker-react';
-import { AddMessageBar, MessageInput, Wrapper } from './MatchChat.styled';
-// import Message from './Message';
+import {
+  AddMessageBar,
+  IconBackground,
+  MessageInput,
+  Wrapper,
+} from './MatchChat.styled';
+import Message from './Message';
 
 const MatchChat = () => {
   return (
@@ -25,17 +30,7 @@ const MatchChat = () => {
           Match title
         </Typography>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <Fab
-            style={{
-              width: '35px',
-              height: '35px',
-              background: '#F2FCF5',
-              boxShadow:
-                '0px 3px 5px -1px rgba(0,0,0,0.1), 0px 6px 10px 0px rgba(0,0,0,0.1), 0px 1px 5px 0px rgba(0,0,0,0.1)',
-            }}
-            aria-label="add"
-            size="small"
-          >
+          <IconBackground>
             <VideocamOutlinedIcon
               style={{
                 fill: '#2CB674',
@@ -43,18 +38,8 @@ const MatchChat = () => {
                 height: '23px',
               }}
             />
-          </Fab>
-          <Fab
-            style={{
-              width: '35px',
-              height: '35px',
-              background: '#F2FCF5',
-              boxShadow:
-                '0px 3px 5px -1px rgba(0,0,0,0.1), 0px 6px 10px 0px rgba(0,0,0,0.1), 0px 1px 5px 0px rgba(0,0,0,0.1)',
-            }}
-            aria-label="add"
-            size="small"
-          >
+          </IconBackground>
+          <IconBackground>
             <CallOutlinedIcon
               style={{
                 fill: '#2CB674',
@@ -62,11 +47,11 @@ const MatchChat = () => {
                 height: '23px',
               }}
             />
-          </Fab>
+          </IconBackground>
         </div>
       </section>
-      <EmojiPicker />
-      {/* <Message
+      {/* <EmojiPicker /> */}
+      <Message
         message="Hi G13 aaaaaaaaaaaaaaaa"
         time={Date.now().toString()}
         sender="ahmed"
@@ -99,21 +84,11 @@ const MatchChat = () => {
         sender="ahmed"
         senderAvatar="https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj"
         isReceived={false}
-      /> */}
+      />
 
       <AddMessageBar>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-          <Fab
-            style={{
-              width: '35px',
-              height: '35px',
-              background: '#F2FCF5',
-              boxShadow:
-                '0px 3px 5px -1px rgba(0,0,0,0.1), 0px 6px 10px 0px rgba(0,0,0,0.1), 0px 1px 5px 0px rgba(0,0,0,0.1)',
-            }}
-            aria-label="add"
-            size="small"
-          >
+          <IconBackground>
             <AttachFileIcon
               style={{
                 fill: '#2CB674',
@@ -121,18 +96,8 @@ const MatchChat = () => {
                 height: '23px',
               }}
             />
-          </Fab>
-          <Fab
-            style={{
-              width: '35px',
-              height: '35px',
-              background: '#F2FCF5',
-              boxShadow:
-                '0px 3px 5px -1px rgba(0,0,0,0.1), 0px 6px 10px 0px rgba(0,0,0,0.1), 0px 1px 5px 0px rgba(0,0,0,0.1)',
-            }}
-            aria-label="add"
-            size="small"
-          >
+          </IconBackground>
+          <IconBackground>
             <InsertEmoticonIcon
               style={{
                 fill: '#2CB674',
@@ -140,19 +105,15 @@ const MatchChat = () => {
                 height: '23px',
               }}
             />
-          </Fab>
+          </IconBackground>
         </div>
         <MessageInput placeholder="اكتب رسالتك" />
-        <Fab
+        <IconBackground
           style={{
             width: '43px',
             height: '43px',
             background: '#2CB674',
-            boxShadow:
-              '0px 3px 5px -1px rgba(0,0,0,0.1), 0px 6px 10px 0px rgba(0,0,0,0.1), 0px 1px 5px 0px rgba(0,0,0,0.1)',
           }}
-          aria-label="add"
-          size="medium"
         >
           <SendIcon
             style={{
@@ -163,7 +124,7 @@ const MatchChat = () => {
               marginRight: '-3px',
             }}
           />
-        </Fab>
+        </IconBackground>
       </AddMessageBar>
     </Wrapper>
   );
