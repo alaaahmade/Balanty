@@ -109,3 +109,34 @@ export const getStadiumProfileService = async (
     data: stadium,
   };
 };
+
+export const UpdateStadiumDataService = async (req: Request) => {
+  // const { StadiumId } = req.UserData this will happen after create protected routes
+  const StadiumId = 5; //and this will removed
+  const { body } = req;
+
+  const isStadiumExist = await Stadium.findOne({
+    where: { UserId: StadiumId },
+  });
+  if (!isStadiumExist) {
+    return {
+      status: 401,
+      data: 'هذا الملعب غير متاح',
+    };
+  }
+
+  const stadiumResult = await Stadium.update(body, {
+    where: { UserId: StadiumId },
+  });
+
+  const UserResult = await User.update(body, { where: { id: StadiumId } });
+
+  return {
+    status: 200,
+    data: {
+      message: 'تم الحفظ بنجاح',
+      stadiumResult: [stadiumResult as Array<number>][0][0],
+      UserResult: [UserResult as Array<number>][0][0],
+    },
+  };
+};
