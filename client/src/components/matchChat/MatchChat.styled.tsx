@@ -80,3 +80,36 @@ export const AddMessageBar = styled(Box)({
   borderTop: '1px solid #eee',
   marginTop: '1rem',
 });
+
+export const MessageInput = styled(TextareaAutosize)({
+  flexGrow: '2',
+  direction: 'rtl',
+  height: '40px !important',
+  maxHeight: '70px',
+  overflow: 'auto !important',
+  outline: 'none',
+  border: 'none',
+  padding: '5px 0.5rem !important',
+  borderBottom: '1px solid #CCD2E3 !important',
+  resize: 'none',
+
+  '&:focus': {
+    outline: 'none',
+    border: 'none',
+  },
+
+  '&::-webkit-scrollbar-track': {
+    webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.3)',
+    backgroundColor: '#F2FCF5',
+  },
+
+  '&::-webkit-scrollbar': {
+    width: '5px',
+    backgroundColor: '#2CB674',
+  },
+
+  '&::-webkit-scrollbar-thumb': {
+    borderRadius: '999px',
+    backgroundColor: '#2CB674',
+  },
+});
