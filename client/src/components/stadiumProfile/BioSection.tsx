@@ -20,6 +20,7 @@ import { BioBox, FlexBox, LocationTypo } from './StadiumProfile.styled';
 import EditInput from './EditInput';
 
 import { UserData, updatedValue } from '../../interfaces';
+import { updatedValueSchema } from '../../validation';
 
 type Props = {
   userData: UserData;
@@ -38,10 +39,13 @@ const BioSection = ({ userData }: Props): ReactElement => {
     setMouseOver(false);
   };
   const handleUpdate = async () => {
-    const { data } = await axios.patch('/api/v1/stadiums/edit', newData);
-    console.log(data);
-
-    // setEditMode(false);
+    try {
+      updatedValueSchema.validateSync(newData);
+      await axios.patch('/api/v1/stadiums/edit', newData);
+      setEditMode(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleCancel = async () => {
