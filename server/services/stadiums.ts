@@ -1,6 +1,7 @@
 import { Request } from 'express';
 import { Gallery, Stadium, User, Match, Review } from '../models';
 import { Op } from 'sequelize';
+import updatedValueSchema from '../validations/updateProfileSchema';
 
 export const getAllStadiumsService = async (): Promise<{
   status: number;
@@ -124,6 +125,7 @@ export const UpdateStadiumDataService = async (req: Request) => {
       data: 'هذا الملعب غير متاح',
     };
   }
+  await updatedValueSchema.validateAsync(body);
 
   const stadiumResult = await Stadium.update(body, {
     where: { UserId: StadiumId },
