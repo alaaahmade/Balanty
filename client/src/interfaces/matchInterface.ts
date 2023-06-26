@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction } from 'react';
+import { Dispatch, Key, ReactNode, SetStateAction } from 'react';
 import { IEvent } from '../pages/CreateMatch';
 
 export interface Option {
@@ -79,11 +79,20 @@ export interface CreateMatchFormProps {
   setOpen: (newValue: boolean) => void;
 }
 
+interface IMatchMessage {
+  id: Key | null | undefined;
+  UserId: number;
+  MatchId: number;
+  message: string;
+  updatedAt: string;
+  createdAt: string;
+}
+
 export interface IMatchDataProps {
   status: number;
   data: {
     match: {
-      MatchMessages: object[];
+      MatchMessages: IMatchMessage[];
       createdAt: string;
       description: string;
       endDate: string;
