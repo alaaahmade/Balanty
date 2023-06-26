@@ -4,7 +4,7 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 import SendIcon from '@mui/icons-material/Send';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
-import { Fab, Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import EmojiPicker from 'emoji-picker-react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
