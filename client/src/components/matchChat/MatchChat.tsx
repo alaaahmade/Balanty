@@ -15,12 +15,31 @@ import {
   Wrapper,
 } from './MatchChat.styled';
 import Message from './Message';
+import { IMatchDataProps } from '../../interfaces';
 
 const MatchChat = () => {
   const { pathname } = useLocation();
   const matchId = Number(pathname.split('/')[2]);
 
-  const [matchData, setMatchData] = useState(null);
+  const [matchData, setMatchData] = useState<IMatchDataProps>({
+    status: 0,
+    data: {
+      match: {
+        MatchMessages: [],
+        createdAt: '',
+        description: '',
+        endDate: '',
+        id: 0,
+        ownerId: 0,
+        seats: 0,
+        stadiumId: 0,
+        startDate: '',
+        title: '',
+        updatedAt: '',
+      },
+    },
+  });
+
   useEffect(() => {
     (async () => {
       try {
@@ -35,7 +54,7 @@ const MatchChat = () => {
     })();
   }, []);
 
-  console.log(matchData);
+  console.log(matchData?.data?.match.id);
 
   return (
     <Wrapper>

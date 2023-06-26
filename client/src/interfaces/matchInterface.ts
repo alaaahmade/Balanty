@@ -78,3 +78,22 @@ export interface MyContextProviderProps {
 export interface CreateMatchFormProps {
   setOpen: (newValue: boolean) => void;
 }
+
+export interface IMatchDataProps {
+  status: number;
+  data: {
+    match: {
+      MatchMessages: object[];
+      createdAt: string;
+      description: string;
+      endDate: string;
+      id: number;
+      ownerId: number;
+      seats: number;
+      stadiumId: number;
+      startDate: string;
+      title: string;
+      updatedAt: string;
+    };
+  };
+}
