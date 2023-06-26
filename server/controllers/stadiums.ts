@@ -1,10 +1,10 @@
 import {
   getAllStadiumsService,
+  getStadiumDetailsService,
   getStadiumMatchesService,
   getStadiumProfileService,
 } from '../services';
 import { RequestHandler, Request, Response } from 'express';
-import { getStadiumDetailsService } from '../services/';
 
 export const getAllStadiums: RequestHandler = async (
   req: Request,

@@ -20,8 +20,8 @@ export const getStadiumDetailsService = async (
   req: Request,
 ): Promise<{ status: number; data: string | object }> => {
   const userId = req.params.id;
-  const ExisteStadium = await Stadium.findOne({ where: { UserId: +userId } });
-  if (!ExisteStadium) {
+  const isStadiumExist = await Stadium.findOne({ where: { UserId: +userId } });
+  if (!isStadiumExist) {
     return {
       status: 401,
       data: 'هذا الملعب غير متاح',
@@ -47,8 +47,10 @@ export const getStadiumMatchesService = async (
 ): Promise<{ status: number; data: string | Match[] }> => {
   const { stadiumId } = req.params;
 
-  const ExistStadium = await Stadium.findOne({ where: { UserId: +stadiumId } });
-  if (!ExistStadium) {
+  const isStadiumExist = await Stadium.findOne({
+    where: { UserId: +stadiumId },
+  });
+  if (!isStadiumExist) {
     return {
       status: 401,
       data: 'هذا الملعب غير متاح',
@@ -75,8 +77,8 @@ export const getStadiumProfileService = async (
 ): Promise<{ status: number; data: User | null | string }> => {
   const { id } = req.params;
 
-  const ExistStadium = await Stadium.findOne({ where: { UserId: id } });
-  if (!ExistStadium) {
+  const isStadiumExist = await Stadium.findOne({ where: { UserId: id } });
+  if (!isStadiumExist) {
     return {
       status: 401,
       data: 'هذا الملعب غير متاح',
