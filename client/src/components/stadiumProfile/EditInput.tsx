@@ -32,6 +32,10 @@ const EditInput: React.FC<Props> = ({
       disabled={!editMode}
       variant="standard"
       multiline={multiline}
+      sx={{
+        textAlign: 'right',
+        direction: 'right',
+      }}
       InputProps={{
         disableUnderline: true,
       }}
