@@ -1,7 +1,7 @@
 import { Request } from 'express';
 import { Gallery, Stadium, User, Match, Review } from '../models';
 import { Op } from 'sequelize';
-import updatedValueSchema from '../validations/updateProfileSchema';
+import updatedValueSchema from '../validations/stadiumProfileSchema';
 
 export const getAllStadiumsService = async (): Promise<{
   status: number;

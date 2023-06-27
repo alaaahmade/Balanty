@@ -4,7 +4,7 @@ import CustomError from './CustomError';
 const errorMappings: { [name: string]: number } = {
   JsonWebTokenError: 401,
   Unauthorized: 401,
-  ValidationError: 422,
+  ValidationError: 403,
   NotFound: 404,
 };
 
