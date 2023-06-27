@@ -14,7 +14,7 @@ export const Wrapper = styled(Box)({
   border: '1px solid #eee',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'flex-end',
+  justifyContent: 'space-between',
   flexGrow: '2',
   padding: '0 1rem 0',
   margin: '1rem 0',

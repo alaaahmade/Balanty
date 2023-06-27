@@ -18,6 +18,8 @@ import {
 import Message from './Message';
 import { IMatchDataProps } from '../../interfaces';
 
+import ChatImage from '../../assets/chat.svg';
+
 const MatchChat = () => {
   const { pathname } = useLocation();
   const matchId = Number(pathname.split('/')[2]);
@@ -78,6 +80,7 @@ const MatchChat = () => {
         } catch (error) {
           // eslint-disable-next-line no-alert
           alert('Error when accessing match');
+          <Alert severity="error">Sending message failed</Alert>;
         }
       })();
     }
@@ -88,7 +91,7 @@ const MatchChat = () => {
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.shiftKey) {
       addMessage();
     }
   };
@@ -129,60 +132,52 @@ const MatchChat = () => {
           </IconBackground>
         </div>
       </section>
-      {/* <EmojiPicker /> */}
 
-      {matchMessages.length &&
-        matchMessages.map((message, i, arr) => {
-          return (
-            <Message
-              key={message.id}
-              message={message.message}
-              time={message.createdAt}
-              senderAvatar={
-                message.UserId !== arr[i - 1]?.UserId
-                  ? 'https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj'
-                  : null
-              }
-              sender={message.UserId}
-              isReceived={message.UserId === fakeLoggedUserId}
+      <div style={{ flexGrow: '2' }}>
+        {matchMessages.length > 0 ? (
+          matchMessages.map((message, i, arr) => {
+            return (
+              <Message
+                key={message.id}
+                message={message.message}
+                time={message.createdAt}
+                senderAvatar={
+                  // message.UserId === fakeLoggedUserId &&
+                  message.UserId !== arr[i - 1]?.UserId
+                    ? 'https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj'
+                    : null
+                }
+                sender={message.UserId}
+                isReceived={message.UserId === fakeLoggedUserId}
+              />
+            );
+          })
+        ) : (
+          <>
+            <img
+              src={ChatImage}
+              alt="Chat"
+              style={{
+                display: 'block',
+                margin: '0 auto',
+                width: '220px',
+                height: '220px',
+              }}
             />
-          );
-        })}
-      {/* <Message
-        message="Hi G13 aaaaaaaaaaaaaaaa"
-        time={Date.now().toString()}
-        sender="ahmed"
-        senderAvatar="https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj"
-        isReceived
-      />
-      <Message
-        message="Hi G13 aaaaaaaaaaaaaaaa"
-        time={Date.now().toString()}
-        sender="ahmed"
-        isReceived
-        senderAvatar={null}
-      />
-      <Message
-        message="Hi G13 fffffffffffffffff"
-        time={Date.now().toString()}
-        sender="ahmed"
-        senderAvatar="https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj"
-        isReceived={false}
-      />
-      <Message
-        message="Hi G13 tttttttttttttt"
-        time={Date.now().toString()}
-        sender="ahmed"
-        senderAvatar="https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj"
-        isReceived
-      />
-      <Message
-        message="Hi G13 ghhhhhhhhhhhhhhhhhhh"
-        time={Date.now().toString()}
-        sender="ahmed"
-        senderAvatar="https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj"
-        isReceived={false}
-      /> */}
+            <Typography
+              component="span"
+              style={{
+                display: 'block',
+                textAlign: 'center',
+                color: '#2CB674',
+                fontWeight: '500',
+              }}
+            >
+              No Message Added yet
+            </Typography>
+          </>
+        )}
+      </div>
 
       <AddMessageBar>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
