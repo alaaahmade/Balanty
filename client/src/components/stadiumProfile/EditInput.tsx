@@ -1,6 +1,4 @@
-// import { Edit } from '@mui/icons-material';
-// import { Button, IconButton, InputAdornment } from '@mui/material';
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { EditInputs } from './StadiumProfile.styled';
 import { Props, updatedValue } from '../../interfaces';
 
@@ -20,6 +18,10 @@ const EditInput: React.FC<Props> = ({
       return { ...prev, [key]: e.target.value };
     });
   };
+
+  useEffect(() => {
+    setValue(lastValue);
+  }, [editMode, lastValue]);
 
   return (
     <EditInputs

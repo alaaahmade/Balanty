@@ -13,4 +13,6 @@ export type {
   createMatchError,
   Props,
   updatedValue,
+  updatedValueError,
+  BioSectionProps,
 } from './StadiumProfile';

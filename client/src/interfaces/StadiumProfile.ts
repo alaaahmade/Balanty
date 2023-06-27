@@ -48,3 +48,16 @@ export interface updatedValue {
   ground?: string;
   address?: string;
 }
+
+export interface updatedValueError {
+  response: {
+    status: number;
+    data: { data: { status: number; message: string } };
+  };
+}
+
+export interface BioSectionProps {
+  userData: UserData;
+  setEditMode: Dispatch<SetStateAction<boolean>>;
+  editMode: boolean;
+}

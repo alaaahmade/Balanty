@@ -11,6 +11,8 @@ import { UserData, errorI } from '../interfaces';
 
 const StadiumProfile = (): ReactElement => {
   const [userData, setUserData] = useState<UserData | null>(null);
+  const [editMode, setEditMode] = useState(false);
+
   const [gallery, setGallery] = useState([
     {
       id: 0,
@@ -38,7 +40,7 @@ const StadiumProfile = (): ReactElement => {
 
   useEffect(() => {
     fetchProfileData(id ?? '');
-  }, [id]);
+  }, [id, editMode]);
   return (
     <Box>
       <ImageSlider gallery={gallery} />
@@ -52,7 +54,13 @@ const StadiumProfile = (): ReactElement => {
           m: '17% 3% 3% 3%',
         }}
       >
-        {userData && <BioSection userData={userData} />}
+        {userData && (
+          <BioSection
+            setEditMode={setEditMode}
+            editMode={editMode}
+            userData={userData}
+          />
+        )}
         <ProfileCalender />
       </Box>
     </Box>

@@ -7,10 +7,16 @@ const updatedValueSchema = object({
     .nullable()
     .typeError('يجب أن يكون الوصف نص '),
 
-  phone: string()
-    .min(3, 'يجب أن يحتوي رقم الهاتف على الأقل 3 أرقام')
-    .max(10, 'يجب أن يحتوي رقم الهاتف على الأكثر 10 أرقام')
-    .nullable(),
+  phone: number()
+    .test(
+      'phone-length',
+      'يجب ان يتكون رقم الهاتف من 7 الى 10 ارقام',
+      value =>
+        value === undefined ||
+        (value.toString().length >= 7 && value.toString().length <= 10),
+    )
+    .nullable()
+    .typeError('يجب ان يكون رقم الهاتف عبارة عن أرقام'),
   price: number()
     .min(3, 'يجب أن يكون السعر أكبر من أو يساوي 3')
     .nullable()

@@ -1,9 +1,10 @@
-import 'react-slideshow-image/dist/styles.css';
+import { FC, ReactElement, useState } from 'react';
 import { Slide } from 'react-slideshow-image';
+
 import { Box } from '@mui/system';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { FC, ReactElement, useState } from 'react';
+
 import {
   ArrowStyle,
   SliderBox,
@@ -11,10 +12,13 @@ import {
   ThumbnailBox,
   ThumbnailImage,
 } from './StadiumProfile.styled';
+
 import {
   StadiumGallery,
   StadiumProfileProps,
 } from '../../interfaces/StadiumProfile';
+
+import 'react-slideshow-image/dist/styles.css';
 
 const ImageSlider: FC<StadiumProfileProps> = ({ gallery }): ReactElement => {
   const [Active, setActive] = useState(0);

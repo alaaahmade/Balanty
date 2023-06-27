@@ -15,24 +15,34 @@ import { Edit } from '@mui/icons-material';
 
 import axios from 'axios';
 
+import { useNavigate } from 'react-router-dom';
 import { BioBox, FlexBox, LocationTypo } from './StadiumProfile.styled';
 
 import EditInput from './EditInput';
 
-import { UserData, updatedValue } from '../../interfaces';
+import {
+  updatedValueError,
+  updatedValue,
+  BioSectionProps,
+} from '../../interfaces';
 import { updatedValueSchema } from '../../validation';
 
-type Props = {
-  userData: UserData;
-};
-const BioSection = ({ userData }: Props): ReactElement => {
+const BioSection = ({
+  userData,
+  editMode,
+  setEditMode,
+}: BioSectionProps): ReactElement => {
   const { description, price, ground, address } = userData.Stadium;
   const { username, phone } = userData;
-  const [editMode, setEditMode] = useState(false);
+
   const [EditAble, setEditAble] = useState(true);
+  const [save, setSave] = useState(false);
   const [hov, setHove] = useState(false);
   const [mouseOver, setMouseOver] = useState(false);
+  const [validation, setValidation] = useState('');
   const [newData, setNewData] = useState<updatedValue>({});
+
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setEditMode(true);
@@ -43,13 +53,27 @@ const BioSection = ({ userData }: Props): ReactElement => {
       updatedValueSchema.validateSync(newData);
       await axios.patch('/api/v1/stadiums/edit', newData);
       setEditMode(false);
+      setSave(true);
+      setValidation('');
     } catch (error) {
-      console.log(error);
+      if (
+        (error as { name: string; message: string }).name === 'ValidationError'
+      ) {
+        setValidation((error as { message: string }).message);
+      } else if (
+        (error as updatedValueError).response.data.data.status === 403
+      ) {
+        setValidation((error as updatedValueError).response.data.data.message);
+      } else {
+        navigate('/serverError');
+      }
     }
   };
 
   const handleCancel = async () => {
+    setSave(false);
     setEditMode(false);
+    setValidation('');
   };
 
   const handleMouseOut = () => {
@@ -259,6 +283,17 @@ const BioSection = ({ userData }: Props): ReactElement => {
             <Button onClick={handleUpdate}>حفظ</Button>
           </Box>
         ) : null}
+        {validation && (
+          <Typography
+            sx={{
+              color: 'red',
+
+              m: '-10px 5px 10px 5px',
+            }}
+          >
+            {validation}
+          </Typography>
+        )}
       </BioBox>
     </Box>
   );
