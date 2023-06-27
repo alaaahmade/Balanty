@@ -48,5 +48,5 @@ export const UpdateStadiumData: RequestHandler = async (
 ) => {
   const response = await UpdateStadiumDataService(req);
 
-  res.status(200).json(response);
+  res.status(response.status).json(response);
 };
