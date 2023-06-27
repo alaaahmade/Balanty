@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { TextField, Typography } from '@mui/material';
+import { Button, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 export const arrowStyle = {};
@@ -32,7 +32,7 @@ export const ThumbnailImage = styled(Box)({
   backgroundSize: 'cover',
   gap: '3%',
   backgroundRepeat: 'no-repeat',
-  width: '23%',
+  width: '21%',
   height: '80px',
   transition: '0.4s',
   borderRadius: '5px',
@@ -55,12 +55,13 @@ export const SliderImage = styled(Box)({
   width: '100%',
   height: '100%',
   borderRadius: '5px',
+  position: 'relative',
 });
 
 export const SliderBox = styled(Box)({
-  width: 'calc(100% - 240px)',
+  width: 'calc(100% - 280px)',
   borderRadius: '5px',
-  height: '75vh',
+  height: '65vh',
 });
 
 export const BioBox = styled(Box)({
@@ -110,5 +111,16 @@ export const EditInputs = styled(TextField)({
   },
   '& .css-1x51dt5-MuiInputBase-input-MuiInput-input.Mui-disabled': {
     WebkitTextFillColor: '#01031C',
+  },
+});
+
+export const EditGalleryButton = styled(Button)({
+  position: 'absolute',
+  bottom: '5%',
+  right: '5%',
+  color: '#01031C',
+  backgroundColor: '#ffffff75',
+  '&:hover': {
+    backgroundColor: '#ffffffc2',
   },
 });
