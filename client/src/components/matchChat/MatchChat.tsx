@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import EmojiPicker from 'emoji-picker-react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import { Alert } from '@mui/material';
 import {
   AddMessageBar,
   IconBackground,
@@ -39,6 +40,7 @@ const MatchChat = () => {
       },
     },
   });
+
   const [messageInput, setMessageInput] = useState<string>('');
 
   const fakeLoggedUserId = 1;
@@ -54,6 +56,7 @@ const MatchChat = () => {
       } catch (error) {
         // eslint-disable-next-line no-alert
         alert('Error when accessing match');
+        <Alert severity="error">Error happened when accessing match</Alert>;
       }
     })();
   }, []);
@@ -70,8 +73,7 @@ const MatchChat = () => {
               message: messageInput.trim(),
             },
           );
-          console.log(data, 'add message function');
-
+          setMessageInput('');
           // setMatchData(data);
         } catch (error) {
           // eslint-disable-next-line no-alert
@@ -80,6 +82,7 @@ const MatchChat = () => {
       })();
     }
   };
+
   const handleInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setMessageInput(e.target.value);
   };
@@ -87,7 +90,6 @@ const MatchChat = () => {
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter') {
       addMessage();
-      setMessageInput('');
     }
   };
 
@@ -217,7 +219,7 @@ const MatchChat = () => {
           }}
         >
           <SendIcon
-            onClick={addMessage}
+            onClick={() => addMessage()}
             style={{
               fill: '#fff',
               transform: 'rotate(-30deg)',
