@@ -166,6 +166,68 @@ describe('GET /api/v1/matches', () => {
   });
 });
 
+describe('patch /api/v1/stadiums/edit', () => {
+  test('responds from /api/v1/stadiums/edit with validation Error and 422 status code', done => {
+    request(app)
+      .patch('/api/v1/stadiums/edit')
+      .set('Accept', 'application/json')
+      .send({
+        description:
+          'يحتوي الملعب المصغر على عشب صناعي غير حشو ومنصات صدمات. يعتمد حجم ملعب كرة القدم المصغر على حجم القاعدة. اتصل بنا للحصول على التفاصيلh',
+        phone: 'h0591234563',
+        price: '750',
+        ground: 'hانجيل',
+        address: 'hالزيتون',
+      })
+      .end((err, res) => {
+        expect(res.status).toBe(422);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(data.status).toBe(422);
+        expect(data.message).toBe(
+          'يجب أن يحتوي رقم الهاتف على الأكثر 10 أرقام',
+        );
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
+
+  test('responds from /api/v1/stadiums/edit with JSON and 422 status code', done => {
+    request(app)
+      .patch('/api/v1/stadiums/edit')
+      .set('Accept', 'application/json')
+      .send({
+        description:
+          'يحتوي الملعب المصغر على عشب صناعي غير حشو ومنصات صدمات. يعتمد حجم ملعب كرة القدم المصغر على حجم القاعدة. اتصل بنا للحصول على التفاصيلh',
+        phone: '0591234',
+        price: '750',
+        ground: 'hانجيل',
+        address: 'hالزيتون',
+      })
+      .end((err, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(response.status).toBe(200);
+        expect(data.UserResult).toBe(1);
+        expect(data.stadiumResult).toBe(1);
+        expect(data.message).toBe('تم الحفظ بنجاح');
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
+});
+
 afterAll(() => {
   sequelize.close();
 });
