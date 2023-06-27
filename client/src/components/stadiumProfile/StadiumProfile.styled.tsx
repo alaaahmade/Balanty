@@ -124,3 +124,10 @@ export const EditGalleryButton = styled(Button)({
     backgroundColor: '#ffffffc2',
   },
 });
+
+export const GalleryAction = styled(Button)({
+  color: '#4c8942',
+  '&:hover': {
+    backgroundColor: '#0d710d3d',
+  },
+});
