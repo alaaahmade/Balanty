@@ -61,3 +61,8 @@ export interface BioSectionProps {
   setEditMode: Dispatch<SetStateAction<boolean>>;
   editMode: boolean;
 }
+
+export interface EditGalleryPopupProps {
+  editGallery: boolean;
+  setEditGallery: Dispatch<SetStateAction<boolean>>;
+}

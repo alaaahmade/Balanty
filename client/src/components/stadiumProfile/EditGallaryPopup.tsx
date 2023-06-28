@@ -1,20 +1,43 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import {
+  ChangeEvent,
+  Dispatch,
+  FC,
+  ReactElement,
+  SetStateAction,
+  useState,
+} from 'react';
+
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Box, Typography } from '@mui/material';
+
+import { EditGalleryPopupProps } from '../../interfaces';
+
 import { GalleryAction } from './StadiumProfile.styled';
 
-const EditGallaryPopup = ({ editGallery, setEditGallery }) => {
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
+const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
+  editGallery,
+  setEditGallery,
+}): ReactElement => {
+  const [newImage, setNewImage] = useState('');
 
   const handleClose = () => {
+    setNewImage('');
     setEditGallery(false);
+  };
+  const selectNewImage = (event: ChangeEvent<HTMLInputElement>) => {
+    const { files } = event.target;
+    if (files && files.length > 0) {
+      let uploadedImage = '';
+      const reader = new FileReader();
+      reader.addEventListener('load', () => {
+        uploadedImage = reader.result as string;
+        setNewImage(uploadedImage);
+      });
+      reader.readAsDataURL(files[0]);
+    }
   };
 
   return (
@@ -58,7 +81,10 @@ const EditGallaryPopup = ({ editGallery, setEditGallery }) => {
                 height: '280px',
                 border: '2px dashed #ccc',
                 borderRadius: '5px',
-                backgroundImage: `url()`,
+                backgroundImage: `url(${newImage})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'bottom',
                 position: 'relative',
               }}
             >
@@ -74,6 +100,17 @@ const EditGallaryPopup = ({ editGallery, setEditGallery }) => {
               >
                 اختيار صورة جديدة
               </Typography>
+              {/* {newImage && (
+                <img
+                  style={{
+                    width: '100%',
+                    height: '100%',
+
+                  }}
+                  alt="newImage"
+                  src={newImage}
+                />
+              )} */}
             </Box>
             <input
               id="input"
@@ -83,7 +120,7 @@ const EditGallaryPopup = ({ editGallery, setEditGallery }) => {
               type="file"
               accept="image/*"
               multiple
-              onChange={e => console.log(e.target.value)}
+              onChange={selectNewImage}
             />
           </label>
         </DialogContent>
@@ -109,4 +146,4 @@ const EditGallaryPopup = ({ editGallery, setEditGallery }) => {
   );
 };
 
-export default EditGallaryPopup;
+export default EditGalleryPopup;

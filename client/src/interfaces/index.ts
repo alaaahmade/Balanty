@@ -15,4 +15,5 @@ export type {
   updatedValue,
   updatedValueError,
   BioSectionProps,
+  EditGalleryPopupProps,
 } from './StadiumProfile';
