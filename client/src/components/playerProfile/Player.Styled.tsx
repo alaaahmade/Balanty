@@ -1,5 +1,5 @@
 import { Typography, Tab } from '@mui/material';
-import { styled } from '@mui/system';
+import { Box, styled } from '@mui/system';
 
 export const Cover = styled('img')({
   width: '100%',
@@ -84,4 +84,17 @@ export const FollowsWrapper = styled('div')({
   flexDirection: 'column',
   justifyContent: 'space-between',
   paddingBottom: 28,
+});
+
+export const BioBox = styled(Box)({
+  marginTop: 22,
+  width: '350px',
+  marginLeft: '42px',
+  padding: '10px',
+  border: '1px solid #ccc',
+  backgroundColor: '#F2FCF5',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '2px',
+  borderRadius: '3px',
 });
