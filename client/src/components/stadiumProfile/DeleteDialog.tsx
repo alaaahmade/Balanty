@@ -18,7 +18,7 @@ const DeleteDialog: FC<deleteDialogProps> = ({
 }) => {
   const HandleAgree = async () => {
     try {
-      await axios.get(`/api/v1/gallery/${ImageId}/${StadiumId}`);
+      await axios.delete(`/api/v1/gallery/${ImageId}/${StadiumId}`);
       handleClose();
     } catch (error) {
       console.log(error);
