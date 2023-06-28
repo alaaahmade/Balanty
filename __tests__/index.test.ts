@@ -236,6 +236,7 @@ describe('Post /api/v1/stadiums/gallery', () => {
       .send({
         image:
           'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
+        StadiumId: 5,
       })
       .end((err, res) => {
         expect(res.status).toBe(200);
@@ -260,6 +261,7 @@ describe('Post /api/v1/stadiums/gallery', () => {
       .send({
         image:
           'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
+        StadiumId: 5,
       })
       .end((err, res) => {
         expect(res.status).toBe(401);
@@ -286,6 +288,7 @@ describe('Patch /api/v1/stadiums/gallery', () => {
         id: 17,
         image:
           'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
+        StadiumId: 5,
       })
       .end((err, res) => {
         expect(res.status).toBe(200);

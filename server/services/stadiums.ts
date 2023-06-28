@@ -155,11 +155,18 @@ export const UpdateStadiumGalleryService = async (
   data: string | object;
 }> => {
   const {
-    body: { image, id },
+    body: { image, id, StadiumId },
   } = req;
 
   // const { StadiumId } = req.UserData this will happen after create protected routes
-  const StadiumId = 5; //and this will removed
+  const checkAuthId = 5; //and this will removed
+
+  if (StadiumId !== checkAuthId) {
+    return {
+      status: 401,
+      data: 'UnAuthorize',
+    };
+  }
 
   const check = await Gallery.findAll({ where: { id, StadiumId } });
   if (!check.length) {
@@ -187,9 +194,17 @@ export const AddStadiumImageService = async (
   data: string | object;
 }> => {
   const { body } = req;
+  const { StadiumId } = body;
 
   // const { StadiumId } = req.UserData this will happen after create protected routes
-  const StadiumId = 5; //and this will removed
+  const checkAuthId = 5; //and this will removed
+
+  if (StadiumId !== checkAuthId) {
+    return {
+      status: 401,
+      data: 'UnAuthorize',
+    };
+  }
 
   const check = await Gallery.findAll({ where: { StadiumId } });
   if (check.length >= 4) {
