@@ -307,6 +307,37 @@ describe('Patch /api/v1/stadiums/gallery', () => {
   });
 });
 
+describe('delete /api/v1/stadiums/gallery/:ImageId/:StadiumId', () => {
+  test('responds from /api/v1/stadiums/gallery/19/5 get 204 status code', done => {
+    request(app)
+      .delete('/api/v1/stadiums/gallery/19/5')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.status).toBe(204);
+        expect(typeof res).toBe('object');
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
+
+  test('responds from /api/v1/stadiums/gallery/19/5 get 401 status code', done => {
+    request(app)
+      .delete('/api/v1/stadiums/gallery/19/5')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.status).toBe(401);
+        expect(typeof res).toBe('object');
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
+});
 afterAll(() => {
   sequelize.close();
 });

@@ -249,7 +249,6 @@ export const deleteStadiumImageService = async (
   const result = await Gallery.destroy({
     where: { StadiumId: +StadiumId, id: +ImageId },
   });
-  console.log(result);
 
   return { status: 204, data: result };
 };
