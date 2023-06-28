@@ -65,4 +65,5 @@ export interface BioSectionProps {
 export interface EditGalleryPopupProps {
   editGallery: boolean;
   setEditGallery: Dispatch<SetStateAction<boolean>>;
+  newImageId: number;
 }

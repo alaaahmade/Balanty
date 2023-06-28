@@ -1,11 +1,4 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  FC,
-  ReactElement,
-  SetStateAction,
-  useState,
-} from 'react';
+import { ChangeEvent, FC, ReactElement, useState } from 'react';
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -13,6 +6,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Box, Typography } from '@mui/material';
 
+import axios from 'axios';
+import { Cloudinary } from '@cloudinary/url-gen';
 import { EditGalleryPopupProps } from '../../interfaces';
 
 import { GalleryAction } from './StadiumProfile.styled';
@@ -27,6 +22,25 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
     setNewImage('');
     setEditGallery(false);
   };
+  const presetKey = 'ry6frp8c';
+  const cloudName = 'dtpbcx2kv';
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: 'dtpbcx2kv',
+    },
+  });
+
+  const uploadImage = async path => {
+    const formData = new FormData();
+    formData.append('file', path);
+    formData.append('upload_preset', presetKey);
+    const { data } = await axios.post(
+      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+      formData,
+    );
+    console.log(data.secure_url);
+  };
+
   const selectNewImage = (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
     if (files && files.length > 0) {
@@ -37,6 +51,8 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
         setNewImage(uploadedImage);
       });
       reader.readAsDataURL(files[0]);
+
+      setNewFile(files[0]);
     }
   };
 

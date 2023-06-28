@@ -3,7 +3,7 @@ import { Slide } from 'react-slideshow-image';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Button, Box } from '@mui/material';
+import { Box } from '@mui/material';
 
 import {
   ArrowStyle,
@@ -20,16 +20,22 @@ import {
 } from '../../interfaces/StadiumProfile';
 
 import 'react-slideshow-image/dist/styles.css';
-import EditGallaryPopup from './EditGallaryPopup';
+import EditGalleryPopup from './EditGallaryPopup';
 
 const ImageSlider: FC<StadiumProfileProps> = ({ gallery }): ReactElement => {
   const [Active, setActive] = useState(0);
   const [editGallery, setEditGallery] = useState(true);
   const [imageHover, setImageHover] = useState(false);
+  const [newImageId, setNewImageId] = useState(0);
 
   const handleSlideChange = (currentSlide: number, e: number) => {
     const { id } = gallery[e];
     setActive(id);
+  };
+
+  const handleAddImage = (id: number) => {
+    setNewImageId(id);
+    setEditGallery(true);
   };
 
   return (
@@ -38,9 +44,10 @@ const ImageSlider: FC<StadiumProfileProps> = ({ gallery }): ReactElement => {
         mt: '1.5%',
       }}
     >
-      <EditGallaryPopup
+      <EditGalleryPopup
         editGallery={editGallery}
         setEditGallery={setEditGallery}
+        newImageId={newImageId}
       />
       <SliderBox
         sx={{
@@ -84,7 +91,7 @@ const ImageSlider: FC<StadiumProfileProps> = ({ gallery }): ReactElement => {
                   onMouseLeave={() => setImageHover(false)}
                 >
                   {imageHover && (
-                    <EditGalleryButton onClick={() => setEditGallery(true)}>
+                    <EditGalleryButton onClick={() => handleAddImage(image.id)}>
                       اضافة صورة
                     </EditGalleryButton>
                   )}
