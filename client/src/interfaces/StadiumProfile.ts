@@ -7,6 +7,8 @@ export interface StadiumGallery {
 
 export interface StadiumProfileProps {
   gallery: StadiumGallery[];
+  setEditGallery: Dispatch<SetStateAction<boolean>>;
+  editGallery: boolean;
 }
 export interface Stadium {
   id: number;
@@ -65,5 +67,5 @@ export interface BioSectionProps {
 export interface EditGalleryPopupProps {
   editGallery: boolean;
   setEditGallery: Dispatch<SetStateAction<boolean>>;
-  newImageId: number;
+  ImageId: number;
 }

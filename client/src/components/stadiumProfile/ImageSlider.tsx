@@ -22,11 +22,14 @@ import {
 import 'react-slideshow-image/dist/styles.css';
 import EditGalleryPopup from './EditGallaryPopup';
 
-const ImageSlider: FC<StadiumProfileProps> = ({ gallery }): ReactElement => {
+const ImageSlider: FC<StadiumProfileProps> = ({
+  gallery,
+  setEditGallery,
+  editGallery,
+}): ReactElement => {
   const [Active, setActive] = useState(0);
-  const [editGallery, setEditGallery] = useState(true);
   const [imageHover, setImageHover] = useState(false);
-  const [newImageId, setNewImageId] = useState(0);
+  const [ImageId, setImageId] = useState(0);
 
   const handleSlideChange = (currentSlide: number, e: number) => {
     const { id } = gallery[e];
@@ -34,20 +37,16 @@ const ImageSlider: FC<StadiumProfileProps> = ({ gallery }): ReactElement => {
   };
 
   const handleAddImage = (id: number) => {
-    setNewImageId(id);
+    setImageId(id);
     setEditGallery(true);
   };
 
   return (
-    <Box
-      sx={{
-        mt: '1.5%',
-      }}
-    >
+    <Box>
       <EditGalleryPopup
         editGallery={editGallery}
         setEditGallery={setEditGallery}
-        newImageId={newImageId}
+        ImageId={ImageId}
       />
       <SliderBox
         sx={{
@@ -92,7 +91,7 @@ const ImageSlider: FC<StadiumProfileProps> = ({ gallery }): ReactElement => {
                 >
                   {imageHover && (
                     <EditGalleryButton onClick={() => handleAddImage(image.id)}>
-                      اضافة صورة
+                      تعديل
                     </EditGalleryButton>
                   )}
                 </SliderImage>

@@ -5,6 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import { EditGalleryPopupProps } from '../../interfaces';
 
 import {
@@ -19,10 +20,11 @@ import {
 const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   editGallery,
   setEditGallery,
-  newImageId,
+  ImageId,
 }): ReactElement => {
   const [newImage, setNewImage] = useState<string>('');
   const [newFile, setNewFile] = useState<File>();
+  const { id } = useParams();
 
   const handleClose = () => {
     setNewImage('');
@@ -60,13 +62,13 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   const handleSave = async () => {
     try {
       const newUrl = await uploadImage(newFile as File);
-      const { data } = await axios.patch('/api/v1/gallery', {
+      await axios.patch('/api/v1/stadiums/gallery', {
         image: newUrl,
-        id: newImageId,
+        id: ImageId,
+        StadiumId: id,
       });
-      console.log(data);
-
       setEditGallery(false);
+      setNewImage('');
     } catch (error) {
       console.log(error);
     }
@@ -75,13 +77,13 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   const handleAddNew = async () => {
     try {
       const newUrl = await uploadImage(newFile as File);
-      const { data } = await axios.post('/api/v1/gallery', {
+      await axios.post('/api/v1/stadiums/gallery', {
         image: newUrl,
-        id: newImageId,
+        StadiumId: id,
       });
-      console.log(data);
 
       setEditGallery(false);
+      setNewImage('');
     } catch (error) {
       console.log(error);
     }

@@ -12,6 +12,7 @@ import { UserData, errorI } from '../interfaces';
 const StadiumProfile = (): ReactElement => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [editMode, setEditMode] = useState(false);
+  const [editGallery, setEditGallery] = useState(false);
 
   const [gallery, setGallery] = useState([
     {
@@ -40,10 +41,14 @@ const StadiumProfile = (): ReactElement => {
 
   useEffect(() => {
     fetchProfileData(id ?? '');
-  }, [id, editMode]);
+  }, [id, editMode, editGallery]);
   return (
     <Box>
-      <ImageSlider gallery={gallery} />
+      <ImageSlider
+        editGallery={editGallery}
+        setEditGallery={setEditGallery}
+        gallery={gallery}
+      />
       <Box
         sx={{
           display: 'flex',
