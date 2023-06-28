@@ -9,6 +9,7 @@ import { RequestHandler, Request, Response } from 'express';
 import {
   AddStadiumImageService,
   UpdateStadiumGalleryService,
+  deleteStadiumImageService,
 } from '../services/stadiums';
 
 export const getAllStadiums: RequestHandler = async (
@@ -69,6 +70,15 @@ export const AddStadiumImage: RequestHandler = async (
   res: Response,
 ) => {
   const response = await AddStadiumImageService(req);
+
+  res.status(response.status).json(response);
+};
+
+export const deleteStadiumImage: RequestHandler = async (
+  req: Request,
+  res: Response,
+) => {
+  const response = await deleteStadiumImageService(req);
 
   res.status(response.status).json(response);
 };

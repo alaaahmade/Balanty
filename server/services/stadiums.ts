@@ -221,3 +221,35 @@ export const AddStadiumImageService = async (
     data: galleries,
   };
 };
+
+export const deleteStadiumImageService = async (
+  req: Request,
+): Promise<{ status: number; data: string | number }> => {
+  const { ImageId, StadiumId } = req.params;
+  // const checkAuthId = req.UserData.StadiumId; this will happen after create protected routes
+  const checkAuthId = 5;
+
+  if (+StadiumId !== checkAuthId) {
+    return {
+      status: 401,
+      data: 'UnAuthorize',
+    };
+  }
+
+  const check = await Gallery.findOne({
+    where: { StadiumId: +StadiumId, id: +ImageId },
+  });
+  if (!check) {
+    return {
+      status: 401,
+      data: 'هذه الصورة غير موجودة',
+    };
+  }
+
+  const result = await Gallery.destroy({
+    where: { StadiumId: +StadiumId, id: +ImageId },
+  });
+  console.log(result);
+
+  return { status: 204, data: result };
+};
