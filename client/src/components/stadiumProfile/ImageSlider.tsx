@@ -3,7 +3,7 @@ import { Slide } from 'react-slideshow-image';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 
 import {
   ArrowStyle,
@@ -22,6 +22,7 @@ import {
 
 import 'react-slideshow-image/dist/styles.css';
 import EditGalleryPopup from './EditGallaryPopup';
+import DeleteDialog from './DeleteDialog';
 
 const ImageSlider: FC<StadiumProfileProps> = ({
   gallery,
@@ -32,6 +33,15 @@ const ImageSlider: FC<StadiumProfileProps> = ({
   const [imageHover, setImageHover] = useState(false);
   const [ImageId, setImageId] = useState(0);
   const [StadiumId, setStadiumId] = useState<number>(0);
+  const [deleteDialog, setDeleteDialog] = useState(true);
+
+  const handleClickOpen = () => {
+    setDeleteDialog(true);
+  };
+
+  const handleClose = () => {
+    setDeleteDialog(false);
+  };
 
   const handleSlideChange = (currentSlide: number, e: number) => {
     const { id } = gallery[e];
@@ -49,6 +59,7 @@ const ImageSlider: FC<StadiumProfileProps> = ({
 
   return (
     <Box>
+      <DeleteDialog deleteDialog={deleteDialog} handleClose={handleClose} />
       <EditGalleryPopup
         editGallery={editGallery}
         setEditGallery={setEditGallery}
@@ -104,7 +115,7 @@ const ImageSlider: FC<StadiumProfileProps> = ({
                         تعديل
                       </EditGalleryButton>
 
-                      <DeleteButton />
+                      <DeleteButton onClick={handleClickOpen} />
                     </>
                   )}
                 </SliderImage>

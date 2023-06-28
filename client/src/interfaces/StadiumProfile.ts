@@ -71,3 +71,8 @@ export interface EditGalleryPopupProps {
   ImageId: number;
   StadiumId: number;
 }
+
+export interface deleteDialogProps {
+  handleClose: () => void;
+  deleteDialog: boolean;
+}
