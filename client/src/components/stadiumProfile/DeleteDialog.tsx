@@ -7,9 +7,23 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import axios from 'axios';
 import { deleteDialogProps } from '../../interfaces/StadiumProfile';
 
-const DeleteDialog: FC<deleteDialogProps> = ({ handleClose, deleteDialog }) => {
+const DeleteDialog: FC<deleteDialogProps> = ({
+  handleClose,
+  deleteDialog,
+  ImageId,
+  StadiumId,
+}) => {
+  const HandleAgree = async () => {
+    try {
+      await axios.get(`/api/v1/gallery/${ImageId}/${StadiumId}`);
+      handleClose();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div>
       <Dialog
@@ -39,7 +53,7 @@ const DeleteDialog: FC<deleteDialogProps> = ({ handleClose, deleteDialog }) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>الغاء</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={HandleAgree} autoFocus>
             موافق
           </Button>
         </DialogActions>

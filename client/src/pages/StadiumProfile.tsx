@@ -14,6 +14,7 @@ const StadiumProfile = (): ReactElement => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [editMode, setEditMode] = useState(false);
   const [editGallery, setEditGallery] = useState(false);
+  const [deleteDialog, setDeleteDialog] = useState(false);
 
   const [gallery, setGallery] = useState<StadiumGallery[]>([
     {
@@ -50,6 +51,8 @@ const StadiumProfile = (): ReactElement => {
         editGallery={editGallery}
         setEditGallery={setEditGallery}
         gallery={gallery}
+        deleteDialog={deleteDialog}
+        setDeleteDialog={setDeleteDialog}
       />
       <Box
         sx={{

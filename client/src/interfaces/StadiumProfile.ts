@@ -10,6 +10,8 @@ export interface StadiumProfileProps {
   gallery: StadiumGallery[];
   setEditGallery: Dispatch<SetStateAction<boolean>>;
   editGallery: boolean;
+  deleteDialog: boolean;
+  setDeleteDialog: Dispatch<SetStateAction<boolean>>;
 }
 export interface Stadium {
   id: number;
@@ -75,4 +77,6 @@ export interface EditGalleryPopupProps {
 export interface deleteDialogProps {
   handleClose: () => void;
   deleteDialog: boolean;
+  ImageId: number;
+  StadiumId: number;
 }

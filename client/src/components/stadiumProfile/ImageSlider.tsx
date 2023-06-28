@@ -28,18 +28,20 @@ const ImageSlider: FC<StadiumProfileProps> = ({
   gallery,
   setEditGallery,
   editGallery,
+  deleteDialog,
+  setDeleteDialog,
 }): ReactElement => {
   const [Active, setActive] = useState(0);
   const [imageHover, setImageHover] = useState(false);
   const [ImageId, setImageId] = useState(0);
   const [StadiumId, setStadiumId] = useState<number>(0);
-  const [deleteDialog, setDeleteDialog] = useState(true);
 
-  const handleClickOpen = () => {
+  const deleteDialogOpen = (id: number) => {
+    setImageId(id);
     setDeleteDialog(true);
   };
 
-  const handleClose = () => {
+  const deleteDialogClose = () => {
     setDeleteDialog(false);
   };
 
@@ -59,7 +61,12 @@ const ImageSlider: FC<StadiumProfileProps> = ({
 
   return (
     <Box>
-      <DeleteDialog deleteDialog={deleteDialog} handleClose={handleClose} />
+      <DeleteDialog
+        deleteDialog={deleteDialog}
+        handleClose={deleteDialogClose}
+        ImageId={ImageId}
+        StadiumId={StadiumId}
+      />
       <EditGalleryPopup
         editGallery={editGallery}
         setEditGallery={setEditGallery}
@@ -115,7 +122,9 @@ const ImageSlider: FC<StadiumProfileProps> = ({
                         تعديل
                       </EditGalleryButton>
 
-                      <DeleteButton onClick={handleClickOpen} />
+                      <DeleteButton
+                        onClick={() => deleteDialogOpen(image.id)}
+                      />
                     </>
                   )}
                 </SliderImage>
