@@ -111,7 +111,12 @@ export const getStadiumProfileService = async (
   };
 };
 
-export const UpdateStadiumDataService = async (req: Request) => {
+export const UpdateStadiumDataService = async (
+  req: Request,
+): Promise<{
+  status: number;
+  data: string | { message: string; stadiumResult: number; UserResult: number };
+}> => {
   // const { StadiumId } = req.UserData this will happen after create protected routes
   const StadiumId = 5; //and this will removed
   const { body } = req;
@@ -140,5 +145,64 @@ export const UpdateStadiumDataService = async (req: Request) => {
       stadiumResult: [stadiumResult as Array<number>][0][0],
       UserResult: [UserResult as Array<number>][0][0],
     },
+  };
+};
+
+export const UpdateStadiumGalleryService = async (
+  req: Request,
+): Promise<{
+  status: number;
+  data: string | object;
+}> => {
+  const {
+    body: { image, id },
+  } = req;
+
+  // const { StadiumId } = req.UserData this will happen after create protected routes
+  const StadiumId = 5; //and this will removed
+
+  const check = await Gallery.findAll({ where: { id, StadiumId } });
+  if (!check.length) {
+    return {
+      status: 401,
+      data: 'هذه اصورة غير',
+    };
+  }
+
+  const galleries = await Gallery.update(
+    { image },
+    { where: { id, StadiumId }, returning: true },
+  );
+
+  return {
+    status: 200,
+    data: galleries,
+  };
+};
+
+export const AddStadiumImageService = async (
+  req: Request,
+): Promise<{
+  status: number;
+  data: string | object;
+}> => {
+  const { body } = req;
+
+  // const { StadiumId } = req.UserData this will happen after create protected routes
+  const StadiumId = 5; //and this will removed
+
+  const check = await Gallery.findAll({ where: { StadiumId } });
+  if (check.length >= 4) {
+    return {
+      status: 401,
+      data: 'لا يمكن اضافة اكثر من اربعة صور',
+    };
+  }
+
+  const galleries = await Gallery.create({ ...body, StadiumId });
+
+  return {
+    status: 200,
+    data: galleries,
   };
 };

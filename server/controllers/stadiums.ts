@@ -6,6 +6,10 @@ import {
   getStadiumProfileService,
 } from '../services';
 import { RequestHandler, Request, Response } from 'express';
+import {
+  AddStadiumImageService,
+  UpdateStadiumGalleryService,
+} from '../services/stadiums';
 
 export const getAllStadiums: RequestHandler = async (
   req: Request,
@@ -47,6 +51,24 @@ export const UpdateStadiumData: RequestHandler = async (
   res: Response,
 ) => {
   const response = await UpdateStadiumDataService(req);
+
+  res.status(response.status).json(response);
+};
+
+export const UpdateStadiumGallery: RequestHandler = async (
+  req: Request,
+  res: Response,
+) => {
+  const response = await UpdateStadiumGalleryService(req);
+
+  res.status(response.status).json(response);
+};
+
+export const AddStadiumImage: RequestHandler = async (
+  req: Request,
+  res: Response,
+) => {
+  const response = await AddStadiumImageService(req);
 
   res.status(response.status).json(response);
 };
