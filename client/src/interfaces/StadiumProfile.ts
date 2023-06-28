@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 
 export interface StadiumGallery {
   id: number;
+  StadiumId: number;
   image: string;
 }
 
@@ -68,4 +69,5 @@ export interface EditGalleryPopupProps {
   editGallery: boolean;
   setEditGallery: Dispatch<SetStateAction<boolean>>;
   ImageId: number;
+  StadiumId: number;
 }

@@ -1,12 +1,13 @@
-import { FC, ReactElement, useState } from 'react';
+import { FC, ReactElement, useEffect, useState } from 'react';
 import { Slide } from 'react-slideshow-image';
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 
 import {
   ArrowStyle,
+  DeleteButton,
   EditGalleryButton,
   SliderBox,
   SliderImage,
@@ -30,6 +31,7 @@ const ImageSlider: FC<StadiumProfileProps> = ({
   const [Active, setActive] = useState(0);
   const [imageHover, setImageHover] = useState(false);
   const [ImageId, setImageId] = useState(0);
+  const [StadiumId, setStadiumId] = useState<number>(0);
 
   const handleSlideChange = (currentSlide: number, e: number) => {
     const { id } = gallery[e];
@@ -41,12 +43,17 @@ const ImageSlider: FC<StadiumProfileProps> = ({
     setEditGallery(true);
   };
 
+  useEffect(() => {
+    setStadiumId(gallery[0].StadiumId);
+  }, [gallery]);
+
   return (
     <Box>
       <EditGalleryPopup
         editGallery={editGallery}
         setEditGallery={setEditGallery}
         ImageId={ImageId}
+        StadiumId={StadiumId}
       />
       <SliderBox
         sx={{
@@ -90,9 +97,15 @@ const ImageSlider: FC<StadiumProfileProps> = ({
                   onMouseLeave={() => setImageHover(false)}
                 >
                   {imageHover && (
-                    <EditGalleryButton onClick={() => handleAddImage(image.id)}>
-                      تعديل
-                    </EditGalleryButton>
+                    <>
+                      <EditGalleryButton
+                        onClick={() => handleAddImage(image.id)}
+                      >
+                        تعديل
+                      </EditGalleryButton>
+
+                      <DeleteButton />
+                    </>
                   )}
                 </SliderImage>
               </Box>

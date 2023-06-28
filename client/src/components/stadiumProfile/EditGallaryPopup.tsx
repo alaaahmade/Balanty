@@ -5,7 +5,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import { EditGalleryPopupProps } from '../../interfaces';
 
 import {
@@ -21,10 +20,10 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   editGallery,
   setEditGallery,
   ImageId,
+  StadiumId,
 }): ReactElement => {
   const [newImage, setNewImage] = useState<string>('');
   const [newFile, setNewFile] = useState<File>();
-  const { id } = useParams();
 
   const handleClose = () => {
     setNewImage('');
@@ -65,7 +64,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
       await axios.patch('/api/v1/stadiums/gallery', {
         image: newUrl,
         id: ImageId,
-        StadiumId: id,
+        StadiumId,
       });
       setEditGallery(false);
       setNewImage('');
@@ -79,7 +78,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
       const newUrl = await uploadImage(newFile as File);
       await axios.post('/api/v1/stadiums/gallery', {
         image: newUrl,
-        StadiumId: id,
+        StadiumId,
       });
 
       setEditGallery(false);

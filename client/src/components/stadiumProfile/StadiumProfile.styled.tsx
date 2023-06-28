@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Button, Box, TextField, Typography } from '@mui/material';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DialogContent from '@mui/material/DialogContent';
 
 export const arrowStyle = {};
@@ -116,9 +117,10 @@ export const EditInputs = styled(TextField)({
 
 export const EditGalleryButton = styled(Button)({
   position: 'absolute',
-  bottom: '5%',
-  right: '5%',
+  bottom: '4%',
+  right: '2%',
   color: '#01031C',
+  margin: 0,
   backgroundColor: '#ffffff75',
   '&:hover': {
     backgroundColor: '#ffffffc2',
@@ -176,4 +178,19 @@ export const SelectButtonsBox = styled(Box)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-evenly',
+});
+
+export const DeleteButton = styled(DeleteForeverIcon)({
+  color: '#ff00009c',
+  position: 'absolute',
+  bottom: '4%',
+  left: '2%',
+  padding: '0',
+  margin: 0,
+  backgroundColor: '#ffffff75',
+  fontSize: '30px',
+  borderRadius: '5px',
+  '&:hover': {
+    backgroundColor: '#ffffffc2',
+  },
 });
