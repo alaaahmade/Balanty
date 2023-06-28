@@ -6,7 +6,7 @@ const getPlayer: RequestHandler = async (
   res: Response,
 ): Promise<void> => {
   const userId = Number(req.params.id);
-  const profileData = getPlayerService(userId);
+  const profileData = await getPlayerService(userId);
 
   res.json({
     status: 200,
