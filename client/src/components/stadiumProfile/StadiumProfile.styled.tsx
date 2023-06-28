@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { Button, TextField, Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { Button, Box, TextField, Typography } from '@mui/material';
+import DialogContent from '@mui/material/DialogContent';
 
 export const arrowStyle = {};
 
@@ -130,4 +130,50 @@ export const GalleryAction = styled(Button)({
   '&:hover': {
     backgroundColor: '#0d710d3d',
   },
+});
+
+export const DialogContentBox = styled(DialogContent)({
+  width: '550px',
+  height: '300px',
+  display: 'flex',
+  justifyContent: 'center',
+  position: 'relative',
+});
+
+export const InputLabel = styled('label')({
+  position: 'absolute',
+  top: '46%',
+  left: '50%',
+  translate: '-50% -50%',
+  padding: 0,
+  borderRadius: 0,
+  cursor: 'pointer',
+  color: '#152c11',
+});
+
+export const SelectBox = styled(Box)({
+  width: '500px',
+  height: '280px',
+  border: '2px dashed #ccc',
+  borderRadius: '5px',
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'bottom',
+  position: 'relative',
+});
+
+export const SelectTypography = styled(Typography)({
+  width: 'fit-content',
+  borderBottom: '1px solid #152c11',
+  position: 'absolute',
+  top: '50%',
+  translate: '-50% -50%',
+  left: '50%',
+});
+
+export const SelectButtonsBox = styled(Box)({
+  width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-evenly',
 });
