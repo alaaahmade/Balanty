@@ -44,7 +44,7 @@ const StadiumProfile = (): ReactElement => {
 
   useEffect(() => {
     fetchProfileData(id ?? '');
-  }, [id, editMode, editGallery]);
+  }, [id, editMode, editGallery, deleteDialog]);
   return (
     <Box>
       <ImageSlider
