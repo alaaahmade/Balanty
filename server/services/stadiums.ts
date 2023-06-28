@@ -165,7 +165,7 @@ export const UpdateStadiumGalleryService = async (
   if (!check.length) {
     return {
       status: 401,
-      data: 'هذه اصورة غير',
+      data: ' هذه الصورة غير موجودة',
     };
   }
 

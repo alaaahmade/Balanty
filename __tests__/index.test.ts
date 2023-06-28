@@ -228,6 +228,82 @@ describe('patch /api/v1/stadiums/edit', () => {
   });
 });
 
+describe('Post /api/v1/stadiums/gallery', () => {
+  test('responds from /api/v1/stadiums/gallery get 200 status code', done => {
+    request(app)
+      .post('/api/v1/stadiums/gallery')
+      .set('Accept', 'application/json')
+      .send({
+        image:
+          'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
+      })
+      .end((err, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(response.status).toBe(200);
+        expect(typeof data.image).toBe('string');
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
+
+  test('responds from /api/v1/stadiums/gallery get 401 status code', done => {
+    request(app)
+      .post('/api/v1/stadiums/gallery')
+      .set('Accept', 'application/json')
+      .send({
+        image:
+          'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
+      })
+      .end((err, res) => {
+        expect(res.status).toBe(401);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(response.status).toBe(401);
+        expect(data).toBe('لا يمكن اضافة اكثر من اربعة صور');
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
+});
+describe('Patch /api/v1/stadiums/gallery', () => {
+  test('responds from /api/v1/stadiums/gallery get 200 status code', done => {
+    request(app)
+      .patch('/api/v1/stadiums/gallery')
+      .set('Accept', 'application/json')
+      .send({
+        id: 17,
+        image:
+          'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
+      })
+      .end((err, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(response.status).toBe(200);
+        expect(typeof data[1][0].image).toBe('string');
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
+});
+
 afterAll(() => {
   sequelize.close();
 });
