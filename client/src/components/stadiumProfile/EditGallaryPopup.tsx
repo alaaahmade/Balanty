@@ -19,6 +19,7 @@ import {
 const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   editGallery,
   setEditGallery,
+  newImageId,
 }): ReactElement => {
   const [newImage, setNewImage] = useState<string>('');
   const [newFile, setNewFile] = useState<File>();
@@ -38,7 +39,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
       `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
       formData,
     );
-    console.log(data.secure_url);
+    return data.secure_url;
   };
 
   const selectNewImage = (event: ChangeEvent<HTMLInputElement>) => {
@@ -57,8 +58,33 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   };
 
   const handleSave = async () => {
-    await uploadImage(newFile as File);
-    setEditGallery(false);
+    try {
+      const newUrl = await uploadImage(newFile as File);
+      const { data } = await axios.patch('/api/v1/gallery', {
+        image: newUrl,
+        id: newImageId,
+      });
+      console.log(data);
+
+      setEditGallery(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleAddNew = async () => {
+    try {
+      const newUrl = await uploadImage(newFile as File);
+      const { data } = await axios.post('/api/v1/gallery', {
+        image: newUrl,
+        id: newImageId,
+      });
+      console.log(data);
+
+      setEditGallery(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -102,7 +128,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
             }}
           >
             <GalleryAction onClick={handleClose}>الغاء</GalleryAction>
-            <GalleryAction onClick={handleClose}>
+            <GalleryAction onClick={handleAddNew}>
               اضافة كصورة جديدة
             </GalleryAction>
             <GalleryAction onClick={handleSave}>حفظ</GalleryAction>
