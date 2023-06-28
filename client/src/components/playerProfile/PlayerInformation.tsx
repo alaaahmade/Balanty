@@ -7,7 +7,7 @@ import {
   Button,
 } from '@mui/material';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { Edit } from '@mui/icons-material';
 import { FlexBox, LocationTypo } from '../stadiumProfile/StadiumProfile.styled';
 import { BioBox } from './Player.Styled';
@@ -21,7 +21,7 @@ import {
 } from '../../interfaces/PLayerProfile';
 
 const PlayerInformation = ({
-  userData,
+  // userData,
   editMode,
   setEditMode,
 }: profileInfoProps): ReactElement => {
@@ -38,34 +38,35 @@ const PlayerInformation = ({
   // const navigate = useNavigate();
 
   const handleClick = () => {
-    setEditMode(true);
+    setEditAble(true);
     setMouseOver(false);
   };
-  // const handleUpdate = async () => {
-  //   try {
-  //     updateProfileSchema.validateSync(newData);
-  //     await axios.patch('/api/v1/stadiums/edit', newData);
-  //     setEditMode(false);
-  //     setSave(true);
-  //     setValidation('');
-  //   } catch (error) {
-  //     if (
-  //       (error as { name: string; message: string }).name === 'ValidationError'
-  //     ) {
-  //       setValidation((error as { message: string }).message);
-  //     } else if (
-  //       (error as updatedValueError).response.data.data.status === 403
-  //     ) {
-  //       setValidation((error as updatedValueError).response.data.data.message);
-  //     } else {
-  //       navigate('/serverError');
-  //     }
-  //   }
-  // };
+  const handleUpdate = async () => {
+    try {
+      updateProfileSchema.validateSync(newData);
+      await axios.patch('/api/v1/players/profile/edit', newData);
+      setEditMode(false);
+      setSave(true);
+      setValidation('');
+    } catch (error) {
+      if (
+        (error as { name: string; message: string }).name === 'ValidationError'
+      ) {
+        setValidation((error as { message: string }).message);
+      } else if (
+        (error as updatedValueError).response.data.data.status === 403
+      ) {
+        setValidation((error as updatedValueError).response.data.data.message);
+      } else {
+        // navigate('/serverError');
+        console.log('error');
+      }
+    }
+  };
 
   const handleCancel = async () => {
     setSave(false);
-    setEditMode(false);
+    setEditAble(false);
     setValidation('');
   };
 

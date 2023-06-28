@@ -10,17 +10,18 @@ import PlayerInformation from './PlayerInformation';
 const Profile: React.FC = (): ReactElement => {
   const { id } = useParams<{ id: string }>();
 
+  const fetchData = async () => {
+    try {
+      const { avater, cover, age, position } = await axios.get(
+        `/api/v1/players/profile/2`,
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/api/v1/profile/${id}`);
-        console.log(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     fetchData();
-  }, [id]);
+  });
   return (
     <>
       <PlayerBackground />
