@@ -1,17 +1,42 @@
 import { Player } from '../models';
+import { Request } from 'express';
 
-const getPlayerById = async (userId: number) => {
+import updatedPLayerSchema from '../validations/playerSchema';
+
+const getPlayerService = async (userId: number) => {
   const player = await Player.findByPk(userId);
   return player;
 };
 
-const updatePlayerById = async (playerId: number, updatedData: object) => {
-  const [updatedPlayer] = await Player.update(updatedData, {
-    where: { id: playerId },
-    returning: true,
-  });
+const updatePlayerService = async (req: Request) => {
+  // const { UserId } = req.UserData;
 
-  return updatedPlayer;
+  const playerId = 5;
+  const { body } = req;
+  const isPLayerExist = await Player.findOne({ where: { UserId: playerId } });
+
+  if (!isPLayerExist) {
+    return {
+      status: 401,
+      data: 'هذا اللاعب غير متاح',
+    };
+  }
+  await updatedPLayerSchema.validateAsync(body);
+
+  const updatedPlayer = await Player.update(
+    { ...body },
+    {
+      where: { UserId: playerId },
+    },
+  );
+
+  return {
+    status: 200,
+    data: {
+      message: 'تم الحفظ بنجاح',
+      user: updatedPlayer,
+    },
+  };
 };
 
-export { getPlayerById, updatePlayerById };
+export { getPlayerService, updatePlayerService };
