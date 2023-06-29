@@ -35,7 +35,6 @@ const BioSection = ({
   const { username, phone } = userData;
 
   const [EditAble, setEditAble] = useState(true);
-  const [save, setSave] = useState(false);
   const [hov, setHove] = useState(false);
   const [mouseOver, setMouseOver] = useState(false);
   const [validation, setValidation] = useState('');
@@ -52,7 +51,6 @@ const BioSection = ({
       updatedValueSchema.validateSync(newData);
       await axios.patch('/api/v1/stadiums/edit', newData);
       setEditMode(false);
-      setSave(true);
       setValidation('');
     } catch (error) {
       if (
@@ -70,7 +68,6 @@ const BioSection = ({
   };
 
   const handleCancel = async () => {
-    setSave(false);
     setEditMode(false);
     setValidation('');
   };
