@@ -13,7 +13,14 @@ const ProfileCalender = (): ReactElement => {
         height: '100%',
       }}
     >
-      <CalendarTitle>الحجوزات</CalendarTitle>
+      <CalendarTitle
+        sx={{
+          mb: '25px',
+          mt: '-60px',
+        }}
+      >
+        الحجوزات
+      </CalendarTitle>
       <Calendar type="profile" />
     </Box>
   );
