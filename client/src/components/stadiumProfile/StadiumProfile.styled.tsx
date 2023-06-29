@@ -206,3 +206,45 @@ export const NewIconButton = styled(IconButton)({
   padding: 0,
   margin: 0,
 });
+
+export const LoaderContainer = styled(Box)({
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  translate: '-50% -50%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '100%',
+  height: '100%',
+  backgroundColor: '#00000047',
+});
+
+export const LoaderBox = styled(Box)({
+  display: 'inline-block',
+  position: 'relative',
+  width: '80px',
+  height: '80px',
+});
+
+export const LDiv = styled('div')`
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  margin: 8px;
+  border: 6px solid #01031c;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #01031c transparent transparent transparent;
+
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;

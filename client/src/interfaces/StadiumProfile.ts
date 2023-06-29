@@ -72,6 +72,7 @@ export interface EditGalleryPopupProps {
   setEditGallery: Dispatch<SetStateAction<boolean>>;
   ImageId: number;
   StadiumId: number;
+  gallery: object[];
 }
 
 export interface deleteDialogProps {

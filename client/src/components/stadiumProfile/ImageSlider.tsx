@@ -73,6 +73,7 @@ const ImageSlider: FC<StadiumProfileProps> = ({
         setEditGallery={setEditGallery}
         ImageId={ImageId}
         StadiumId={StadiumId}
+        gallery={gallery}
       />
       <SliderBox
         sx={{
@@ -123,9 +124,11 @@ const ImageSlider: FC<StadiumProfileProps> = ({
                         تعديل
                       </EditGalleryButton>
 
-                      <DeleteButton
-                        onClick={() => deleteDialogOpen(image.id)}
-                      />
+                      {gallery.length > 1 && (
+                        <DeleteButton
+                          onClick={() => deleteDialogOpen(image.id)}
+                        />
+                      )}
                     </>
                   )}
                 </SliderImage>

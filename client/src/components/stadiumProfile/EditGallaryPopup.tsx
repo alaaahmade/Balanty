@@ -22,6 +22,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   setEditGallery,
   ImageId,
   StadiumId,
+  gallery,
 }): ReactElement => {
   const [newImage, setNewImage] = useState<string>('');
   const [newFile, setNewFile] = useState<File>();
@@ -132,9 +133,11 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
             }}
           >
             <GalleryAction onClick={handleClose}>الغاء</GalleryAction>
-            <GalleryAction onClick={handleAddNew}>
-              اضافة كصورة جديدة
-            </GalleryAction>
+            {gallery.length < 4 && (
+              <GalleryAction onClick={handleAddNew}>
+                اضافة كصورة جديدة
+              </GalleryAction>
+            )}
             <GalleryAction onClick={handleSave}>حفظ</GalleryAction>
           </SelectButtonsBox>
         </DialogActions>
