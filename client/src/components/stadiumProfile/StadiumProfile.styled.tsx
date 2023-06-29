@@ -160,7 +160,6 @@ export const InputLabel = styled('label')({
 export const SelectBox = styled(Box)({
   width: '500px',
   height: '280px',
-  border: '2px dashed #ccc',
   borderRadius: '5px',
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
@@ -170,7 +169,6 @@ export const SelectBox = styled(Box)({
 
 export const SelectTypography = styled(Typography)({
   width: 'fit-content',
-  borderBottom: '1px solid #152c11',
   position: 'absolute',
   top: '50%',
   translate: '-50% -50%',

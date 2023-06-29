@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, ReactElement, useState } from 'react';
+import { ChangeEvent, FC, ReactElement, useRef, useState } from 'react';
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -30,12 +30,21 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
 }): ReactElement => {
   const [newImage, setNewImage] = useState<string>('');
   const [newFile, setNewFile] = useState<File>();
+  const [imageError, setImageError] = useState(false);
+
+  const fileInput = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
 
   const handleClose = () => {
+    if (fileInput.current) {
+      fileInput.current.value = '';
+    }
+    setNewFile(undefined);
     setNewImage('');
     setEditGallery(false);
+    setLoading(false);
+    setImageError(false);
   };
   const presetKey = 'ry6frp8c';
   const cloudName = 'dtpbcx2kv';
@@ -53,6 +62,8 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
 
   const selectNewImage = (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
+    setImageError(false);
+    setLoading(false);
     if (files && files.length > 0) {
       let uploadedImage = '';
       const reader = new FileReader();
@@ -69,15 +80,20 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   const handleSave = async () => {
     try {
       setLoading(true);
-      const newUrl = await uploadImage(newFile as File);
-      await axios.patch('/api/v1/stadiums/gallery', {
-        image: newUrl,
-        id: ImageId,
-        StadiumId,
-      });
-      setEditGallery(false);
-      setLoading(false);
-      setNewImage('');
+      if (!newFile) {
+        setImageError(true);
+      } else {
+        const newUrl = await uploadImage(newFile as File);
+        await axios.patch('/api/v1/stadiums/gallery', {
+          image: newUrl,
+          id: ImageId,
+          StadiumId,
+        });
+        // setEditGallery(false);
+        setLoading(false);
+        // setNewImage('');
+        handleClose();
+      }
     } catch (error) {
       setLoading(false);
       navigate('serverError');
@@ -93,19 +109,22 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
         StadiumId,
       });
 
-      setEditGallery(false);
       setLoading(false);
-      setNewImage('');
+      handleClose();
     } catch (error) {
       setLoading(false);
       navigate('serverError');
     }
   };
 
+  const border = () => {
+    return imageError ? '2px dashed red' : '2px dashed #ccc';
+  };
+
   return (
     <Box>
       <Dialog open={editGallery} onClose={handleClose}>
-        {loading && <Loader />}
+        {!imageError && loading ? <Loader /> : null}
 
         <DialogTitle
           sx={{
@@ -121,10 +140,28 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
             <SelectBox
               sx={{
                 mt: '10px',
+                border,
                 backgroundImage: `url(${newImage})`,
               }}
             >
-              <SelectTypography>اختيار صورة جديدة</SelectTypography>
+              {imageError ? (
+                <SelectTypography
+                  sx={{
+                    color: 'red',
+                    borderBottom: '1px solid red',
+                  }}
+                >
+                  ! يجب اختيار الصورة أولا
+                </SelectTypography>
+              ) : (
+                <SelectTypography
+                  sx={{
+                    borderBottom: '1px solid #152c11',
+                  }}
+                >
+                  اختيار صورة جديدة
+                </SelectTypography>
+              )}
             </SelectBox>
             <input
               id="input"
@@ -135,6 +172,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
               accept="image/*"
               multiple
               onChange={selectNewImage}
+              ref={fileInput}
             />
           </InputLabel>
         </DialogContentBox>
