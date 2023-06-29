@@ -5,6 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { EditGalleryPopupProps } from '../../interfaces';
 
 import {
@@ -24,6 +25,8 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
 }): ReactElement => {
   const [newImage, setNewImage] = useState<string>('');
   const [newFile, setNewFile] = useState<File>();
+
+  const navigate = useNavigate();
 
   const handleClose = () => {
     setNewImage('');
@@ -69,7 +72,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
       setEditGallery(false);
       setNewImage('');
     } catch (error) {
-      console.log(error);
+      navigate('serverError');
     }
   };
 
@@ -84,7 +87,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
       setEditGallery(false);
       setNewImage('');
     } catch (error) {
-      console.log(error);
+      navigate('serverError');
     }
   };
 
