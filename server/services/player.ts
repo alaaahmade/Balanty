@@ -1,10 +1,28 @@
-import { Player } from '../models';
 import { Request } from 'express';
-
+import { Player, User } from '../models';
 import updatedPLayerSchema from '../validations/playerSchema';
 
-const getPlayerService = async (userId: number) => {
-  const player = await Player.findByPk(userId);
+const getPlayerService = async (id: number) => {
+  const isPLayerExist = await Player.findOne({ where: { UserId: id } });
+
+  if (!isPLayerExist) {
+    return {
+      status: 401,
+      messege: 'هذا اللاعب غير موجود',
+    };
+  }
+
+  const player = await User.findOne({
+    where: { id },
+    attributes: ['username', 'phone', 'id'],
+    include: [
+      {
+        model: Player,
+        as: 'player',
+      },
+    ],
+  });
+
   return player;
 };
 
