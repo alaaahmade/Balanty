@@ -1,12 +1,6 @@
 import { ReactElement, useState } from 'react';
 
-import {
-  Typography,
-  Box,
-  InputAdornment,
-  IconButton,
-  Button,
-} from '@mui/material';
+import { Typography, Box, InputAdornment, Button } from '@mui/material';
 
 import StarIcon from '@mui/icons-material/Star';
 
@@ -16,7 +10,12 @@ import { Edit } from '@mui/icons-material';
 import axios from 'axios';
 
 import { useNavigate } from 'react-router-dom';
-import { BioBox, FlexBox, LocationTypo } from './StadiumProfile.styled';
+import {
+  BioBox,
+  FlexBox,
+  LocationTypo,
+  NewIconButton,
+} from './StadiumProfile.styled';
 
 import EditInput from './EditInput';
 
@@ -93,34 +92,32 @@ const BioSection = ({
   return (
     <Box>
       <BioBox
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'flex-end',
-        }}
+        sx={{}}
         onMouseEnter={handleMouseOver}
         onMouseLeave={handleMouseOut}
       >
-        <FlexBox
-          sx={{
-            justifyContent: 'space-between',
-          }}
-        >
+        <Box>
           {hov && !editMode && (
-            <InputAdornment
-              sx={{
-                mr: '30px',
-              }}
-              position="end"
-            >
+            <InputAdornment position="end">
               {EditAble && (
-                <IconButton onClick={handleClick}>
+                <NewIconButton onClick={handleClick}>
                   <Edit />
-                </IconButton>
+                </NewIconButton>
               )}
             </InputAdornment>
           )}
-          <Box
+        </Box>
+        <FlexBox
+          sx={{
+            width: '100%',
+          }}
+        >
+          <Typography variant="h5" sx={{ ml: '5px' }}>
+            {username}
+          </Typography>
+        </FlexBox>
+        <FlexBox>
+          <FlexBox
             sx={{
               color: 'yellow',
             }}
@@ -130,16 +127,13 @@ const BioSection = ({
             <StarIcon />
             <StarIcon />
             <StarIcon />
-          </Box>
-
+          </FlexBox>
           <Typography variant="h5" sx={{ ml: '5px' }}>
-            {username}
+            : التقييم
           </Typography>
         </FlexBox>
-        <Box
+        <FlexBox
           sx={{
-            display: 'flex',
-            alignItems: 'center',
             justifyContent: 'space-evenly',
             width: '100%',
           }}

@@ -61,7 +61,7 @@ const StadiumProfile = (): ReactElement => {
           width: 'calc(100% - 310px)',
           height: '480px',
           gap: '30px',
-          m: '17% 3% 3% 3%',
+          m: '23% 3% 3% 3%',
         }}
       >
         {userData && (

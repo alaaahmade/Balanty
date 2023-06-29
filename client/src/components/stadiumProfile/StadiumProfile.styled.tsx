@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Button, Box, TextField, Typography } from '@mui/material';
+import { Button, Box, TextField, Typography, IconButton } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DialogContent from '@mui/material/DialogContent';
 
@@ -68,14 +68,19 @@ export const SliderBox = styled(Box)({
 export const BioBox = styled(Box)({
   maxWidth: '350px',
   minWidth: '350px',
+  minHeight: '480px',
+
   ml: '3%',
   padding: '10px',
   border: '0.1px solid #D9D9D9',
   display: 'flex',
   flexDirection: 'column',
-  gap: '15px',
+  gap: '10px',
   borderRadius: '3px',
   boxShadow: '1px 1px 2px #D9D9D9 ',
+  position: 'relative',
+  justifyContent: 'center',
+  alignItems: 'flex-end',
 });
 
 export const FlexBox = styled(Box)({
@@ -93,7 +98,7 @@ export const LocationTypo = styled(Typography)({
 
 export const EditInputs = styled(TextField)({
   '& input': {
-    color: '#5f5f5f',
+    color: '#11508fa3',
     textAlign: 'right',
     paddingRight: '10px',
   },
@@ -102,10 +107,9 @@ export const EditInputs = styled(TextField)({
   margin: 0,
   mr: '10px',
   '& .css-66dh3a-MuiInputBase-input-MuiInput-input': {
-    color: '#5f5f5f',
+    color: '#11508fa3',
   },
   '& .css-66dh3a-MuiInputBase-input-MuiInput-input.Mui-disabled': {
-    color: 'red',
     textAlign: 'right',
 
     WebkitTextFillColor: '#01031C',
@@ -193,4 +197,12 @@ export const DeleteButton = styled(DeleteForeverIcon)({
   '&:hover': {
     backgroundColor: '#ffffffc2',
   },
+});
+
+export const NewIconButton = styled(IconButton)({
+  position: 'absolute',
+  left: '20px',
+  top: '20px',
+  padding: 0,
+  margin: 0,
 });
