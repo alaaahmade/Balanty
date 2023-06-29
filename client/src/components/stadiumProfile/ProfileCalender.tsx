@@ -1,8 +1,9 @@
 import { ReactElement } from 'react';
 
-import { Typography, Box } from '@mui/material';
+import { Box } from '@mui/material';
 
 import Calendar from '../calender/Calender';
+import { CalendarTitle } from './StadiumProfile.styled';
 
 const ProfileCalender = (): ReactElement => {
   return (
@@ -12,16 +13,7 @@ const ProfileCalender = (): ReactElement => {
         height: '100%',
       }}
     >
-      <Typography
-        sx={{
-          textAlign: 'right',
-          mb: '15px',
-          mt: '-45px',
-          fontSize: '20px',
-        }}
-      >
-        الحجوزات
-      </Typography>
+      <CalendarTitle>الحجوزات</CalendarTitle>
       <Calendar type="profile" />
     </Box>
   );

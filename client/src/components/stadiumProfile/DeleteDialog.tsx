@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -12,6 +12,7 @@ import axios from 'axios';
 import { Box } from '@mui/material';
 import { deleteDialogProps } from '../../interfaces/StadiumProfile';
 import Loader from './Loader';
+import { UpdateGalleryContext } from '../../context';
 
 const DeleteDialog: FC<deleteDialogProps> = ({
   handleClose,
@@ -21,10 +22,13 @@ const DeleteDialog: FC<deleteDialogProps> = ({
   loading,
   setLoading,
 }) => {
+  const { setAgree, Agree } = useContext(UpdateGalleryContext);
+
   const navigate = useNavigate();
 
   const HandleAgree = async () => {
     try {
+      setAgree(!Agree);
       setLoading(true);
       await axios.delete(`/api/v1/stadiums/gallery/${ImageId}/${StadiumId}`);
       handleClose();

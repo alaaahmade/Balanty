@@ -1,4 +1,11 @@
-import { ChangeEvent, FC, ReactElement, useRef, useState } from 'react';
+import {
+  ChangeEvent,
+  FC,
+  ReactElement,
+  useContext,
+  useRef,
+  useState,
+} from 'react';
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -18,6 +25,7 @@ import {
   SelectTypography,
 } from './StadiumProfile.styled';
 import Loader from './Loader';
+import { UpdateGalleryContext } from '../../context';
 
 const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   editGallery,
@@ -31,6 +39,8 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   const [newImage, setNewImage] = useState<string>('');
   const [newFile, setNewFile] = useState<File>();
   const [imageError, setImageError] = useState(false);
+
+  const { setAgree, Agree } = useContext(UpdateGalleryContext);
 
   const fileInput = useRef<HTMLInputElement>(null);
 
@@ -89,9 +99,8 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
           id: ImageId,
           StadiumId,
         });
-        // setEditGallery(false);
         setLoading(false);
-        // setNewImage('');
+        setAgree(!Agree);
         handleClose();
       }
     } catch (error) {
@@ -103,14 +112,18 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   const handleAddNew = async () => {
     try {
       setLoading(true);
-      const newUrl = await uploadImage(newFile as File);
-      await axios.post('/api/v1/stadiums/gallery', {
-        image: newUrl,
-        StadiumId,
-      });
-
-      setLoading(false);
-      handleClose();
+      if (!newFile) {
+        setImageError(true);
+      } else {
+        const newUrl = await uploadImage(newFile as File);
+        await axios.post('/api/v1/stadiums/gallery', {
+          image: newUrl,
+          StadiumId,
+        });
+        setLoading(false);
+        setAgree(!Agree);
+        handleClose();
+      }
     } catch (error) {
       setLoading(false);
       navigate('serverError');

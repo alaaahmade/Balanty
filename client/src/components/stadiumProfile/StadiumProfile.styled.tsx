@@ -248,3 +248,10 @@ export const LDiv = styled('div')`
     }
   }
 `;
+
+export const CalendarTitle = styled(Typography)({
+  textAlign: 'right',
+  mb: '25px',
+  mt: '-60px',
+  fontSize: '23px',
+});

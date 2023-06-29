@@ -1,11 +1,20 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ReactElement } from 'react';
 import { ThemeProvider } from '@emotion/react';
+
 import RootLayout from './layouts/RootLayout';
+
 import { LandingPage } from './pages';
+
 import LightTheme from './themes';
-import { open, useCustomOpen } from './context';
-import { StatsContextProvider } from './context/CreateMatch';
+
+import {
+  open,
+  useCustomOpen,
+  UpdateGalleryContextProvider,
+  StatsContextProvider,
+} from './context';
+
 import StadiumProfile from './pages/StadiumProfile';
 
 const router = createBrowserRouter([
@@ -36,7 +45,9 @@ const App = (): ReactElement => {
     <ThemeProvider theme={LightTheme}>
       <open.Provider value={useCustomOpen()}>
         <StatsContextProvider>
-          <RouterProvider router={router} />
+          <UpdateGalleryContextProvider>
+            <RouterProvider router={router} />
+          </UpdateGalleryContextProvider>
         </StatsContextProvider>
       </open.Provider>
     </ThemeProvider>

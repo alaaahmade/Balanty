@@ -85,3 +85,8 @@ export interface deleteDialogProps {
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
 }
+
+export interface UpdateContextValue {
+  Agree: boolean;
+  setAgree: Dispatch<SetStateAction<boolean>>;
+}
