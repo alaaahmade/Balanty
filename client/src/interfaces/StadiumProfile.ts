@@ -73,6 +73,8 @@ export interface EditGalleryPopupProps {
   ImageId: number;
   StadiumId: number;
   gallery: object[];
+  loading: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface deleteDialogProps {
@@ -80,4 +82,6 @@ export interface deleteDialogProps {
   deleteDialog: boolean;
   ImageId: number;
   StadiumId: number;
+  loading: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }

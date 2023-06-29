@@ -36,6 +36,7 @@ const ImageSlider: FC<StadiumProfileProps> = ({
   const [imageHover, setImageHover] = useState(false);
   const [ImageId, setImageId] = useState(0);
   const [StadiumId, setStadiumId] = useState<number>(0);
+  const [loading, setLoading] = useState(false);
 
   const deleteDialogOpen = (id: number) => {
     setImageId(id);
@@ -67,6 +68,8 @@ const ImageSlider: FC<StadiumProfileProps> = ({
         handleClose={deleteDialogClose}
         ImageId={ImageId}
         StadiumId={StadiumId}
+        loading={loading}
+        setLoading={setLoading}
       />
       <EditGalleryPopup
         editGallery={editGallery}
@@ -74,6 +77,8 @@ const ImageSlider: FC<StadiumProfileProps> = ({
         ImageId={ImageId}
         StadiumId={StadiumId}
         gallery={gallery}
+        loading={loading}
+        setLoading={setLoading}
       />
       <SliderBox
         sx={{

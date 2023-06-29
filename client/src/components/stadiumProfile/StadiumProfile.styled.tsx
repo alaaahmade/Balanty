@@ -217,6 +217,7 @@ export const LoaderContainer = styled(Box)({
   justifyContent: 'center',
   width: '100%',
   height: '100%',
+  zIndex: 40,
   backgroundColor: '#00000047',
 });
 
@@ -224,6 +225,7 @@ export const LoaderBox = styled(Box)({
   display: 'inline-block',
   position: 'relative',
   width: '80px',
+  zIndex: 40,
   height: '80px',
 });
 

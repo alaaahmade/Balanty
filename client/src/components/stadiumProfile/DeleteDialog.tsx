@@ -9,32 +9,41 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import axios from 'axios';
+import { Box } from '@mui/material';
 import { deleteDialogProps } from '../../interfaces/StadiumProfile';
+import Loader from './Loader';
 
 const DeleteDialog: FC<deleteDialogProps> = ({
   handleClose,
   deleteDialog,
   ImageId,
   StadiumId,
+  loading,
+  setLoading,
 }) => {
   const navigate = useNavigate();
 
   const HandleAgree = async () => {
     try {
+      setLoading(true);
       await axios.delete(`/api/v1/stadiums/gallery/${ImageId}/${StadiumId}`);
       handleClose();
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       navigate('/serverError');
     }
   };
   return (
-    <div>
+    <Box>
       <Dialog
         open={deleteDialog}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
+        {loading && <Loader />}
+
         <DialogTitle
           sx={{
             textAlign: 'right',
@@ -61,7 +70,7 @@ const DeleteDialog: FC<deleteDialogProps> = ({
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Box>
   );
 };
 

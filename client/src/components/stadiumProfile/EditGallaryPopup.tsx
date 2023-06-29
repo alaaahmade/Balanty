@@ -6,6 +6,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
 import { EditGalleryPopupProps } from '../../interfaces';
 
 import {
@@ -16,6 +17,7 @@ import {
   SelectButtonsBox,
   SelectTypography,
 } from './StadiumProfile.styled';
+import Loader from './Loader';
 
 const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   editGallery,
@@ -23,6 +25,8 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   ImageId,
   StadiumId,
   gallery,
+  loading,
+  setLoading,
 }): ReactElement => {
   const [newImage, setNewImage] = useState<string>('');
   const [newFile, setNewFile] = useState<File>();
@@ -64,6 +68,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
 
   const handleSave = async () => {
     try {
+      setLoading(true);
       const newUrl = await uploadImage(newFile as File);
       await axios.patch('/api/v1/stadiums/gallery', {
         image: newUrl,
@@ -71,14 +76,17 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
         StadiumId,
       });
       setEditGallery(false);
+      setLoading(false);
       setNewImage('');
     } catch (error) {
+      setLoading(false);
       navigate('serverError');
     }
   };
 
   const handleAddNew = async () => {
     try {
+      setLoading(true);
       const newUrl = await uploadImage(newFile as File);
       await axios.post('/api/v1/stadiums/gallery', {
         image: newUrl,
@@ -86,15 +94,19 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
       });
 
       setEditGallery(false);
+      setLoading(false);
       setNewImage('');
     } catch (error) {
+      setLoading(false);
       navigate('serverError');
     }
   };
 
   return (
-    <div>
+    <Box>
       <Dialog open={editGallery} onClose={handleClose}>
+        {loading && <Loader />}
+
         <DialogTitle
           sx={{
             textAlign: 'right',
@@ -142,7 +154,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
           </SelectButtonsBox>
         </DialogActions>
       </Dialog>
-    </div>
+    </Box>
   );
 };
 
