@@ -18,7 +18,6 @@ const getPlayerService = async (id: number) => {
     include: [
       {
         model: Player,
-        as: 'player',
       },
     ],
   });
