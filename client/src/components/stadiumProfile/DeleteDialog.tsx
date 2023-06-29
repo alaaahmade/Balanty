@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { FC } from 'react';
 
 import Button from '@mui/material/Button';
@@ -16,12 +17,14 @@ const DeleteDialog: FC<deleteDialogProps> = ({
   ImageId,
   StadiumId,
 }) => {
+  const navigate = useNavigate();
+
   const HandleAgree = async () => {
     try {
       await axios.delete(`/api/v1/stadiums/gallery/${ImageId}/${StadiumId}`);
       handleClose();
     } catch (error) {
-      console.log(error);
+      navigate('/serverError');
     }
   };
   return (

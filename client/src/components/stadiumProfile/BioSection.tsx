@@ -1,4 +1,5 @@
 import { ReactElement, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Typography, Box, InputAdornment, Button } from '@mui/material';
 
@@ -9,7 +10,6 @@ import { Edit } from '@mui/icons-material';
 
 import axios from 'axios';
 
-import { useNavigate } from 'react-router-dom';
 import {
   BioBox,
   FlexBox,
@@ -24,6 +24,7 @@ import {
   updatedValue,
   BioSectionProps,
 } from '../../interfaces';
+
 import { updatedValueSchema } from '../../validation';
 
 const BioSection = ({

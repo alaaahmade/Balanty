@@ -1,8 +1,7 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 
-import { Box } from '@mui/system';
+import { Typography, Box } from '@mui/material';
 
-import { Typography } from '@mui/material';
 import Calendar from '../calender/Calender';
 
 const ProfileCalender = (): ReactElement => {

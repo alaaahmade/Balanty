@@ -1,12 +1,16 @@
-import { Box } from '@mui/system';
 import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+
 import axios from 'axios';
+
+import { Box } from '@mui/material';
+
 import {
   BioSection,
   ImageSlider,
   ProfileCalender,
 } from '../components/stadiumProfile';
+
 import { UserData, errorI } from '../interfaces';
 import { StadiumGallery } from '../interfaces/StadiumProfile';
 

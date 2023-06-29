@@ -20,9 +20,10 @@ import {
   StadiumProfileProps,
 } from '../../interfaces/StadiumProfile';
 
-import 'react-slideshow-image/dist/styles.css';
 import EditGalleryPopup from './EditGallaryPopup';
 import DeleteDialog from './DeleteDialog';
+
+import 'react-slideshow-image/dist/styles.css';
 
 const ImageSlider: FC<StadiumProfileProps> = ({
   gallery,

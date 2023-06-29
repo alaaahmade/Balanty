@@ -1,5 +1,7 @@
 import { ReactElement, useEffect, useState } from 'react';
+
 import { EditInputs } from './StadiumProfile.styled';
+
 import { Props, updatedValue } from '../../interfaces';
 
 const EditInput: React.FC<Props> = ({
