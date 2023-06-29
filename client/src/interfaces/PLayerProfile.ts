@@ -1,5 +1,9 @@
 import { Dispatch, SetStateAction } from 'react';
 
+export interface playerBackgroundProps {
+  avatar: string;
+  cover: string;
+}
 export interface Props {
   lastValue: string | number;
   multiline: boolean;

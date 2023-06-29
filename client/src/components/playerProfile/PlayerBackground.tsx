@@ -3,20 +3,21 @@ import React, { ReactElement } from 'react';
 import LeftSideBar from '../RootComponents/leftSideBar/LeftSideBar';
 import NavBar from '../RootComponents/navBar/NavBar';
 import { Cover, AvatarWrapper, MainWrapper } from './Player.Styled';
+import { playerBackgroundProps } from '../../interfaces/PLayerProfile';
 
-const PlayerBackground: React.FC = (): ReactElement => {
+const PlayerBackground = ({
+  avatar,
+  cover,
+}: playerBackgroundProps): ReactElement => {
   return (
     <>
       <NavBar />
       <MainWrapper>
         <AvatarWrapper>
-          <Cover
-            alt="backgroundimage"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1pTPIgF0WL3OISw6WCVR_BCDVX1BkT26V5l8kScTyk9fOu0PfZQdbk72ZT9pBIMYX7cg&usqp=CAU"
-          />
+          <Cover alt="backgroundimage" src={cover} />
           <Avatar
             alt="Remy Sharp"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXKrxLlVyJ00ejbBf8gTGIA5HKb7Ewr1WgJA&usqp=CAU"
+            src={avatar}
             sx={{
               width: 145,
               height: 145,
@@ -26,7 +27,12 @@ const PlayerBackground: React.FC = (): ReactElement => {
             }}
           />
         </AvatarWrapper>
-        <LeftSideBar />
+        <LeftSideBar
+          // eslint-disable-next-line react/jsx-no-bind
+          setOpen={function (): void {
+            throw new Error('Function not implemented.');
+          }}
+        />
       </MainWrapper>
     </>
   );
