@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 const signupSchema = Joi.object({
-  username: Joi.string().alphanum().min(4).max(50).required(),
+  username: Joi.string().alphanum().min(2).max(50).required(),
   email: Joi.string()
     .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
     .regex(/^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/)
