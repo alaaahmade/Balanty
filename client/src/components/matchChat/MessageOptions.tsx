@@ -3,7 +3,7 @@ import React, { ReactElement, FC } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import styled from '@emotion/styled';
-import { IconBackground } from './MatchChat.styled';
+import axios from 'axios';
 
 const MessageOptionsBox = styled(Box)({
   display: 'none',
@@ -13,10 +13,23 @@ const MessageOptionsBox = styled(Box)({
 });
 
 const MessageOptions: FC<{ id: number }> = ({ id }): ReactElement => {
+  const handleEditClick = () => {
+    const editedMessage = axios.put(`http://localhost:8080/api/v1/message/`, {
+      id,
+      updatedMessage: 'fff',
+    });
+  };
+  const handleDeleteClick = async () => {
+    const deletedMessage = await axios.delete(
+      `http://localhost:8080/api/v1/message/2`,
+    );
+    console.log(deletedMessage, 'deleted');
+  };
+
   return (
     <MessageOptionsBox className="message-options">
       <IconButton
-        onClick={() => console.log('object')}
+        onClick={handleDeleteClick}
         sx={{
           width: '30px',
           height: '30px',
@@ -28,7 +41,7 @@ const MessageOptions: FC<{ id: number }> = ({ id }): ReactElement => {
         />
       </IconButton>
       <IconButton
-        onClick={() => console.log('object')}
+        onClick={handleEditClick}
         sx={{
           width: '30px',
           height: '30px',
