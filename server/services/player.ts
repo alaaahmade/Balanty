@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { Player, User } from '../models';
+import { Match, Player, User } from '../models';
 import updatedPLayerSchema from '../validations/playerSchema';
 
 const getPlayerService = async (id: number) => {
@@ -56,4 +56,23 @@ const updatePlayerService = async (req: Request) => {
   };
 };
 
-export { getPlayerService, updatePlayerService };
+const getPlayerMatches = async (id: number) => {
+  const isPLayerExist = Player.findOne({ where: { UserId: id } });
+  if (!isPLayerExist) {
+    return {
+      status: 401,
+      message: 'هذا اللاعب ير متاح',
+    };
+  }
+  const playerMatches = await Match.findAll({
+    where: {
+      UserId: id,
+    },
+  });
+  return {
+    status: 200,
+    data: playerMatches,
+  };
+};
+
+export { getPlayerService, updatePlayerService, getPlayerMatches };
