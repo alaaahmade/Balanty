@@ -8,6 +8,7 @@ import SignupWrapper from './components/auth/SignupWrapper';
 import LightTheme from './themes';
 import { open, useCustomOpen } from './context';
 import { StatsContextProvider } from './context/CreateMatch';
+import StadiumProfile from './pages/StadiumProfile';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,11 @@ const router = createBrowserRouter([
     path: '/home',
     element: <RootLayout />,
     children: [],
+  },
+  {
+    path: '/profile',
+    element: <RootLayout />,
+    children: [{ path: 'stadium/:id', element: <StadiumProfile /> }],
   },
   { path: '*', element: <h1>error</h1> },
 ]);
