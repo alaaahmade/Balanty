@@ -1,5 +1,9 @@
 import { Request, RequestHandler, Response } from 'express';
-import { getPlayerService, updatePlayerService } from '../services/player';
+import {
+  getPlayerService,
+  playerMatchesService,
+  updatePlayerService,
+} from '../services/player';
 
 const getPlayer: RequestHandler = async (
   req: Request,
@@ -25,4 +29,13 @@ const updatePlayer: RequestHandler = async (
   });
 };
 
-export { getPlayer, updatePlayer };
+const playerMatches: RequestHandler = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const matches = await playerMatchesService(+id);
+  return {
+    status: 200,
+    data: matches,
+  };
+};
+
+export { getPlayer, updatePlayer, playerMatches };
