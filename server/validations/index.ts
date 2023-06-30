@@ -1,2 +1,2 @@
-export { default as loginSchema } from './loginSchema';
 export { default as matchSchema } from './matchSchema';
+export { signupSchema, loginSchema } from './authSchema';
