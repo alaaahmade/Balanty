@@ -1,7 +1,5 @@
 import React from 'react';
-import Card from '@mui/material/Card';
-import { Avatar, Button, Typography } from '@mui/material';
-import { deepOrange } from '@mui/material/colors';
+import { Avatar, Button, Typography, Card } from '@mui/material';
 
 const PlayerFollows: React.FC<{ action: string; username: string }> = ({
   action,
@@ -53,7 +51,6 @@ const PlayerFollows: React.FC<{ action: string; username: string }> = ({
           height: 80,
           borderRadius: '50%',
           objectFit: 'cover',
-          bgcolor: deepOrange[500],
         }}
       />
     </Card>

@@ -8,7 +8,6 @@ import {
   Button,
 } from '@mui/material';
 import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
 import { Edit } from '@mui/icons-material';
 import { FlexBox } from '../stadiumProfile/StadiumProfile.styled';
 import { BioBox } from './Player.Styled';

@@ -1,14 +1,10 @@
 import { Avatar } from '@mui/material';
-import React, { ReactElement } from 'react';
-import LeftSideBar from '../RootComponents/leftSideBar/LeftSideBar';
-import NavBar from '../RootComponents/navBar/NavBar';
 import { Cover, AvatarWrapper, MainWrapper } from './Player.Styled';
 import { playerBackgroundProps } from '../../interfaces/PLayerProfile';
+import LeftSideBar from '../RootComponents/leftSideBar/LeftSideBar';
+import NavBar from '../RootComponents/navBar/NavBar';
 
-const PlayerBackground = ({
-  avatar,
-  cover,
-}: playerBackgroundProps): ReactElement => {
+const PlayerBackground = ({ avatar, cover }: playerBackgroundProps) => {
   return (
     <>
       <NavBar />

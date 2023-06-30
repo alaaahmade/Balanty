@@ -35,13 +35,6 @@ export interface player {
   UserId: number;
 }
 
-export interface UserData {
-  id: number;
-  username: string;
-  phone: string;
-  player: player;
-}
-
 export interface profileInfoProps {
   age: number;
   position: string;
@@ -53,4 +46,8 @@ export interface profileInfoProps {
 
 export interface playerActionsProps {
   username: string;
+}
+
+export interface error {
+  response: { status: number; data: object };
 }

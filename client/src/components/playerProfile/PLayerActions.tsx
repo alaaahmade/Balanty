@@ -1,14 +1,12 @@
-import React, { ReactElement } from 'react';
 import {
   ActionButton,
   ActionsWrapper,
   UserName,
   ButtonsWrapper,
 } from './Player.Styled';
-
 import { playerActionsProps } from '../../interfaces/PLayerProfile';
 
-const PlayerActions = ({ username }: playerActionsProps): ReactElement => {
+const PlayerActions = ({ username }: playerActionsProps) => {
   return (
     <ActionsWrapper>
       <ButtonsWrapper>
