@@ -13,17 +13,17 @@ const MessageOptionsBox = styled(Box)({
 });
 
 const MessageOptions: FC<{ id: number }> = ({ id }): ReactElement => {
-  const handleEditClick = () => {
-    const editedMessage = axios.put(`http://localhost:8080/api/v1/message/`, {
-      id,
-      updatedMessage: 'fff',
-    });
+  const handleEditClick = async () => {
+    const editedMessage = await axios.put(
+      `http://localhost:8080/api/v1/message/`,
+      {
+        id,
+        updatedMessage: 'fff',
+      },
+    );
   };
   const handleDeleteClick = async () => {
-    const deletedMessage = await axios.delete(
-      `http://localhost:8080/api/v1/message/2`,
-    );
-    console.log(deletedMessage, 'deleted');
+    await axios.delete(`http://localhost:8080/api/v1/message/2`);
   };
 
   return (
