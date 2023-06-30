@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/system';
 import { Avatar } from '@mui/material';
+import MessageOptions from './MessageOptions';
 
 interface Props {
   message: string;
@@ -26,14 +27,20 @@ const Message = ({
         justifyContent: isReceived ? 'left' : 'right',
       }}
     >
-      <div
-        style={{
+      <Box
+        sx={{
           display: 'flex',
           gap: '0.5rem',
           alignItems: 'center',
+          '&:hover': {
+            '.message-options': {
+              display: 'flex',
+            },
+          },
         }}
       >
-        {senderAvatar && <Avatar src={senderAvatar} />}
+        {!isReceived && <MessageOptions id={5} />}
+        {/* {senderAvatar && <Avatar src={senderAvatar} />} */}
         <Box
           sx={{
             background: isReceived ? '#F2FCF5' : '#2CB674',
@@ -51,7 +58,8 @@ const Message = ({
         >
           {message}
         </Box>
-      </div>
+        {isReceived && <MessageOptions id={5} />}
+      </Box>
     </section>
   );
 };
