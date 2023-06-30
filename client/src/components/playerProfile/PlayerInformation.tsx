@@ -23,8 +23,6 @@ const PlayerInformation = ({
   editMode,
   setEditMode,
 }: profileInfoProps): ReactElement => {
-  const [editable, setEditable] = useState(true);
-  const [save, setSave] = useState(false);
   const [validation, setValidation] = useState<updatedValue>({});
   const [newData, setNewData] = useState<updatedValue>({});
 
@@ -44,7 +42,6 @@ const PlayerInformation = ({
         window.location.reload();
       }
       setEditMode(false);
-      setSave(true);
       setValidation({});
     } catch (error) {
       if (error instanceof yup.ValidationError) {
@@ -62,8 +59,6 @@ const PlayerInformation = ({
   };
 
   const handleCancel = async () => {
-    setSave(false);
-    setEditable(false);
     setValidation({});
   };
 
