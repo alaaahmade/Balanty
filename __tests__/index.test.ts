@@ -8,8 +8,9 @@ beforeAll(async () => {
 });
 
 describe('test GitHub Actions CICD Piplines', () => {
-  test('test for husky', () => {
+  test('test for husky', done => {
     expect(3).toBe(3);
+    done();
   });
 });
 
@@ -76,10 +77,10 @@ describe('GET /api/v1/stadiums', () => {
       });
   });
 
-  describe('GET /api/v1/stadiums/matches/5', () => {
+  describe('GET /api/v1/matches/stadium/5', () => {
     test('responds with JSON and 200 status code', done => {
       request(app)
-        .get('/api/v1/stadiums/matches/5')
+        .get('/api/v1/matches/stadium/5')
         .set('Accept', 'application/json')
         .end((err, res) => {
           expect(res.status).toBe(200);
@@ -99,6 +100,73 @@ describe('GET /api/v1/stadiums', () => {
   });
 });
 
-afterAll(async () => {
+test('test for not exist Stadium should return 404 with "هذا الملعب غير متاح"', done => {
+  request(app)
+    .get('/api/v1/stadiums/profile/500')
+    .set('Accept', 'application/json')
+    .end((err, res) => {
+      if (err) {
+        done(err);
+      }
+      expect(res.status).toBe(401);
+      expect(res.type).toBe('application/json');
+      expect(typeof res).toBe('object');
+      const response = JSON.parse(res.text);
+      const { data } = response;
+      expect(response.status).toBe(401);
+      expect(data).toBe('هذا الملعب غير متاح');
+      done();
+    });
+});
+
+describe('GET /api/v1/stadiums/profiles', () => {
+  test('responds from /api/v1/stadiums/profile/id with JSON and 200 status code', done => {
+    request(app)
+      .get('/api/v1/stadiums/profile/5')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(response.status).toBe(200);
+        expect(data.username).toBe('ملعب الساحة');
+        expect(typeof data.Stadium).toBe('object');
+        expect(data.Stadium.id).toBe(1);
+        expect(Array.isArray(data.Stadium.stadiumGallery)).toBe(true);
+        expect(typeof data.Stadium.stadiumGallery[0]).toBe('object');
+        done();
+        if (err) {
+          done(err);
+        }
+      });
+  });
+});
+
+describe('GET /api/v1/matches', () => {
+  test('responds from /api/v1/matches with JSON and 200 status code', done => {
+    request(app)
+      .get('/api/v1/matches')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(response.status).toBe(200);
+        expect(Array.isArray(data)).toBe(true);
+        expect(data[0].ownerId).toBe(1);
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
+});
+
+afterAll(() => {
   sequelize.close();
 });

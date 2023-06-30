@@ -10,7 +10,7 @@
     "lint": "eslint server --ext .ts",
     "lint-fix": "eslint server --fix --ext .ts",
     "dev": "cross-env NODE_ENV=development npx nodemon ./server/index.ts",
-    "test": "cross-env NODE_ENV=test jest --runInBand",
+    "test": "cross-env NODE_ENV=test jest --runInBand ",
     "build": "tsc",
     "start": "cross-env NODE_ENV=production node ./dist",
     "prepare": "husky install",
@@ -48,6 +48,7 @@
     "typescript": "^4.0.2"
   },
   "dependencies": {
+    "@fullcalendar/react": "^6.1.8",
     "@types/jest": "^29.1.2",
     "@types/supertest": "^2.0.12",
     "bcrypt": "^5.1.0",

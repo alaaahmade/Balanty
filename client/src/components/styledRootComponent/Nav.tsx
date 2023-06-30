@@ -3,16 +3,18 @@ import { styled } from '@mui/system';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
 export const StyledNavBox = styled(Box)({
+  position: 'fixed',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   padding: '0 40px',
   width: '100%',
-  height: '65px',
+  height: '50px',
   left: 0,
   top: 0,
   backgroundColor: '#01031C',
   borderBottom: '0.5px solid #000000',
+  zIndex: '11',
 });
 
 export const StyledLogo = styled(Typography)({
@@ -27,25 +29,26 @@ export const StyledLogo = styled(Typography)({
 export const StyledSearchInput = styled(Input)({
   width: '40%',
   height: '40px',
-  background: '#D9D9D9',
+  background: '#EDF7FF',
   borderRadius: '5px',
-  padding: '20px',
+  padding: '20px 40px',
   br: '4px',
-  outline: '0',
-  borderWidth: '1px',
-  borderStyle: 'solid',
+  // borderWidth: '1px',
+  '& input': {
+    textAlign: 'Right',
+  },
 });
 
 export const StyledMnu = styled(GiHamburgerMenu)({
   color: '#D9D9D9',
   cursor: 'pointer',
-  fontSize: '30px',
+  fontSize: '25px',
   marginRight: '70px',
 });
 
 export const StyledLabel = styled('label')({
   position: 'absolute',
-  left: '66%',
+  right: '66%',
   top: '17px',
   zIndex: 2,
 });
