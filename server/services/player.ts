@@ -56,7 +56,7 @@ const updatePlayerService = async (req: Request) => {
   };
 };
 
-const getPlayerMatches = async (id: number) => {
+const playerMatchesService = async (id: number) => {
   const isPLayerExist = Player.findOne({ where: { UserId: id } });
   if (!isPLayerExist) {
     return {
@@ -75,4 +75,4 @@ const getPlayerMatches = async (id: number) => {
   };
 };
 
-export { getPlayerService, updatePlayerService, getPlayerMatches };
+export { getPlayerService, updatePlayerService, playerMatchesService };
