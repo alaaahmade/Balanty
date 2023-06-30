@@ -27,12 +27,7 @@ const PlayerBackground = ({
             }}
           />
         </AvatarWrapper>
-        <LeftSideBar
-          // eslint-disable-next-line react/jsx-no-bind
-          setOpen={function (): void {
-            throw new Error('Function not implemented.');
-          }}
-        />
+        <LeftSideBar />
       </MainWrapper>
     </>
   );

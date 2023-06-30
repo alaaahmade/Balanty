@@ -1,6 +1,6 @@
 import { string, object, number } from 'yup';
 
-const updateProfileSchema = Object({
+const updateProfileSchema = object().shape({
   bio: string()
     .min(3, 'يجب أن يكون الوصف على الأقل 3 أحرف')
     .max(200, 'يجب أن يكون الوصف على الأكثر 200 حرف')
@@ -22,11 +22,6 @@ const updateProfileSchema = Object({
     .min(3, 'يجب أن يحتوي نوع الملعب على الأقل 3 أحرف')
     .max(10, 'يجب أن يحتوي نوع الملعب على الأكثر 10 أحرف')
     .typeError('يجب أن المركز نص ')
-    .nullable(),
-  address: string()
-    .min(3, 'يجب أن يحتوي العنوان على الأقل 3 أحرف')
-    .max(100, 'يجب أن يحتوي العنوان على الأكثر 100 حرف')
-    .typeError('يجب أن يكون العنوان نص ')
     .nullable(),
 });
 

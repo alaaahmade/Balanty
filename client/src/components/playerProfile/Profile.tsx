@@ -6,37 +6,55 @@ import PlayerActions from './PLayerActions';
 import PlayerBackground from './PlayerBackground';
 import PlayerStats from './PlayerStats';
 import PlayerInformation from './PlayerInformation';
-import { UserData } from '../../interfaces/PLayerProfile';
+import { UserData, player } from '../../interfaces/PLayerProfile';
 
 const Profile: React.FC = (): ReactElement => {
   const { id } = useParams<{ id: string }>();
-  const [userData, setUserData] = useState<UserData | null>(null);
   const [editMode, setEditMode] = useState(false);
-  const fetchData = async () => {
-    try {
-      const data = await axios.get(`/api/v1/players/profile/2`);
-      const { age, avatar, bio, cover, position } = data.data.data;
-      console.log({ age, avatar, bio, cover, position });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const [cover, setCover] = useState<string>('');
+  const [avatar, setAvatar] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
+  const [bio, setBio] = useState<string>('');
+  const [position, setPosition] = useState<string>('');
+  const [age, setAge] = useState<number>(0);
+  const [phone, setPhone] = useState<number>(0);
+
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`/api/v1/players/profile/2`);
+        setCover(data.data.Player.cover);
+        setAvatar(data.data.Player.avatar);
+        setPhone(data.data.phone);
+        setUsername(data.data.username);
+        setBio(data.data.Player.bio);
+        setPosition(data.data.Player.position);
+        setAge(data.data.Player.age);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     fetchData();
-  });
+  }, []);
+
   return (
     <>
-      <PlayerBackground cover={cover} avatar={avater} />
-      <PlayerActions />
+      {cover && avatar && <PlayerBackground cover={cover} avatar={avatar} />}
+      <PlayerActions username={username} />
       <FollowsInfoWrapper>
         <PlayerInformation
           setEditMode={setEditMode}
           editMode={editMode}
-          userData={userData}
+          phone={phone}
+          age={age}
+          position={position}
+          bio={bio}
         />
         <PlayerStats />
       </FollowsInfoWrapper>
     </>
   );
 };
+
 export default Profile;

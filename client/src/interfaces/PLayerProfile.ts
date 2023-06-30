@@ -4,7 +4,8 @@ export interface playerBackgroundProps {
   avatar: string;
   cover: string;
 }
-export interface Props {
+
+export interface props {
   lastValue: string | number;
   multiline: boolean;
   name: string;
@@ -17,7 +18,6 @@ export interface updatedValue {
   phone?: string;
   position?: string;
   age?: number;
-  address?: string;
 }
 
 export interface updatedValueError {
@@ -27,9 +27,8 @@ export interface updatedValueError {
   };
 }
 
-export interface Player {
+export interface player {
   id: number;
-  address: string;
   bio: string;
   age: number;
   position: string;
@@ -37,14 +36,21 @@ export interface Player {
 }
 
 export interface UserData {
+  id: number;
   username: string;
   phone: string;
-  id: number;
-  Player: Player;
+  player: player;
 }
 
 export interface profileInfoProps {
-  userData: UserData;
+  age: number;
+  position: string;
+  bio: string;
+  phone: number;
   setEditMode: Dispatch<SetStateAction<boolean>>;
   editMode: boolean;
+}
+
+export interface playerActionsProps {
+  username: string;
 }

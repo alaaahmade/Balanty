@@ -6,14 +6,16 @@ import {
   ButtonsWrapper,
 } from './Player.Styled';
 
-const PlayerActions: React.FC = (): ReactElement => {
+import { playerActionsProps } from '../../interfaces/PLayerProfile';
+
+const PlayerActions = ({ username }: playerActionsProps): ReactElement => {
   return (
     <ActionsWrapper>
       <ButtonsWrapper>
         <ActionButton>متابعة</ActionButton>
         <ActionButton>مراسلة</ActionButton>
       </ButtonsWrapper>
-      <UserName variant="h3"> أحمد عبدالله</UserName>
+      <UserName variant="h3">{username}</UserName>
     </ActionsWrapper>
   );
 };
