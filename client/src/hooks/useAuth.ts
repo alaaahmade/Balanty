@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import useUser, { User } from './useUser';
-import useLocalStorage from './useLocalStorage';
+import { User } from './useUser';
+import { useUser, useLocalStorage } from './index';
 
 const useAuth = () => {
   const { user, addUser, removeUser } = useUser();
@@ -13,8 +13,8 @@ const useAuth = () => {
     }
   }, []);
 
-  const login = () => {
-    addUser(user);
+  const login = (loggedUser: User) => {
+    addUser(loggedUser);
   };
 
   const logout = () => {

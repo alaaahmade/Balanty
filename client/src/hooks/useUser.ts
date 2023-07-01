@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { AuthContext } from '../context';
-import useLocalStorage from './useLocalStorage';
+import { useLocalStorage } from './index';
 
 export interface User {
   id: number;
