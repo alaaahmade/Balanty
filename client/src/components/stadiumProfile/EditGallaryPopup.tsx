@@ -94,14 +94,18 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
         setImageError(true);
       } else {
         const newUrl = await uploadImage(newFile as File);
-        await axios.patch('/api/v1/stadiums/gallery', {
+        const res = await axios.patch('/api/v1/stadiums/gallery', {
           image: newUrl,
           id: ImageId,
           StadiumId,
         });
+
         setLoading(false);
         setAgree(!Agree);
         handleClose();
+        if (res.data.status !== 200) {
+          navigate('serverError');
+        }
       }
     } catch (error) {
       setLoading(false);
@@ -116,13 +120,16 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
         setImageError(true);
       } else {
         const newUrl = await uploadImage(newFile as File);
-        await axios.post('/api/v1/stadiums/gallery', {
+        const res = await axios.post('/api/v1/stadiums/gallery', {
           image: newUrl,
           StadiumId,
         });
         setLoading(false);
         setAgree(!Agree);
         handleClose();
+        if (res.data.status !== 200) {
+          navigate('serverError');
+        }
       }
     } catch (error) {
       setLoading(false);
