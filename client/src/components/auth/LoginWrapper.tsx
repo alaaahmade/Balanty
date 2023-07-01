@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useState } from 'react';
 
 import { Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
@@ -18,7 +18,7 @@ import TitleWrap from './Title';
 import GoogleIcon from '../../assets/image-2.svg';
 import LinkWrap from './Link';
 import { loginSchema } from '../../validation';
-import { loginProps } from '../../interfaces';
+import { loginProps, signupProps } from '../../interfaces';
 
 const LoginWrapper: FC = (): ReactElement => {
   const {
@@ -34,6 +34,14 @@ const LoginWrapper: FC = (): ReactElement => {
     },
   });
 
+  const [userData, setUserData] = useState<signupProps>({
+    username: '',
+    email: '',
+    phone: '',
+    password: '',
+    confirmPassword: '',
+  });
+
   const { pathname } = useLocation();
   let isPlayer = true;
 
@@ -41,8 +49,6 @@ const LoginWrapper: FC = (): ReactElement => {
     isPlayer = false;
   }
   const onSubmit: SubmitHandler<loginProps> = async data => {
-    console.log(data);
-
     try {
       const user = await axios.post(
         `http://localhost:8080/api/v1/${
@@ -53,7 +59,9 @@ const LoginWrapper: FC = (): ReactElement => {
           password: data.password,
         },
       );
-      window.location.href = '/home';
+      localStorage.setItem('user', user.data.data);
+      setUserData(user.data.data);
+      // window.location.href = '/home';
     } catch (error) {
       // eslint-disable-next-line no-alert
       alert('There an error when logging a user');
