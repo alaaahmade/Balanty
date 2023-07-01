@@ -89,11 +89,7 @@ const BioSection = ({
 
   return (
     <Box>
-      <BioBox
-        sx={{}}
-        onMouseEnter={handleMouseOver}
-        onMouseLeave={handleMouseOut}
-      >
+      <BioBox onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOut}>
         <Box>
           {hov && !editMode && (
             <InputAdornment position="end">

@@ -1,5 +1,5 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ReactElement } from 'react';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
 
 import RootLayout from './layouts/RootLayout';

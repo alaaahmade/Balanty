@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { FC, useContext } from 'react';
+import { FC, ReactElement, useContext } from 'react';
 
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -21,7 +21,7 @@ const DeleteDialog: FC<deleteDialogProps> = ({
   StadiumId,
   loading,
   setLoading,
-}) => {
+}): ReactElement => {
   const { setAgree, Agree } = useContext(UpdateGalleryContext);
 
   const navigate = useNavigate();
