@@ -19,6 +19,7 @@ import GoogleIcon from '../../assets/image-2.svg';
 import LinkWrap from './Link';
 import { loginSchema } from '../../validation';
 import { loginProps, signupProps } from '../../interfaces';
+import { useAuth } from '../../hooks';
 
 const LoginWrapper: FC = (): ReactElement => {
   const {
@@ -34,14 +35,15 @@ const LoginWrapper: FC = (): ReactElement => {
     },
   });
 
-  const [userData, setUserData] = useState<signupProps>({
-    username: '',
-    email: '',
-    phone: '',
-    password: '',
-    confirmPassword: '',
-  });
+  // const [userData, setUserData] = useState<signupProps>({
+  //   username: '',
+  //   email: '',
+  //   phone: '',
+  //   password: '',
+  //   confirmPassword: '',
+  // });
 
+  const { login } = useAuth();
   const { pathname } = useLocation();
   let isPlayer = true;
 
@@ -59,14 +61,14 @@ const LoginWrapper: FC = (): ReactElement => {
           password: data.password,
         },
       );
-      localStorage.setItem('user', user.data.data);
-      setUserData(user.data.data);
-      // window.location.href = '/home';
+      login(user.data.data);
+      window.location.href = '/home';
     } catch (error) {
       // eslint-disable-next-line no-alert
       alert('There an error when logging a user');
     }
   };
+
   return (
     <Wrapper isPlayer={isPlayer}>
       <ImageWrap isPlayer={isPlayer} />
