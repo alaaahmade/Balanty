@@ -9,7 +9,7 @@ const useAuth = () => {
   useEffect(() => {
     const loggedUser = getItem('user');
     if (loggedUser) {
-      addUser(JSON.parse(user));
+      addUser(JSON.parse(loggedUser));
     }
   }, []);
 

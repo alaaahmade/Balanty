@@ -1,14 +1,15 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { ReactElement } from 'react';
+import { ReactElement, useMemo } from 'react';
 import { ThemeProvider } from '@emotion/react';
 import RootLayout from './layouts/RootLayout';
 import { LandingPage } from './pages';
 import LoginWrapper from './components/auth/LoginWrapper';
 import SignupWrapper from './components/auth/SignupWrapper';
 import LightTheme from './themes';
-import { open, useCustomOpen } from './context';
 import { StatsContextProvider } from './context/CreateMatch';
 import StadiumProfile from './pages/StadiumProfile';
+import { AuthContext, open, useCustomOpen } from './context';
+import { useAuth, useUser } from './hooks';
 
 const router = createBrowserRouter([
   {
@@ -34,13 +35,18 @@ const router = createBrowserRouter([
   { path: '*', element: <h1>error</h1> },
 ]);
 const App = (): ReactElement => {
+  const { user, setUser } = useUser();
+
+  const authContextValue = useMemo(() => ({ user, setUser }), [user, setUser]);
   return (
     <ThemeProvider theme={LightTheme}>
-      <open.Provider value={useCustomOpen()}>
-        <StatsContextProvider>
-          <RouterProvider router={router} />
-        </StatsContextProvider>
-      </open.Provider>
+      <AuthContext.Provider value={authContextValue}>
+        <open.Provider value={useCustomOpen()}>
+          <StatsContextProvider>
+            <RouterProvider router={router} />
+          </StatsContextProvider>
+        </open.Provider>
+      </AuthContext.Provider>
     </ThemeProvider>
   );
 };
