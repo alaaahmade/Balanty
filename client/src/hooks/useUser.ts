@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../context';
 import useLocalStorage from './useLocalStorage';
 
-interface User {
+export interface User {
   id: number;
   username: string;
   email: string;
