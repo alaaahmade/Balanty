@@ -65,15 +65,16 @@ export const SliderBox = styled(Box)({
 });
 
 export const BioBox = styled(Box)({
-  width: '350px',
+  maxWidth: '350px',
+  minWidth: '350px',
   ml: '3%',
   padding: '10px',
-  border: '1px solid #ccc',
-  backgroundColor: '#F2FCF5',
+  border: '0.1px solid #D9D9D9',
   display: 'flex',
   flexDirection: 'column',
   gap: '10px',
   borderRadius: '3px',
+  boxShadow: '1px 1px 2px #D9D9D9 ',
 });
 
 export const FlexBox = styled(Box)({
@@ -85,23 +86,23 @@ export const FlexBox = styled(Box)({
 export const LocationTypo = styled(Typography)({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
+  justifyContent: 'flex-end',
   flexDirection: 'row',
-  fontWeight: 'bold',
 });
 
 export const EditInputs = styled(TextField)({
   '& input': {
-    color: 'blue',
+    color: '#5f5f5f',
     textAlign: 'right',
     paddingRight: '10px',
     padding: '0 10px 0 0',
   },
   width: '90%',
+  padding: 0,
+  margin: 0,
   mr: '10px',
-
   '& .css-66dh3a-MuiInputBase-input-MuiInput-input': {
-    color: 'blue',
+    color: '#5f5f5f',
   },
   '& .css-66dh3a-MuiInputBase-input-MuiInput-input.Mui-disabled': {
     color: 'red',

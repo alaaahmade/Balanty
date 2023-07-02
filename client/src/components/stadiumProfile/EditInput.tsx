@@ -1,14 +1,14 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { EditInputs } from './StadiumProfile.styled';
-import { Props, updatedValue } from '../../interfaces/PLayerProfile';
+import { props, updatedValue } from '../../interfaces/PLayerProfile';
 
-const EditInput: React.FC<Props> = ({
+const EditInput: React.FC<props> = ({
   lastValue,
   multiline,
   editMode,
   name,
   setNewData,
-}: Props): ReactElement => {
+}: props): ReactElement => {
   const [value, setValue] = useState(lastValue);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
