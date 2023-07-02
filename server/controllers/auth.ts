@@ -1,15 +1,36 @@
 import { Request, Response } from 'express';
 import { signupService } from '../services/auth';
+import { loginService } from '../services';
 
 const signup = async (req: Request, res: Response) => {
-  const { token } = await signupService(req.body);
+  const { newUser, token } = await signupService(req.body);
 
-  res.cookie('token', token);
-
-  res.json({
+  res.cookie('token', token).json({
     status: 200,
-    messege: 'User created successfully',
+    message: 'User created successfully',
+    user: newUser,
   });
 };
 
-export default signup;
+const login = async (req: Request, res: Response) => {
+  const { loggedUser, token } = await loginService(req.body);
+
+  res.cookie('token', token).json({
+    status: 200,
+    data: {
+      message: 'Successfully Login',
+      user: loggedUser,
+    },
+  });
+};
+
+const logout = (req: Request, res: Response) => {
+  res.clearCookie('token').json({
+    status: 200,
+    data: {
+      message: 'تم تسجيل الخروج بنجاح',
+    },
+  });
+};
+
+export { signup, login, logout };

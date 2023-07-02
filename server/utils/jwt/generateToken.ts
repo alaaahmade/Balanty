@@ -1,9 +1,9 @@
-import { sign, Secret } from 'jsonwebtoken';
-import { SECRET_KEY } from '../../config';
+import { sign } from 'jsonwebtoken';
+import environment from '../../config/environment';
 
 const generateToken = (payload: object): Promise<string> => {
   return new Promise<string>((resolve, reject) => {
-    sign(payload, SECRET_KEY as Secret, (err, token) => {
+    sign(payload, environment.SECRET_KEY, (err, token) => {
       if (err) {
         reject(err);
       } else {
