@@ -1,15 +1,36 @@
-import { createContext } from 'react';
-import { User } from '../hooks/useUser';
+import { createContext, ReactNode, useState, useMemo } from 'react';
+import { User } from '../interfaces';
 
 export interface AuthContextType {
   user: User | null;
-  setUser: (user: User | null) => void;
+  login: (user: User) => void;
+  logout: () => void;
 }
 
-const AuthContext = createContext<AuthContextType>({
-  user: null,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setUser: () => {},
-});
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const [user, setUser] = useState<User | null>(null);
+
+  const login = (loggedUser: User) => {
+    setUser(loggedUser);
+    localStorage.setItem('user', JSON.stringify(loggedUser));
+  };
+
+  const logout = () => {
+    setUser(null);
+    localStorage.setItem('user', '');
+  };
+  const authContextValue = useMemo(
+    () => ({ user, login, logout }),
+    [user, login, logout],
+  );
+
+  return (
+    <AuthContext.Provider value={authContextValue}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
 export default AuthContext;

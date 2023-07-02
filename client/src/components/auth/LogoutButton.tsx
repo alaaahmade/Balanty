@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@mui/material';
-import { useAuth } from '../../hooks';
+import useAuth from '../../hooks';
 
 const LogoutButton = () => {
   const { logout } = useAuth();

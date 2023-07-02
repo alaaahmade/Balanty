@@ -1,27 +1,63 @@
-import { useEffect } from 'react';
-import { User } from './useUser';
-import { useUser, useLocalStorage } from './index';
+// import { useContext, useEffect } from 'react';
+// import { User } from './useUser';
+// import { useUser, useLocalStorage } from './index';
+// import { AuthContext } from '../context';
 
-const useAuth = () => {
-  const { user, addUser, removeUser } = useUser();
-  const { getItem } = useLocalStorage();
+import { useContext } from 'react';
+import { AuthContext } from '../context';
 
-  useEffect(() => {
-    const loggedUser = getItem('user');
-    if (loggedUser) {
-      addUser(JSON.parse(loggedUser));
-    }
-  }, []);
+// // const useAuth = () => {
+// //   const { user, addUser, removeUser } = useUser();
+// //   const { getItem } = useLocalStorage();
 
-  const login = (loggedUser: User) => {
-    addUser(loggedUser);
-  };
+// //   useEffect(() => {
+// //     const loggedUser = getItem('user');
+// //     if (loggedUser) {
+// //       addUser(JSON.parse(loggedUser));
+// //     }
+// //   }, []);
 
-  const logout = () => {
-    removeUser();
-  };
+// //   const login = (loggedUser: User) => {
+// //     addUser(loggedUser);
+// //   };
 
-  return { user, login, logout };
-};
+// //   const logout = () => {
+// //     removeUser();
+// //   };
 
-export default useAuth;
+// //   return { user, login, logout };
+// // };
+
+// const useAuth = () => {
+//   const { user, setUser } = useContext(AuthContext);
+
+//   useEffect(() => {
+//     const loggedUser = localStorage.getItem('user');
+//     if (loggedUser) {
+//       setUser(JSON.parse(loggedUser));
+//       localStorage.setItem('user', JSON.stringify(loggedUser));
+//     }
+//   }, []);
+
+//   const login = (loggedUser: User) => {
+//     setUser(loggedUser);
+//     localStorage.setItem('user', JSON.stringify(loggedUser));
+//   };
+
+//   const logout = () => {
+//     setUser(null);
+//     localStorage.setItem('user', '');
+//   };
+
+//   return { user, login, logout };
+// };
+
+// export default useAuth;
+
+export default function useAuth() {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+}

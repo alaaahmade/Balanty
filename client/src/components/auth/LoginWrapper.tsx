@@ -19,7 +19,7 @@ import GoogleIcon from '../../assets/image-2.svg';
 import LinkWrap from './Link';
 import { loginSchema } from '../../validation';
 import { loginProps, signupProps } from '../../interfaces';
-import { useAuth } from '../../hooks';
+import useAuth from '../../hooks';
 
 const LoginWrapper: FC = (): ReactElement => {
   const {

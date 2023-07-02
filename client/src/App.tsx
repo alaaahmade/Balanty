@@ -10,6 +10,7 @@ import { StatsContextProvider } from './context/CreateMatch';
 import StadiumProfile from './pages/StadiumProfile';
 import { AuthContext, open, useCustomOpen } from './context';
 import { useAuth, useUser } from './hooks';
+import { AuthProvider } from './context/AuthContext';
 
 const router = createBrowserRouter([
   {
@@ -35,18 +36,15 @@ const router = createBrowserRouter([
   { path: '*', element: <h1>error</h1> },
 ]);
 const App = (): ReactElement => {
-  const { user, login, logout, setUser } = useAuth();
-
-  const authContextValue = useMemo(() => ({ user, setUser }), [user, setUser]);
   return (
     <ThemeProvider theme={LightTheme}>
-      <AuthContext.Provider value={authContextValue}>
+      <AuthProvider>
         <open.Provider value={useCustomOpen()}>
           <StatsContextProvider>
             <RouterProvider router={router} />
           </StatsContextProvider>
         </open.Provider>
-      </AuthContext.Provider>
+      </AuthProvider>
     </ThemeProvider>
   );
 };

@@ -19,6 +19,7 @@ import GoogleIcon from '../../assets/image-2.svg';
 import LinkWrap from './Link';
 import { signupProps } from '../../interfaces';
 import { signupSchema } from '../../validation';
+import useAuth from '../../hooks';
 
 const SignupWrapper: FC = (): ReactElement => {
   const {
@@ -37,6 +38,7 @@ const SignupWrapper: FC = (): ReactElement => {
     },
   });
   const { pathname } = useLocation();
+  const { login } = useAuth();
   let isPlayer = true;
 
   if (!(pathname.split('/')[1] === 'player')) {
@@ -56,6 +58,7 @@ const SignupWrapper: FC = (): ReactElement => {
           confirmPassword: data.confirmPassword,
         },
       );
+      login(user.data.data);
       window.location.href = '/home';
     } catch (error) {
       // eslint-disable-next-line no-alert

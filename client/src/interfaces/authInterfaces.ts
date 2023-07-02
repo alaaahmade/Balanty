@@ -21,3 +21,11 @@ export interface InputProps {
   control: any;
   name: string;
 }
+
+export interface User {
+  id: number;
+  username: string;
+  email: string;
+  avatar: string;
+  authToken?: string;
+}
