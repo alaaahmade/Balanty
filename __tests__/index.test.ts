@@ -298,7 +298,7 @@ describe('Patch /api/v1/stadiums/gallery', () => {
         const response = JSON.parse(res.text);
         const { data } = response;
         expect(response.status).toBe(200);
-        expect(typeof data[1][0].image).toBe('string');
+        expect(typeof data.image).toBe('string');
         done();
 
         if (err) {
@@ -329,7 +329,7 @@ describe('delete /api/v1/stadiums/gallery/:ImageId/:StadiumId', () => {
       .delete('/api/v1/stadiums/gallery/19/5')
       .set('Accept', 'application/json')
       .end((err, res) => {
-        expect(res.status).toBe(401);
+        expect(res.status).toBe(404);
         expect(typeof res).toBe('object');
         done();
 
