@@ -261,11 +261,8 @@
     {
       "image": "https://felesteen.news/thumb/w920/uploads/images/2021/04/6q4Oo.jpeg",
       "StadiumId": 5
-    },
-    {
-      "image": "https://www.aljazeera.net/wp-content/uploads/2020/01/245797c9-958d-4081-8104-8acc8c3a4029.jpeg?resize=770%2C513&quality=80",
-      "StadiumId": 5
     }
+
   ],
   "Message": [
     {
@@ -299,18 +296,18 @@
   ],
   "Review": [
     {
-      "PlayerId": 1,
-      "StadiumId": 2,
+      "playerId": 1,
+      "stadiumId": 2,
       "value": 4
     },
     {
-      "PlayerId": 2,
-      "StadiumId": 2,
+      "playerId": 2,
+      "stadiumId": 2,
       "value": 1
     },
     {
-      "PlayerId": 4,
-      "StadiumId": 2,
+      "playerId": 4,
+      "stadiumId": 2,
       "value": 3
     }
   ]

@@ -167,6 +167,52 @@ describe('GET /api/v1/matches', () => {
   });
 });
 
+describe('post /api/v1/review/5', () => {
+  test('responds from /api/v1/review/5 with JSON and 200 status code', done => {
+    request(app)
+      .post('/api/v1/review/5')
+      .set('Accept', 'application/json')
+      .send({ value: 4 })
+      .end((err, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(response.status).toBe(200);
+        expect(Array.isArray(data)).toBe(false);
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
+});
+
+describe('GET /api/v1/review/5', () => {
+  test('responds from /api/v1/review/5 with JSON and 200 status code', done => {
+    request(app)
+      .get('/api/v1/review/5')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(response.status).toBe(200);
+        expect(Array.isArray(data)).toBe(true);
+        expect(data[0].value).toBe(4);
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
+});
+
 afterAll(() => {
   sequelize.close();
 });
