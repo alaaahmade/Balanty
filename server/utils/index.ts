@@ -1,2 +1,4 @@
 import { CustomError, errorWrapper } from './errorHandler';
-export { CustomError, errorWrapper };
+import verifyToken from './jwt/verifyToken';
+
+export { CustomError, errorWrapper, verifyToken };
