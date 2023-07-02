@@ -48,14 +48,23 @@ const updatePlayerService = async (
       data: 'هذا اللاعب غير متاح',
     };
   }
+
   await updatedPLayerSchema.validateAsync(body);
 
-  const updatedPlayer = await Player.update(
+  const [updatedRows, [updatedPlayer]] = await Player.update(
     { ...body },
     {
       where: { UserId: playerId },
+      returning: true,
     },
   );
+
+  if (updatedRows === 0) {
+    return {
+      status: 400,
+      data: 'Failed to update the player',
+    };
+  }
 
   return {
     status: 200,
