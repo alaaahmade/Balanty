@@ -56,7 +56,7 @@ const StadiumCard = () => {
         </FlexBox>
 
         <FlexBox>
-          <Typography
+          <Box
             sx={{
               textAlign: 'right',
             }}
@@ -72,7 +72,7 @@ const StadiumCard = () => {
               <StarIcon />
               <StarIcon />
             </Box>
-          </Typography>
+          </Box>
           <Typography>: التقييم</Typography>
         </FlexBox>
         <FlexBox

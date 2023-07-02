@@ -45,7 +45,7 @@ export {
   StyledTeamBox,
   StyledWorldMatches,
   StyledMyMatches,
-} from './styledRootComponent/RightSideBarStyldComponent';
+} from './styledRootComponent/RightSideBarSteyldComponent';
 
 export {
   StyledNavBox,
