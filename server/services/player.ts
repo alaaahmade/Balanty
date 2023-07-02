@@ -61,7 +61,7 @@ const playerMatchesService = async (id: number) => {
   if (!isPLayerExist) {
     return {
       status: 401,
-      message: 'هذا اللاعب ير متاح',
+      message: 'هذا اللاعب غير موجود',
     };
   }
   const playerMatches = await Match.findAll({
@@ -69,10 +69,7 @@ const playerMatchesService = async (id: number) => {
       UserId: id,
     },
   });
-  return {
-    status: 200,
-    data: playerMatches,
-  };
+  return playerMatches;
 };
 
 export { getPlayerService, updatePlayerService, playerMatchesService };
