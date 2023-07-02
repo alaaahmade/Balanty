@@ -34,6 +34,13 @@ export const FlexBox = styled(Box)({
   gap: '15px',
 });
 
+export const ButtonBox = styled(Box)({
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+});
+
 export const ImageBox = styled(Box)({
   width: '50%',
   height: '100%',

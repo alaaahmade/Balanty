@@ -1,9 +1,10 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Rating, Typography } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import StarIcon from '@mui/icons-material/Star';
-import { FC, ReactElement, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { StyledButton } from '..';
 import {
+  ButtonBox,
   CardContainer,
   DetailsBox,
   FlexBox,
@@ -15,32 +16,24 @@ import { StadiumDataProps } from '../../interfaces';
 const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
   stadiumData,
 }) => {
-  const [stars, setStars] = useState<number>(0);
-  const [starsArr, setStarsArr] = useState<ReactElement[]>([]);
-  const { username, Stadium, StadiumsReviews } = stadiumData;
-  const { description, address } = Stadium;
+  const [image, setImage] = useState<string>('');
 
-  const totalReviews = +StadiumsReviews.length;
-  const sumOfRatings = +StadiumsReviews.reduce(
-    (acc, review) => acc + +review.value,
-    0,
-  );
-  const averageRating = sumOfRatings / totalReviews;
+  const { username, Stadium, StadiumsReviews, id } = stadiumData;
+  const { description, address, stadiumGallery } = Stadium;
 
-  const getStars = () => {
-    for (let i = 0; i <= Math.ceil(stars); i + 1) {
-      setStarsArr(prev => [...prev, <StarIcon />]);
-    }
+  const navigate = useNavigate();
+
+  const averageRating =
+    StadiumsReviews.reduce((sum, review) => sum + review.value, 0) /
+    StadiumsReviews.length;
+
+  const handleGoToProfile = () => {
+    navigate(`/profile/stadium/${id}`);
   };
 
   useEffect(() => {
-    if (Number.isNaN(averageRating)) {
-      setStars(0);
-    } else {
-      setStars(averageRating);
-    }
-    getStars();
-  }, [stadiumData]);
+    setImage(stadiumGallery[0]?.image);
+  }, []);
 
   return (
     <StadiumCardBox>
@@ -67,7 +60,7 @@ const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
               width: '70%',
             }}
           >
-            ...{description && (description || '').slice(0, 30)}
+            ...{description && (description || '').slice(0, 23)}
           </Typography>
           <Typography>: الوصف</Typography>
         </FlexBox>
@@ -97,30 +90,32 @@ const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
                 color: 'yellow',
               }}
             >
-              {starsArr}
-              {/* <StarIcon /> */}
-              {/* <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarIcon /> */}
+              <Rating
+                name="half-rating"
+                defaultValue={averageRating}
+                precision={0.5}
+                sx={{
+                  direction: 'rtl',
+                }}
+              />
             </Box>
           </Box>
           <Typography>: التقييم</Typography>
         </FlexBox>
-        <FlexBox
+        <ButtonBox
           sx={{
             mt: '15px',
           }}
-        />
-        <StyledButton>
-          <ArrowBackIcon /> معرفة المزيد
-        </StyledButton>
+        >
+          <StyledButton onClick={handleGoToProfile}>
+            <ArrowBackIcon /> معرفة المزيد
+          </StyledButton>
+        </ButtonBox>
       </CardContainer>
 
       <ImageBox
         sx={{
-          backgroundImage:
-            'url(https://digitalhub.fifa.com/m/52166e010ebdf873/original/1299995505-jpg.jpg)',
+          backgroundImage: `url(${image})`,
         }}
       />
     </StadiumCardBox>
