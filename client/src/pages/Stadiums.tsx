@@ -1,10 +1,13 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import axios from 'axios';
 import { StadiumCard, StadiumPageBox } from '../components';
 
-const StadiumsPage = () => {
-  const [stadiumData, setStadiumsData] = useState<[]>([]);
+import { StadiumDataProps } from '../interfaces';
+
+const StadiumsPage = (): ReactElement => {
+  const [stadiumData, setStadiumsData] = useState<StadiumDataProps[]>([]);
 
   const navigate = useNavigate();
   const Stadiums = async () => {
@@ -26,7 +29,9 @@ const StadiumsPage = () => {
       }}
     >
       {stadiumData &&
-        stadiumData.map(stadium => <StadiumCard stadiumData={stadium} />)}
+        stadiumData.map(stadium => (
+          <StadiumCard key={stadium.id} stadiumData={stadium} />
+        ))}
     </StadiumPageBox>
   );
 };

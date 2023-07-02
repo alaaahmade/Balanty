@@ -1,7 +1,9 @@
+import { FC, ReactElement } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { Box, Rating, Typography } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { FC, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import { StyledButton } from '..';
 import {
   ButtonBox,
@@ -11,13 +13,12 @@ import {
   ImageBox,
   StadiumCardBox,
 } from './StadiumPage.styled';
+
 import { StadiumDataProps } from '../../interfaces';
 
 const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
   stadiumData,
-}) => {
-  const [image, setImage] = useState<string>('');
-
+}): ReactElement => {
   const { username, Stadium, StadiumsReviews, id } = stadiumData;
   const { description, address, stadiumGallery } = Stadium;
 
@@ -30,10 +31,6 @@ const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
   const handleGoToProfile = () => {
     navigate(`/profile/stadium/${id}`);
   };
-
-  useEffect(() => {
-    setImage(stadiumGallery[0]?.image);
-  }, []);
 
   return (
     <StadiumCardBox>
@@ -92,7 +89,7 @@ const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
             >
               <Rating
                 name="half-rating"
-                defaultValue={averageRating}
+                value={averageRating}
                 precision={0.5}
                 sx={{
                   direction: 'rtl',
@@ -115,7 +112,7 @@ const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
 
       <ImageBox
         sx={{
-          backgroundImage: `url(${image})`,
+          backgroundImage: `url(${stadiumGallery[0]?.image})`,
         }}
       />
     </StadiumCardBox>
