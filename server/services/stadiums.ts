@@ -171,7 +171,7 @@ export const UpdateStadiumGalleryService = async (
   const check = await Gallery.findAll({ where: { id, StadiumId } });
   if (!check.length) {
     return {
-      status: 401,
+      status: 404,
       data: ' هذه الصورة غير موجودة',
     };
   }
@@ -183,7 +183,7 @@ export const UpdateStadiumGalleryService = async (
 
   return {
     status: 200,
-    data: galleries,
+    data: galleries[1][0].dataValues,
   };
 };
 
@@ -241,7 +241,7 @@ export const deleteStadiumImageService = async (
   });
   if (!check) {
     return {
-      status: 401,
+      status: 404,
       data: 'هذه الصورة غير موجودة',
     };
   }
