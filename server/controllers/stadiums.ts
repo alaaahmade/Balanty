@@ -42,11 +42,10 @@ export const getStadiumProfile: RequestHandler = async (
   res.status(matches.status).json(matches);
 };
 
-export const getStadiums : RequestHandler = async (
+export const getStadiums: RequestHandler = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
   const Stadiums = await getStadiumsService();
-  res.json(Stadiums)
-  // res.status(matches.status).json(matches);
+  res.status(Stadiums.status).json(Stadiums);
 };

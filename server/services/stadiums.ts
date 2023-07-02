@@ -120,10 +120,18 @@ export const getStadiumsService = async (): Promise<{
     include: [
       {
         model: Stadium,
-        include: [{ model: Gallery, as: 'stadiumGallery', limit: 1 }],
+        include: [
+          {
+            model: Gallery,
+            as: 'stadiumGallery',
+            limit: 1,
+          },
+        ],
       },
+      { model: Review, as: 'StadiumsReviews', attributes: ['value'] },
     ],
   });
+
   return {
     status: 200,
     data: res,

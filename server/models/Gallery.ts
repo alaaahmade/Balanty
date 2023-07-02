@@ -11,7 +11,11 @@ class Gallery extends Model {
 Gallery.init(
   {
     StadiumId: DataTypes.INTEGER,
-    image: DataTypes.TEXT,
+    image: {
+      type: DataTypes.TEXT,
+      defaultValue:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Etihad_Stadium.jpg/1024px-Etihad_Stadium.jpg',
+    },
   },
   {
     sequelize,

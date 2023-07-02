@@ -11,10 +11,10 @@ class Stadium extends Model {
 
 Stadium.init(
   {
-    address: { type: DataTypes.STRING, defaultValue: 'قم باضافة عنوانك' },
+    address: { type: DataTypes.STRING, defaultValue: 'لم يتم ادخال عنوان' },
     description: {
       type: DataTypes.STRING,
-      defaultValue: 'يمكنك اضافة وصف من هنا',
+      defaultValue: 'لم يتم ادخال وصف',
     },
     price: { type: DataTypes.INTEGER, defaultValue: 0 },
     ground: {
