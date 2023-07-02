@@ -44,6 +44,7 @@ const MatchChat = () => {
   });
 
   const [messageInput, setMessageInput] = useState<string>('');
+  const [newMessage, setNewMessage] = useState<object | null>(null);
 
   const fakeLoggedUserId = 1;
   const matchMessages = matchData?.data?.match?.MatchMessages;
@@ -61,7 +62,7 @@ const MatchChat = () => {
         <Alert severity="error">Error happened when accessing match</Alert>;
       }
     })();
-  }, []);
+  }, [newMessage]);
 
   const addMessage = () => {
     if (messageInput.trim()) {
@@ -76,6 +77,7 @@ const MatchChat = () => {
             },
           );
           setMessageInput('');
+          setNewMessage(data);
           // setMatchData(data);
         } catch (error) {
           // eslint-disable-next-line no-alert

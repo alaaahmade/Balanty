@@ -8,14 +8,14 @@ import axios from 'axios';
 const MessageOptionsBox = styled(Box)({
   display: 'none',
   alignItems: 'center',
-  gap: '0.5rem',
+  gap: '0',
   transition: '0.3s ease',
 });
 
 const MessageOptions: FC<{ id: number }> = ({ id }): ReactElement => {
   const handleEditClick = async () => {
     const editedMessage = await axios.put(
-      `http://localhost:8080/api/v1/message/`,
+      `http://localhost:8080/api/v1/message/${id}`,
       {
         id,
         updatedMessage: 'fff',
@@ -23,7 +23,7 @@ const MessageOptions: FC<{ id: number }> = ({ id }): ReactElement => {
     );
   };
   const handleDeleteClick = async () => {
-    await axios.delete(`http://localhost:8080/api/v1/message/2`);
+    await axios.delete(`http://localhost:8080/api/v1/message/${id}`);
   };
 
   return (
