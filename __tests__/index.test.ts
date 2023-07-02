@@ -167,6 +167,26 @@ describe('GET /api/v1/matches', () => {
   });
 });
 
+describe('GET /api/v1/stadiums/all', () => {
+  test('responds /api/v1/stadiums/all with JSON and 200 status code', done => {
+    request(app)
+      .get('/api/v1/stadiums/all')
+      .set('Accept', 'application/json')
+      .end((error, res) => {
+        expect(res.status).toBe(200);
+        const response = JSON.parse(res.text);
+        expect(response.status).toBe(200);
+        expect(response.data[0].username).toBe('نادي الاتحاد');
+        expect(response.data[0].Stadium.UserId).toBe(6);
+        expect(response.data[0].id).toBe(6);
+        done();
+        if (error) {
+          done(error);
+        }
+      });
+  });
+});
+
 afterAll(() => {
   sequelize.close();
 });
