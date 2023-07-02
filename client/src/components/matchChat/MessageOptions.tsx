@@ -40,6 +40,7 @@ const MessageOptions: FC<{ id: number }> = ({ id }): ReactElement => {
           sx={{ cursor: 'pointer', color: '#818181', fontSize: '20px' }}
         />
       </IconButton>
+
       <IconButton
         onClick={handleEditClick}
         sx={{

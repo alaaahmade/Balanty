@@ -109,7 +109,7 @@ const MatchChat = () => {
         }}
       >
         <Typography variant="h4" sx={{ fontSize: '20px', fontWeight: 'bold' }}>
-          Match title
+          {matchData?.data?.match?.title}
         </Typography>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <IconBackground>
