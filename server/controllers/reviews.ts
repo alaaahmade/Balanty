@@ -6,7 +6,7 @@ export const getReview: RequestHandler = async (
   res: Response,
 ): Promise<void> => {
   const response = await getReviewService(req);
-  res.json(response);
+  res.status(response.status).json(response);
 };
 
 export const addReview: RequestHandler = async (
@@ -14,5 +14,5 @@ export const addReview: RequestHandler = async (
   res: Response,
 ): Promise<void> => {
   const response = await addReviewService(req);
-  res.json(response);
+  res.status(response.status).json(response);
 };
