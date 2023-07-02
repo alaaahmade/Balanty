@@ -1,12 +1,12 @@
 import { createContext } from 'react';
 import { User } from '../hooks/useUser';
 
-interface AuthContext {
+export interface AuthContextType {
   user: User | null;
   setUser: (user: User | null) => void;
 }
 
-const AuthContext = createContext<AuthContext>({
+const AuthContext = createContext<AuthContextType>({
   user: null,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setUser: () => {},

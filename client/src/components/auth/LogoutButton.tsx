@@ -4,7 +4,10 @@ import { useAuth } from '../../hooks';
 
 const LogoutButton = () => {
   const { logout } = useAuth();
-  return <Button onClick={logout}>Logout</Button>;
+  const handleLogout = () => {
+    logout();
+  };
+  return <Button onClick={handleLogout}>Logout</Button>;
 };
 
 export default LogoutButton;

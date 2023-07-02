@@ -35,7 +35,7 @@ const router = createBrowserRouter([
   { path: '*', element: <h1>error</h1> },
 ]);
 const App = (): ReactElement => {
-  const { user, setUser } = useUser();
+  const { user, login, logout, setUser } = useAuth();
 
   const authContextValue = useMemo(() => ({ user, setUser }), [user, setUser]);
   return (

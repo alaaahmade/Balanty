@@ -64,6 +64,8 @@ const LoginWrapper: FC = (): ReactElement => {
       login(user.data.data);
       window.location.href = '/home';
     } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log('There an error when logging a user', error);
       // eslint-disable-next-line no-alert
       alert('There an error when logging a user');
     }
