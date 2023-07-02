@@ -13,3 +13,5 @@ export {
   getStadiumProfile,
   getStadiumMatches,
 } from './stadiums';
+
+export { getReview } from './reviews';
