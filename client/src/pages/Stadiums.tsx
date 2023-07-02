@@ -19,7 +19,7 @@ const StadiumsPage = () => {
         sx={{
           width: 'calc(100% - 560px)',
           // border: '1px solid ',
-          boxShadow: '-2px 2px 5px #ccc, 1px -1px 2px #ccc',
+          boxShadow: '-2px 2px 5px #ccc, 1px -1px 2px #cccccc4a',
           height: '250px',
           display: 'flex',
           borderRadius: '5px',
