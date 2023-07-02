@@ -11,3 +11,10 @@ export interface userLoginAttrs {
   username: string;
   password: string;
 }
+
+export interface IUser {
+  username: string;
+  email: string;
+  phone: number;
+  role: string;
+}

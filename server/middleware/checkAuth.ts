@@ -1,7 +1,8 @@
-import { NextFunction, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { CustomError, verifyToken } from '../utils';
+import { IUser } from '../interfaces/auth';
 
-const checkAuth = async (req: any, res: Response, next: NextFunction) => {
+const checkAuth = async (req: Request, res: Response, next: NextFunction) => {
   const { token } = req.cookies;
 
   if (!token) {
@@ -9,7 +10,7 @@ const checkAuth = async (req: any, res: Response, next: NextFunction) => {
   }
   try {
     const decoded = await verifyToken(token);
-    req.user = decoded;
+    req.user = decoded as IUser;
     next();
   } catch (error) {
     res.clearCookie('token');
