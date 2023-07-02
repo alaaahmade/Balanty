@@ -65,9 +65,7 @@ const playerMatchesService = async (id: number) => {
     };
   }
   const playerMatches = await Match.findAll({
-    where: {
-      UserId: id,
-    },
+    where: { UserId: id },
   });
   return playerMatches;
 };

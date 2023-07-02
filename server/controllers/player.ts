@@ -29,9 +29,13 @@ const updatePlayer: RequestHandler = async (
   });
 };
 
-const playerMatches: RequestHandler = async (req: Request, res: Response) => {
+const playerMatches: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
   const { id } = req.params;
   const matches = await playerMatchesService(+id);
+  console.log(matches);
   res.json({
     status: 200,
     data: matches,
