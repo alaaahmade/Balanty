@@ -16,7 +16,7 @@ const signupService = async (
   const userExists = await User.findOne({ where: { username } });
 
   if (userExists) {
-    throw new CustomError(500, 'User already exists');
+    throw new CustomError(401, 'هذا المستخدم موجود');
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
