@@ -1,24 +1,32 @@
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { StadiumCard, StadiumPageBox } from '../components';
 
 const StadiumsPage = () => {
+  const [stadiumData, setStadiumsData] = useState<[]>([]);
+
+  const navigate = useNavigate();
   const Stadiums = async () => {
-    const { data } = await axios.get('/api/v1/stadiums/all');
-    console.log(data);
+    try {
+      const { data } = await axios.get('/api/v1/stadiums/all');
+      setStadiumsData(data.data);
+    } catch (error) {
+      navigate('/serverError');
+    }
   };
 
-  // useEffect(() => {
-  //   Stadiums();
-  // }, []);
+  useEffect(() => {
+    Stadiums();
+  }, []);
   return (
     <StadiumPageBox
       sx={{
         mt: '5.5%',
       }}
     >
-      <StadiumCard />
-      <StadiumCard />
+      {stadiumData &&
+        stadiumData.map(stadium => <StadiumCard stadiumData={stadium} />)}
     </StadiumPageBox>
   );
 };

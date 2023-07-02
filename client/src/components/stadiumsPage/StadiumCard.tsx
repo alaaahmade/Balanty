@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import StarIcon from '@mui/icons-material/Star';
+import { FC, ReactElement, useEffect, useState } from 'react';
 import { StyledButton } from '..';
 import {
   CardContainer,
@@ -9,8 +10,38 @@ import {
   ImageBox,
   StadiumCardBox,
 } from './StadiumPage.styled';
+import { StadiumDataProps } from '../../interfaces';
 
-const StadiumCard = () => {
+const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
+  stadiumData,
+}) => {
+  const [stars, setStars] = useState<number>(0);
+  const [starsArr, setStarsArr] = useState<ReactElement[]>([]);
+  const { username, Stadium, StadiumsReviews } = stadiumData;
+  const { description, address } = Stadium;
+
+  const totalReviews = +StadiumsReviews.length;
+  const sumOfRatings = +StadiumsReviews.reduce(
+    (acc, review) => acc + +review.value,
+    0,
+  );
+  const averageRating = sumOfRatings / totalReviews;
+
+  const getStars = () => {
+    for (let i = 0; i <= Math.ceil(stars); i + 1) {
+      setStarsArr(prev => [...prev, <StarIcon />]);
+    }
+  };
+
+  useEffect(() => {
+    if (Number.isNaN(averageRating)) {
+      setStars(0);
+    } else {
+      setStars(averageRating);
+    }
+    getStars();
+  }, [stadiumData]);
+
   return (
     <StadiumCardBox>
       <CardContainer>
@@ -22,7 +53,7 @@ const StadiumCard = () => {
             }}
             variant="h6"
           >
-            ملعب الساحة
+            {username}
           </Typography>
         </DetailsBox>
         <FlexBox
@@ -36,7 +67,7 @@ const StadiumCard = () => {
               width: '70%',
             }}
           >
-            ...ملعب الساحة هو ملعب
+            ...{description && (description || '').slice(0, 30)}
           </Typography>
           <Typography>: الوصف</Typography>
         </FlexBox>
@@ -50,7 +81,7 @@ const StadiumCard = () => {
               textAlign: 'right',
             }}
           >
-            غزة-السرايا
+            {address}
           </Typography>
           <Typography>: العنوان</Typography>
         </FlexBox>
@@ -66,11 +97,12 @@ const StadiumCard = () => {
                 color: 'yellow',
               }}
             >
+              {starsArr}
+              {/* <StarIcon /> */}
+              {/* <StarIcon />
               <StarIcon />
               <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
+              <StarIcon /> */}
             </Box>
           </Box>
           <Typography>: التقييم</Typography>
@@ -79,11 +111,10 @@ const StadiumCard = () => {
           sx={{
             mt: '15px',
           }}
-        >
-          <StyledButton>
-            <ArrowBackIcon /> معرفة المزيد
-          </StyledButton>
-        </FlexBox>
+        />
+        <StyledButton>
+          <ArrowBackIcon /> معرفة المزيد
+        </StyledButton>
       </CardContainer>
 
       <ImageBox
