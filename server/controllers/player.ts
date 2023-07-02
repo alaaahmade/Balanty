@@ -32,10 +32,10 @@ const updatePlayer: RequestHandler = async (
 const playerMatches: RequestHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
   const matches = await playerMatchesService(+id);
-  return {
+  res.json({
     status: 200,
     data: matches,
-  };
+  });
 };
 
 export { getPlayer, updatePlayer, playerMatches };
