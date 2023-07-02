@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 import { CustomRequest, IServiceResponse } from '../interfaces';
 import { Match, Stadium, User } from '../models';
-import matchSchema from '../validations';
+import { matchSchema } from '../validations';
 import { matchesInterface } from '../interfaces/matchInterfaces';
 
 export const createMatchService = async (

@@ -1,18 +1,17 @@
 import bcrypt from 'bcrypt';
 import { User } from '../models';
 import { CustomError } from '../utils';
-import { signupSchema } from '../validations/schema';
 import { generateToken } from '../utils/jwt/generateToken';
 import { UserData } from '../interfaces/auth';
+import { signupSchema, loginSchema } from '../validations';
+import { userLoginAttrs } from '../interfaces/auth';
 
-const signupService = async (userData: UserData) => {
+const signupService = async (
+  userData: UserData,
+): Promise<{ newUser: object; token: string }> => {
   const { username, email, password, phone, role } = userData;
 
-  const validatedData = await signupSchema.validateAsync(userData);
-
-  if (!validatedData) {
-    throw new CustomError(422, 'UnproccableContent');
-  }
+  await signupSchema.validateAsync(userData);
 
   const userExists = await User.findOne({ where: { username } });
 
@@ -35,4 +34,40 @@ const signupService = async (userData: UserData) => {
   return { newUser, token };
 };
 
-export { signupService };
+const loginService = async (
+  userData: userLoginAttrs,
+): Promise<{ loggedUser: object; token: string }> => {
+  const { password, username } = userData;
+
+  await loginSchema.validateAsync(userData);
+
+  const user = await User.findOne({
+    where: { username },
+  });
+  if (!user) {
+    throw new CustomError(404, 'هناك خطأ في اسم المستخدم');
+  }
+
+  const result = await bcrypt.compare(password, user.dataValues.password);
+
+  if (!result) {
+    throw new CustomError(401, 'خطأ في البريد الإلكتروني أو كلمة المرور');
+  }
+
+  const userName = user.username;
+  const { id, email, phone, role, createdAt, updatedAt } = user.dataValues;
+
+  const loggedUser = {
+    id,
+    username: userName,
+    email,
+    phone,
+    role,
+    createdAt,
+    updatedAt,
+  };
+  const token = await generateToken({ id, userName, email, phone, role });
+  return { loggedUser, token };
+};
+
+export { signupService, loginService };
