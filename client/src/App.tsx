@@ -7,6 +7,7 @@ import LightTheme from './themes';
 import { open, useCustomOpen } from './context';
 import { StatsContextProvider } from './context/CreateMatch';
 import StadiumProfile from './pages/StadiumProfile';
+import StadiumsPage from './pages/Stadiums';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,12 @@ const router = createBrowserRouter([
   {
     path: '/home',
     element: <RootLayout />,
-    children: [],
+    children: [
+      {
+        path: 'stadiums',
+        element: <StadiumsPage />,
+      },
+    ],
   },
   {
     path: '/profile',
