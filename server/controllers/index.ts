@@ -12,4 +12,5 @@ export {
   getStadiumDetails,
   getStadiumProfile,
   getStadiumMatches,
+  getStadiums,
 } from './stadiums';

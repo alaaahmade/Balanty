@@ -3,6 +3,7 @@ import {
   getStadiumDetailsService,
   getStadiumMatchesService,
   getStadiumProfileService,
+  getStadiumsService,
 } from '../services';
 import { RequestHandler, Request, Response } from 'express';
 
@@ -39,4 +40,13 @@ export const getStadiumProfile: RequestHandler = async (
 ): Promise<void> => {
   const matches = await getStadiumProfileService(req);
   res.status(matches.status).json(matches);
+};
+
+export const getStadiums : RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const Stadiums = await getStadiumsService();
+  res.json(Stadiums)
+  // res.status(matches.status).json(matches);
 };

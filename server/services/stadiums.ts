@@ -109,3 +109,23 @@ export const getStadiumProfileService = async (
     data: stadium,
   };
 };
+
+export const getStadiumsService = async (): Promise<{
+  status: number;
+  data: object;
+}> => {
+  const res = await User.findAll({
+    where: { role: 'STADIUM' },
+    attributes: ['id', 'username'],
+    include: [
+      {
+        model: Stadium,
+        include: [{ model: Gallery, as: 'stadiumGallery', limit: 1 }],
+      },
+    ],
+  });
+  return {
+    status: 200,
+    data: res,
+  };
+};

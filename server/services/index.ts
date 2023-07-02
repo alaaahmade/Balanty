@@ -10,5 +10,6 @@ export {
   getStadiumDetailsService,
   getStadiumProfileService,
   getStadiumMatchesService,
+  getStadiumsService,
 } from './stadiums';
 export { createMatchService, getAllMatches } from './matches';
