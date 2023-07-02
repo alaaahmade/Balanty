@@ -14,4 +14,4 @@ export {
   getStadiumMatches,
 } from './stadiums';
 
-export { getReview } from './reviews';
+export { getReview, addReview } from './reviews';

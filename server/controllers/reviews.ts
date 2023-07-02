@@ -1,5 +1,5 @@
 import { Request, RequestHandler, Response } from 'express';
-import { getReviewService } from '../services';
+import { addReviewService, getReviewService } from '../services';
 
 export const getReview: RequestHandler = async (
   req: Request,
@@ -9,4 +9,10 @@ export const getReview: RequestHandler = async (
   res.json(response);
 };
 
-// export const addReview = () => {};
+export const addReview: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const response = await addReviewService(req);
+  res.json(response);
+};

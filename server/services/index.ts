@@ -17,4 +17,4 @@ export {
 
 export { createMatchService, getAllMatches } from './matches';
 
-export { getReviewService } from './reviews';
+export { getReviewService, addReviewService } from './reviews';
