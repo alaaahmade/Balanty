@@ -6,7 +6,9 @@ import { UserData } from '../interfaces/auth';
 import { signupSchema, loginSchema } from '../validations';
 import { userLoginAttrs } from '../interfaces/auth';
 
-const signupService = async (userData: UserData) => {
+const signupService = async (
+  userData: UserData,
+): Promise<{ newUser: object; token: string }> => {
   const { username, email, password, phone, role } = userData;
 
   await signupSchema.validateAsync(userData);
@@ -32,7 +34,9 @@ const signupService = async (userData: UserData) => {
   return { newUser, token };
 };
 
-const loginService = async (userData: userLoginAttrs) => {
+const loginService = async (
+  userData: userLoginAttrs,
+): Promise<{ loggedUser: object; token: string }> => {
   const { password, username } = userData;
 
   await loginSchema.validateAsync(userData);
@@ -55,13 +59,14 @@ const loginService = async (userData: userLoginAttrs) => {
 
   const loggedUser = {
     id,
+    username: userName,
     email,
     phone,
     role,
     createdAt,
     updatedAt,
   };
-  const token = generateToken({ id, userName, email, phone, role });
+  const token = await generateToken({ id, userName, email, phone, role });
   return { loggedUser, token };
 };
 
