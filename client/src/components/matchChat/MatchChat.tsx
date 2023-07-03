@@ -61,7 +61,17 @@ const MatchChat = () => {
   const fakeLoggedUserId = 2;
   const matchMessages = matchData?.data?.match?.MatchMessages;
 
+  const handleScrollChat = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({
+        top: scrollContainerRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   useEffect(() => {
+    handleScrollChat();
     (async () => {
       try {
         const response = await axios.get(`/api/v1/message/match/${matchId}`);
@@ -72,15 +82,6 @@ const MatchChat = () => {
       }
     })();
   }, [newMessage]);
-
-  const handleScrollChat = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTo({
-        top: scrollContainerRef.current.scrollHeight,
-        behavior: 'smooth',
-      });
-    }
-  };
 
   const addMessage = () => {
     if (messageInput.trim()) {
@@ -164,7 +165,7 @@ const MatchChat = () => {
         </Typography>
       </section>
 
-      <div style={{ flexGrow: '2', marginTop: '4rem' }}>
+      <div style={{ flexGrow: '2', marginTop: '0.5rem' }}>
         {matchMessages?.length > 0 ? (
           matchMessages.map((message, i, arr) => {
             return (

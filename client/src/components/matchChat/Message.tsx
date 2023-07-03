@@ -57,7 +57,11 @@ const Message = ({
             id={id}
           />
         )}
-        {/* {senderAvatar && <Avatar src={senderAvatar} />} */}
+        {isReceived && senderAvatar ? (
+          <Avatar src={senderAvatar} />
+        ) : (
+          <div style={{ width: '40px', height: '40px' }} />
+        )}
         <Box
           sx={{
             background: isReceived ? '#F2FCF5' : '#2CB674',
