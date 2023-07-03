@@ -1,3 +1,5 @@
+import { RequestHandler, Request, Response } from 'express';
+
 import {
   UpdateStadiumDataService,
   getAllStadiumsService,
@@ -5,7 +7,7 @@ import {
   getStadiumMatchesService,
   getStadiumProfileService,
 } from '../services';
-import { RequestHandler, Request, Response } from 'express';
+
 import {
   AddStadiumImageService,
   UpdateStadiumGalleryService,
