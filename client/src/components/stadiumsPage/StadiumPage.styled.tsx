@@ -56,3 +56,12 @@ export const StadiumPageBox = styled(Box)({
   justifyContent: 'flex-start',
   gap: '20px',
 });
+
+export const DotsLoaderBox = styled(Box)({
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  gap: '20px',
+});
