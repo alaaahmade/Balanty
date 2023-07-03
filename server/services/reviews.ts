@@ -98,8 +98,10 @@ export const getPlayerReviewService = async (
     };
   }
 
-  const playerReview = await Review.findOne({ where: { playerId, stadiumId } });
-  console.log(playerReview);
+  const playerReview = await Review.findOne({
+    where: { playerId, stadiumId },
+    attributes: ['id', 'value', 'playerId', 'stadiumId'],
+  });
 
   return {
     status: 200,

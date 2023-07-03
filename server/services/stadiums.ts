@@ -227,8 +227,6 @@ export const AddStadiumImageService = async (
   const checkAuthId = 5; //and this will removed
 
   if (StadiumId !== checkAuthId) {
-    console.log(StadiumId, checkAuthId);
-
     return {
       status: 401,
       data: 'UnAuthorize',

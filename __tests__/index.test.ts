@@ -425,6 +425,26 @@ describe('GET /api/v1/review/5', () => {
       });
   });
 });
+
+describe('GET /api/v1/review/player/5', () => {
+  test('responds from /api/v1/review/player/5 with JSON and 200 status code', done => {
+    request(app)
+      .get('/api/v1/review/player/5')
+      .set('Accept', 'application/json')
+      .end((error, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        const { data } = JSON.parse(res.text);
+        expect(data.value).toBe(4);
+        expect(data.playerId).toBe(4);
+        expect(data.stadiumId).toBe(5);
+        done();
+        if (error) {
+          done(error);
+        }
+      });
+  });
+});
 afterAll(() => {
   sequelize.close();
 });
