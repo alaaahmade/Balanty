@@ -104,9 +104,6 @@ const MatchChat = () => {
           marginBottom: '2rem',
         }}
       >
-        <Typography variant="h4" sx={{ fontSize: '20px', fontWeight: 'bold' }}>
-          {matchData?.data?.match?.title}
-        </Typography>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <IconBackground>
             <VideocamOutlinedIcon
@@ -127,6 +124,9 @@ const MatchChat = () => {
             />
           </IconBackground>
         </div>
+        <Typography variant="h4" sx={{ fontSize: '20px', fontWeight: 'bold' }}>
+          {matchData?.data?.match?.title}
+        </Typography>
       </section>
 
       <div style={{ flexGrow: '2' }}>
