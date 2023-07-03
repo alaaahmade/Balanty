@@ -114,7 +114,7 @@ export const getStadiumsService = async (): Promise<{
   status: number;
   data: object;
 }> => {
-  const res = await User.findAll({
+  const response = await User.findAll({
     where: { role: 'STADIUM' },
     attributes: ['id', 'username'],
     include: [
@@ -134,6 +134,6 @@ export const getStadiumsService = async (): Promise<{
 
   return {
     status: 200,
-    data: res,
+    data: response,
   };
 };

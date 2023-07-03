@@ -46,6 +46,6 @@ export const getStadiums: RequestHandler = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
-  const Stadiums = await getStadiumsService();
-  res.status(Stadiums.status).json(Stadiums);
+  const response = await getStadiumsService();
+  res.status(response.status).json(response);
 };
