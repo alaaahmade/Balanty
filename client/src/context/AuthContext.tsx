@@ -40,4 +40,25 @@ export const AuthProvider: FC<React.PropsWithChildren<object>> = ({
       // console.error('Login Failed', error);
     }
   }, []);
+
+  const signup = useCallback(
+    async (userData: signupProps, isplayer: boolean) => {
+      try {
+        const response = await axios.post(`/api/v1/user/signup`, {
+          username: userData.username,
+          email: userData.email,
+          phone: userData.phone,
+          password: userData.password,
+          confirmPassword: userData.confirmPassword,
+          role: isplayer ? 'player' : 'stadium',
+        });
+        setUser(response.data.user);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        window.location.href = '/home';
+      } catch (error) {
+        console.error('Signup Failed', error);
+      }
+    },
+    [],
+  );
 };
