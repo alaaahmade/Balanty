@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { ReactElement, useMemo } from 'react';
+import { ReactElement } from 'react';
 import { ThemeProvider } from '@emotion/react';
 import RootLayout from './layouts/RootLayout';
 import { LandingPage } from './pages';
