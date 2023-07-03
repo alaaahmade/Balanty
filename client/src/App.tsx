@@ -8,8 +8,7 @@ import SignupWrapper from './components/auth/SignupWrapper';
 import LightTheme from './themes';
 import { StatsContextProvider } from './context/CreateMatch';
 import StadiumProfile from './pages/StadiumProfile';
-import { AuthContext, open, useCustomOpen } from './context';
-import { useAuth, useUser } from './hooks';
+import { open, useCustomOpen } from './context';
 import { AuthProvider } from './context/AuthContext';
 
 const router = createBrowserRouter([
