@@ -37,3 +37,17 @@ export interface AuthContextData {
   logout: () => Promise<void>;
   errorMessage: string;
 }
+
+export interface ErrorData {
+  error: {
+    response: {
+      data: {
+        error: boolean;
+        data: {
+          status: number;
+          message: string;
+        };
+      };
+    };
+  };
+}

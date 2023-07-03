@@ -14,5 +14,6 @@ export type {
   InputProps,
   User,
   AuthContextData,
+  ErrorData,
 } from './authInterfaces';
 export type { errorI, UserData, createMatchError } from './StadiumProfile';
