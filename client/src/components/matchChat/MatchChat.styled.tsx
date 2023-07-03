@@ -43,9 +43,14 @@ export const AddMessageBar = styled(Box)({
   display: 'flex',
   alignItems: 'center',
   gap: '0.6rem',
-  padding: '0.5rem 0',
   borderTop: '1px solid #eee',
   marginTop: '1rem',
+  position: 'sticky',
+  bottom: '0',
+  left: '0',
+  padding: '0.5rem 0',
+  background: '#fff',
+  zIndex: '1000',
 });
 
 export const MessageInput = styled(TextareaAutosize)({
