@@ -1,10 +1,9 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useContext } from 'react';
 
 import { Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import axios from 'axios';
 
 import {
   Form,
@@ -17,9 +16,9 @@ import InputWrap from './Input';
 import TitleWrap from './Title';
 import GoogleIcon from '../../assets/image-2.svg';
 import LinkWrap from './Link';
-import { signupProps } from '../../interfaces';
+import { signupProps, AuthContextData } from '../../interfaces';
 import { signupSchema } from '../../validation';
-import useAuth from '../../hooks';
+import { AuthContext } from '../../context';
 
 const SignupWrapper: FC = (): ReactElement => {
   const {
@@ -37,33 +36,18 @@ const SignupWrapper: FC = (): ReactElement => {
       confirmPassword: '',
     },
   });
+
+  const authContext = useContext(AuthContext);
+  const { signup } = authContext as AuthContextData;
+
   const { pathname } = useLocation();
-  const { login } = useAuth();
   let isPlayer = true;
 
   if (!(pathname.split('/')[1] === 'player')) {
     isPlayer = false;
   }
   const onSubmit: SubmitHandler<signupProps> = async data => {
-    try {
-      const user = await axios.post(
-        `http://localhost:8080/api/v1/${
-          isPlayer ? 'player/signup' : 'stadium/signup'
-        }`,
-        {
-          username: data.username,
-          email: data.email,
-          phone: data.phone,
-          password: data.password,
-          confirmPassword: data.confirmPassword,
-        },
-      );
-      login(user.data.data);
-      window.location.href = '/home';
-    } catch (error) {
-      // eslint-disable-next-line no-alert
-      alert('There an error when logging a user');
-    }
+    await signup(data, isPlayer);
   };
   return (
     <Wrapper isPlayer={isPlayer}>
