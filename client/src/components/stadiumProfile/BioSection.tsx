@@ -1,9 +1,7 @@
-import { ReactElement, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { ReactElement, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { Typography, Box, InputAdornment, Button } from '@mui/material';
-
-import StarIcon from '@mui/icons-material/Star';
+import { Typography, Box, InputAdornment, Button, Rating } from '@mui/material';
 
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { Edit } from '@mui/icons-material';
@@ -32,14 +30,17 @@ const BioSection = ({
   editMode,
   setEditMode,
 }: BioSectionProps): ReactElement => {
+  const [ratingArray, setRatingArray] = useState<{ value: number }[]>([]);
+  const [EditAble, setEditAble] = useState<boolean>(true);
+  const [hov, setHove] = useState<boolean>(false);
+  const [mouseOver, setMouseOver] = useState<boolean>(false);
+  const [validation, setValidation] = useState<string>('');
+  const [newData, setNewData] = useState<updatedValue>({});
+
   const { description, price, ground, address } = userData.Stadium;
   const { username, phone } = userData;
 
-  const [EditAble, setEditAble] = useState(true);
-  const [hov, setHove] = useState(false);
-  const [mouseOver, setMouseOver] = useState(false);
-  const [validation, setValidation] = useState('');
-  const [newData, setNewData] = useState<updatedValue>({});
+  const { id } = useParams();
 
   const navigate = useNavigate();
 
@@ -47,6 +48,20 @@ const BioSection = ({
     setEditMode(true);
     setMouseOver(false);
   };
+
+  const getReview = async () => {
+    try {
+      const { data } = await axios.get(`/api/v1/review/${id}`);
+      setRatingArray(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const averageRating =
+    ratingArray.reduce((sum, review) => sum + review.value, 0) /
+    ratingArray.length;
+
   const handleUpdate = async () => {
     try {
       updatedValueSchema.validateSync(newData);
@@ -87,6 +102,10 @@ const BioSection = ({
     setHove(true);
   };
 
+  useEffect(() => {
+    getReview();
+  }, [id]);
+
   return (
     <Box>
       <BioBox onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOut}>
@@ -111,17 +130,14 @@ const BioSection = ({
           </Typography>
         </FlexBox>
         <FlexBox>
-          <FlexBox
+          <Rating
+            name="half-rating"
+            value={averageRating}
+            precision={0.5}
             sx={{
-              color: 'yellow',
+              direction: 'rtl',
             }}
-          >
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-          </FlexBox>
+          />
           <Typography variant="h5" sx={{ ml: '5px' }}>
             : التقييم
           </Typography>

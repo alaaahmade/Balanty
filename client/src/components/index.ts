@@ -56,4 +56,4 @@ export {
 } from './styledRootComponent/Nav';
 
 export { default as StadiumCard } from './stadiumsPage/StadiumCard';
-export { StadiumPageBox } from './stadiumsPage/StadiumPage.styled';
+export { StadiumPageBox } from './stadiumsPage/StadiumsPage.styled';

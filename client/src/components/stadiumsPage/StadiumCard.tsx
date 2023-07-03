@@ -12,7 +12,7 @@ import {
   FlexBox,
   ImageBox,
   StadiumCardBox,
-} from './StadiumPage.styled';
+} from './StadiumsPage.styled';
 
 import { StadiumDataProps } from '../../interfaces';
 
