@@ -18,8 +18,8 @@ export const Wrapper = styled(Box)({
   flexGrow: '2',
   padding: '0 1rem 0',
   margin: '1rem 0',
-  height: '60vh',
-  maxHeight: '60vh',
+  height: '90vh',
+  maxHeight: '90vh',
   overflow: 'auto !important',
 
   '&::-webkit-scrollbar-track': {

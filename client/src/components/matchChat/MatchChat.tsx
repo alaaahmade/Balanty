@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { Alert } from '@mui/material';
+import data from '@emoji-mart/data';
+import Picker from '@emoji-mart/react';
 import {
   AddMessageBar,
   IconBackground,
@@ -53,8 +55,8 @@ const MatchChat = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get(`/api/v1/message/match/${matchId}`);
-        setMatchData(data);
+        const response = await axios.get(`/api/v1/message/match/${matchId}`);
+        setMatchData(response.data);
       } catch (error) {
         // eslint-disable-next-line no-alert
         console.log('Error when accessing match', error);
@@ -66,13 +68,13 @@ const MatchChat = () => {
     if (messageInput.trim()) {
       (async () => {
         try {
-          const { data } = await axios.post(`/api/v1/message`, {
+          const response = await axios.post(`/api/v1/message`, {
             senderId: fakeLoggedUserId,
             matchId: matchData?.data?.match?.id,
             message: messageInput.trim(),
           });
           setMessageInput('');
-          setNewMessage(data);
+          setNewMessage(response.data);
           // setMatchData(data);
         } catch (error) {
           // eslint-disable-next-line no-alert
@@ -90,6 +92,10 @@ const MatchChat = () => {
     if (e.key === 'Enter' && !e.shiftKey) {
       addMessage();
     }
+  };
+
+  const handleEmojiSelect = (emoji: string) => {
+    setMessageInput(prevValue => prevValue + emoji);
   };
 
   return (
@@ -177,7 +183,12 @@ const MatchChat = () => {
           </>
         )}
       </div>
-
+      <Picker
+        data={data}
+        onEmojiSelect={(emoji: { native: string }) =>
+          handleEmojiSelect(emoji.native)
+        }
+      />
       <AddMessageBar>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
           <IconBackground>
