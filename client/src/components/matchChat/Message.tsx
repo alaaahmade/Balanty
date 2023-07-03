@@ -1,24 +1,33 @@
-import React from 'react';
+import React, { Key, useState, Dispatch, SetStateAction } from 'react';
 import { Box } from '@mui/system';
 import { Avatar } from '@mui/material';
 import MessageOptions from './MessageOptions';
 
 interface Props {
+  id: any;
   message: string;
   time: string;
   sender: string | number;
   // eslint-disable-next-line react/require-default-props
   senderAvatar: string | null;
   isReceived: boolean;
+  setIsEdit: Dispatch<SetStateAction<boolean>>;
+  // setUpdatedMessage: Dispatch<SetStateAction<string>>;
+  setMessageActionIndex: Dispatch<SetStateAction<number>>;
 }
 
 const Message = ({
+  id,
   message,
   time,
-  sender,
   senderAvatar,
+  sender,
   isReceived,
+  setIsEdit,
+  setMessageActionIndex,
 }: Props) => {
+  const [updatedMessage, setUpdatedMessage] = useState<string>('');
+
   return (
     <section
       style={{
@@ -39,7 +48,15 @@ const Message = ({
           },
         }}
       >
-        {!isReceived && <MessageOptions id={5} />}
+        {!isReceived && (
+          <MessageOptions
+            updatedMessage={updatedMessage}
+            setUpdatedMessage={setUpdatedMessage}
+            setIsEdit={setIsEdit}
+            setMessageActionIndex={setMessageActionIndex}
+            id={id}
+          />
+        )}
         {/* {senderAvatar && <Avatar src={senderAvatar} />} */}
         <Box
           sx={{
@@ -58,7 +75,6 @@ const Message = ({
         >
           {message}
         </Box>
-        {isReceived && <MessageOptions id={5} />}
       </Box>
     </section>
   );
