@@ -72,4 +72,15 @@ export const AuthProvider: FC<React.PropsWithChildren<object>> = ({
       console.error('Logout Failed', error);
     }
   }, []);
+
+  const authContextValue = useMemo(
+    () => ({ user, login, signup, logout }),
+    [user, login, signup, logout],
+  );
+
+  return (
+    <AuthContext.Provider value={authContextValue}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
