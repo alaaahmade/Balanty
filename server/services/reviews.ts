@@ -49,30 +49,29 @@ export const addReviewService = async (
     };
   }
   const { value } = await reviewSchema.validateAsync(body);
-  console.log(value);
 
   const checkReview = await Review.findOne({
     where: { playerId: UserId, stadiumId },
   });
 
   if (checkReview) {
-    const response = await Review.update(
+    const updatedReview = await Review.update(
       { value },
       { where: { stadiumId }, returning: true },
     );
     return {
       status: 200,
-      data: response[1][0],
+      data: updatedReview[1][0],
     };
   } else {
-    const response = await Review.create({
+    const newReview = await Review.create({
       playerId: UserId,
       stadiumId,
       value,
     });
     return {
       status: 200,
-      data: response,
+      data: newReview,
     };
   }
 };
