@@ -38,16 +38,9 @@ export interface AuthContextData {
   errorMessage: string;
 }
 
-export interface ErrorData {
-  error: {
-    response: {
-      data: {
-        error: boolean;
-        data: {
-          status: number;
-          message: string;
-        };
-      };
-    };
+export interface CustomErrorResponse {
+  data: {
+    message: string;
+    status: number;
   };
 }
