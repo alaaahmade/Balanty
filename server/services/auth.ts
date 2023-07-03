@@ -66,7 +66,8 @@ const loginService = async (
     createdAt,
     updatedAt,
   };
-  const token = await generateToken({ id, userName, email, phone, role });
+
+  const token = await generateToken(loggedUser);
   return { loggedUser, token };
 };
 
