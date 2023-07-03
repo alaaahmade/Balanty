@@ -46,10 +46,11 @@ const MatchChat = () => {
 
   const [messageInput, setMessageInput] = useState<string>('');
   const [newMessage, setNewMessage] = useState<object | null>(null);
+  const [isIconPickerShown, setIsIconPickerShown] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [messageActionIndex, setMessageActionIndex] = useState<number>(0);
 
-  const fakeLoggedUserId = 1;
+  const fakeLoggedUserId = 2;
   const matchMessages = matchData?.data?.match?.MatchMessages;
 
   useEffect(() => {
@@ -75,6 +76,7 @@ const MatchChat = () => {
           });
           setMessageInput('');
           setNewMessage(response.data);
+          setIsIconPickerShown(false);
           // setMatchData(data);
         } catch (error) {
           // eslint-disable-next-line no-alert
@@ -102,15 +104,25 @@ const MatchChat = () => {
     <Wrapper>
       <section
         style={{
+          position: 'sticky',
+          top: '0',
+          left: '0',
+          width: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '0.5rem 0',
+          background: '#fff',
           borderBottom: '1px solid #eee',
-          marginBottom: '2rem',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem',
+          }}
+        >
           <IconBackground>
             <VideocamOutlinedIcon
               style={{
@@ -135,7 +147,7 @@ const MatchChat = () => {
         </Typography>
       </section>
 
-      <div style={{ flexGrow: '2' }}>
+      <div style={{ flexGrow: '2', marginTop: '4rem' }}>
         {matchMessages?.length > 0 ? (
           matchMessages.map((message, i, arr) => {
             return (
@@ -183,12 +195,23 @@ const MatchChat = () => {
           </>
         )}
       </div>
-      <Picker
-        data={data}
-        onEmojiSelect={(emoji: { native: string }) =>
-          handleEmojiSelect(emoji.native)
-        }
-      />
+      {isIconPickerShown && (
+        <div
+          style={{
+            display: 'block',
+            position: 'sticky',
+            bottom: '4rem',
+          }}
+        >
+          <Picker
+            data={data}
+            onEmojiSelect={(emoji: { native: string }) =>
+              handleEmojiSelect(emoji.native)
+            }
+          />
+        </div>
+      )}
+
       <AddMessageBar>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
           <IconBackground>
@@ -200,7 +223,9 @@ const MatchChat = () => {
               }}
             />
           </IconBackground>
-          <IconBackground>
+          <IconBackground
+            onClick={() => setIsIconPickerShown(!isIconPickerShown)}
+          >
             <InsertEmoticonIcon
               style={{
                 fill: '#2CB674',
