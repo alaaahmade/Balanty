@@ -36,11 +36,10 @@ const BioSection = ({
   const [mouseOver, setMouseOver] = useState<boolean>(false);
   const [validation, setValidation] = useState<string>('');
   const [newData, setNewData] = useState<updatedValue>({});
+  const [newRating, setNewRating] = useState<number>(0);
 
-  const { description, price, ground, address } = userData.Stadium;
+  const { description, price, ground, address, id } = userData.Stadium;
   const { username, phone } = userData;
-
-  const { id } = useParams();
 
   const navigate = useNavigate();
 
@@ -54,7 +53,7 @@ const BioSection = ({
       const { data } = await axios.get(`/api/v1/review/${id}`);
       setRatingArray(data.data);
     } catch (error) {
-      console.log(error);
+      navigate('/serverError');
     }
   };
 
@@ -102,9 +101,21 @@ const BioSection = ({
     setHove(true);
   };
 
+  const addNewReview = async (rate: number) => {
+    try {
+      const { data } = await axios.post(`/api/v1/review/${id}`, {
+        value: rate,
+      });
+      console.log(data);
+
+      setNewRating(rate);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getReview();
-  }, [id]);
+  }, [id, newRating]);
 
   return (
     <Box>
@@ -257,16 +268,18 @@ const BioSection = ({
             justifyContent: 'flex-end',
           }}
         >
-          <Box
-            sx={{
-              color: 'yellow',
-            }}
-          >
-            <StarBorderIcon />
-            <StarBorderIcon />
-            <StarBorderIcon />
-            <StarBorderIcon />
-            <StarBorderIcon />
+          <Box>
+            <Rating
+              name="half-rating"
+              value={+newRating}
+              precision={0.5}
+              onChange={e => {
+                addNewReview(+(e.target as HTMLInputElement).value);
+              }}
+              sx={{
+                direction: 'rtl',
+              }}
+            />
           </Box>
           <Typography
             sx={{
