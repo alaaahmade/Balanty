@@ -1,10 +1,9 @@
-import React, { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactElement, useContext } from 'react';
 
 import { Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import axios from 'axios';
 
 import {
   Form,
@@ -18,8 +17,8 @@ import TitleWrap from './Title';
 import GoogleIcon from '../../assets/image-2.svg';
 import LinkWrap from './Link';
 import { loginSchema } from '../../validation';
-import { loginProps, signupProps } from '../../interfaces';
-import useAuth from '../../hooks';
+import { loginProps, AuthContextData } from '../../interfaces';
+import { AuthContext } from '../../context';
 
 const LoginWrapper: FC = (): ReactElement => {
   const {
@@ -35,15 +34,9 @@ const LoginWrapper: FC = (): ReactElement => {
     },
   });
 
-  // const [userData, setUserData] = useState<signupProps>({
-  //   username: '',
-  //   email: '',
-  //   phone: '',
-  //   password: '',
-  //   confirmPassword: '',
-  // });
+  const authContext = useContext(AuthContext);
+  const { login } = authContext as AuthContextData;
 
-  const { login } = useAuth();
   const { pathname } = useLocation();
   let isPlayer = true;
 
@@ -51,24 +44,7 @@ const LoginWrapper: FC = (): ReactElement => {
     isPlayer = false;
   }
   const onSubmit: SubmitHandler<loginProps> = async data => {
-    try {
-      const user = await axios.post(
-        `http://localhost:8080/api/v1/${
-          isPlayer ? 'player/login' : 'stadium/login'
-        }`,
-        {
-          username: data.username,
-          password: data.password,
-        },
-      );
-      login(user.data.data);
-      window.location.href = '/home';
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log('There an error when logging a user', error);
-      // eslint-disable-next-line no-alert
-      alert('There an error when logging a user');
-    }
+    await login(data.username, data.password);
   };
 
   return (
