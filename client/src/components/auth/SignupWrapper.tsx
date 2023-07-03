@@ -1,10 +1,11 @@
 import React, { FC, ReactElement, useContext } from 'react';
 
-import { Box } from '@mui/material';
+import { Alert, AlertTitle, Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { Stack } from '@mui/system';
 import {
   Form,
   ImageWrap,
@@ -38,22 +39,22 @@ const SignupWrapper: FC = (): ReactElement => {
   });
 
   const authContext = useContext(AuthContext);
-  const { signup } = authContext as AuthContextData;
+  const { signup, errorMessage } = authContext as AuthContextData;
 
   const { pathname } = useLocation();
-  let isPlayer = true;
+  let isplayer = true;
 
   if (!(pathname.split('/')[1] === 'player')) {
-    isPlayer = false;
+    isplayer = false;
   }
   const onSubmit: SubmitHandler<signupProps> = async data => {
-    await signup(data, isPlayer);
+    await signup(data, isplayer);
   };
   return (
-    <Wrapper isPlayer={isPlayer}>
-      <ImageWrap isPlayer={isPlayer} />
+    <Wrapper isplayer={isplayer}>
+      <ImageWrap isplayer={isplayer} />
       <Form>
-        {isPlayer ? (
+        {isplayer ? (
           <TitleWrap caption="تسجيل كلاعب" />
         ) : (
           <TitleWrap caption="تسجيل كملعب" />
@@ -62,8 +63,8 @@ const SignupWrapper: FC = (): ReactElement => {
           <InputWrap
             name="username"
             type="text"
-            label={isPlayer ? 'اسم اللاعب' : 'اسم الملعب'}
-            placeholder={isPlayer ? 'ادخل اسم اللاعب' : 'ادخل اسم الملعب'}
+            label={isplayer ? 'اسم اللاعب' : 'اسم الملعب'}
+            placeholder={isplayer ? 'ادخل اسم اللاعب' : 'ادخل اسم الملعب'}
             errors={errors}
             control={control}
           />
@@ -100,7 +101,7 @@ const SignupWrapper: FC = (): ReactElement => {
             control={control}
           />
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            {isPlayer ? (
+            {isplayer ? (
               <LinkWrap url="/player/login" caption="دخول كلاعب" />
             ) : (
               <LinkWrap url="/stadium/login" caption="دخول كملعب" />
@@ -133,6 +134,22 @@ const SignupWrapper: FC = (): ReactElement => {
           </SignButton>
         </Box>
       </Form>
+      {errorMessage && (
+        <Stack
+          sx={{
+            width: '45%',
+            position: 'absolute',
+            right: '2rem',
+            bottom: '2rem',
+            zIndex: '1000',
+          }}
+          spacing={2}
+        >
+          <Alert severity="error">
+            {errorMessage} — <strong>تفحصه!</strong>
+          </Alert>
+        </Stack>
+      )}
     </Wrapper>
   );
 };
