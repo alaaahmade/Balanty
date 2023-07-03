@@ -1,15 +1,20 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ReactElement } from 'react';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
 import RootLayout from './layouts/RootLayout';
 import { LandingPage } from './pages';
 import LoginWrapper from './components/auth/LoginWrapper';
 import SignupWrapper from './components/auth/SignupWrapper';
-import LightTheme from './themes';
-import { StatsContextProvider } from './context/CreateMatch';
-import StadiumProfile from './pages/StadiumProfile';
-import { open, useCustomOpen } from './context';
 import { AuthProvider } from './context/AuthContext';
+import LightTheme from './themes';
+import {
+  open,
+  useCustomOpen,
+  UpdateGalleryContextProvider,
+  StatsContextProvider,
+} from './context';
+import StadiumProfile from './pages/StadiumProfile';
+import StadiumsPage from './pages/Stadiums';
 
 const router = createBrowserRouter([
   {
@@ -25,7 +30,12 @@ const router = createBrowserRouter([
   {
     path: '/home',
     element: <RootLayout />,
-    children: [],
+    children: [
+      {
+        path: 'stadiums',
+        element: <StadiumsPage />,
+      },
+    ],
   },
   {
     path: '/profile',
@@ -40,7 +50,9 @@ const App = (): ReactElement => {
       <AuthProvider>
         <open.Provider value={useCustomOpen()}>
           <StatsContextProvider>
-            <RouterProvider router={router} />
+            <UpdateGalleryContextProvider>
+              <RouterProvider router={router} />
+            </UpdateGalleryContextProvider>
           </StatsContextProvider>
         </open.Provider>
       </AuthProvider>
