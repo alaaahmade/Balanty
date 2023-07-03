@@ -37,6 +37,7 @@ const BioSection = ({
   const [validation, setValidation] = useState<string>('');
   const [newData, setNewData] = useState<updatedValue>({});
   const [newRating, setNewRating] = useState<number>(0);
+  const [playerRating, setPlayerRating] = useState<number>(0);
 
   const { description, price, ground, address, id } = userData.Stadium;
   const { username, phone } = userData;
@@ -103,18 +104,27 @@ const BioSection = ({
 
   const addNewReview = async (rate: number) => {
     try {
-      const { data } = await axios.post(`/api/v1/review/${id}`, {
+      await axios.post(`/api/v1/review/${id}`, {
         value: rate,
       });
-      console.log(data);
-
       setNewRating(rate);
     } catch (error) {
-      console.log(error);
+      navigate('/serverError');
     }
   };
+
+  const getPlayerReview = async () => {
+    try {
+      const { data } = await axios.get(`/api/v1/review/player/${id}`);
+      setPlayerRating(data.data.value || 0);
+    } catch (error) {
+      navigate('/serverError');
+    }
+  };
+
   useEffect(() => {
     getReview();
+    getPlayerReview();
   }, [id, newRating]);
 
   return (
@@ -271,7 +281,7 @@ const BioSection = ({
           <Box>
             <Rating
               name="half-rating"
-              value={+newRating}
+              value={+newRating || +playerRating}
               precision={0.5}
               onChange={e => {
                 addNewReview(+(e.target as HTMLInputElement).value);
