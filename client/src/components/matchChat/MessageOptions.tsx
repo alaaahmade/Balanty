@@ -1,5 +1,11 @@
 import { Box, IconButton } from '@mui/material';
-import React, { ReactElement, FC } from 'react';
+import React, {
+  ReactElement,
+  FC,
+  SetStateAction,
+  Dispatch,
+  useState,
+} from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import styled from '@emotion/styled';
@@ -12,18 +18,29 @@ const MessageOptionsBox = styled(Box)({
   transition: '0.3s ease',
 });
 
-const MessageOptions: FC<{ id: number }> = ({ id }): ReactElement => {
+const MessageOptions: FC<{
+  id: number;
+  updatedMessage: string;
+  setUpdatedMessage: Dispatch<SetStateAction<string>>;
+  setIsEdit: Dispatch<SetStateAction<boolean>>;
+  setMessageActionIndex: Dispatch<SetStateAction<number>>;
+}> = ({
+  id,
+  updatedMessage,
+  setUpdatedMessage,
+  setIsEdit,
+  setMessageActionIndex,
+}): ReactElement => {
   const handleEditClick = async () => {
-    const editedMessage = await axios.put(
-      `http://localhost:8080/api/v1/message/${id}`,
-      {
-        id,
-        updatedMessage: 'fff',
-      },
-    );
+    setIsEdit(true);
+    setMessageActionIndex(id);
+    const editedMessage = await axios.put(`/api/v1/message`, {
+      id,
+      newMessage: updatedMessage,
+    });
   };
   const handleDeleteClick = async () => {
-    await axios.delete(`http://localhost:8080/api/v1/message/${id}`);
+    await axios.delete(`/api/v1/message/${id}`);
   };
 
   return (
