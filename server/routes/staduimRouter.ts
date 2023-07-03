@@ -5,6 +5,7 @@ import {
   getAllStadiums,
   getStadiumDetails,
   getStadiumProfile,
+  getStadiums,
 } from '../controllers';
 import {
   AddStadiumImage,
@@ -15,6 +16,7 @@ import {
 export const stadiumRouter: Router = Router();
 
 stadiumRouter.get('/', errorWrapper(getAllStadiums));
+stadiumRouter.get('/all', errorWrapper(getStadiums));
 stadiumRouter.get('/details/:id', errorWrapper(getStadiumDetails));
 stadiumRouter.get('/profile/:id', errorWrapper(getStadiumProfile));
 stadiumRouter.patch('/edit', errorWrapper(UpdateStadiumData));

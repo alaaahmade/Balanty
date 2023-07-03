@@ -111,6 +111,33 @@ export const getStadiumProfileService = async (
   };
 };
 
+export const getStadiumsService = async (): Promise<{
+  status: number;
+  data: object;
+}> => {
+  const response = await User.findAll({
+    where: { role: 'STADIUM' },
+    attributes: ['id', 'username'],
+    include: [
+      {
+        model: Stadium,
+        include: [
+          {
+            model: Gallery,
+            as: 'stadiumGallery',
+            limit: 1,
+          },
+        ],
+      },
+      { model: Review, as: 'StadiumsReviews', attributes: ['value'] },
+    ],
+  });
+
+  return {
+    status: 200,
+    data: response,
+  };
+};
 export const UpdateStadiumDataService = async (
   req: Request,
 ): Promise<{
@@ -200,6 +227,8 @@ export const AddStadiumImageService = async (
   const checkAuthId = 5; //and this will removed
 
   if (StadiumId !== checkAuthId) {
+    console.log(StadiumId, checkAuthId);
+
     return {
       status: 401,
       data: 'UnAuthorize',

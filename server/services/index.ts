@@ -13,6 +13,7 @@ export {
   getStadiumDetailsService,
   getStadiumProfileService,
   getStadiumMatchesService,
+  getStadiumsService,
   UpdateStadiumDataService,
 } from './stadiums';
 
