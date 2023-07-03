@@ -1,4 +1,5 @@
 export { signupService, loginService } from './auth';
+
 export {
   addMessageService,
   getMessageByIdService,
@@ -6,6 +7,7 @@ export {
   deleteMessageService,
   editMessageService,
 } from './matchChat';
+
 export {
   getAllStadiumsService,
   getStadiumDetailsService,
@@ -14,4 +16,7 @@ export {
   getStadiumsService,
   UpdateStadiumDataService,
 } from './stadiums';
+
 export { createMatchService, getAllMatches } from './matches';
+
+export { getReviewService, addReviewService } from './reviews';

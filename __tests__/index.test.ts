@@ -247,6 +247,7 @@ describe('patch /api/v1/stadiums/edit', () => {
         const response = JSON.parse(res.text);
         const { data } = response;
         expect(response.status).toBe(200);
+        expect(Array.isArray(data)).toBe(false);
         expect(data.UserResult).toBe(1);
         expect(data.stadiumResult).toBe(1);
         expect(data.message).toBe('تم الحفظ بنجاح');
@@ -310,6 +311,7 @@ describe('Post /api/v1/stadiums/gallery', () => {
       });
   });
 });
+
 describe('Patch /api/v1/stadiums/gallery', () => {
   test('responds from /api/v1/stadiums/gallery get 200 status code', done => {
     request(app)
@@ -365,6 +367,60 @@ describe('delete /api/v1/stadiums/gallery/:ImageId/:StadiumId', () => {
 
         if (err) {
           done(err);
+        }
+      });
+  });
+});
+
+describe('post /api/v1/review/5', () => {
+  test('responds from /api/v1/review/5 with JSON and 200 status code', done => {
+    request(app)
+      .post('/api/v1/review/5')
+      .set('Accept', 'application/json')
+      .send({ value: 4 })
+      .end((error, res) => {
+        expect(res.status).toBe(200);
+        const { data } = JSON.parse(res.text);
+        expect(data.value).toBe(4);
+        done();
+        if (error) {
+          done(error);
+        }
+      });
+  });
+});
+
+describe('GET /api/v1/review/5', () => {
+  test('responds from /api/v1/review/5 with JSON and 200 status code', done => {
+    request(app)
+      .get('/api/v1/review/5')
+      .set('Accept', 'application/json')
+      .end((error, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        const { data } = JSON.parse(res.text);
+        expect(Array.isArray(data)).toBe(true);
+        expect(data[0].value).toBe(4);
+        expect(data[0].playerId).toBe(4);
+        expect(data[0].stadiumId).toBe(5);
+        done();
+        if (error) {
+          done(error);
+        }
+      });
+  });
+
+  test('responds from /api/v1/review/5 with JSON and 404 status code', done => {
+    request(app)
+      .get('/api/v1/review/90')
+      .set('Accept', 'application/json')
+      .end((error, res) => {
+        expect(res.status).toBe(404);
+        expect(res.type).toBe('application/json');
+
+        done();
+        if (error) {
+          done(error);
         }
       });
   });
