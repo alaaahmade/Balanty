@@ -58,8 +58,7 @@ export const SliderImage = styled(Box)({
 });
 
 export const SliderBox = styled(Box)({
-  width: 'calc(100% - 400px)',
-  // width: 'calc(100% - 320px)',
+  width: 'calc(100% - 320px)',
   borderRadius: '5px',
   height: '75vh',
 });
