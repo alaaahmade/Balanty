@@ -10,7 +10,6 @@ import axios from 'axios';
 import { Alert } from '@mui/material';
 import { AuthContextData, User, signupProps } from '../interfaces';
 
-// eslint-disable-next-line import/prefer-default-export
 export const AuthContext = createContext<AuthContextData>({
   user: null,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -20,3 +19,25 @@ export const AuthContext = createContext<AuthContextData>({
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   logout: async () => {},
 });
+
+export const AuthProvider: FC<React.PropsWithChildren<object>> = ({
+  children,
+}) => {
+  const [user, setUser] = useState<User | null>(null);
+
+  const login = useCallback(async (username: string, password: string) => {
+    try {
+      const response = await axios.post(`/api/v1/user/login`, {
+        username,
+        password,
+      });
+
+      setUser(response.data.data.user);
+      localStorage.setItem('user', JSON.stringify(response.data.data.user));
+      window.location.href = '/home';
+    } catch (error) {
+      <Alert>Login Failed</Alert>;
+      // console.error('Login Failed', error);
+    }
+  }, []);
+};
