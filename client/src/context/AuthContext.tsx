@@ -3,12 +3,15 @@ import React, {
   createContext,
   useCallback,
   useState,
-  ReactNode,
   useMemo,
 } from 'react';
-import axios from 'axios';
-import { Alert } from '@mui/material';
-import { AuthContextData, User, signupProps } from '../interfaces';
+import axios, { AxiosError } from 'axios';
+import {
+  AuthContextData,
+  User,
+  signupProps,
+  CustomErrorResponse,
+} from '../interfaces';
 
 export const AuthContext = createContext<AuthContextData>({
   user: null,
@@ -18,12 +21,18 @@ export const AuthContext = createContext<AuthContextData>({
   signup: async () => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   logout: async () => {},
+  errorMessage: '',
 });
 
 export const AuthProvider: FC<React.PropsWithChildren<object>> = ({
   children,
 }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  function isAxiosError(error: unknown): error is AxiosError {
+    return (error as AxiosError).isAxiosError !== undefined;
+  }
 
   const login = useCallback(async (username: string, password: string) => {
     try {
@@ -36,8 +45,15 @@ export const AuthProvider: FC<React.PropsWithChildren<object>> = ({
       localStorage.setItem('user', JSON.stringify(response.data.data.user));
       window.location.href = '/home';
     } catch (error) {
-      <Alert>Login Failed</Alert>;
-      // console.error('Login Failed', error);
+      if (isAxiosError(error)) {
+        const axiosError = error as AxiosError<CustomErrorResponse>;
+        if (axiosError.response) {
+          const errorResponse = axiosError.response.data.data;
+          setErrorMessage(errorResponse.message);
+        }
+      } else {
+        setErrorMessage((error as Error).message);
+      }
     }
   }, []);
 
@@ -56,7 +72,15 @@ export const AuthProvider: FC<React.PropsWithChildren<object>> = ({
         localStorage.setItem('user', JSON.stringify(response.data.user));
         window.location.href = '/home';
       } catch (error) {
-        console.error('Signup Failed', error);
+        if (isAxiosError(error)) {
+          const axiosError = error as AxiosError<CustomErrorResponse>;
+          if (axiosError.response) {
+            const errorResponse = axiosError.response.data.data;
+            setErrorMessage(errorResponse.message);
+          }
+        } else {
+          setErrorMessage((error as Error).message);
+        }
       }
     },
     [],
@@ -69,13 +93,21 @@ export const AuthProvider: FC<React.PropsWithChildren<object>> = ({
       localStorage.setItem('user', '');
       window.location.href = '/';
     } catch (error) {
-      console.error('Logout Failed', error);
+      if (isAxiosError(error)) {
+        const axiosError = error as AxiosError<CustomErrorResponse>;
+        if (axiosError.response) {
+          const errorResponse = axiosError.response.data.data;
+          setErrorMessage(errorResponse.message);
+        }
+      } else {
+        setErrorMessage((error as Error).message);
+      }
     }
   }, []);
 
   const authContextValue = useMemo(
-    () => ({ user, login, signup, logout }),
-    [user, login, signup, logout],
+    () => ({ user, login, signup, logout, errorMessage }),
+    [user, login, signup, logout, errorMessage],
   );
 
   return (
