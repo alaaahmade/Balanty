@@ -75,3 +75,34 @@ export const addReviewService = async (
     };
   }
 };
+
+export const getPlayerReviewService = async (
+  req: Request,
+): Promise<{ status: number; data: object | string | null }> => {
+  // const playerId = req.user.UserId; this id will comming from checkAuth middillware
+  const playerId = 4; //and this will removed
+  const { stadiumId } = req.params;
+
+  const checkPlayer = await User.findOne({ where: { id: playerId } });
+  const checkStadium = await Stadium.findOne({ where: { id: stadiumId } });
+
+  if (!checkStadium) {
+    return {
+      status: 404,
+      data: '! هذا الملعب غير موجود ',
+    };
+  } else if (!checkPlayer) {
+    return {
+      status: 404,
+      data: '! هذا اللاعب غير موجود ',
+    };
+  }
+
+  const playerReview = await Review.findOne({ where: { playerId, stadiumId } });
+  console.log(playerReview);
+
+  return {
+    status: 200,
+    data: playerReview,
+  };
+};

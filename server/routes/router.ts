@@ -8,7 +8,6 @@ import reviewRouter from './reviewRouter';
 
 const router: Router = Router();
 router.use('/matches', matchRouter);
-
 router.use('/user', authRouter);
 router.use('/stadiums', stadiumRouter);
 router.use('/players', playerRouter);
