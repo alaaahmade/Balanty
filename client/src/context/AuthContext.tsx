@@ -61,4 +61,15 @@ export const AuthProvider: FC<React.PropsWithChildren<object>> = ({
     },
     [],
   );
+
+  const logout = useCallback(async () => {
+    try {
+      await axios.post('/api/v1/user/logout');
+      setUser(null);
+      localStorage.setItem('user', '');
+      window.location.href = '/';
+    } catch (error) {
+      console.error('Logout Failed', error);
+    }
+  }, []);
 };
