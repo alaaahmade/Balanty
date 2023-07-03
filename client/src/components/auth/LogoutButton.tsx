@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button } from '@mui/material';
-import useAuth from '../../hooks';
+import { AuthContext } from '../../context';
+import { AuthContextData } from '../../interfaces';
 
 const LogoutButton = () => {
-  const { logout } = useAuth();
-  const handleLogout = () => {
-    logout();
+  const authContext = useContext(AuthContext);
+  const { logout } = authContext as AuthContextData;
+  const handleLogout = async () => {
+    await logout();
   };
   return <Button onClick={handleLogout}>Logout</Button>;
 };
