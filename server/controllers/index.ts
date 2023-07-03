@@ -13,4 +13,5 @@ export {
   getStadiumProfile,
   getStadiumMatches,
   getStadiums,
+  UpdateStadiumData,
 } from './stadiums';

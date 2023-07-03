@@ -1,11 +1,19 @@
+import { RequestHandler, Request, Response } from 'express';
+
 import {
+  UpdateStadiumDataService,
   getAllStadiumsService,
   getStadiumDetailsService,
   getStadiumMatchesService,
   getStadiumProfileService,
   getStadiumsService,
 } from '../services';
-import { RequestHandler, Request, Response } from 'express';
+
+import {
+  AddStadiumImageService,
+  UpdateStadiumGalleryService,
+  deleteStadiumImageService,
+} from '../services/stadiums';
 
 export const getAllStadiums: RequestHandler = async (
   req: Request,
@@ -47,5 +55,41 @@ export const getStadiums: RequestHandler = async (
   res: Response,
 ): Promise<void> => {
   const response = await getStadiumsService();
+  res.status(response.status).json(response);
+};
+
+export const UpdateStadiumData: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const response = await UpdateStadiumDataService(req);
+
+  res.status(response.status).json(response);
+};
+
+export const UpdateStadiumGallery: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const response = await UpdateStadiumGalleryService(req);
+
+  res.status(response.status).json(response);
+};
+
+export const AddStadiumImage: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const response = await AddStadiumImageService(req);
+
+  res.status(response.status).json(response);
+};
+
+export const deleteStadiumImage: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const response = await deleteStadiumImageService(req);
+
   res.status(response.status).json(response);
 };
