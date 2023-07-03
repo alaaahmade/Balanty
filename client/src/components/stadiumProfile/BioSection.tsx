@@ -1,40 +1,76 @@
 import { ReactElement, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import {
-  Typography,
-  Box,
-  InputAdornment,
-  IconButton,
-  Button,
-} from '@mui/material';
+import { Typography, Box, InputAdornment, Button } from '@mui/material';
 
 import StarIcon from '@mui/icons-material/Star';
 
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { Edit } from '@mui/icons-material';
-import { BioBox, FlexBox, LocationTypo } from './StadiumProfile.styled';
+
+import axios from 'axios';
+
+import {
+  BioBox,
+  FlexBox,
+  LocationTypo,
+  NewIconButton,
+} from './StadiumProfile.styled';
 
 import EditInput from './EditInput';
 
-import { UserData } from '../../interfaces/StadiumProfile';
+import {
+  updatedValueError,
+  updatedValue,
+  BioSectionProps,
+} from '../../interfaces';
 
-type Props = {
-  userData: UserData;
-};
-const BioSection = ({ userData }: Props): ReactElement => {
+import { updatedValueSchema } from '../../validation';
+
+const BioSection = ({
+  userData,
+  editMode,
+  setEditMode,
+}: BioSectionProps): ReactElement => {
   const { description, price, ground, address } = userData.Stadium;
   const { username, phone } = userData;
-  const [editMode, setEditMode] = useState(false);
+
   const [EditAble, setEditAble] = useState(true);
   const [hov, setHove] = useState(false);
   const [mouseOver, setMouseOver] = useState(false);
+  const [validation, setValidation] = useState('');
+  const [newData, setNewData] = useState<updatedValue>({});
+
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setEditMode(true);
     setMouseOver(false);
   };
   const handleUpdate = async () => {
+    try {
+      updatedValueSchema.validateSync(newData);
+      await axios.patch('/api/v1/stadiums/edit', newData);
+      setEditMode(false);
+      setValidation('');
+    } catch (error) {
+      if (
+        (error as { name: string; message: string }).name === 'ValidationError'
+      ) {
+        setValidation((error as { message: string }).message);
+      } else if (
+        (error as updatedValueError).response.data.data.status === 403
+      ) {
+        setValidation((error as updatedValueError).response.data.data.message);
+      } else {
+        navigate('/serverError');
+      }
+    }
+  };
+
+  const handleCancel = async () => {
     setEditMode(false);
+    setValidation('');
   };
 
   const handleMouseOut = () => {
@@ -53,35 +89,29 @@ const BioSection = ({ userData }: Props): ReactElement => {
 
   return (
     <Box>
-      <BioBox
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'flex-end',
-        }}
-        onMouseEnter={handleMouseOver}
-        onMouseLeave={handleMouseOut}
-      >
-        <FlexBox
-          sx={{
-            justifyContent: 'space-between',
-          }}
-        >
+      <BioBox onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOut}>
+        <Box>
           {hov && !editMode && (
-            <InputAdornment
-              sx={{
-                mr: '45px',
-              }}
-              position="end"
-            >
+            <InputAdornment position="end">
               {EditAble && (
-                <IconButton onClick={handleClick}>
+                <NewIconButton onClick={handleClick}>
                   <Edit />
-                </IconButton>
+                </NewIconButton>
               )}
             </InputAdornment>
           )}
-          <Box
+        </Box>
+        <FlexBox
+          sx={{
+            width: '100%',
+          }}
+        >
+          <Typography variant="h5" sx={{ ml: '5px' }}>
+            {username}
+          </Typography>
+        </FlexBox>
+        <FlexBox>
+          <FlexBox
             sx={{
               color: 'yellow',
             }}
@@ -91,27 +121,36 @@ const BioSection = ({ userData }: Props): ReactElement => {
             <StarIcon />
             <StarIcon />
             <StarIcon />
-          </Box>
-
+          </FlexBox>
           <Typography variant="h5" sx={{ ml: '5px' }}>
-            {username}
+            : التقييم
           </Typography>
         </FlexBox>
-        <Box
+        <FlexBox
           sx={{
-            display: 'flex',
-            alignItems: 'center',
             justifyContent: 'space-evenly',
             width: '100%',
           }}
         />
-        <EditInput editMode={editMode} lastValue={description} multiline />
+        <EditInput
+          setNewData={setNewData}
+          name="description"
+          editMode={editMode}
+          lastValue={description}
+          multiline
+        />
         <FlexBox
           sx={{
             justifyContent: 'flex-end',
           }}
         >
-          <EditInput editMode={editMode} lastValue={phone} multiline={false} />
+          <EditInput
+            setNewData={setNewData}
+            name="phone"
+            editMode={editMode}
+            lastValue={phone}
+            multiline={false}
+          />
 
           <Typography
             sx={{
@@ -128,8 +167,10 @@ const BioSection = ({ userData }: Props): ReactElement => {
           }}
         >
           <EditInput
+            setNewData={setNewData}
+            name="price"
             editMode={editMode}
-            lastValue={price ? `شيكل${price}` : 'قم بكتابة السعر'}
+            lastValue={price ? `${price}` : 'قم بكتابة السعر'}
             multiline={false}
           />
 
@@ -148,7 +189,13 @@ const BioSection = ({ userData }: Props): ReactElement => {
             justifyContent: 'flex-end',
           }}
         >
-          <EditInput editMode={editMode} lastValue={ground} multiline={false} />
+          <EditInput
+            setNewData={setNewData}
+            name="ground"
+            editMode={editMode}
+            lastValue={ground}
+            multiline={false}
+          />
           <Typography
             sx={{
               width: '5rem',
@@ -171,6 +218,8 @@ const BioSection = ({ userData }: Props): ReactElement => {
             }}
           >
             <EditInput
+              setNewData={setNewData}
+              name="address"
               editMode={editMode}
               lastValue={address}
               multiline={false}
@@ -188,7 +237,6 @@ const BioSection = ({ userData }: Props): ReactElement => {
         </FlexBox>
         <Box
           sx={{
-            // mt: '15px',
             display: 'flex',
             justifyContent: 'flex-end',
           }}
@@ -219,10 +267,21 @@ const BioSection = ({ userData }: Props): ReactElement => {
               display: 'flex',
             }}
           >
-            <Button onClick={handleUpdate}>الغاء</Button>
+            <Button onClick={handleCancel}>الغاء</Button>
             <Button onClick={handleUpdate}>حفظ</Button>
           </Box>
         ) : null}
+        {validation && (
+          <Typography
+            sx={{
+              color: 'red',
+
+              m: '-10px 5px 10px 5px',
+            }}
+          >
+            {validation}
+          </Typography>
+        )}
       </BioBox>
     </Box>
   );
