@@ -5,18 +5,45 @@ import { generateToken } from '../utils/jwt/generateToken';
 import { UserData } from '../interfaces/auth';
 import { signupSchema, loginSchema } from '../validations';
 import { userLoginAttrs } from '../interfaces/auth';
+import { Op } from 'sequelize';
 
 const signupService = async (
   userData: UserData,
-): Promise<{ newUser: object; token: string }> => {
+): Promise<{
+  status: number;
+  data: object | string;
+  token?: string | null;
+}> => {
   const { username, email, password, phone, role } = userData;
 
   await signupSchema.validateAsync(userData);
 
-  const userExists = await User.findOne({ where: { username } });
+  const userExists = await User.findOne({
+    where: {
+      [Op.or]: [{ username }, { email }, { phone }],
+    },
+  });
 
-  if (userExists) {
-    throw new CustomError(409, 'هذا المستخدم موجود');
+  console.log(userExists);
+
+  if (userExists?.username === username) {
+    return {
+      status: 409,
+      data: 'اسم المستخدم موجود',
+    };
+  }
+  if (userExists?.email === email) {
+    console.log('email');
+    return {
+      status: 409,
+      data: 'هذا الايميل مستخدم',
+    };
+  }
+  if ((userExists?.phone ?? 0) === phone) {
+    return {
+      status: 409,
+      data: 'هذا الهاتف مستخدم',
+    };
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -31,7 +58,11 @@ const signupService = async (
 
   const token = await generateToken({ username, email, phone, role });
 
-  return { newUser, token };
+  return {
+    status: 201,
+    data: newUser,
+    token,
+  };
 };
 
 const loginService = async (
