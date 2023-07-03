@@ -7,5 +7,16 @@ export type {
   LeftSideBarInterface,
   MyContextProviderProps,
 } from './matchInterface';
-export type { errorI, UserData, createMatchError } from './StadiumProfile';
+
 export type { StadiumDataProps } from './stadiumsPage';
+
+export type {
+  errorI,
+  UserData,
+  createMatchError,
+  Props,
+  updatedValue,
+  updatedValueError,
+  BioSectionProps,
+  EditGalleryPopupProps,
+} from './StadiumProfile';

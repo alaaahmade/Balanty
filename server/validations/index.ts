@@ -1,3 +1,2 @@
-import matchSchema from './matchSchema';
-
-export default matchSchema;
+export { default as matchSchema } from './matchSchema';
+export { signupSchema, loginSchema } from './authSchema';

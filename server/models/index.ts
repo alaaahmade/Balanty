@@ -28,6 +28,7 @@ User.belongsToMany(Match, {
   as: 'Matches',
   foreignKey: 'userId',
 });
+
 Match.belongsToMany(User, {
   through: 'MatchPlayer',
   as: 'Players',

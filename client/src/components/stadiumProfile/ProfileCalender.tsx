@@ -1,6 +1,9 @@
-import React, { ReactElement } from 'react';
-import { Box } from '@mui/system';
+import { ReactElement } from 'react';
+
+import { Box } from '@mui/material';
+
 import Calendar from '../calender/Calender';
+import { CalendarTitle } from './StadiumProfile.styled';
 
 const ProfileCalender = (): ReactElement => {
   return (
@@ -10,6 +13,14 @@ const ProfileCalender = (): ReactElement => {
         height: '100%',
       }}
     >
+      <CalendarTitle
+        sx={{
+          mb: '25px',
+          mt: '-60px',
+        }}
+      >
+        الحجوزات
+      </CalendarTitle>
       <Calendar type="profile" />
     </Box>
   );
