@@ -5,7 +5,6 @@ import SendIcon from '@mui/icons-material/Send';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
 import Typography from '@mui/material/Typography';
-import EmojiPicker from 'emoji-picker-react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { Alert } from '@mui/material';
@@ -45,6 +44,8 @@ const MatchChat = () => {
 
   const [messageInput, setMessageInput] = useState<string>('');
   const [newMessage, setNewMessage] = useState<object | null>(null);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [messageActionIndex, setMessageActionIndex] = useState<number>(0);
 
   const fakeLoggedUserId = 1;
   const matchMessages = matchData?.data?.match?.MatchMessages;
@@ -52,14 +53,11 @@ const MatchChat = () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get(
-          `http://localhost:8080/api/v1/message/match/${matchId}`,
-        );
+        const { data } = await axios.get(`/api/v1/message/match/${matchId}`);
         setMatchData(data);
       } catch (error) {
         // eslint-disable-next-line no-alert
-        alert('Error when accessing match');
-        <Alert severity="error">Error happened when accessing match</Alert>;
+        console.log('Error when accessing match', error);
       }
     })();
   }, [newMessage]);
@@ -68,21 +66,17 @@ const MatchChat = () => {
     if (messageInput.trim()) {
       (async () => {
         try {
-          const { data } = await axios.post(
-            `http://localhost:8080/api/v1/message`,
-            {
-              senderId: 5,
-              matchId: matchData?.data?.match?.id,
-              message: messageInput.trim(),
-            },
-          );
+          const { data } = await axios.post(`/api/v1/message`, {
+            senderId: fakeLoggedUserId,
+            matchId: matchData?.data?.match?.id,
+            message: messageInput.trim(),
+          });
           setMessageInput('');
           setNewMessage(data);
           // setMatchData(data);
         } catch (error) {
           // eslint-disable-next-line no-alert
-          alert('Error when accessing match');
-          <Alert severity="error">Sending message failed</Alert>;
+          console.log('Error when accessing match', error);
         }
       })();
     }
@@ -136,11 +130,12 @@ const MatchChat = () => {
       </section>
 
       <div style={{ flexGrow: '2' }}>
-        {matchMessages.length > 0 ? (
+        {matchMessages?.length > 0 ? (
           matchMessages.map((message, i, arr) => {
             return (
               <Message
                 key={message.id}
+                id={message.id}
                 message={message.message}
                 time={message.createdAt}
                 senderAvatar={
@@ -150,7 +145,9 @@ const MatchChat = () => {
                     : null
                 }
                 sender={message.UserId}
-                isReceived={message.UserId === fakeLoggedUserId}
+                isReceived={message.UserId !== fakeLoggedUserId}
+                setIsEdit={setIsEdit}
+                setMessageActionIndex={setMessageActionIndex}
               />
             );
           })
@@ -203,7 +200,9 @@ const MatchChat = () => {
           </IconBackground>
         </div>
         <MessageInput
-          value={messageInput}
+          value={
+            isEdit ? matchMessages[messageActionIndex].message : messageInput
+          }
           onChange={handleInput}
           onKeyDown={handleKeyDown}
           placeholder="اكتب رسالتك"
