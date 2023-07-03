@@ -166,7 +166,37 @@ describe('GET /api/v1/matches', () => {
       });
   });
 });
+describe('patch /api/v1/stadiums/edit', () => {
+  test('responds from /api/v1/stadiums/edit with validation Error and 403 status code', done => {
+    request(app)
+      .patch('/api/v1/stadiums/edit')
+      .set('Accept', 'application/json')
+      .send({
+        description:
+          'يحتوي الملعب المصغر على عشب صناعي غير حشو ومنصات صدمات. يعتمد حجم ملعب كرة القدم المصغر على حجم القاعدة. اتصل بنا للحصول على التفاصيلh',
+        phone: 'h0591234563',
+        price: '750',
+        ground: 'hانجيل',
+        address: 'hالزيتون',
+      })
+      .end((err, res) => {
+        expect(res.status).toBe(403);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(data.status).toBe(403);
+        expect(data.message).toBe(
+          'يجب أن يحتوي رقم الهاتف على الأكثر 10 أرقام',
+        );
+        done();
 
+        if (err) {
+          done(err);
+        }
+      });
+  });
+});
 describe('patch /api/v1/stadiums/edit', () => {
   test('responds from /api/v1/stadiums/edit with validation Error and 403 status code', done => {
     request(app)

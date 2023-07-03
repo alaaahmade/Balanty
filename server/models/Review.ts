@@ -2,8 +2,8 @@ import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../database';
 
 class Review extends Model {
-  declare player_id: number;
-  declare Stadium_id: number;
+  declare PlayerId: number;
+  declare StadiumId: number;
   declare value: number;
 }
 
