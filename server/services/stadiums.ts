@@ -137,7 +137,7 @@ export const getStadiumsService = async (
     ],
   });
 
-  const pageSize = 10;
+  const pageSize = 8;
   const startIndex = ((+page as number) - 1) * pageSize;
   const endIndex = startIndex + pageSize;
   const paginatedItems = Stadiums.slice(startIndex, endIndex);

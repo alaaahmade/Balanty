@@ -436,7 +436,7 @@ describe('GET /api/v1/stadiums/all/1', () => {
         expect(res.type).toBe('application/json');
         const { data } = JSON.parse(res.text);
         expect(Array.isArray(data)).toBe(true);
-        expect(data.length).toBe(10);
+        expect(data.length).toBe(8);
 
         done();
         if (error) {
