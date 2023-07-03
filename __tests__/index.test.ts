@@ -409,6 +409,21 @@ describe('GET /api/v1/review/5', () => {
         }
       });
   });
+
+  test('responds from /api/v1/review/5 with JSON and 404 status code', done => {
+    request(app)
+      .get('/api/v1/review/90')
+      .set('Accept', 'application/json')
+      .end((error, res) => {
+        expect(res.status).toBe(404);
+        expect(res.type).toBe('application/json');
+
+        done();
+        if (error) {
+          done(error);
+        }
+      });
+  });
 });
 afterAll(() => {
   sequelize.close();
