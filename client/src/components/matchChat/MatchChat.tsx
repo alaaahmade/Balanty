@@ -1,4 +1,10 @@
-import { useEffect, useState, ChangeEvent, KeyboardEvent } from 'react';
+import React, {
+  useEffect,
+  useState,
+  ChangeEvent,
+  KeyboardEvent,
+  useRef,
+} from 'react';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import SendIcon from '@mui/icons-material/Send';
@@ -50,6 +56,8 @@ const MatchChat = () => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [messageActionIndex, setMessageActionIndex] = useState<number>(0);
 
+  const scrollContainerRef = useRef<HTMLDivElement>();
+
   const fakeLoggedUserId = 2;
   const matchMessages = matchData?.data?.match?.MatchMessages;
 
@@ -65,6 +73,15 @@ const MatchChat = () => {
     })();
   }, [newMessage]);
 
+  const handleScrollChat = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({
+        top: scrollContainerRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   const addMessage = () => {
     if (messageInput.trim()) {
       (async () => {
@@ -77,7 +94,7 @@ const MatchChat = () => {
           setMessageInput('');
           setNewMessage(response.data);
           setIsIconPickerShown(false);
-          // setMatchData(data);
+          handleScrollChat();
         } catch (error) {
           // eslint-disable-next-line no-alert
           console.log('Error when accessing match', error);
@@ -101,7 +118,7 @@ const MatchChat = () => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper ref={scrollContainerRef}>
       <section
         style={{
           position: 'sticky',
