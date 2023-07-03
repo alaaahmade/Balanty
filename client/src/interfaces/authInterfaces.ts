@@ -35,4 +35,5 @@ export interface AuthContextData {
   login: (username: string, password: string) => Promise<void>;
   signup: (userData: signupProps, isplayer: boolean) => Promise<void>;
   logout: () => Promise<void>;
+  errorMessage: string;
 }
