@@ -29,3 +29,10 @@ export interface User {
   avatar: string;
   authToken?: string;
 }
+
+export interface AuthContextData {
+  user: User | null;
+  login: (username: string, password: string) => Promise<void>;
+  signup: (userData: signupProps, isplayer: boolean) => Promise<void>;
+  logout: () => Promise<void>;
+}

@@ -13,5 +13,6 @@ export type {
   signupProps,
   InputProps,
   User,
+  AuthContextData,
 } from './authInterfaces';
 export type { errorI, UserData, createMatchError } from './StadiumProfile';
