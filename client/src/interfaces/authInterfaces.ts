@@ -1,4 +1,4 @@
-import { FieldErrors, Control } from 'react-hook-form';
+// import { FieldErrors, Control } from 'react-hook-form';
 
 export interface loginProps {
   username: string;
@@ -17,9 +17,13 @@ export interface InputProps {
   type: string;
   label: string;
   placeholder: string;
-  errors: FieldErrors<loginProps | signupProps>;
-  control: Control<loginProps | signupProps>;
-  name: keyof (loginProps | signupProps);
+  // errors: FieldErrors<signupProps | loginProps>;
+  // control: Control<signupProps, any> | Control<loginProps, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  errors: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  control: any;
+  name: keyof signupProps | keyof loginProps;
 }
 
 export interface User {
