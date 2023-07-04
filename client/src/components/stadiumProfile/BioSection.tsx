@@ -156,8 +156,9 @@ const BioSection = ({
             value={averageRating}
             precision={0.5}
             sx={{
-              direction: 'rtl',
+              transform: 'rotateY(180deg)',
             }}
+            readOnly
           />
           <Typography variant="h5" sx={{ ml: '5px' }}>
             : التقييم
@@ -287,7 +288,7 @@ const BioSection = ({
                 addNewReview(+(e.target as HTMLInputElement).value);
               }}
               sx={{
-                direction: 'rtl',
+                transform: 'rotateY(180deg)',
               }}
             />
           </Box>
