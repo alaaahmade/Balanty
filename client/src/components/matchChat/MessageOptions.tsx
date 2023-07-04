@@ -20,27 +20,33 @@ const MessageOptionsBox = styled(Box)({
 
 const MessageOptions: FC<{
   id: number;
+  index: number;
   updatedMessage: string;
   setUpdatedMessage: Dispatch<SetStateAction<string>>;
   setIsEdit: Dispatch<SetStateAction<boolean>>;
-  setMessageActionIndex: Dispatch<SetStateAction<number>>;
+  setMessageActionIndex: Dispatch<SetStateAction<number | null>>;
+  setIsDeleted: Dispatch<SetStateAction<object>>;
 }> = ({
   id,
+  index,
   updatedMessage,
   setUpdatedMessage,
   setIsEdit,
   setMessageActionIndex,
+  setIsDeleted,
 }): ReactElement => {
   const handleEditClick = async () => {
     setIsEdit(true);
-    setMessageActionIndex(id);
+    setMessageActionIndex(index);
     const editedMessage = await axios.put(`/api/v1/message`, {
       id,
       newMessage: updatedMessage,
     });
+    setUpdatedMessage(editedMessage.data.data.updatedMessage);
   };
   const handleDeleteClick = async () => {
-    await axios.delete(`/api/v1/message/${id}`);
+    const deletedMessage = await axios.delete(`/api/v1/message/${id}`);
+    setIsDeleted(deletedMessage);
   };
 
   return (

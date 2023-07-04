@@ -16,6 +16,7 @@ import { useLocation } from 'react-router-dom';
 import { Alert } from '@mui/material';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
+import { Edit } from '@mui/icons-material';
 import {
   AddMessageBar,
   IconBackground,
@@ -53,12 +54,18 @@ const MatchChat = () => {
   const [messageInput, setMessageInput] = useState<string>('');
   const [newMessage, setNewMessage] = useState<object | null>(null);
   const [isIconPickerShown, setIsIconPickerShown] = useState<boolean>(false);
+
+  const [isDeleted, setIsDeleted] = useState<object | null>(null);
+  const [updatedMessage, setUpdatedMessage] = useState<string>('');
+
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [messageActionIndex, setMessageActionIndex] = useState<number>(0);
+  const [messageActionIndex, setMessageActionIndex] = useState<number | null>(
+    null,
+  );
 
   const scrollContainerRef = useRef<HTMLDivElement>();
 
-  const fakeLoggedUserId = 2;
+  const fakeLoggedUserId = 5;
   const matchMessages = matchData?.data?.match?.MatchMessages;
 
   const handleScrollChat = () => {
@@ -81,7 +88,7 @@ const MatchChat = () => {
         console.log('Error when accessing match', error);
       }
     })();
-  }, [newMessage]);
+  }, [newMessage, isDeleted, updatedMessage]);
 
   const addMessage = () => {
     if (messageInput.trim()) {
@@ -108,6 +115,11 @@ const MatchChat = () => {
     setMessageInput(e.target.value);
   };
 
+  const updateMessage = () => {
+    setUpdatedMessage(messageInput);
+    setIsEdit(false);
+  };
+
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       addMessage();
@@ -117,6 +129,10 @@ const MatchChat = () => {
   const handleEmojiSelect = (emoji: string) => {
     setMessageInput(prevValue => prevValue + emoji);
   };
+
+  if (messageActionIndex) {
+    setMessageInput(matchMessages[messageActionIndex]?.message);
+  }
 
   return (
     <Wrapper ref={scrollContainerRef}>
@@ -132,6 +148,7 @@ const MatchChat = () => {
           padding: '0.5rem 0',
           background: '#fff',
           borderBottom: '1px solid #eee',
+          zIndex: '1000',
         }}
       >
         <div
@@ -171,17 +188,21 @@ const MatchChat = () => {
             return (
               <Message
                 key={message.id}
+                index={i}
                 id={message.id}
                 message={message.message}
                 time={message.createdAt}
                 senderAvatar={
-                  // message.UserId === fakeLoggedUserId &&
+                  message.UserId !== fakeLoggedUserId &&
                   message.UserId !== arr[i - 1]?.UserId
                     ? 'https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj'
                     : null
                 }
                 sender={message.UserId}
                 isReceived={message.UserId !== fakeLoggedUserId}
+                setIsDeleted={setIsDeleted}
+                setUpdatedMessage={setUpdatedMessage}
+                updatedMessage={updatedMessage}
                 setIsEdit={setIsEdit}
                 setMessageActionIndex={setMessageActionIndex}
               />
@@ -254,9 +275,7 @@ const MatchChat = () => {
           </IconBackground>
         </div>
         <MessageInput
-          value={
-            isEdit ? matchMessages[messageActionIndex].message : messageInput
-          }
+          value={messageInput}
           onChange={handleInput}
           onKeyDown={handleKeyDown}
           placeholder="اكتب رسالتك"
@@ -268,16 +287,25 @@ const MatchChat = () => {
             background: '#2CB674',
           }}
         >
-          <SendIcon
-            onClick={() => addMessage()}
-            style={{
-              fill: '#fff',
-              transform: 'rotate(-30deg)',
-              transformOrigin: 'center',
-              marginTop: '-5px',
-              marginRight: '-3px',
-            }}
-          />
+          {isEdit ? (
+            <Edit
+              onClick={() => updateMessage()}
+              style={{
+                fill: '#fff',
+              }}
+            />
+          ) : (
+            <SendIcon
+              onClick={() => addMessage()}
+              style={{
+                fill: '#fff',
+                transform: 'rotate(-30deg)',
+                transformOrigin: 'center',
+                marginTop: '-5px',
+                marginRight: '-3px',
+              }}
+            />
+          )}
         </IconBackground>
       </AddMessageBar>
     </Wrapper>

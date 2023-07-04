@@ -5,6 +5,7 @@ import MessageOptions from './MessageOptions';
 
 interface Props {
   id: any;
+  index: number;
   message: string;
   time: string;
   sender: string | number;
@@ -13,11 +14,15 @@ interface Props {
   isReceived: boolean;
   setIsEdit: Dispatch<SetStateAction<boolean>>;
   // setUpdatedMessage: Dispatch<SetStateAction<string>>;
-  setMessageActionIndex: Dispatch<SetStateAction<number>>;
+  setMessageActionIndex: Dispatch<SetStateAction<number | null>>;
+  setIsDeleted: Dispatch<SetStateAction<object>>;
+  setUpdatedMessage: Dispatch<SetStateAction<string>>;
+  updatedMessage: string;
 }
 
 const Message = ({
   id,
+  index,
   message,
   time,
   senderAvatar,
@@ -25,9 +30,10 @@ const Message = ({
   isReceived,
   setIsEdit,
   setMessageActionIndex,
+  setIsDeleted,
+  setUpdatedMessage,
+  updatedMessage,
 }: Props) => {
-  const [updatedMessage, setUpdatedMessage] = useState<string>('');
-
   return (
     <section
       style={{
@@ -50,14 +56,16 @@ const Message = ({
       >
         {!isReceived && (
           <MessageOptions
-            updatedMessage={updatedMessage}
             setUpdatedMessage={setUpdatedMessage}
+            updatedMessage={updatedMessage}
+            setIsDeleted={setIsDeleted}
             setIsEdit={setIsEdit}
             setMessageActionIndex={setMessageActionIndex}
             id={id}
+            index={index}
           />
         )}
-        {isReceived && senderAvatar ? (
+        {senderAvatar ? (
           <Avatar src={senderAvatar} />
         ) : (
           <div style={{ width: '40px', height: '40px' }} />
