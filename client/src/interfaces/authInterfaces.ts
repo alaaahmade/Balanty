@@ -17,8 +17,6 @@ export interface InputProps {
   type: string;
   label: string;
   placeholder: string;
-  // errors: FieldErrors;
-  // control: Control<loginProps | signupProps>;
   errors: FieldErrors<loginProps | signupProps>;
   control: Control<loginProps | signupProps>;
   name: keyof (loginProps | signupProps);
