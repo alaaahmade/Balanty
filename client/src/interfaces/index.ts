@@ -8,6 +8,15 @@ export type {
   MyContextProviderProps,
 } from './matchInterface';
 
+export type {
+  loginProps,
+  signupProps,
+  InputProps,
+  User,
+  AuthContextData,
+  CustomErrorResponse,
+} from './authInterfaces';
+
 export type { StadiumDataProps } from './stadiumsPage';
 
 export type {
@@ -20,3 +29,5 @@ export type {
   BioSectionProps,
   EditGalleryPopupProps,
 } from './StadiumProfile';
+
+export type { Page } from './landingPage';

@@ -1,4 +1,5 @@
-import React, { FC, ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
+import { Box } from '@mui/system';
 import {
   BestStadiums,
   Header,
@@ -11,7 +12,11 @@ import Footer from '../components/footer/footer';
 
 const LandingPage: FC = (): ReactElement => {
   return (
-    <>
+    <Box
+      sx={{
+        mt: '5%',
+      }}
+    >
       <Header />
       <HeroSection />
       <Definition />
@@ -19,7 +24,7 @@ const LandingPage: FC = (): ReactElement => {
       <BestStadiums />
       <Contact />
       <Footer />
-    </>
+    </Box>
   );
 };
 
