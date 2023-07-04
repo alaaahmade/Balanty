@@ -5,7 +5,6 @@ import RootLayout from './layouts/RootLayout';
 import { LandingPage } from './pages';
 import LoginWrapper from './components/auth/LoginWrapper';
 import SignupWrapper from './components/auth/SignupWrapper';
-import { AuthProvider } from './context/AuthContext';
 import LightTheme from './themes';
 import {
   open,
