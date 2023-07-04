@@ -1,9 +1,15 @@
 import { Router } from 'express';
-import { getPlayer, playerMatches, updatePlayer } from '../controllers/player';
 import { errorWrapper } from '../utils';
+import {
+  getPlayer,
+  getPlayers,
+  playerMatches,
+  updatePlayer,
+} from '../controllers/player';
 
 export const playerRouter: Router = Router();
 
+playerRouter.get('/all', errorWrapper(getPlayers));
 playerRouter.get('/profile/:id', errorWrapper(getPlayer));
 playerRouter.get('/profile/:id/matches', errorWrapper(playerMatches));
 playerRouter.patch('/profile/edit', errorWrapper(updatePlayer));
