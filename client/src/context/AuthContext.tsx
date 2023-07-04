@@ -20,6 +20,7 @@ import {
 } from '../interfaces';
 
 import LoginWrapper from '../components/auth/LoginWrapper';
+import SignupWrapper from '../components/auth/SignupWrapper';
 
 export const AuthContext = createContext<AuthContextData>({
   user: null,
@@ -70,8 +71,6 @@ export const AuthProvider: FC<ChildrenProps> = ({ children }) => {
 
   const signup = useCallback(
     async (userData: signupProps, isplayer: string) => {
-      console.log('hi');
-
       try {
         const response = await axios.post(`/api/v1/user/signup`, {
           username: userData.username,
@@ -125,7 +124,7 @@ export const AuthProvider: FC<ChildrenProps> = ({ children }) => {
 
   return (
     <AuthContext.Provider value={authContextValue}>
-      {user ? children : <LoginWrapper />}
+      {(user && children) || <SignupWrapper />}
     </AuthContext.Provider>
   );
 };

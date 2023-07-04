@@ -17,9 +17,10 @@ import InputWrap from './Input';
 import TitleWrap from './Title';
 import GoogleIcon from '../../assets/image-2.svg';
 import LinkWrap from './Link';
-import { signupProps, AuthContextData } from '../../interfaces';
+import { signupProps } from '../../interfaces';
 import { signupSchema } from '../../validation';
 import { AuthContext } from '../../context';
+import { AuthProvider } from '../../context/AuthContext';
 
 const SignupWrapper: FC = (): ReactElement => {
   const {
@@ -38,8 +39,7 @@ const SignupWrapper: FC = (): ReactElement => {
     },
   });
   const navigate = useNavigate();
-  const authContext = useContext(AuthContext);
-  const { signup, errorMessage } = authContext;
+  const { signup, errorMessage } = useContext(AuthContext);
   console.log(signup);
 
   const { pathname } = useLocation();
@@ -50,9 +50,11 @@ const SignupWrapper: FC = (): ReactElement => {
   }
   const onSubmit: SubmitHandler<signupProps> = async data => {
     await signup(data, isplayer);
+
     navigate('/home');
   };
   return (
+    // <AuthProvider>
     <Wrapper isplayer={isplayer}>
       <ImageWrap isplayer={isplayer} />
       <Form>
@@ -155,6 +157,7 @@ const SignupWrapper: FC = (): ReactElement => {
         </Stack>
       )}
     </Wrapper>
+    // </AuthProvider>
   );
 };
 
