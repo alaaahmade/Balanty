@@ -7,6 +7,7 @@ class Player extends Model {
   declare age: number;
   declare position: string;
   declare cover: string;
+  declare bio: string;
 }
 
 Player.init(
@@ -15,6 +16,7 @@ Player.init(
     age: { type: DataTypes.INTEGER },
     position: { type: DataTypes.STRING(100) },
     cover: { type: DataTypes.TEXT },
+    bio: { type: DataTypes.TEXT },
   },
   {
     sequelize,
