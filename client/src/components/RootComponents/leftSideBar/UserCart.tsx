@@ -1,8 +1,8 @@
 import { Typography } from '@mui/material';
-import { ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
 import { BorderBox, StyledImag, StyledUserCart } from '../../index';
 
-const UserCart = (): ReactElement => {
+const UserCart: FC<{ username: string }> = ({ username }): ReactElement => {
   return (
     <BorderBox
       sx={{
@@ -24,7 +24,7 @@ const UserCart = (): ReactElement => {
             },
           }}
         >
-          نيمار مزيف
+          {username}
         </Typography>
         <StyledImag
           src="https://static.dw.com/image/54662995_101.jpg"
