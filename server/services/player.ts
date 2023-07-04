@@ -1,4 +1,5 @@
 import { Request } from 'express';
+import { Op } from 'sequelize';
 import { Match, Player, User } from '../models';
 import updatedPLayerSchema from '../validations/playerSchema';
 
@@ -105,4 +106,37 @@ const playerMatchesService = async (
   };
 };
 
-export { getPlayerService, updatePlayerService, playerMatchesService };
+const getPlayersService = async (
+  req: Request,
+): Promise<{ status: number; data: object }> => {
+  const searchQuery = req.body;
+  // const { page, pageSize } = req.params;
+  const page = '1';
+  const pageSize = '10';
+  //  page Replace with the desired page number
+  //  pageSize Replace with the desired page size (number of items per page)
+  const pageNumber = parseInt(page, 10) || 1; // Default to page 1 if no page number is provided
+  const itemsPerPage = parseInt(pageSize, 10) || 10; // Default to 10 items per page if no page size is provided
+
+  const players = await Player.findAndCountAll({
+    where: {
+      name: {
+        [Op.iLike]: `%${searchQuery}`,
+      },
+    },
+    limit: pageNumber,
+    offset: (pageNumber - 1) * itemsPerPage,
+  });
+  console.log(players);
+  return {
+    status: 201,
+    data: players,
+  };
+};
+
+export {
+  getPlayerService,
+  updatePlayerService,
+  playerMatchesService,
+  getPlayersService,
+};
