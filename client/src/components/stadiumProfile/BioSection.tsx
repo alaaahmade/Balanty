@@ -1,5 +1,5 @@
-import { ReactElement, useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { ReactElement, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Typography, Box, InputAdornment, Button } from '@mui/material';
 
@@ -27,22 +27,14 @@ import {
 
 import { updatedValueSchema } from '../../validation';
 
-import { AuthContext } from '../../context';
-
 const BioSection = ({
   userData,
   editMode,
   setEditMode,
+  EditAble,
 }: BioSectionProps): ReactElement => {
   const { description, price, ground, address } = userData.Stadium;
   const { username, phone } = userData;
-
-  const { user } = useContext(AuthContext);
-  const { id } = useParams();
-
-  const [EditAble, setEditAble] = useState(
-    user && ((+user.id === +(id as string)) as boolean),
-  );
   const [hov, setHove] = useState(false);
   const [mouseOver, setMouseOver] = useState(false);
   const [validation, setValidation] = useState('');
@@ -93,10 +85,6 @@ const BioSection = ({
     }
     setHove(true);
   };
-
-  useEffect(() => {
-    setEditAble(user && ((+user.id === +(id as string)) as boolean));
-  }, [id]);
 
   return (
     <Box>

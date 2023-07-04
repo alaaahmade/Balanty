@@ -12,6 +12,7 @@ export interface StadiumProfileProps {
   editGallery: boolean;
   deleteDialog: boolean;
   setDeleteDialog: Dispatch<SetStateAction<boolean>>;
+  EditAble: boolean;
 }
 export interface Stadium {
   id: number;
@@ -65,6 +66,7 @@ export interface BioSectionProps {
   userData: UserData;
   setEditMode: Dispatch<SetStateAction<boolean>>;
   editMode: boolean;
+  EditAble: boolean;
 }
 
 export interface EditGalleryPopupProps {
