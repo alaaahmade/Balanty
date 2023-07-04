@@ -1,3 +1,5 @@
+import { FieldErrors, Control } from 'react-hook-form';
+
 export interface loginProps {
   username: string;
   password: string;
@@ -15,11 +17,11 @@ export interface InputProps {
   type: string;
   label: string;
   placeholder: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  errors: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  control: any;
-  name: string;
+  // errors: FieldErrors;
+  // control: Control<loginProps | signupProps>;
+  errors: FieldErrors<loginProps | signupProps>;
+  control: Control<loginProps | signupProps>;
+  name: keyof (loginProps | signupProps);
 }
 
 export interface User {
@@ -33,7 +35,7 @@ export interface User {
 export interface AuthContextData {
   user: User | null;
   login: (username: string, password: string) => Promise<void>;
-  signup: (userData: signupProps, isplayer: boolean) => Promise<void>;
+  signup: (userData: signupProps, isplayer: string) => Promise<void>;
   logout: () => Promise<void>;
   errorMessage: string;
 }
