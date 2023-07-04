@@ -94,6 +94,7 @@ const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
                 sx={{
                   direction: 'rtl',
                 }}
+                readOnly
               />
             </Box>
           </Box>
