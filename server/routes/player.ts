@@ -9,7 +9,7 @@ import {
 
 export const playerRouter: Router = Router();
 
-playerRouter.get('/all', errorWrapper(getPlayers));
+playerRouter.post('/:page', errorWrapper(getPlayers));
 playerRouter.get('/profile/:id', errorWrapper(getPlayer));
 playerRouter.get('/profile/:id/matches', errorWrapper(playerMatches));
 playerRouter.patch('/profile/edit', errorWrapper(updatePlayer));
