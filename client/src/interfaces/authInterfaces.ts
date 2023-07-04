@@ -22,7 +22,7 @@ export interface InputProps {
   // control: Control<signupProps, any> | Control<loginProps, any>;
 
   errors: { [key in keyof signupProps | keyof loginProps]?: FieldError };
-  control: Control<FieldValues>;
+  control: Control<signupProps> | Control<FieldValues>;
   name: keyof signupProps | keyof loginProps;
 }
 

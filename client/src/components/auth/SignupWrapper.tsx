@@ -39,7 +39,8 @@ const SignupWrapper: FC = (): ReactElement => {
   });
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
-  const { signup, errorMessage } = authContext as AuthContextData;
+  const { signup, errorMessage } = authContext;
+  console.log(signup);
 
   const { pathname } = useLocation();
   let isplayer = 'true';

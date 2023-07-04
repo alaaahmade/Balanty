@@ -1,12 +1,23 @@
-import { Typography } from '@mui/material';
 import { FC, ReactElement } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { Typography } from '@mui/material';
+
 import { BorderBox, StyledImag, StyledUserCart } from '../../index';
 
-const UserCart: FC<{ username: string }> = ({ username }): ReactElement => {
+const UserCart: FC<{ username: string; userId: number }> = ({
+  username,
+  userId,
+}): ReactElement => {
+  const navigate = useNavigate();
+
   return (
     <BorderBox
       sx={{
         pb: '30px',
+      }}
+      onClick={() => {
+        navigate(`/profile/stadium/${userId}`);
       }}
     >
       <StyledUserCart

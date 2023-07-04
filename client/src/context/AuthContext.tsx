@@ -70,6 +70,8 @@ export const AuthProvider: FC<ChildrenProps> = ({ children }) => {
 
   const signup = useCallback(
     async (userData: signupProps, isplayer: string) => {
+      console.log('hi');
+
       try {
         const response = await axios.post(`/api/v1/user/signup`, {
           username: userData.username,

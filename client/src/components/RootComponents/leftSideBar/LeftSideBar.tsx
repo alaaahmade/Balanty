@@ -27,7 +27,7 @@ const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
         boxShadow: '-5px 4px 4px rgba(0, 0, 0, 0.15)',
       }}
     >
-      <UserCart username={(user as User).username} />
+      <UserCart username={(user as User).username} userId={(user as User).id} />
 
       <SideBarLink text="الصفحة الرئيسية" icon={<AiFillHome />} />
       <SideBarLink text="اللاعبين" icon={<BsPersonFillAdd />} />
