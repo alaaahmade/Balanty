@@ -1,4 +1,4 @@
-import { Box, Input, Typography } from '@mui/material';
+import { Box, Input } from '@mui/material';
 import { styled } from '@mui/system';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
@@ -17,15 +17,14 @@ export const StyledNavBox = styled(Box)({
   zIndex: '11',
 });
 
-export const StyledLogo = styled(Typography)({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '30px',
-  width: '100px',
-  backgroundColor: '#D9D9D9',
-  borderRadius: '20px',
+export const StyledLogo = styled('img')({
+  width: '350px',
+  height: '150px',
+  marginRight: '-130px',
+  marginLeft: '-150px',
+  marginTop: '15px',
 });
+
 export const StyledSearchInput = styled(Input)({
   width: '40%',
   height: '40px',
@@ -33,7 +32,6 @@ export const StyledSearchInput = styled(Input)({
   borderRadius: '5px',
   padding: '20px 40px',
   br: '4px',
-  // borderWidth: '1px',
   '& input': {
     textAlign: 'Right',
   },
