@@ -3,13 +3,13 @@ import { Box } from '@mui/system';
 import { Typography, Button } from '@mui/material';
 
 interface Props {
-  isplayer: boolean;
+  isplayer: string;
 }
 export const Wrapper = styled(Box)<Props>(({ isplayer }) => ({
   width: '100%',
   height: '100vh',
   display: 'flex',
-  flexDirection: isplayer ? 'row' : 'row-reverse',
+  flexDirection: isplayer === 'true' ? 'row' : 'row-reverse',
   alignItems: 'center',
   direction: 'rtl',
 }));
@@ -17,9 +17,10 @@ export const Wrapper = styled(Box)<Props>(({ isplayer }) => ({
 export const ImageWrap = styled(Box)<Props>(({ isplayer }) => ({
   width: '50vw',
   height: '100vh',
-  backgroundImage: isplayer
-    ? 'url(https://res.cloudinary.com/df3ydvucj/image/upload/v1687159218/football-lj-studio_r5loci.gif)'
-    : 'url(https://res.cloudinary.com/df3ydvucj/image/upload/v1687159864/stadium_tsdye8.avif)',
+  backgroundImage:
+    isplayer === 'true'
+      ? 'url(https://res.cloudinary.com/df3ydvucj/image/upload/v1687159218/football-lj-studio_r5loci.gif)'
+      : 'url(https://res.cloudinary.com/df3ydvucj/image/upload/v1687159864/stadium_tsdye8.avif)',
   backgroundPosition: 'center',
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
