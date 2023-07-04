@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useContext } from 'react';
 
-import { Alert, AlertTitle, Box } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { Alert, Box } from '@mui/material';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -37,24 +37,25 @@ const SignupWrapper: FC = (): ReactElement => {
       confirmPassword: '',
     },
   });
-
+  const navigate = useNavigate();
   const authContext = useContext(AuthContext);
   const { signup, errorMessage } = authContext as AuthContextData;
 
   const { pathname } = useLocation();
-  let isplayer = true;
+  let isplayer = 'true';
 
   if (!(pathname.split('/')[1] === 'player')) {
-    isplayer = false;
+    isplayer = 'false';
   }
   const onSubmit: SubmitHandler<signupProps> = async data => {
     await signup(data, isplayer);
+    navigate('/home');
   };
   return (
     <Wrapper isplayer={isplayer}>
       <ImageWrap isplayer={isplayer} />
       <Form>
-        {isplayer ? (
+        {isplayer === 'true' ? (
           <TitleWrap caption="تسجيل كلاعب" />
         ) : (
           <TitleWrap caption="تسجيل كملعب" />
@@ -63,8 +64,10 @@ const SignupWrapper: FC = (): ReactElement => {
           <InputWrap
             name="username"
             type="text"
-            label={isplayer ? 'اسم اللاعب' : 'اسم الملعب'}
-            placeholder={isplayer ? 'ادخل اسم اللاعب' : 'ادخل اسم الملعب'}
+            label={isplayer === 'true' ? 'اسم اللاعب' : 'اسم الملعب'}
+            placeholder={
+              isplayer === 'true' ? 'ادخل اسم اللاعب' : 'ادخل اسم الملعب'
+            }
             errors={errors}
             control={control}
           />
@@ -100,14 +103,14 @@ const SignupWrapper: FC = (): ReactElement => {
             errors={errors}
             control={control}
           />
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            {isplayer ? (
+          <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
+            {isplayer === 'true' ? (
               <LinkWrap url="/player/login" caption="دخول كلاعب" />
             ) : (
               <LinkWrap url="/stadium/login" caption="دخول كملعب" />
             )}
             <OtherLink href="/">عودة إلى الرئيسية</OtherLink>
-          </div>
+          </Box>
           <SignButton
             onClick={handleSubmit(onSubmit)}
             variant="contained"
