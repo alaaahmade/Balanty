@@ -1,13 +1,23 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ReactElement } from 'react';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
+
 import RootLayout from './layouts/RootLayout';
+
 import { LandingPage } from './pages';
 import MatchRoomPage from './pages/MatchRoomPage';
+
 import LightTheme from './themes';
-import { open, useCustomOpen } from './context';
-import { StatsContextProvider } from './context/CreateMatch';
+
+import {
+  open,
+  useCustomOpen,
+  UpdateGalleryContextProvider,
+  StatsContextProvider,
+} from './context';
+
 import StadiumProfile from './pages/StadiumProfile';
+import StadiumsPage from './pages/Stadiums';
 
 const router = createBrowserRouter([
   {
@@ -24,7 +34,12 @@ const router = createBrowserRouter([
   {
     path: '/home',
     element: <RootLayout />,
-    children: [],
+    children: [
+      {
+        path: 'stadiums',
+        element: <StadiumsPage />,
+      },
+    ],
   },
   {
     path: '/profile',
@@ -38,7 +53,9 @@ const App = (): ReactElement => {
     <ThemeProvider theme={LightTheme}>
       <open.Provider value={useCustomOpen()}>
         <StatsContextProvider>
-          <RouterProvider router={router} />
+          <UpdateGalleryContextProvider>
+            <RouterProvider router={router} />
+          </UpdateGalleryContextProvider>
         </StatsContextProvider>
       </open.Provider>
     </ThemeProvider>
