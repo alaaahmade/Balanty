@@ -102,6 +102,7 @@ export const StatsContextProvider = ({ children }: MyContextProviderProps) => {
     <statsContext.Provider value={values}>{children}</statsContext.Provider>
   );
 };
+
 StatsContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
