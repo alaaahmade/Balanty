@@ -10,23 +10,22 @@ const getPlayer: RequestHandler = async (
   res: Response,
 ): Promise<void> => {
   const { id } = req.params;
-  const profileData = await getPlayerService(+id);
-
-  res.json({
-    status: 200,
-    data: profileData,
-  });
+  const response = (await getPlayerService(+id)) as {
+    status: number;
+    data: object;
+  };
+  res.status(response?.status).json(response);
 };
 
 const updatePlayer: RequestHandler = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
-  const updatedPlayer = await updatePlayerService(req);
-  res.json({
-    status: 200,
-    data: updatedPlayer,
-  });
+  const response = (await updatePlayerService(req)) as {
+    status: number;
+    data: object;
+  };
+  res.status(response?.status).json(response);
 };
 
 const playerMatches: RequestHandler = async (
@@ -34,12 +33,11 @@ const playerMatches: RequestHandler = async (
   res: Response,
 ): Promise<void> => {
   const { id } = req.params;
-  const matches = await playerMatchesService(+id);
-  console.log(matches);
-  res.json({
-    status: 200,
-    data: matches,
-  });
+  const response = (await playerMatchesService(+id)) as {
+    status: number;
+    data: object;
+  };
+  res.status(response?.status).json(response);
 };
 
 export { getPlayer, updatePlayer, playerMatches };
