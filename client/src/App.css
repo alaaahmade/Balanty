@@ -10,7 +10,7 @@ body{
 }
 
 .active{
-  color: #2CB674;
-  padding: 15px 30px 15px 0;
-  background-color: #D9D9D9;
+  color: #2CB674 !important;
+  padding: 15px 30px 15px 0 !important;
+  background-color: #D9D9D9 !important;
 }

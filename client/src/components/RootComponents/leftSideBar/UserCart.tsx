@@ -7,7 +7,7 @@ const UserCart = (): ReactElement => {
     <BorderBox>
       <StyledUserCart
         sx={{
-          m: '25px 0',
+          m: '15px 0',
         }}
       >
         <Typography
