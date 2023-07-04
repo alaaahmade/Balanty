@@ -47,15 +47,13 @@ const router = createBrowserRouter([
 const App = (): ReactElement => {
   return (
     <ThemeProvider theme={LightTheme}>
-      <AuthProvider>
-        <open.Provider value={useCustomOpen()}>
-          <StatsContextProvider>
-            <UpdateGalleryContextProvider>
-              <RouterProvider router={router} />
-            </UpdateGalleryContextProvider>
-          </StatsContextProvider>
-        </open.Provider>
-      </AuthProvider>
+      <open.Provider value={useCustomOpen()}>
+        <StatsContextProvider>
+          <UpdateGalleryContextProvider>
+            <RouterProvider router={router} />
+          </UpdateGalleryContextProvider>
+        </StatsContextProvider>
+      </open.Provider>
     </ThemeProvider>
   );
 };
