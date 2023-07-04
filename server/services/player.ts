@@ -109,28 +109,36 @@ const playerMatchesService = async (
 const getPlayersService = async (
   req: Request,
 ): Promise<{ status: number; data: object }> => {
-  const searchQuery = req.body;
-  // const { page, pageSize } = req.params;
-  const page = '1';
-  const pageSize = '10';
-  //  page Replace with the desired page number
-  //  pageSize Replace with the desired page size (number of items per page)
-  const pageNumber = parseInt(page, 10) || 1; // Default to page 1 if no page number is provided
-  const itemsPerPage = parseInt(pageSize, 10) || 10; // Default to 10 items per page if no page size is provided
+  const { searchQuery } = req.body;
+  const { page } = req.params;
+  const sanitizedSearchQuery = searchQuery || '';
 
-  const players = await Player.findAndCountAll({
+  const pageSize = 2;
+  const offset = (Number(page) - 1) * pageSize;
+
+  const { count, rows: players } = await User.findAndCountAll({
     where: {
-      name: {
-        [Op.iLike]: `%${searchQuery}`,
+      username: {
+        [Op.iLike]: `%${sanitizedSearchQuery}%`,
       },
+      role: 'PLAYER',
     },
-    limit: pageNumber,
-    offset: (pageNumber - 1) * itemsPerPage,
+    include: [{ model: Player, attributes: ['avatar', 'UserId'] }],
+    limit: pageSize,
+    offset: offset,
   });
-  console.log(players);
+
+  const totalPages = Math.ceil(count / pageSize);
+  const paginatedItems = players;
+
   return {
     status: 201,
-    data: players,
+    data: {
+      items: paginatedItems,
+      totalItems: count,
+      totalPages: totalPages,
+      currentPage: Number(page),
+    },
   };
 };
 
