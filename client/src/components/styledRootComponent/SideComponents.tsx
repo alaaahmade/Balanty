@@ -4,7 +4,7 @@ import { Box, styled } from '@mui/system';
 export const SideBox = styled(Box)({
   position: 'fixed',
   width: '240px',
-  minHeight: 'calc(100vh - 65px)',
+  minHeight: 'calc(100vh - 50px)',
   top: '3.2em',
   backgroundColor: '#FFFFFF',
   borderTop: 0,
@@ -40,5 +40,8 @@ export const BorderBox = styled(Box)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  borderBottom: '1px solid #2CB674',
+  cursor: 'pointer',
+  '& :hover': {
+    color: '#2CB674',
+  },
 });

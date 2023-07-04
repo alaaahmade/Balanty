@@ -34,7 +34,6 @@ export { default as LeftSideBar } from './RootComponents/leftSideBar/LeftSideBar
 export { default as RightSideBar } from './RootComponents/rightSideBar/RightSideBar';
 
 export {
-  StyledSideBarLink,
   StyledImag,
   StyledUserCart,
   CreateMatchBox,

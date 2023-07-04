@@ -4,31 +4,27 @@ import { BorderBox, StyledImag, StyledUserCart } from '../../index';
 
 const UserCart = (): ReactElement => {
   return (
-    <BorderBox
-      sx={{
-        pb: '30px',
-      }}
-    >
+    <BorderBox>
       <StyledUserCart
         sx={{
-          mt: '25px',
+          m: '25px 0',
         }}
       >
         <Typography
           sx={{
-            fontWeight: 'bold',
             transition: '0.2s',
-            cursor: 'pointer',
-            '&:hover': {
+            '& :hover': {
               color: '#2CB674',
             },
           }}
         >
-          نيمار مزيف
+          محمد عبد الصمد
         </Typography>
         <StyledImag
-          src="https://static.dw.com/image/54662995_101.jpg"
-          alt="userImage"
+          sx={{
+            mr: '30px',
+            backgroundImage: `url(https://static.dw.com/image/54662995_101.jpg)`,
+          }}
         />
       </StyledUserCart>
     </BorderBox>
