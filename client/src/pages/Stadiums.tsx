@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import { Typography } from '@mui/material';
 
-import { DotsLoader, StadiumCard, StadiumPageBox } from '../components';
+import { SkeletonLoader, StadiumCard, StadiumPageBox } from '../components';
 
 import { StadiumDataProps } from '../interfaces';
 
@@ -64,7 +64,7 @@ const StadiumsPage = (): ReactElement => {
       {stadiumData.map(stadium => (
         <StadiumCard key={stadium.id} stadiumData={stadium} />
       ))}
-      {first && <DotsLoader />}
+      {first && <SkeletonLoader />}
       {isLoading && (
         <ThreeDots
           height="80"

@@ -1,7 +1,7 @@
 import { Skeleton } from '@mui/material';
 import { DotsLoaderBox } from './StadiumPage.styled';
 
-const DotsLoader = () => {
+const SkeletonLoader = () => {
   const SkeletonArray = [1, 2, 3];
 
   return (
@@ -18,4 +18,4 @@ const DotsLoader = () => {
   );
 };
 
-export default DotsLoader;
+export default SkeletonLoader;
