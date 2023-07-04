@@ -113,7 +113,7 @@ const getPlayersService = async (
   const { page } = req.params;
   const sanitizedSearchQuery = searchQuery || '';
 
-  const pageSize = 2;
+  const pageSize = 8;
   const offset = (Number(page) - 1) * pageSize;
 
   const { count, rows: players } = await User.findAndCountAll({
