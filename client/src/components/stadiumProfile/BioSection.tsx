@@ -1,9 +1,8 @@
 import { ReactElement, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Typography, Box, InputAdornment, Button, Rating } from '@mui/material';
 
-import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { Edit } from '@mui/icons-material';
 
 import axios from 'axios';
