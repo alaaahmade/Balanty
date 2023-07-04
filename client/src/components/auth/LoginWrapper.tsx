@@ -1,6 +1,6 @@
 import React, { FC, ReactElement, useContext } from 'react';
-import { Alert, AlertTitle, Box, Stack } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { Alert, Box, Stack } from '@mui/material';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -33,24 +33,27 @@ const LoginWrapper: FC = (): ReactElement => {
     },
   });
 
+  const navigate = useNavigate();
+
   const authContext = useContext(AuthContext);
   const { login, errorMessage } = authContext as AuthContextData;
 
   const { pathname } = useLocation();
-  let isplayer = true;
+  let isplayer = 'true';
 
   if (!(pathname.split('/')[1] === 'player')) {
-    isplayer = false;
+    isplayer = 'false';
   }
   const onSubmit: SubmitHandler<loginProps> = async data => {
     await login(data.username, data.password);
+    navigate('/home');
   };
 
   return (
     <Wrapper isplayer={isplayer}>
       <ImageWrap isplayer={isplayer} />
       <Form>
-        {isplayer ? (
+        {isplayer === 'true' ? (
           <TitleWrap caption="دخول كلاعب" />
         ) : (
           <TitleWrap caption="دخول كملعب" />
@@ -59,8 +62,10 @@ const LoginWrapper: FC = (): ReactElement => {
           <InputWrap
             name="username"
             type="text"
-            label={isplayer ? 'اسم اللاعب' : 'اسم الملعب'}
-            placeholder={isplayer ? 'ادخل اسم اللاعب' : 'ادخل اسم الملعب'}
+            label={isplayer === 'true' ? 'اسم اللاعب' : 'اسم الملعب'}
+            placeholder={
+              isplayer === 'true' ? 'ادخل اسم اللاعب' : 'ادخل اسم الملعب'
+            }
             errors={errors}
             control={control}
           />
@@ -73,7 +78,7 @@ const LoginWrapper: FC = (): ReactElement => {
             errors={errors}
           />
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            {isplayer ? (
+            {isplayer === 'true' ? (
               <LinkWrap url="/player/signup" caption="تسجيل كلاعب" />
             ) : (
               <LinkWrap url="/stadium/signup" caption="تسجيل كملعب" />
