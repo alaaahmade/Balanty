@@ -15,6 +15,7 @@ export type {
   User,
   AuthContextData,
   CustomErrorResponse,
+  ChildrenProps,
 } from './authInterfaces';
 
 export type { StadiumDataProps } from './stadiumsPage';

@@ -1,5 +1,8 @@
 // import { FieldErrors, Control } from 'react-hook-form';
 
+import { ReactNode } from 'react';
+import { Control, FieldError, FieldValues } from 'react-hook-form';
+
 export interface loginProps {
   username: string;
   password: string;
@@ -19,10 +22,9 @@ export interface InputProps {
   placeholder: string;
   // errors: FieldErrors<signupProps | loginProps>;
   // control: Control<signupProps, any> | Control<loginProps, any>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  errors: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  control: any;
+
+  errors: { [key in keyof signupProps | keyof loginProps]?: FieldError };
+  control: Control<FieldValues>;
   name: keyof signupProps | keyof loginProps;
 }
 
@@ -47,4 +49,8 @@ export interface CustomErrorResponse {
     message: string;
     status: number;
   };
+}
+
+export interface ChildrenProps {
+  children: ReactNode;
 }
