@@ -281,6 +281,7 @@ const MatchChat = () => {
           placeholder="اكتب رسالتك"
         />
         <IconBackground
+          onClick={() => addMessage()}
           style={{
             width: '43px',
             height: '43px',
@@ -296,7 +297,6 @@ const MatchChat = () => {
             />
           ) : (
             <SendIcon
-              onClick={() => addMessage()}
               style={{
                 fill: '#fff',
                 transform: 'rotate(-30deg)',
