@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { OtherLink } from './LoginWrapper.styled';
 
 type Props = {
@@ -6,7 +6,7 @@ type Props = {
   caption: string;
 };
 
-const LinkWrap: FC<Props> = ({ url, caption }) => {
+const LinkWrap: FC<Props> = ({ url, caption }): ReactElement => {
   return <OtherLink href={url}>{caption}</OtherLink>;
 };
 

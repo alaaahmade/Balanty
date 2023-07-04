@@ -4,7 +4,9 @@ import React, {
   useCallback,
   useState,
   useMemo,
+  ReactNode,
 } from 'react';
+
 import axios, { AxiosError } from 'axios';
 import {
   AuthContextData,
@@ -15,18 +17,23 @@ import {
 
 export const AuthContext = createContext<AuthContextData>({
   user: null,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  login: async () => {},
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  signup: async () => {},
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  logout: async () => {},
+  login: async () => {
+    return undefined;
+  },
+  signup: async () => {
+    return undefined;
+  },
+  logout: async () => {
+    return undefined;
+  },
   errorMessage: '',
 });
 
-export const AuthProvider: FC<React.PropsWithChildren<object>> = ({
-  children,
-}) => {
+interface ChildrenProps {
+  children: ReactNode;
+}
+
+export const AuthProvider: FC<ChildrenProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -43,7 +50,7 @@ export const AuthProvider: FC<React.PropsWithChildren<object>> = ({
 
       setUser(response.data.data.user);
       localStorage.setItem('user', JSON.stringify(response.data.data.user));
-      window.location.href = '/home';
+      // navigate('/home');
     } catch (error) {
       if (isAxiosError(error)) {
         const axiosError = error as AxiosError<CustomErrorResponse>;
@@ -58,7 +65,7 @@ export const AuthProvider: FC<React.PropsWithChildren<object>> = ({
   }, []);
 
   const signup = useCallback(
-    async (userData: signupProps, isplayer: boolean) => {
+    async (userData: signupProps, isplayer: string) => {
       try {
         const response = await axios.post(`/api/v1/user/signup`, {
           username: userData.username,
@@ -66,7 +73,7 @@ export const AuthProvider: FC<React.PropsWithChildren<object>> = ({
           phone: userData.phone,
           password: userData.password,
           confirmPassword: userData.confirmPassword,
-          role: isplayer ? 'player' : 'stadium',
+          role: isplayer === 'true' ? 'player' : 'stadium',
         });
         setUser(response.data.user);
         localStorage.setItem('user', JSON.stringify(response.data.user));
@@ -90,7 +97,7 @@ export const AuthProvider: FC<React.PropsWithChildren<object>> = ({
     try {
       await axios.post('/api/v1/user/logout');
       setUser(null);
-      localStorage.setItem('user', '');
+      localStorage.removeItem('user');
       window.location.href = '/';
     } catch (error) {
       if (isAxiosError(error)) {
