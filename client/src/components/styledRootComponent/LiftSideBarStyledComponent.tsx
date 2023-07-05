@@ -48,7 +48,7 @@ export const SideLink = styled(NavLink)({
   paddingRight: '30px',
   gap: '20px',
   cursor: 'pointer',
-  transition: '0.2s',
+  transition: '0.2s ease',
   '&:hover': {
     color: '#2CB674',
     padding: '15px 30px 15px 0',
