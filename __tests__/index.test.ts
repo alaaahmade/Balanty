@@ -7,12 +7,12 @@ beforeAll(async () => {
   await build();
 });
 
-// describe('test GitHub Actions CICD Piplines', () => {
-//   test('test for husky', done => {
-//     expect(3).toBe(3);
-//     done();
-//   });
-// });
+describe('test GitHub Actions CICD Piplines', () => {
+  test('test for husky', done => {
+    expect(3).toBe(3);
+    done();
+  });
+});
 
 // describe('GET /api/v1/stadiums', () => {
 //   test('responds from /api/v1/stadiums with JSON and 200 status code', done => {
@@ -408,7 +408,7 @@ beforeAll(async () => {
 //         done();
 //         if (error) {
 //           done(error);
-//         }
+//         }3
 //       });
 //   });
 
