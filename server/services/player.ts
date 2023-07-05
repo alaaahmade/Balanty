@@ -111,9 +111,6 @@ const getPlayersService = async (
 ): Promise<{ status: number; data: object }> => {
   const { search } = req.query;
   const { page } = req.params;
-  const sanitizedSearchQuery = search || '';
-
-  console.log(search, 'searcg');
 
   const pageSize = 8;
   const offset = (Number(page) - 1) * pageSize;
@@ -121,7 +118,7 @@ const getPlayersService = async (
   const { count, rows: players } = await User.findAndCountAll({
     where: {
       username: {
-        [Op.iLike]: `%${sanitizedSearchQuery}%`,
+        [Op.iLike]: `%${search ?? ''}%`,
       },
       role: 'PLAYER',
     },
@@ -129,6 +126,9 @@ const getPlayersService = async (
     limit: pageSize,
     offset: offset,
   });
+
+  console.log('search', search);
+  console.log(players[0]);
 
   const totalPages = Math.ceil(count / pageSize);
   const paginatedItems = players;
