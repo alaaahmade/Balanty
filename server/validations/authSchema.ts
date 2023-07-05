@@ -24,7 +24,7 @@ const signupSchema = Joi.object({
     'any.required': 'رقم الجوال حقل مطلوب',
   }),
   role: Joi.string().valid('player', 'stadium'),
-  password: Joi.string().alphanum().min(8).max(25).required().messages({
+  password: Joi.string().min(8).max(25).required().messages({
     'string.empty': 'هذا الحقل لا يمكن أن يكون فارغ',
     'string.base': 'هذا الحقل يجب أن يكون عبارة عن كلمة مرور',
     'string.min': 'يجب ألا يقل هذا الحقل عن 5 أحرف',
