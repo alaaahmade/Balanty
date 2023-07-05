@@ -109,7 +109,7 @@ const playerMatchesService = async (
 const getPlayersService = async (
   req: Request,
 ): Promise<{ status: number; data: object }> => {
-  const { searchQuery } = req.body;
+  const { searchQuery } = req.query;
   const { page } = req.params;
   const sanitizedSearchQuery = searchQuery || '';
 
@@ -132,7 +132,7 @@ const getPlayersService = async (
   const paginatedItems = players;
 
   return {
-    status: 201,
+    status: 200,
     data: {
       items: paginatedItems,
       totalItems: count,
