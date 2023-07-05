@@ -17,7 +17,11 @@ const WorldMatch = (): ReactElement => {
       >
         الساعة: 12:00
       </Typography>
-      <StyledTeamBox>
+      <StyledTeamBox
+        sx={{
+          mt: '10px',
+        }}
+      >
         <TeamName text="ريال مدريد" />
         VS
         <TeamName text="ريال مدريد" />

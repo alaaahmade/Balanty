@@ -1,6 +1,8 @@
-import { Typography } from '@mui/material';
 import { ReactElement } from 'react';
-import { StyledSideBarLink } from '../../index';
+
+import { SideLink } from '../../styledRootComponent';
+
+import '../../../App.css';
 
 interface SideBarLinkProps {
   text: string;
@@ -9,21 +11,22 @@ interface SideBarLinkProps {
 
 const SideBarLink = ({ text, icon }: SideBarLinkProps): ReactElement => {
   return (
-    <StyledSideBarLink
-      sx={{
-        mt: '30px',
-      }}
+    <SideLink
+      to={
+        text === 'الصفحة الرئيسية'
+          ? '/home'
+          : text === 'اللاعبين'
+          ? '/home/players'
+          : text === 'الملاعب'
+          ? '/home/stadiums'
+          : text === 'اخر اللاعبين'
+          ? '/home/lastPlayer'
+          : '/home'
+      }
     >
-      <Typography
-        sx={{
-          fontWeight: 'bold',
-          fontSize: '16px',
-        }}
-      >
-        {text}
-      </Typography>
+      {text}
       {icon}
-    </StyledSideBarLink>
+    </SideLink>
   );
 };
 
