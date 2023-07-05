@@ -111,11 +111,15 @@ export const getStadiumProfileService = async (
   };
 };
 
-export const getStadiumsService = async (): Promise<{
+export const getStadiumsService = async (
+  req: Request,
+): Promise<{
   status: number;
   data: object;
 }> => {
-  const response = await User.findAll({
+  const { page } = req.params;
+
+  const Stadiums = await User.findAll({
     where: { role: 'STADIUM' },
     attributes: ['id', 'username'],
     include: [
@@ -133,9 +137,14 @@ export const getStadiumsService = async (): Promise<{
     ],
   });
 
+  const pageSize = 8;
+  const startIndex = ((+page as number) - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const paginatedItems = Stadiums.slice(startIndex, endIndex);
+
   return {
     status: 200,
-    data: response,
+    data: paginatedItems,
   };
 };
 export const UpdateStadiumDataService = async (
@@ -252,6 +261,7 @@ export const deleteStadiumImageService = async (
 ): Promise<{ status: number; data: string | number }> => {
   const { ImageId, StadiumId, userId } = req.params;
   const checkAuthId = req.user?.id;
+  console.log(userId, checkAuthId);
 
   if (+userId !== +(checkAuthId as number)) {
     return {

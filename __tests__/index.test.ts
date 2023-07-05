@@ -309,7 +309,7 @@ describe('Post /api/v1/stadiums/gallery', () => {
         image:
           'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
         StadiumId: 7,
-        userId: 11,
+        userId: 17,
       })
       .end((err, res) => {
         expect(res.status).toBe(200);
@@ -336,7 +336,7 @@ describe('Post /api/v1/stadiums/gallery', () => {
         image:
           'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
         StadiumId: 7,
-        userId: 11,
+        userId: 17,
       })
       .end((err, res) => {
         expect(res.status).toBe(200);
@@ -363,7 +363,7 @@ describe('Post /api/v1/stadiums/gallery', () => {
         image:
           'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
         StadiumId: 7,
-        userId: 11,
+        userId: 17,
       })
       .end((err, res) => {
         expect(res.status).toBe(200);
@@ -389,7 +389,7 @@ describe('Post /api/v1/stadiums/gallery', () => {
       .send({
         image:
           'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
-        userId: 11,
+        userId: 17,
         StadiumId: 7,
       })
       .end((err, res) => {
@@ -416,11 +416,11 @@ describe('Patch /api/v1/stadiums/gallery', () => {
       .set('Accept', 'application/json')
       .set('Cookie', `token=${token}`)
       .send({
-        id: 24,
+        id: 27,
         image:
           'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
-        StadiumId: 7,
-        userId: 11,
+        StadiumId: 13,
+        userId: 17,
       })
       .end((err, res) => {
         expect(res.status).toBe(200);
@@ -440,9 +440,9 @@ describe('Patch /api/v1/stadiums/gallery', () => {
 });
 
 describe('delete /api/v1/stadiums/gallery/:ImageId/:StadiumId/userId', () => {
-  test('responds from /api/v1/stadiums/gallery/19/5/11 get 204 status code', done => {
+  test('responds from /api/v1/stadiums/gallery/17/13/17 get 204 status code', done => {
     request(app)
-      .delete('/api/v1/stadiums/gallery/19/5/11')
+      .delete('/api/v1/stadiums/gallery/19/5/17')
       .set('Accept', 'application/json')
       .set('Cookie', `token=${token}`)
       .end((err, res) => {
@@ -455,9 +455,10 @@ describe('delete /api/v1/stadiums/gallery/:ImageId/:StadiumId/userId', () => {
         }
       });
   });
-  test('responds from /api/v1/stadiums/gallery/19/5/11 get 401 status code', done => {
+
+  test('responds from /api/v1/stadiums/gallery/19/13/17 get 401 status code', done => {
     request(app)
-      .delete('/api/v1/stadiums/gallery/19/5/11')
+      .delete('/api/v1/stadiums/gallery/19/5/17')
       .set('Accept', 'application/json')
       .set('Cookie', `token=${token}`)
       .end((err, res) => {
@@ -503,7 +504,7 @@ describe('GET /api/v1/review/5', () => {
         const { data } = JSON.parse(res.text);
         expect(Array.isArray(data)).toBe(true);
         expect(data[0].value).toBe(4);
-        expect(data[0].playerId).toBe(11);
+        expect(data[0].playerId).toBe(17);
         expect(data[0].stadiumId).toBe(5);
         done();
         if (error) {
@@ -529,6 +530,26 @@ describe('GET /api/v1/review/5', () => {
   });
 });
 
+describe('GET /api/v1/stadiums/all/1', () => {
+  test('responds from /api/v1/stadiums/all/1 with JSON and 200 status code', done => {
+    request(app)
+      .get('/api/v1/stadiums/all/1')
+      .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
+      .end((error, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        const { data } = JSON.parse(res.text);
+        expect(Array.isArray(data)).toBe(true);
+        expect(data.length).toBe(8);
+
+        done();
+        if (error) {
+          done(error);
+        }
+      });
+  });
+});
 afterAll(() => {
   sequelize.close();
 });

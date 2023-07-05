@@ -3,12 +3,12 @@ import { signupService } from '../services/auth';
 import { loginService } from '../services';
 
 const signup = async (req: Request, res: Response) => {
-  const { newUser, token } = await signupService(req.body);
+  const { token, data } = await signupService(req.body);
 
   res.cookie('token', token).json({
     status: 200,
     message: 'User created successfully',
-    user: newUser,
+    user: data,
     token,
   });
 };
