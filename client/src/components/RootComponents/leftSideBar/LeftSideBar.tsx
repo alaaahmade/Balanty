@@ -22,7 +22,7 @@ const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
       sx={{
         right: 0,
         borderLeft: '0.4px solid #ccc',
-        boxShadow: '-5px 4px 4px rgba(0, 0, 0, 0.15)',
+        boxShadow: '-1px 4px 6px 1px rgba(0, 0, 0, 0.15)',
       }}
     >
       <UserCart />
