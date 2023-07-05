@@ -20,6 +20,7 @@ import LinkWrap from './Link';
 import { signupProps } from '../../interfaces';
 import { signupSchema } from '../../validation';
 import { AuthContext } from '../../context';
+import ErrorAlert from '../ErrorAlert';
 
 const SignupWrapper: FC = (): ReactElement => {
   const {
@@ -136,22 +137,7 @@ const SignupWrapper: FC = (): ReactElement => {
           </SignButton>
         </Box>
       </Form>
-      {errorMessage && (
-        <Stack
-          sx={{
-            width: '45%',
-            position: 'absolute',
-            right: '2rem',
-            bottom: '2rem',
-            zIndex: '1000',
-          }}
-          spacing={2}
-        >
-          <Alert severity="error">
-            {errorMessage} — <strong>تفحصه!</strong>
-          </Alert>
-        </Stack>
-      )}
+      {errorMessage && <ErrorAlert errorMessage={errorMessage} />}
     </Wrapper>
   );
 };
