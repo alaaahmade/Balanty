@@ -8,6 +8,8 @@ const serverError = (
   res: Response,
   next: NextFunction,
 ) => {
+  console.log(err);
+
   if (err.status) {
     return res.status(err.status).json({
       error: true,

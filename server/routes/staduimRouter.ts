@@ -23,6 +23,6 @@ stadiumRouter.patch('/edit', errorWrapper(UpdateStadiumData));
 stadiumRouter.patch('/gallery', errorWrapper(UpdateStadiumGallery));
 stadiumRouter.post('/gallery', errorWrapper(AddStadiumImage));
 stadiumRouter.delete(
-  '/gallery/:ImageId/:StadiumId',
+  '/gallery/:ImageId/:StadiumId/:userId',
   errorWrapper(deleteStadiumImage),
 );
