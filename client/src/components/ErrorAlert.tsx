@@ -1,7 +1,15 @@
 import { Alert, Stack } from '@mui/material';
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, CSSProperties } from 'react';
 
-const ErrorAlert: FC<{ errorMessage: string; style: object }> = ({
+interface ErrorAlertProps {
+  errorMessage: string;
+  style?: CSSProperties;
+}
+
+const defaultProps: Partial<ErrorAlertProps> = {
+  style: {},
+};
+const ErrorAlert: FC<ErrorAlertProps> = ({
   errorMessage,
   style,
 }): ReactElement => {
@@ -24,5 +32,7 @@ const ErrorAlert: FC<{ errorMessage: string; style: object }> = ({
     </Stack>
   );
 };
+
+ErrorAlert.defaultProps = defaultProps;
 
 export default ErrorAlert;
