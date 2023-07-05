@@ -213,8 +213,8 @@ describe('patch /api/v1/stadiums/edit', () => {
           'يحتوي الملعب المصغر على عشب صناعي غير حشو ومنصات صدمات. يعتمد حجم ملعب كرة القدم المصغر على حجم القاعدة. اتصل بنا للحصول على التفاصيلh',
         phone: 'h0591234563',
         price: '750',
-        ground: 'hانجيل',
-        address: 'hالزيتون',
+        ground: 'انجيل',
+        address: 'الزيتون',
       })
       .end((err, res) => {
         expect(res.status).toBe(403);
@@ -308,7 +308,62 @@ describe('Post /api/v1/stadiums/gallery', () => {
       .send({
         image:
           'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
-        StadiumId: 5,
+        StadiumId: 7,
+        userId: 11,
+      })
+      .end((err, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(response.status).toBe(200);
+        expect(typeof data.image).toBe('string');
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
+
+  test('responds from /api/v1/stadiums/gallery get 200 status code', done => {
+    request(app)
+      .post('/api/v1/stadiums/gallery')
+      .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
+      .send({
+        image:
+          'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
+        StadiumId: 7,
+        userId: 11,
+      })
+      .end((err, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(response.status).toBe(200);
+        expect(typeof data.image).toBe('string');
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
+
+  test('responds from /api/v1/stadiums/gallery get 200 status code', done => {
+    request(app)
+      .post('/api/v1/stadiums/gallery')
+      .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
+      .send({
+        image:
+          'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
+        StadiumId: 7,
+        userId: 11,
       })
       .end((err, res) => {
         expect(res.status).toBe(200);
@@ -334,7 +389,8 @@ describe('Post /api/v1/stadiums/gallery', () => {
       .send({
         image:
           'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
-        StadiumId: 5,
+        userId: 11,
+        StadiumId: 7,
       })
       .end((err, res) => {
         expect(res.status).toBe(401);
@@ -360,10 +416,11 @@ describe('Patch /api/v1/stadiums/gallery', () => {
       .set('Accept', 'application/json')
       .set('Cookie', `token=${token}`)
       .send({
-        id: 17,
+        id: 24,
         image:
           'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
-        StadiumId: 5,
+        StadiumId: 7,
+        userId: 11,
       })
       .end((err, res) => {
         expect(res.status).toBe(200);
@@ -382,10 +439,10 @@ describe('Patch /api/v1/stadiums/gallery', () => {
   });
 });
 
-describe('delete /api/v1/stadiums/gallery/:ImageId/:StadiumId', () => {
-  test('responds from /api/v1/stadiums/gallery/19/5 get 204 status code', done => {
+describe('delete /api/v1/stadiums/gallery/:ImageId/:StadiumId/userId', () => {
+  test('responds from /api/v1/stadiums/gallery/19/5/11 get 204 status code', done => {
     request(app)
-      .delete('/api/v1/stadiums/gallery/19/5')
+      .delete('/api/v1/stadiums/gallery/19/5/11')
       .set('Accept', 'application/json')
       .set('Cookie', `token=${token}`)
       .end((err, res) => {
@@ -398,10 +455,9 @@ describe('delete /api/v1/stadiums/gallery/:ImageId/:StadiumId', () => {
         }
       });
   });
-
-  test('responds from /api/v1/stadiums/gallery/19/5 get 401 status code', done => {
+  test('responds from /api/v1/stadiums/gallery/19/5/11 get 401 status code', done => {
     request(app)
-      .delete('/api/v1/stadiums/gallery/19/5')
+      .delete('/api/v1/stadiums/gallery/19/5/11')
       .set('Accept', 'application/json')
       .set('Cookie', `token=${token}`)
       .end((err, res) => {
@@ -447,7 +503,7 @@ describe('GET /api/v1/review/5', () => {
         const { data } = JSON.parse(res.text);
         expect(Array.isArray(data)).toBe(true);
         expect(data[0].value).toBe(4);
-        expect(data[0].playerId).toBe(4);
+        expect(data[0].playerId).toBe(11);
         expect(data[0].stadiumId).toBe(5);
         done();
         if (error) {
