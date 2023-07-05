@@ -29,6 +29,7 @@ export const StyledImag = styled('img')({
   width: '35px',
   height: '35px',
   cursor: 'pointer',
+  objectFit: 'cover',
   borderRadius: '50%',
   outline: '2px solid rgb(133 133 133)',
 });
@@ -41,10 +42,10 @@ export const StyledSideBarLink = styled(Box)({
   gap: '20px',
   fontSize: '25px',
   cursor: 'pointer',
-  transition: '0.2s',
+  transition: '0.2s ease',
   '&:hover': {
     color: '#2CB674',
     outline: '1px solid #2CB674',
-    padding: '5px 10px',
+    padding: '5px 8px',
   },
 });
