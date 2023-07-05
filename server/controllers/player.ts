@@ -1,6 +1,7 @@
 import { Request, RequestHandler, Response } from 'express';
 import {
   getPlayerService,
+  getPlayersService,
   playerMatchesService,
   updatePlayerService,
 } from '../services/player';
@@ -40,4 +41,15 @@ const playerMatches: RequestHandler = async (
   res.status(response?.status).json(response);
 };
 
-export { getPlayer, updatePlayer, playerMatches };
+const getPlayers: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const response = (await getPlayersService(req)) as {
+    status: number;
+    data: object;
+  };
+  res.status(response.status).json(response);
+};
+
+export { getPlayer, updatePlayer, playerMatches, getPlayers };

@@ -1,7 +1,9 @@
+import { FC, ReactElement, useContext } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { BsPersonFillAdd, BsFillFilePersonFill } from 'react-icons/bs';
 import { MdStadium } from 'react-icons/md';
-import { FC, ReactElement, useContext } from 'react';
+
+import { Box } from '@mui/material';
 import UserCart from './UserCart';
 import SideBarLink from './SideBarLink';
 import {
@@ -34,16 +36,17 @@ const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
         role={(user as User).role}
       />
 
-      <SideBarLink text="الصفحة الرئيسية" icon={<AiFillHome />} />
-      <SideBarLink text="اللاعبين" icon={<BsPersonFillAdd />} />
-      <SideBarLink text="الملاعب" icon={<MdStadium />} />
-      <SideBarLink text="اخر اللاعبين" icon={<BsFillFilePersonFill />} />
-
-      <CreateMatchBox
+      <Box
         sx={{
-          mt: '120px',
+          width: '100%',
         }}
       >
+        <SideBarLink text="الصفحة الرئيسية" icon={<AiFillHome />} />
+        <SideBarLink text="اللاعبين" icon={<BsPersonFillAdd />} />
+        <SideBarLink text="الملاعب" icon={<MdStadium />} />
+        <SideBarLink text="اخر اللاعبين" icon={<BsFillFilePersonFill />} />
+      </Box>
+      <CreateMatchBox>
         <StyledTypography>
           يمكنك انشاء مباراة ودعوة اصدقائك للانضمام اليك
         </StyledTypography>
