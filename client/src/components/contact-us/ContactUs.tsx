@@ -42,7 +42,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <StyledContainer maxWidth="md">
+    <StyledContainer id="contactUs" maxWidth="md">
       <div>
         <StyledBox>
           <StyledTypographyContact variant="h2">

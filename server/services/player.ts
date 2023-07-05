@@ -1,4 +1,5 @@
 import { Request } from 'express';
+import { Op } from 'sequelize';
 import { Match, Player, User } from '../models';
 import updatedPLayerSchema from '../validations/playerSchema';
 import { CustomUser } from '../interfaces/player';
@@ -128,9 +129,48 @@ const playerAvatarService = async (
   return { status: 200, data: (player as CustomUser).Player.avatar };
 };
 
+const getPlayersService = async (
+  req: Request,
+): Promise<{ status: number; data: object }> => {
+  const { search } = req.query;
+  const { page } = req.params;
+
+  const pageSize = 8;
+  const offset = (Number(page) - 1) * pageSize;
+
+  const { count, rows: players } = await User.findAndCountAll({
+    where: {
+      username: {
+        [Op.iLike]: `%${search ?? ''}%`,
+      },
+      role: 'PLAYER',
+    },
+    include: [{ model: Player, attributes: ['avatar', 'UserId'] }],
+    limit: pageSize,
+    offset: offset,
+  });
+
+  console.log('search', search);
+  console.log(players[0]);
+
+  const totalPages = Math.ceil(count / pageSize);
+  const paginatedItems = players;
+
+  return {
+    status: 200,
+    data: {
+      items: paginatedItems,
+      totalItems: count,
+      totalPages: totalPages,
+      currentPage: Number(page),
+    },
+  };
+};
+
 export {
   getPlayerService,
   updatePlayerService,
   playerMatchesService,
   playerAvatarService,
+  getPlayersService,
 };

@@ -15,8 +15,13 @@ export {
   getStadiumMatchesService,
   getStadiumsService,
   UpdateStadiumDataService,
+  getBestStadiumsService,
 } from './stadiums';
 
 export { createMatchService, getAllMatches } from './matches';
 
-export { getReviewService, addReviewService } from './reviews';
+export {
+  getReviewService,
+  addReviewService,
+  getPlayerReviewService,
+} from './reviews';

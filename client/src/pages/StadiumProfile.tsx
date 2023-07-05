@@ -13,7 +13,7 @@ import {
 
 import { UserData, errorI } from '../interfaces';
 import { StadiumGallery } from '../interfaces/StadiumProfile';
-import { UpdateGalleryContext } from '../context';
+import { AuthContext, UpdateGalleryContext } from '../context';
 
 const StadiumProfile = (): ReactElement => {
   const [userData, setUserData] = useState<UserData | null>(null);
@@ -27,12 +27,17 @@ const StadiumProfile = (): ReactElement => {
       StadiumId: 0,
     },
   ]);
+  const { user } = useContext(AuthContext);
+  const { id } = useParams();
+
+  const [EditAble, setEditAble] = useState(
+    user ? ((+user.id === +(id as string)) as boolean) : false,
+  );
 
   const { Agree } = useContext(UpdateGalleryContext);
 
   const navigate = useNavigate();
 
-  const { id } = useParams();
   const fetchProfileData = async (userId: string) => {
     try {
       setGallery([]);
@@ -54,6 +59,10 @@ const StadiumProfile = (): ReactElement => {
     fetchProfileData(id ?? '');
   }, [id, editMode, Agree]);
 
+  useEffect(() => {
+    setEditAble(user ? ((+user.id === +(id as string)) as boolean) : false);
+  }, [id]);
+
   return (
     <Box>
       {gallery.length && (
@@ -63,6 +72,7 @@ const StadiumProfile = (): ReactElement => {
           gallery={gallery}
           deleteDialog={deleteDialog}
           setDeleteDialog={setDeleteDialog}
+          EditAble={EditAble}
         />
       )}
       <Box
@@ -80,6 +90,7 @@ const StadiumProfile = (): ReactElement => {
             setEditMode={setEditMode}
             editMode={editMode}
             userData={userData}
+            EditAble={EditAble}
           />
         )}
         <ProfileCalender />

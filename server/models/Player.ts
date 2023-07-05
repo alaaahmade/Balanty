@@ -2,7 +2,7 @@ import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../database';
 
 class Player extends Model {
-  declare userId: number;
+  declare UserId: number;
   declare avatar: string;
   declare age: number;
   declare position: string;

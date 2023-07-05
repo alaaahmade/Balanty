@@ -1,10 +1,15 @@
 import { styled } from '@mui/system';
 import { Box, Typography } from '@mui/material';
 
-export const StyledDefinitionSection = styled(Box)`
-  background: #f2fcf5;
-  height: 418px;
-`;
+export const StyledDefinitionSection = styled(Box)({
+  background: ' #f2fcf5',
+  height: '418px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexDirection: 'column',
+  textAlign: 'center',
+});
 
 export const StyledTitle = styled(Typography)`
   font-weight: 700;

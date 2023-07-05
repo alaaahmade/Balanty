@@ -1,4 +1,5 @@
-import React, { FC, ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
+import { Box } from '@mui/system';
 import {
   BestStadiums,
   Header,
@@ -8,18 +9,25 @@ import {
   Contact,
 } from '../components';
 import Footer from '../components/footer/footer';
+import { RedirectProvider } from '../context/RedirectContext';
 
 const LandingPage: FC = (): ReactElement => {
   return (
-    <>
-      <Header />
-      <HeroSection />
-      <Definition />
-      <Features />
-      <BestStadiums />
-      <Contact />
-      <Footer />
-    </>
+    <RedirectProvider>
+      <Box
+        sx={{
+          mt: '5%',
+        }}
+      >
+        <Header />
+        <HeroSection />
+        <Definition />
+        <Features />
+        <BestStadiums />
+        <Contact />
+        <Footer />
+      </Box>
+    </RedirectProvider>
   );
 };
 

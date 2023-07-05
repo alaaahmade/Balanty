@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import { Box } from '@mui/material';
 import MyMatches from './MyMatches';
 import RightSideBarTitle from './RightSideBarTitle';
 import WorldMatch from './WorldMatch';
@@ -23,14 +24,13 @@ const RightSideBar = (): ReactElement => {
   return (
     <SideBox
       sx={{
-        left: '0px',
+        left: 0,
         borderRight: '0.4px solid #ccc',
-        boxShadow: '5px 4px 4px rgba(0, 0, 0, 0.15)',
       }}
     >
       <BorderBox
         sx={{
-          pb: '30px',
+          pb: '10px',
         }}
       >
         <RightSideBarTitle title="مبارياتي" />
@@ -40,24 +40,16 @@ const RightSideBar = (): ReactElement => {
         matches.map(match => (
           <MyMatches key={match.id} stadium={match.title} />
         ))}
-      <a
-        href="myMatches"
-        style={{
-          color: '#2CB674',
-          marginTop: '15px',
-        }}
-      >
-        المزيد
-      </a>
+
       <BorderBox
         sx={{
-          pb: '20px',
-          borderTop: '1px solid #2CB674',
+          p: '5px 0',
         }}
       >
         <RightSideBarTitle title="المباريات العالمية" />
       </BorderBox>
 
+      <WorldMatch />
       <WorldMatch />
       <WorldMatch />
     </SideBox>
