@@ -27,6 +27,7 @@ interface Match {
   ownerUser: {
     username: string;
   };
+  // eslint-disable-next-line no-use-before-define
   Players: Player[];
 }
 

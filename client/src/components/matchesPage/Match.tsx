@@ -11,10 +11,16 @@ interface Match {
   seats: number;
   stadiumMatch: {
     username: string;
+    Stadium: {
+      stadiumGallery: {
+        image: any;
+      }[];
+    };
   };
   ownerUser: {
     username: string;
   };
+  // eslint-disable-next-line no-use-before-define
   Players: Player[];
 }
 
@@ -35,7 +41,7 @@ const MatchesPage = (): React.ReactElement => {
     (async () => {
       try {
         const response = await axios.get('/api/v1/matches');
-        console.log(response, 'kjhgfd');
+        console.log(response, 'response');
 
         setMatches(response.data.data);
       } catch (err) {
