@@ -1,5 +1,4 @@
 import { ReactElement, FC } from 'react';
-import RootLayout from '../layouts/RootLayout';
 import MatchChat from '../components/matchChat/MatchChat';
 
 const MatchRoomPage: FC = (): ReactElement => {
@@ -12,7 +11,6 @@ const MatchRoomPage: FC = (): ReactElement => {
         gap: '2rem',
       }}
     >
-      <RootLayout />
       <MatchChat />
     </section>
   );
