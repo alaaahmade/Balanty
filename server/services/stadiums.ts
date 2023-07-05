@@ -235,7 +235,7 @@ export const AddStadiumImageService = async (
   // const { StadiumId } = req.UserData this will happen after create protected routes
   const checkAuthId = 5; //and this will removed
 
-  if (StadiumId !== checkAuthId) {
+  if (+StadiumId !== +checkAuthId) {
     return {
       status: 401,
       data: 'UnAuthorize',
