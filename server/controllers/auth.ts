@@ -9,6 +9,7 @@ const signup = async (req: Request, res: Response) => {
     status: 200,
     message: 'User created successfully',
     user: newUser,
+    token,
   });
 };
 

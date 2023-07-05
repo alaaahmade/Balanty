@@ -3,6 +3,9 @@ import app from '../server/app';
 import { sequelize } from '../server/database';
 import build from '../server/database/config/build';
 
+let token = '';
+// 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVtYW4iLCJlbWFpbCI6ImVtYW5yQGFkbWluLmNvbSIsInBob25lIjoiMTIzODU2Nzk5Iiwicm9sZSI6InN0YWRpdW0iLCJpZCI6MTEsImlhdCI6MTY4ODU1OTI4NX0.F_1jKA0r1I7OX70A4xsiCnCJAoLMAbJJ5Sg-ZFxPI8g';
+
 beforeAll(async () => {
   await build();
 });
@@ -14,11 +17,39 @@ describe('test GitHub Actions CICD Piplines', () => {
   });
 });
 
+describe('Post /api/v1/user/signup', () => {
+  test('responds from /api/v1/user/signup with JSON and 200 status code', done => {
+    request(app)
+      .post('/api/v1/user/signup')
+      .set('Accept', 'application/json')
+      .send({
+        username: 'Eman',
+        role: 'stadium',
+        email: 'emanr@admin.com',
+        password: '123456789',
+        phone: '123856799',
+        confirmPassword: '123456789',
+      })
+      .end((err, res) => {
+        expect(res.type).toBe('application/json');
+        const response = JSON.parse(res.text);
+        expect(response.status).toBe(200);
+        token = response.token;
+
+        done();
+
+        if (err) {
+          done(err);
+        }
+      });
+  });
+});
+
 describe('GET /api/v1/stadiums', () => {
   test('responds from /api/v1/stadiums with JSON and 200 status code', done => {
     request(app)
       .get('/api/v1/stadiums')
-      .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
       .end((err, res) => {
         expect(res.status).toBe(200);
         expect(res.type).toBe('application/json');
@@ -35,11 +66,11 @@ describe('GET /api/v1/stadiums', () => {
         }
       });
   });
-
   test('responds from /api/v1/stadiums/details/5 with JSON and 200 status code', done => {
     request(app)
       .get('/api/v1/stadiums/details/5')
       .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
       .end((err, res) => {
         expect(res.status).toBe(200);
         expect(res.type).toBe('application/json');
@@ -61,6 +92,7 @@ describe('GET /api/v1/stadiums', () => {
     request(app)
       .get('/api/v1/stadiums/details/2')
       .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
       .end((err, res) => {
         expect(res.status).toBe(401);
         expect(res.type).toBe('application/json');
@@ -76,27 +108,27 @@ describe('GET /api/v1/stadiums', () => {
         }
       });
   });
+});
+describe('GET /api/v1/matches/stadium/5', () => {
+  test('responds with JSON and 200 status code', done => {
+    request(app)
+      .get('/api/v1/matches/stadium/5')
+      .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
+      .end((err, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(response.status).toBe(200);
+        expect(Array.isArray(data)).toBe(true);
+        done();
 
-  describe('GET /api/v1/matches/stadium/5', () => {
-    test('responds with JSON and 200 status code', done => {
-      request(app)
-        .get('/api/v1/matches/stadium/5')
-        .set('Accept', 'application/json')
-        .end((err, res) => {
-          expect(res.status).toBe(200);
-          expect(res.type).toBe('application/json');
-          expect(typeof res).toBe('object');
-          const response = JSON.parse(res.text);
-          const { data } = response;
-          expect(response.status).toBe(200);
-          expect(Array.isArray(data)).toBe(true);
-          done();
-
-          if (err) {
-            done(err);
-          }
-        });
-    });
+        if (err) {
+          done(err);
+        }
+      });
   });
 });
 
@@ -104,6 +136,7 @@ test('test for not exist Stadium should return 404 with "هذا الملعب غ�
   request(app)
     .get('/api/v1/stadiums/profile/500')
     .set('Accept', 'application/json')
+    .set('Cookie', `token=${token}`)
     .end((err, res) => {
       if (err) {
         done(err);
@@ -124,6 +157,7 @@ describe('GET /api/v1/stadiums/profiles', () => {
     request(app)
       .get('/api/v1/stadiums/profile/5')
       .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
       .end((err, res) => {
         expect(res.status).toBe(200);
         expect(res.type).toBe('application/json');
@@ -149,6 +183,7 @@ describe('GET /api/v1/matches', () => {
     request(app)
       .get('/api/v1/matches')
       .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
       .end((err, res) => {
         expect(res.status).toBe(200);
         expect(res.type).toBe('application/json');
@@ -166,11 +201,13 @@ describe('GET /api/v1/matches', () => {
       });
   });
 });
+
 describe('patch /api/v1/stadiums/edit', () => {
   test('responds from /api/v1/stadiums/edit with validation Error and 403 status code', done => {
     request(app)
       .patch('/api/v1/stadiums/edit')
       .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
       .send({
         description:
           'يحتوي الملعب المصغر على عشب صناعي غير حشو ومنصات صدمات. يعتمد حجم ملعب كرة القدم المصغر على حجم القاعدة. اتصل بنا للحصول على التفاصيلh',
@@ -202,6 +239,7 @@ describe('patch /api/v1/stadiums/edit', () => {
     request(app)
       .patch('/api/v1/stadiums/edit')
       .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
       .send({
         description:
           'يحتوي الملعب المصغر على عشب صناعي غير حشو ومنصات صدمات. يعتمد حجم ملعب كرة القدم المصغر على حجم القاعدة. اتصل بنا للحصول على التفاصيلh',
@@ -232,6 +270,7 @@ describe('patch /api/v1/stadiums/edit', () => {
     request(app)
       .patch('/api/v1/stadiums/edit')
       .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
       .send({
         description:
           'يحتوي الملعب المصغر على عشب صناعي غير حشو ومنصات صدمات. يعتمد حجم ملعب كرة القدم المصغر على حجم القاعدة. اتصل بنا للحصول على التفاصيلh',
@@ -265,6 +304,7 @@ describe('Post /api/v1/stadiums/gallery', () => {
     request(app)
       .post('/api/v1/stadiums/gallery')
       .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
       .send({
         image:
           'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
@@ -290,6 +330,7 @@ describe('Post /api/v1/stadiums/gallery', () => {
     request(app)
       .post('/api/v1/stadiums/gallery')
       .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
       .send({
         image:
           'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
@@ -317,6 +358,7 @@ describe('Patch /api/v1/stadiums/gallery', () => {
     request(app)
       .patch('/api/v1/stadiums/gallery')
       .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
       .send({
         id: 17,
         image:
@@ -345,6 +387,7 @@ describe('delete /api/v1/stadiums/gallery/:ImageId/:StadiumId', () => {
     request(app)
       .delete('/api/v1/stadiums/gallery/19/5')
       .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
       .end((err, res) => {
         expect(res.status).toBe(204);
         expect(typeof res).toBe('object');
@@ -360,6 +403,7 @@ describe('delete /api/v1/stadiums/gallery/:ImageId/:StadiumId', () => {
     request(app)
       .delete('/api/v1/stadiums/gallery/19/5')
       .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
       .end((err, res) => {
         expect(res.status).toBe(404);
         expect(typeof res).toBe('object');
@@ -377,6 +421,7 @@ describe('post /api/v1/review/5', () => {
     request(app)
       .post('/api/v1/review/5')
       .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
       .send({ value: 4 })
       .end((error, res) => {
         expect(res.status).toBe(200);
@@ -395,6 +440,7 @@ describe('GET /api/v1/review/5', () => {
     request(app)
       .get('/api/v1/review/5')
       .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
       .end((error, res) => {
         expect(res.status).toBe(200);
         expect(res.type).toBe('application/json');
@@ -414,6 +460,7 @@ describe('GET /api/v1/review/5', () => {
     request(app)
       .get('/api/v1/review/90')
       .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
       .end((error, res) => {
         expect(res.status).toBe(404);
         expect(res.type).toBe('application/json');
@@ -425,6 +472,7 @@ describe('GET /api/v1/review/5', () => {
       });
   });
 });
+
 afterAll(() => {
   sequelize.close();
 });
