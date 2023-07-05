@@ -20,4 +20,8 @@ export {
 
 export { createMatchService, getAllMatches } from './matches';
 
-export { getReviewService, addReviewService } from './reviews';
+export {
+  getReviewService,
+  addReviewService,
+  getPlayerReviewService,
+} from './reviews';

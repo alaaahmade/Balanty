@@ -1,5 +1,5 @@
 import { Skeleton } from '@mui/material';
-import { DotsLoaderBox } from './StadiumPage.styled';
+import { DotsLoaderBox } from './StadiumsPage.styled';
 
 const SkeletonLoader = () => {
   const SkeletonArray = [1, 2, 3];
