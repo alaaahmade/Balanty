@@ -3,6 +3,7 @@ import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { Fab } from '@mui/material';
 
 import { Box } from '@mui/system';
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled(Box)({
   width: '50%',
@@ -94,4 +95,16 @@ export const IconBackground = styled(Fab)({
   background: '#F2FCF5',
   boxShadow:
     '0px 3px 5px -1px rgba(0,0,0,0.1), 0px 6px 10px 0px rgba(0,0,0,0.1), 0px 1px 5px 0px rgba(0,0,0,0.1)',
+});
+
+export const CustomizeLink = styled(Link)({
+  marginLeft: '50px',
+  fontSize: '15px',
+  color: 'black',
+  textDecoration: 'none',
+  fontWeight: '500',
+
+  '&:hover': {
+    textDecoration: 'underline',
+  },
 });
