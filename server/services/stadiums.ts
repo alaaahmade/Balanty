@@ -261,7 +261,6 @@ export const deleteStadiumImageService = async (
 ): Promise<{ status: number; data: string | number }> => {
   const { ImageId, StadiumId, userId } = req.params;
   const checkAuthId = req.user?.id;
-  console.log(userId, checkAuthId);
 
   if (+userId !== +(checkAuthId as number)) {
     return {
