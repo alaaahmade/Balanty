@@ -34,19 +34,6 @@ const MessageOptions: FC<{
           sx={{ cursor: 'pointer', color: '#818181', fontSize: '20px' }}
         />
       </IconButton>
-
-      {/* <IconButton
-        onClick={handleEditClick}
-        sx={{
-          width: '30px',
-          height: '30px',
-          '&:hover': { background: '#CCD2E3' },
-        }}
-      >
-        <EditIcon
-          sx={{ cursor: 'pointer', color: '#818181', fontSize: '20px' }}
-        />
-      </IconButton> */}
     </MessageOptionsBox>
   );
 };
