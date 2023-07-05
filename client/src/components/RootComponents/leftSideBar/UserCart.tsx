@@ -63,7 +63,7 @@ const UserCart: FC<UserCardProps> = ({
         {avatar ? (
           <StyledImag src={avatar} alt="userImage" />
         ) : (
-          <Avatargit >{username[0]}</Avatargit>
+          <Avatar>{username[0]}</Avatar>
         )}
       </StyledUserCart>
     </BorderBox>
