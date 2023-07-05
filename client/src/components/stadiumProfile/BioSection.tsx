@@ -28,9 +28,9 @@ const BioSection = ({
   userData,
   editMode,
   setEditMode,
+  EditAble,
 }: BioSectionProps): ReactElement => {
   const [ratingArray, setRatingArray] = useState<{ value: number }[]>([]);
-  const [EditAble, setEditAble] = useState<boolean>(true);
   const [hov, setHove] = useState<boolean>(false);
   const [mouseOver, setMouseOver] = useState<boolean>(false);
   const [validation, setValidation] = useState<string>('');
@@ -272,12 +272,7 @@ const BioSection = ({
             </LocationTypo>
           </FlexBox>
         </FlexBox>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-          }}
-        >
+        {!EditAble && (
           <Box>
             <Rating
               name="half-rating"
@@ -291,15 +286,7 @@ const BioSection = ({
               }}
             />
           </Box>
-          <Typography
-            sx={{
-              width: '7rem',
-              textAlign: 'right',
-            }}
-          >
-            : اضافة تقييم
-          </Typography>
-        </Box>
+        )}
         {editMode ? (
           <Box
             sx={{
