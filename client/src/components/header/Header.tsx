@@ -1,4 +1,6 @@
-import React, { useState, FC, MouseEvent, ReactElement } from 'react';
+import { useState, FC, MouseEvent, ReactElement } from 'react';
+import { Link } from 'react-scroll';
+
 import {
   AppBar,
   Box,
@@ -7,23 +9,18 @@ import {
   Typography,
   Menu,
   Container,
-  Button,
   MenuItem,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-scroll';
-import { CustomizedButton, CustomizedTypography } from './Header.styled';
 
-interface Page {
-  id: string;
-  key: string;
-}
+import { CustomizedButton, Logo, ScrollLink } from './Header.styled';
+import { Page } from '../../interfaces';
 
 const pages: Page[] = [
-  { id: 'contact-us', key: 'تواصل معنا' },
-  { id: 'services', key: 'خدماتنا' },
-  { id: 'definition', key: 'من نحن' },
-  { id: 'main', key: 'الرئيسية' },
+  { id: 'contactUs', key: 'تواصل معنا' },
+  { id: 'servicesLink', key: 'خدماتنا' },
+  { id: 'definitionLink', key: 'من نحن' },
+  { id: 'mainLink', key: 'الرئيسية' },
 ];
 
 const Header: FC = (): ReactElement => {
@@ -37,12 +34,19 @@ const Header: FC = (): ReactElement => {
     setAnchorElNav(null);
   };
   return (
-    <AppBar sx={{ background: '#01031C', width: '100%', padding: '0 40px' }}>
+    <AppBar
+      sx={{
+        background: '#01031C',
+        width: '100%',
+        padding: '0 40px',
+        height: '70px',
+        display: 'flex',
+        justifyContent: 'center',
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <Link to="/login"> this will uncommint when routes get ready */}
-          <CustomizedButton>تسجيل دخول</CustomizedButton>
-          {/* </Link> */}
+          <CustomizedButton to="/player/login">تسجيل دخول</CustomizedButton>
           <Box
             sx={{
               flexGrow: 1,
@@ -79,14 +83,7 @@ const Header: FC = (): ReactElement => {
             >
               {pages.map(page => (
                 <MenuItem key={page.id} onClick={handleCloseNavMenu}>
-                  <Link
-                    to={page.id}
-                    activeClass="active"
-                    smooth
-                    spy
-                    offset={-70}
-                    duration={500}
-                  >
+                  <Link activeClass="active" smooth spy to={page.id}>
                     <Typography textAlign="center">{page.key}</Typography>
                   </Link>
                 </MenuItem>
@@ -102,18 +99,15 @@ const Header: FC = (): ReactElement => {
             }}
           >
             {pages.map(page => (
-              <Button
-                key={page.id}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page.key}
-              </Button>
+              <ScrollLink smooth spy to={page.id}>
+                <Typography textAlign="center">{page.key}</Typography>
+              </ScrollLink>
             ))}
           </Box>
-          <CustomizedTypography component="a" href="/" variant="h6">
-            بلنتي
-          </CustomizedTypography>
+          <Logo
+            src="https://res.cloudinary.com/dtpbcx2kv/image/upload/v1688470562/pf3trycwmq9sw80w2ahf.svg"
+            alt="logo"
+          />
         </Toolbar>
       </Container>
     </AppBar>

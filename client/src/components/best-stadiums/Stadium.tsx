@@ -13,7 +13,7 @@ import { LocationWrap } from './BestStadiums.styled';
 interface Props {
   image: string;
   name: string;
-  rate: number;
+  rate: { value: number }[];
   address: string;
   description: string;
 }
@@ -25,6 +25,8 @@ const Stadium: FC<Props> = ({
   address,
   description,
 }): ReactElement => {
+  const averageRating =
+    rate.reduce((sum, review) => sum + review.value, 0) / rate.length;
   return (
     <Card
       sx={{
@@ -46,9 +48,8 @@ const Stadium: FC<Props> = ({
             {name}
           </Typography>
           <Rating
-            sx={{ direction: 'ltr' }}
             name="read-only"
-            value={rate}
+            value={averageRating}
             precision={0.5}
             readOnly
           />

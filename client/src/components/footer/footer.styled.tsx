@@ -20,13 +20,13 @@ export const StyledLogo = styled(Typography)`
   line-height: 26px;
   text-align: center;
   color: #ffffff;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 `;
 
 export const StyledLinks = styled(Link)`
   display: flex;
   color: #ffffff;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   text-decoration: none;
 
   & > * {
