@@ -4,6 +4,7 @@ import React, {
   ChangeEvent,
   KeyboardEvent,
   useRef,
+  useContext,
 } from 'react';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
@@ -13,10 +14,9 @@ import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import { Alert } from '@mui/material';
+import { Alert, Box } from '@mui/material';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
-import { Edit } from '@mui/icons-material';
 import {
   AddMessageBar,
   IconBackground,
@@ -27,6 +27,7 @@ import Message from './Message';
 import { IMatchDataProps } from '../../interfaces';
 
 import ChatImage from '../../assets/chat.svg';
+import { AuthContext } from '../../context';
 
 const MatchChat = () => {
   const { pathname } = useLocation();
@@ -54,18 +55,12 @@ const MatchChat = () => {
   const [messageInput, setMessageInput] = useState<string>('');
   const [newMessage, setNewMessage] = useState<object | null>(null);
   const [isIconPickerShown, setIsIconPickerShown] = useState<boolean>(false);
-
   const [isDeleted, setIsDeleted] = useState<object | null>(null);
-  const [updatedMessage, setUpdatedMessage] = useState<string>('');
-
-  const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [messageActionIndex, setMessageActionIndex] = useState<number | null>(
-    null,
-  );
 
   const scrollContainerRef = useRef<HTMLDivElement>();
 
-  const fakeLoggedUserId = 5;
+  const { user } = useContext(AuthContext);
+
   const matchMessages = matchData?.data?.match?.MatchMessages;
 
   const handleScrollChat = () => {
@@ -88,14 +83,14 @@ const MatchChat = () => {
         console.log('Error when accessing match', error);
       }
     })();
-  }, [newMessage, isDeleted, updatedMessage]);
+  }, [newMessage, isDeleted]);
 
   const addMessage = () => {
     if (messageInput.trim()) {
       (async () => {
         try {
           const response = await axios.post(`/api/v1/message`, {
-            senderId: fakeLoggedUserId,
+            senderId: user?.id,
             matchId: matchData?.data?.match?.id,
             message: messageInput.trim(),
           });
@@ -115,11 +110,6 @@ const MatchChat = () => {
     setMessageInput(e.target.value);
   };
 
-  const updateMessage = () => {
-    setUpdatedMessage(messageInput);
-    setIsEdit(false);
-  };
-
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       addMessage();
@@ -130,13 +120,12 @@ const MatchChat = () => {
     setMessageInput(prevValue => prevValue + emoji);
   };
 
-  if (messageActionIndex) {
-    setMessageInput(matchMessages[messageActionIndex]?.message);
-  }
+  // console.log(matchData, 'match data');
+  // console.log(user, 'user');
 
   return (
     <Wrapper ref={scrollContainerRef}>
-      <section
+      <Box
         style={{
           position: 'sticky',
           top: '0',
@@ -180,7 +169,7 @@ const MatchChat = () => {
         <Typography variant="h4" sx={{ fontSize: '20px', fontWeight: 'bold' }}>
           {matchData?.data?.match?.title}
         </Typography>
-      </section>
+      </Box>
 
       <div style={{ flexGrow: '2', marginTop: '0.5rem' }}>
         {matchMessages?.length > 0 ? (
@@ -188,23 +177,20 @@ const MatchChat = () => {
             return (
               <Message
                 key={message.id}
-                index={i}
                 id={message.id}
                 message={message.message}
-                time={message.createdAt}
+                // time={message.createdAt}
                 senderAvatar={
-                  message.UserId !== fakeLoggedUserId &&
+                  message.UserId !== user?.id &&
                   message.UserId !== arr[i - 1]?.UserId
-                    ? 'https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj'
+                    ? message?.User?.Player?.avatar ||
+                      'https://res.cloudinary.com/df3ydvucj/image/upload/v1688546902/user_txwkqq.webp'
                     : null
                 }
-                sender={message.UserId}
-                isReceived={message.UserId !== fakeLoggedUserId}
+                senderName={message.User?.username}
+                isReceived={message.UserId !== user?.id}
                 setIsDeleted={setIsDeleted}
-                setUpdatedMessage={setUpdatedMessage}
-                updatedMessage={updatedMessage}
-                setIsEdit={setIsEdit}
-                setMessageActionIndex={setMessageActionIndex}
+                role={message.User?.role}
               />
             );
           })
@@ -288,24 +274,15 @@ const MatchChat = () => {
             background: '#2CB674',
           }}
         >
-          {isEdit ? (
-            <Edit
-              onClick={() => updateMessage()}
-              style={{
-                fill: '#fff',
-              }}
-            />
-          ) : (
-            <SendIcon
-              style={{
-                fill: '#fff',
-                transform: 'rotate(-30deg)',
-                transformOrigin: 'center',
-                marginTop: '-5px',
-                marginRight: '-3px',
-              }}
-            />
-          )}
+          <SendIcon
+            style={{
+              fill: '#fff',
+              transform: 'rotate(-30deg)',
+              transformOrigin: 'center',
+              marginTop: '-5px',
+              marginRight: '-3px',
+            }}
+          />
         </IconBackground>
       </AddMessageBar>
     </Wrapper>
