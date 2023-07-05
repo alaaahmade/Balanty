@@ -15,7 +15,16 @@ interface Match {
   ownerUser: {
     username: string;
   };
-  Players: [];
+  Players: Player[];
+}
+
+interface Player {
+  id: number;
+  avatar: string;
+  age: number;
+  position: string;
+  cover: string;
+  bio: string;
 }
 
 const MatchesPage = (): React.ReactElement => {
