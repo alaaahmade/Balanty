@@ -1,13 +1,6 @@
 import { Box, IconButton } from '@mui/material';
-import React, {
-  ReactElement,
-  FC,
-  SetStateAction,
-  Dispatch,
-  useState,
-} from 'react';
+import React, { ReactElement, FC, SetStateAction, Dispatch, Key } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import styled from '@emotion/styled';
 import axios from 'axios';
 
@@ -19,31 +12,9 @@ const MessageOptionsBox = styled(Box)({
 });
 
 const MessageOptions: FC<{
-  id: number;
-  index: number;
-  updatedMessage: string;
-  setUpdatedMessage: Dispatch<SetStateAction<string>>;
-  setIsEdit: Dispatch<SetStateAction<boolean>>;
-  setMessageActionIndex: Dispatch<SetStateAction<number | null>>;
+  id: Key | null | undefined;
   setIsDeleted: Dispatch<SetStateAction<object>>;
-}> = ({
-  id,
-  index,
-  updatedMessage,
-  setUpdatedMessage,
-  setIsEdit,
-  setMessageActionIndex,
-  setIsDeleted,
-}): ReactElement => {
-  const handleEditClick = async () => {
-    setIsEdit(true);
-    setMessageActionIndex(index);
-    const editedMessage = await axios.put(`/api/v1/message`, {
-      id,
-      newMessage: updatedMessage,
-    });
-    setUpdatedMessage(editedMessage.data.data.updatedMessage);
-  };
+}> = ({ id, setIsDeleted }): ReactElement => {
   const handleDeleteClick = async () => {
     const deletedMessage = await axios.delete(`/api/v1/message/${id}`);
     setIsDeleted(deletedMessage);
@@ -64,7 +35,7 @@ const MessageOptions: FC<{
         />
       </IconButton>
 
-      <IconButton
+      {/* <IconButton
         onClick={handleEditClick}
         sx={{
           width: '30px',
@@ -75,7 +46,7 @@ const MessageOptions: FC<{
         <EditIcon
           sx={{ cursor: 'pointer', color: '#818181', fontSize: '20px' }}
         />
-      </IconButton>
+      </IconButton> */}
     </MessageOptionsBox>
   );
 };
