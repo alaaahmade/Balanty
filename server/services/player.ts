@@ -109,9 +109,11 @@ const playerMatchesService = async (
 const getPlayersService = async (
   req: Request,
 ): Promise<{ status: number; data: object }> => {
-  const { searchQuery } = req.query;
+  const { search } = req.query;
   const { page } = req.params;
-  const sanitizedSearchQuery = searchQuery || '';
+  const sanitizedSearchQuery = search || '';
+
+  console.log(search, 'searcg');
 
   const pageSize = 8;
   const offset = (Number(page) - 1) * pageSize;
