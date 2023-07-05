@@ -46,7 +46,7 @@ const LoginWrapper: FC = (): ReactElement => {
   }
   const onSubmit: SubmitHandler<loginProps> = async data => {
     await login(data.username, data.password);
-    navigate('/home');
+    navigate('/match/1');
   };
 
   return (
