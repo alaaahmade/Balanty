@@ -12,9 +12,9 @@ import SendIcon from '@mui/icons-material/Send';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
 import Typography from '@mui/material/Typography';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useLocation } from 'react-router-dom';
-import { Alert, Box } from '@mui/material';
+import { Alert, Box, Stack } from '@mui/material';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import {
@@ -24,10 +24,11 @@ import {
   Wrapper,
 } from './MatchChat.styled';
 import Message from './Message';
-import { IMatchDataProps } from '../../interfaces';
+import { CustomErrorResponse, IMatchDataProps } from '../../interfaces';
 
 import ChatImage from '../../assets/chat.svg';
 import { AuthContext } from '../../context';
+import ErrorAlert from '../ErrorAlert';
 
 const MatchChat = () => {
   const { pathname } = useLocation();
@@ -57,6 +58,8 @@ const MatchChat = () => {
   const [isIconPickerShown, setIsIconPickerShown] = useState<boolean>(false);
   const [isDeleted, setIsDeleted] = useState<object | null>(null);
 
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
   const scrollContainerRef = useRef<HTMLDivElement>();
 
   const { user } = useContext(AuthContext);
@@ -72,6 +75,10 @@ const MatchChat = () => {
     }
   };
 
+  function isAxiosError(error: unknown): error is AxiosError {
+    return (error as AxiosError).isAxiosError !== undefined;
+  }
+
   useEffect(() => {
     handleScrollChat();
     (async () => {
@@ -81,6 +88,15 @@ const MatchChat = () => {
       } catch (error) {
         // eslint-disable-next-line no-alert
         console.log('Error when accessing match', error);
+        if (isAxiosError(error)) {
+          const axiosError = error as AxiosError<CustomErrorResponse>;
+          if (axiosError.response) {
+            const errorResponse = axiosError.response.data.data;
+            setErrorMessage(errorResponse?.message);
+          }
+        } else {
+          setErrorMessage((error as Error).message);
+        }
       }
     })();
   }, [newMessage, isDeleted]);
@@ -99,8 +115,15 @@ const MatchChat = () => {
           setIsIconPickerShown(false);
           handleScrollChat();
         } catch (error) {
-          // eslint-disable-next-line no-alert
-          console.log('Error when accessing match', error);
+          if (isAxiosError(error)) {
+            const axiosError = error as AxiosError<CustomErrorResponse>;
+            if (axiosError.response) {
+              const errorResponse = axiosError.response.data.data;
+              setErrorMessage(errorResponse?.message);
+            }
+          } else {
+            setErrorMessage((error as Error).message);
+          }
         }
       })();
     }
@@ -119,9 +142,6 @@ const MatchChat = () => {
   const handleEmojiSelect = (emoji: string) => {
     setMessageInput(prevValue => prevValue + emoji);
   };
-
-  // console.log(matchData, 'match data');
-  // console.log(user, 'user');
 
   return (
     <Wrapper ref={scrollContainerRef}>
@@ -285,6 +305,16 @@ const MatchChat = () => {
           />
         </IconBackground>
       </AddMessageBar>
+      {errorMessage && (
+        <ErrorAlert
+          style={{
+            width: '80%',
+            right: '0.5rem',
+            top: '4rem',
+          }}
+          errorMessage={errorMessage}
+        />
+      )}
     </Wrapper>
   );
 };
