@@ -8,7 +8,7 @@ import { LeftSideBar, RightSideBar } from '../components';
 import CreateMatch from '../pages/CreateMatch';
 
 import { open } from '../context';
-import { AuthProvider } from '../context/AuthContext';
+import ProtectedProvider from '../context/ProtectedContext';
 
 const RootLayout: React.FC = (): ReactElement => {
   const [Profile, setProfile] = useState(false);
@@ -27,7 +27,7 @@ const RootLayout: React.FC = (): ReactElement => {
     }
   }, [pathname]);
   return (
-    <AuthProvider>
+    <ProtectedProvider>
       <Box
         sx={{
           width: '100%',
@@ -43,7 +43,7 @@ const RootLayout: React.FC = (): ReactElement => {
 
         <Outlet />
       </Box>
-    </AuthProvider>
+    </ProtectedProvider>
   );
 };
 

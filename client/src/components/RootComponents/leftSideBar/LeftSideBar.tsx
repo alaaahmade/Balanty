@@ -15,6 +15,7 @@ import { AuthContext } from '../../../context';
 
 const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
   const { user } = useContext(AuthContext);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -27,7 +28,11 @@ const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
         boxShadow: '-5px 4px 4px rgba(0, 0, 0, 0.15)',
       }}
     >
-      <UserCart username={(user as User).username} userId={(user as User).id} />
+      <UserCart
+        username={(user as User).username}
+        userId={(user as User).id}
+        role={(user as User).role}
+      />
 
       <SideBarLink text="الصفحة الرئيسية" icon={<AiFillHome />} />
       <SideBarLink text="اللاعبين" icon={<BsPersonFillAdd />} />

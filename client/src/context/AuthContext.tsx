@@ -19,9 +19,6 @@ import {
   ChildrenProps,
 } from '../interfaces';
 
-import LoginWrapper from '../components/auth/LoginWrapper';
-import SignupWrapper from '../components/auth/SignupWrapper';
-
 export const AuthContext = createContext<AuthContextData>({
   user: null,
   login: async () => {
@@ -124,7 +121,7 @@ export const AuthProvider: FC<ChildrenProps> = ({ children }) => {
 
   return (
     <AuthContext.Provider value={authContextValue}>
-      {(user && children) || <SignupWrapper />}
+      {children}
     </AuthContext.Provider>
   );
 };

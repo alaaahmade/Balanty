@@ -30,3 +30,5 @@ export type {
   BioSectionProps,
   EditGalleryPopupProps,
 } from './StadiumProfile';
+
+export type { UserCardProps } from './rootLayout';

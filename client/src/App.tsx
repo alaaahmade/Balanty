@@ -14,6 +14,7 @@ import {
 } from './context';
 import StadiumProfile from './pages/StadiumProfile';
 import StadiumsPage from './pages/Stadiums';
+import { AuthProvider } from './context/AuthContext';
 
 const router = createBrowserRouter([
   {
@@ -46,13 +47,15 @@ const router = createBrowserRouter([
 const App = (): ReactElement => {
   return (
     <ThemeProvider theme={LightTheme}>
-      <open.Provider value={useCustomOpen()}>
-        <StatsContextProvider>
-          <UpdateGalleryContextProvider>
-            <RouterProvider router={router} />
-          </UpdateGalleryContextProvider>
-        </StatsContextProvider>
-      </open.Provider>
+      <AuthProvider>
+        <open.Provider value={useCustomOpen()}>
+          <StatsContextProvider>
+            <UpdateGalleryContextProvider>
+              <RouterProvider router={router} />
+            </UpdateGalleryContextProvider>
+          </StatsContextProvider>
+        </open.Provider>
+      </AuthProvider>
     </ThemeProvider>
   );
 };

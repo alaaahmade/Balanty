@@ -20,7 +20,6 @@ import LinkWrap from './Link';
 import { signupProps } from '../../interfaces';
 import { signupSchema } from '../../validation';
 import { AuthContext } from '../../context';
-import { AuthProvider } from '../../context/AuthContext';
 
 const SignupWrapper: FC = (): ReactElement => {
   const {
@@ -40,7 +39,6 @@ const SignupWrapper: FC = (): ReactElement => {
   });
   const navigate = useNavigate();
   const { signup, errorMessage } = useContext(AuthContext);
-  console.log(signup);
 
   const { pathname } = useLocation();
   let isplayer = 'true';
@@ -54,7 +52,6 @@ const SignupWrapper: FC = (): ReactElement => {
     navigate('/home');
   };
   return (
-    // <AuthProvider>
     <Wrapper isplayer={isplayer}>
       <ImageWrap isplayer={isplayer} />
       <Form>
@@ -157,7 +154,6 @@ const SignupWrapper: FC = (): ReactElement => {
         </Stack>
       )}
     </Wrapper>
-    // </AuthProvider>
   );
 };
 

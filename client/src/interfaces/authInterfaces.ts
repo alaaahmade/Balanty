@@ -32,6 +32,7 @@ export interface User {
   email: string;
   avatar: string;
   authToken?: string;
+  role: string;
 }
 
 export interface AuthContextData {
