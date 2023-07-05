@@ -12,10 +12,10 @@ import { StadiumDataProps } from '../interfaces';
 
 const StadiumsPage = (): ReactElement => {
   const [stadiumData, setStadiumData] = useState<StadiumDataProps[]>([]);
-  const [page, setPage] = useState(1);
-  const [first, setFirst] = useState(true);
-  const [end, setEnd] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState<number>(1);
+  const [first, setFirst] = useState<boolean>(true);
+  const [end, setEnd] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const fetchStadiumsData = async () => {
