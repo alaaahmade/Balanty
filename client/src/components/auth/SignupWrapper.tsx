@@ -49,7 +49,7 @@ const SignupWrapper: FC = (): ReactElement => {
   }
   const onSubmit: SubmitHandler<signupProps> = async data => {
     await signup(data, isplayer);
-    navigate('/home');
+    navigate('/match/1');
   };
   return (
     <Wrapper isplayer={isplayer}>
