@@ -47,16 +47,14 @@ export const AuthProvider: FC<ChildrenProps> = ({ children }) => {
         username,
         password,
       });
-
       setUser(response.data.data.user);
       localStorage.setItem('user', JSON.stringify(response.data.data.user));
-      // navigate('/home');
     } catch (error) {
       if (isAxiosError(error)) {
         const axiosError = error as AxiosError<CustomErrorResponse>;
         if (axiosError.response) {
           const errorResponse = axiosError.response.data.data;
-          setErrorMessage(errorResponse.message);
+          setErrorMessage(errorResponse?.message);
         }
       } else {
         setErrorMessage((error as Error).message);
@@ -77,13 +75,12 @@ export const AuthProvider: FC<ChildrenProps> = ({ children }) => {
         });
         setUser(response.data.user);
         localStorage.setItem('user', JSON.stringify(response.data.user));
-        window.location.href = '/home';
       } catch (error) {
         if (isAxiosError(error)) {
           const axiosError = error as AxiosError<CustomErrorResponse>;
           if (axiosError.response) {
             const errorResponse = axiosError.response.data.data;
-            setErrorMessage(errorResponse.message);
+            setErrorMessage(errorResponse?.message);
           }
         } else {
           setErrorMessage((error as Error).message);
@@ -98,13 +95,12 @@ export const AuthProvider: FC<ChildrenProps> = ({ children }) => {
       await axios.post('/api/v1/user/logout');
       setUser(null);
       localStorage.removeItem('user');
-      window.location.href = '/';
     } catch (error) {
       if (isAxiosError(error)) {
         const axiosError = error as AxiosError<CustomErrorResponse>;
         if (axiosError.response) {
           const errorResponse = axiosError.response.data.data;
-          setErrorMessage(errorResponse.message);
+          setErrorMessage(errorResponse?.message);
         }
       } else {
         setErrorMessage((error as Error).message);
