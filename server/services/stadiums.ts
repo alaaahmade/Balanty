@@ -315,7 +315,7 @@ export const getBestStadiumsService = async (): Promise<{
     const totalReviews = (stadium.StadiumsReviews as Review[]).length;
     const averageReview =
       (stadium.StadiumsReviews as Review[]).reduce(
-        (sum: number, review: { value: number }) => sum + review.value,
+        (sum: number, review: { value: string }) => sum + +review.value,
         0,
       ) / totalReviews;
 

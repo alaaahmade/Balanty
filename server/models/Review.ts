@@ -4,13 +4,13 @@ import { sequelize } from '../database';
 class Review extends Model {
   declare PlayerId: number;
   declare StadiumId: number;
-  declare value: number;
+  declare value: string;
 }
 
 Review.init(
   {
     value: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         min: 1,

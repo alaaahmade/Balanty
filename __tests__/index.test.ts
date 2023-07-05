@@ -377,11 +377,11 @@ describe('post /api/v1/review/5', () => {
     request(app)
       .post('/api/v1/review/5')
       .set('Accept', 'application/json')
-      .send({ value: 4 })
+      .send({ value: '4' })
       .end((error, res) => {
         expect(res.status).toBe(200);
         const { data } = JSON.parse(res.text);
-        expect(data.value).toBe(4);
+        expect(data.value).toBe('4');
         done();
         if (error) {
           done(error);
@@ -400,7 +400,7 @@ describe('GET /api/v1/review/5', () => {
         expect(res.type).toBe('application/json');
         const { data } = JSON.parse(res.text);
         expect(Array.isArray(data)).toBe(true);
-        expect(data[0].value).toBe(4);
+        expect(data[0].value).toBe('4');
         expect(data[0].playerId).toBe(4);
         expect(data[0].stadiumId).toBe(5);
         done();
