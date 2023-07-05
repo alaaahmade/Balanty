@@ -425,6 +425,28 @@ describe('GET /api/v1/review/5', () => {
       });
   });
 });
+
+describe('GET /api/v1/players/avatar/1', () => {
+  test('responds from /api/v1/players/avatar/1 with JSON and 200 status code', done => {
+    request(app)
+      .get('/api/v1/players/avatar/1')
+      .set('Accept', 'application/json')
+      .end((error, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        const { data } = JSON.parse(res.text);
+        expect(Array.isArray(data)).toBe(false);
+        expect(typeof data).toBe('string');
+        expect(data).toBe(
+          'https://www.yourstru.ly/wp-content/uploads/2022/12/2022-12-22_12_lionel-messi-biograph.webp',
+        );
+        done();
+        if (error) {
+          done(error);
+        }
+      });
+  });
+});
 afterAll(() => {
   sequelize.close();
 });
