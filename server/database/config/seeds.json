@@ -44,29 +44,71 @@
     },
     {
       "username": "نادي السلام",
-      "phone": "0591234565",
+      "phone": "0391234565",
       "email": "AlsalamStad@gmail.com",
       "password": "AlsalamStad123",
       "role": "STADIUM"
     },
     {
       "username": "خدمات جباليا",
-      "phone": "0591234566",
+      "phone": "0291234566",
       "email": "JabalyaStad@gmail.com",
       "password": "JabalyaStad123",
       "role": "STADIUM"
     },
     {
       "username": "خدمات بيت لاهيا",
-      "phone": "0591234567",
+      "phone": "0391234567",
       "email": "BitLahyaStad@gmail.com",
       "password": "BitLahyaStad123",
       "role": "STADIUM"
     },
     {
       "username": "نادي الحارة",
-      "phone": "0591239995",
+      "phone": "0531239995",
       "email": "AlharaStad@gmail.com",
+      "password": "AlharaStad123",
+      "role": "STADIUM"
+    },
+    {
+      "username": "ملعب المشروع",
+      "phone": "0591234223",
+      "email": "Almashroh@gmail.com",
+      "password": "AlsahaStad123",
+      "role": "STADIUM"
+    },
+    {
+      "username": "نادي المعسكر",
+      "phone": "059344564",
+      "email": "Almoasker@gmail.com",
+      "password": "AletehadStad123",
+      "role": "STADIUM"
+    },
+    {
+      "username": "نادي فالوجة",
+      "phone": "0591234565",
+      "email": "Alfaloja@gmail.com",
+      "password": "AlsalamStad123",
+      "role": "STADIUM"
+    },
+    {
+      "username": "خدمات رفح",
+      "phone": "0591234566",
+      "email": "rafah2aStad@gmail.com",
+      "password": "JabalyaStad123",
+      "role": "STADIUM"
+    },
+    {
+      "username": "خدمات  معسكر الشاطئ",
+      "phone": "0591234567",
+      "email": "alshatea@gmail.com",
+      "password": "BitLahyaStad123",
+      "role": "STADIUM"
+    },
+    {
+      "username": "نادي البحرين",
+      "phone": "0591239995",
+      "email": "allbahrean@gmail.com",
       "password": "AlharaStad123",
       "role": "STADIUM"
     }
@@ -140,6 +182,27 @@
       "description": "يحتوي الملعب المصغر على عشب صناعي غير حشو ومنصات صدمات. يعتمد حجم ملعب كرة القدم المصغر على حجم القاعدة. اتصل بنا للحصول على التفاصيل",
       "price": 80,
       "ground": "انجيل"
+    },
+    {
+      "UserId": 10
+    },
+    {
+      "UserId": 11
+    },
+    {
+      "UserId": 12
+    },
+    {
+      "UserId": 13
+    },
+    {
+      "UserId": 14
+    },
+    {
+      "UserId": 15
+    },
+    {
+      "UserId": 16
     }
   ],
   "Matches": [
@@ -265,6 +328,27 @@
     {
       "image": "https://www.aljazeera.net/wp-content/uploads/2020/01/245797c9-958d-4081-8104-8acc8c3a4029.jpeg?resize=770%2C513&quality=80",
       "StadiumId": 5
+    },
+    {
+      "StadiumId": 6
+    },
+    {
+      "StadiumId": 7
+    },
+    {
+      "StadiumId": 8
+    },
+    {
+      "StadiumId": 9
+    },
+    {
+      "StadiumId": 10
+    },
+    {
+      "StadiumId": 11
+    },
+    {
+      "StadiumId": 12
     }
   ],
   "Message": [

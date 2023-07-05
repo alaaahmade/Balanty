@@ -15,7 +15,11 @@ const DefinitionSection: React.FC<DefinitionProps> = ({
   description,
 }: DefinitionProps): ReactElement => {
   return (
-    <StyledDefinitionSection>
+    <StyledDefinitionSection
+      sx={{
+        p: '10%',
+      }}
+    >
       <StyledTitle>{title}</StyledTitle>
       <StyledDescription>{description}</StyledDescription>
     </StyledDefinitionSection>

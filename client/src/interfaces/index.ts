@@ -16,6 +16,7 @@ export type {
   User,
   AuthContextData,
   CustomErrorResponse,
+  ChildrenProps,
 } from './authInterfaces';
 
 export type { StadiumDataProps } from './stadiumsPage';
@@ -30,3 +31,6 @@ export type {
   BioSectionProps,
   EditGalleryPopupProps,
 } from './StadiumProfile';
+
+export type { Page } from './landingPage';
+export type { UserCardProps } from './rootLayout';

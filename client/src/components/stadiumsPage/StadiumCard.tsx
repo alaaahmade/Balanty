@@ -12,7 +12,7 @@ import {
   FlexBox,
   ImageBox,
   StadiumCardBox,
-} from './StadiumPage.styled';
+} from './StadiumsPage.styled';
 
 import { StadiumDataProps } from '../../interfaces';
 
@@ -92,8 +92,9 @@ const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
                 value={averageRating}
                 precision={0.5}
                 sx={{
-                  direction: 'rtl',
+                  transform: 'rotateY(180deg)',
                 }}
+                readOnly
               />
             </Box>
           </Box>
