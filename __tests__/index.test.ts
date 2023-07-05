@@ -437,6 +437,26 @@ describe('GET /api/v1/stadiums/best', () => {
         const { data } = JSON.parse(res.text);
         expect(Array.isArray(data)).toBe(true);
         expect(data.length).toBe(3);
+
+        done();
+        if (error) {
+          done(error);
+        }
+      });
+  });
+});
+describe('GET /api/v1/stadiums/all/1', () => {
+  test('responds from /api/v1/stadiums/all/1 with JSON and 200 status code', done => {
+    request(app)
+      .get('/api/v1/stadiums/all/1')
+      .set('Accept', 'application/json')
+      .end((error, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        const { data } = JSON.parse(res.text);
+        expect(Array.isArray(data)).toBe(true);
+        expect(data.length).toBe(8);
+
         done();
         if (error) {
           done(error);

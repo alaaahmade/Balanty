@@ -31,11 +31,10 @@ const BioSection = ({
   userData,
   editMode,
   setEditMode,
+  EditAble,
 }: BioSectionProps): ReactElement => {
   const { description, price, ground, address } = userData.Stadium;
   const { username, phone } = userData;
-
-  const [EditAble, setEditAble] = useState(true);
   const [hov, setHove] = useState(false);
   const [mouseOver, setMouseOver] = useState(false);
   const [validation, setValidation] = useState('');
@@ -235,32 +234,34 @@ const BioSection = ({
             </LocationTypo>
           </FlexBox>
         </FlexBox>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-          }}
-        >
+        {!EditAble && (
           <Box
             sx={{
-              color: 'yellow',
+              display: 'flex',
+              justifyContent: 'flex-end',
             }}
           >
-            <StarBorderIcon />
-            <StarBorderIcon />
-            <StarBorderIcon />
-            <StarBorderIcon />
-            <StarBorderIcon />
+            <Box
+              sx={{
+                color: 'yellow',
+              }}
+            >
+              <StarBorderIcon />
+              <StarBorderIcon />
+              <StarBorderIcon />
+              <StarBorderIcon />
+              <StarBorderIcon />
+            </Box>
+            <Typography
+              sx={{
+                width: '7rem',
+                textAlign: 'right',
+              }}
+            >
+              : اضافة تقييم
+            </Typography>
           </Box>
-          <Typography
-            sx={{
-              width: '7rem',
-              textAlign: 'right',
-            }}
-          >
-            : اضافة تقييم
-          </Typography>
-        </Box>
+        )}
         {editMode ? (
           <Box
             sx={{

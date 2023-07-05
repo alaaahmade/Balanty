@@ -1,7 +1,7 @@
 import { AiFillHome } from 'react-icons/ai';
 import { BsPersonFillAdd, BsFillFilePersonFill } from 'react-icons/bs';
 import { MdStadium } from 'react-icons/md';
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, useContext } from 'react';
 import UserCart from './UserCart';
 import SideBarLink from './SideBarLink';
 import {
@@ -10,9 +10,12 @@ import {
   StyledButton,
   StyledTypography,
 } from '../../index';
-import { LeftSideBarInterface } from '../../../interfaces';
+import { LeftSideBarInterface, User } from '../../../interfaces';
+import { AuthContext } from '../../../context';
 
 const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
+  const { user } = useContext(AuthContext);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -22,10 +25,14 @@ const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
       sx={{
         right: 0,
         borderLeft: '0.4px solid #ccc',
-        boxShadow: '-5px 4px 4px rgba(0, 0, 0, 0.15)',
+        boxShadow: '-1px 4px 6px 1px rgba(0, 0, 0, 0.15)',
       }}
     >
-      <UserCart />
+      <UserCart
+        username={(user as User).username}
+        userId={(user as User).id}
+        role={(user as User).role}
+      />
 
       <SideBarLink text="الصفحة الرئيسية" icon={<AiFillHome />} />
       <SideBarLink text="اللاعبين" icon={<BsPersonFillAdd />} />
