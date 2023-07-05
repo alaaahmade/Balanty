@@ -16,21 +16,19 @@ import {
 } from './context';
 import StadiumProfile from './pages/StadiumProfile';
 import StadiumsPage from './pages/Stadiums';
+import PlayerProfile from './pages/PlayerProfile';
 
 const router = createBrowserRouter([
   {
     path: '/',
     children: [
       { index: true, element: <LandingPage /> },
-      { path: '/player/login', element: <h1>player login</h1> },
-      { path: '/stadium/login', element: <h1>stadium login</h1> },
-      { path: '/player/signup', element: <h1>player signup</h1> },
-      { path: '/stadium/signup', element: <h1>stadium signup</h1> },
       { path: '/match/:matchId', element: <MatchRoomPage /> },
       { path: '/player/login', element: <LoginWrapper /> },
       { path: '/stadium/login', element: <LoginWrapper /> },
       { path: '/player/signup', element: <SignupWrapper /> },
       { path: '/stadium/signup', element: <SignupWrapper /> },
+      { path: '/profile/player/:id', element: <PlayerProfile /> },
     ],
   },
   {
