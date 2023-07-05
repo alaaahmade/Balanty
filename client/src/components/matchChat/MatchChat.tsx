@@ -13,8 +13,8 @@ import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
 import Typography from '@mui/material/Typography';
 import axios, { AxiosError } from 'axios';
-import { useLocation } from 'react-router-dom';
-import { Alert, Box, Stack } from '@mui/material';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import {
@@ -62,6 +62,8 @@ const MatchChat = () => {
 
   const scrollContainerRef = useRef<HTMLDivElement>();
 
+  const navigate = useNavigate();
+
   const { user } = useContext(AuthContext);
 
   const matchMessages = matchData?.data?.match?.MatchMessages;
@@ -86,12 +88,13 @@ const MatchChat = () => {
         const response = await axios.get(`/api/v1/message/match/${matchId}`);
         setMatchData(response.data);
       } catch (error) {
-        // eslint-disable-next-line no-alert
-        console.log('Error when accessing match', error);
         if (isAxiosError(error)) {
           const axiosError = error as AxiosError<CustomErrorResponse>;
           if (axiosError.response) {
             const errorResponse = axiosError.response.data.data;
+            if (errorResponse.status === 500) {
+              navigate('/servererror');
+            }
             setErrorMessage(errorResponse?.message);
           }
         } else {
@@ -119,6 +122,9 @@ const MatchChat = () => {
             const axiosError = error as AxiosError<CustomErrorResponse>;
             if (axiosError.response) {
               const errorResponse = axiosError.response.data.data;
+              if (errorResponse.status === 500) {
+                navigate('/servererror');
+              }
               setErrorMessage(errorResponse?.message);
             }
           } else {
