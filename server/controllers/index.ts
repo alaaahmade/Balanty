@@ -12,4 +12,8 @@ export {
   getStadiumDetails,
   getStadiumProfile,
   getStadiumMatches,
+  getStadiums,
+  UpdateStadiumData,
 } from './stadiums';
+
+export { getReview, addReview } from './reviews';

@@ -12,7 +12,6 @@ export { default as Definition } from './Definition/Definition';
 export { default as Features } from './Features/Features';
 export { default as BestStadiums } from './best-stadiums/BestStadiums';
 export { default as Contact } from './contact-us/ContactUs';
-// export { default as CreateMatchForm } from './createMatchComponents';
 
 export {
   StyledContainer,
@@ -46,7 +45,7 @@ export {
   StyledTeamBox,
   StyledWorldMatches,
   StyledMyMatches,
-} from './styledRootComponent/RightSideBarStyldComponent';
+} from './styledRootComponent/RightSideBarSteyldComponent';
 
 export {
   StyledNavBox,
@@ -55,3 +54,6 @@ export {
   StyledMnu,
   StyledLabel,
 } from './styledRootComponent/Nav';
+
+export { default as StadiumCard } from './stadiumsPage/StadiumCard';
+export { StadiumPageBox } from './stadiumsPage/StadiumPage.styled';

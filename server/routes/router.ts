@@ -1,15 +1,19 @@
 import { Router, Request, Response } from 'express';
 import { authRouter } from './auth';
-import chatRouter from './matchChat';
+import { playerRouter } from './player';
 import { stadiumRouter } from './staduimRouter';
 import matchRouter from './matches';
+import chatRouter from './matchChat';
+import reviewRouter from './reviewRouter';
 
 const router: Router = Router();
-router.use('/matches', matchRouter);
 
+router.use('/matches', matchRouter);
 router.use('/user', authRouter);
 router.use('/stadiums', stadiumRouter);
+router.use('/players', playerRouter);
 router.use('/message', chatRouter);
+router.use('/review', reviewRouter);
 
 router.get('/', (req: Request, res: Response): void => {
   res.json({
