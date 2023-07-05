@@ -29,7 +29,13 @@ const signupService = async (
     role,
   });
 
-  const token = await generateToken({ username, email, phone, role });
+  const token = await generateToken({
+    username,
+    email,
+    phone,
+    role,
+    id: newUser.id,
+  });
 
   return { newUser, token };
 };

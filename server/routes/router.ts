@@ -5,9 +5,10 @@ import { stadiumRouter } from './staduimRouter';
 import matchRouter from './matches';
 import chatRouter from './matchChat';
 import reviewRouter from './reviewRouter';
+import { checkAuth } from '../middleware';
 
 const router: Router = Router();
-router.use('/matches', matchRouter);
+router.use('/matches', checkAuth, matchRouter);
 
 router.use('/user', authRouter);
 router.use('/stadiums', stadiumRouter);
