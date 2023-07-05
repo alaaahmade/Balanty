@@ -1,6 +1,7 @@
 import { Request } from 'express';
 import { Match, Player, User } from '../models';
 import updatedPLayerSchema from '../validations/playerSchema';
+import { CustomUser } from '../interfaces/player';
 
 const getPlayerService = async (
   id: number,
@@ -105,4 +106,31 @@ const playerMatchesService = async (
   };
 };
 
-export { getPlayerService, updatePlayerService, playerMatchesService };
+const playerAvatarService = async (
+  id: number,
+): Promise<{ status: number; data: string }> => {
+  const player = await User.findOne({
+    where: { id },
+    attributes: ['id'],
+    include: [
+      {
+        model: Player,
+        attributes: ['avatar'],
+      },
+    ],
+  });
+  if (!player) {
+    return {
+      status: 404,
+      data: 'هذا اللاعب غير موجود',
+    };
+  }
+  return { status: 200, data: (player as CustomUser).Player.avatar };
+};
+
+export {
+  getPlayerService,
+  updatePlayerService,
+  playerMatchesService,
+  playerAvatarService,
+};

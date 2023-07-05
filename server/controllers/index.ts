@@ -17,3 +17,5 @@ export {
 } from './stadiums';
 
 export { getReview, addReview } from './reviews';
+
+export { playerAvatar, getPlayer, playerMatches, updatePlayer } from './player';
