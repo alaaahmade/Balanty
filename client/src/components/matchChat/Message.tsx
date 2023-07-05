@@ -1,94 +1,84 @@
-import React, { Key, useState, Dispatch, SetStateAction } from 'react';
+import React, { Key, Dispatch, SetStateAction } from 'react';
 import { Box } from '@mui/system';
-import { Avatar } from '@mui/material';
+import { Avatar, Typography } from '@mui/material';
 import MessageOptions from './MessageOptions';
+import { CustomizeLink } from './MatchChat.styled';
 
 interface Props {
-  id: any;
-  index: number;
+  id: Key | null | undefined;
   message: string;
-  time: string;
-  sender: string | number;
+  // time: string;
+  senderName: string | number;
   // eslint-disable-next-line react/require-default-props
-  senderAvatar: string | null;
+  senderAvatar?: string | null;
   isReceived: boolean;
-  setIsEdit: Dispatch<SetStateAction<boolean>>;
-  // setUpdatedMessage: Dispatch<SetStateAction<string>>;
-  setMessageActionIndex: Dispatch<SetStateAction<number | null>>;
   setIsDeleted: Dispatch<SetStateAction<object>>;
-  setUpdatedMessage: Dispatch<SetStateAction<string>>;
-  updatedMessage: string;
+  role: string | undefined;
 }
 
 const Message = ({
   id,
-  index,
   message,
-  time,
+  // time,
   senderAvatar,
-  sender,
+  senderName,
   isReceived,
-  setIsEdit,
-  setMessageActionIndex,
   setIsDeleted,
-  setUpdatedMessage,
-  updatedMessage,
+  role,
 }: Props) => {
   return (
-    <section
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: isReceived ? 'left' : 'right',
-      }}
-    >
-      <Box
-        sx={{
+    <Box sx={{ mt: senderAvatar ? '10px' : 'auto' }}>
+      {senderAvatar && (
+        <CustomizeLink to={`/profile/${role}/${id}`}>
+          {senderName}
+        </CustomizeLink>
+      )}
+      <section
+        style={{
           display: 'flex',
-          gap: '0.5rem',
           alignItems: 'center',
-          '&:hover': {
-            '.message-options': {
-              display: 'flex',
-            },
-          },
+          justifyContent: isReceived ? 'left' : 'right',
         }}
       >
-        {!isReceived && (
-          <MessageOptions
-            setUpdatedMessage={setUpdatedMessage}
-            updatedMessage={updatedMessage}
-            setIsDeleted={setIsDeleted}
-            setIsEdit={setIsEdit}
-            setMessageActionIndex={setMessageActionIndex}
-            id={id}
-            index={index}
-          />
-        )}
-        {senderAvatar ? (
-          <Avatar src={senderAvatar} />
-        ) : (
-          <div style={{ width: '40px', height: '40px' }} />
-        )}
         <Box
           sx={{
-            background: isReceived ? '#F2FCF5' : '#2CB674',
-            color: isReceived ? '#000' : '#fff',
-            textAlign: isReceived ? 'left' : 'right',
-            direction: isReceived ? 'ltr' : 'rtl',
-            alignSelf: isReceived ? 'left' : 'right',
-            marginBottom: '4px',
-            padding: '5px 10px',
-            width: 'fit-content',
-            maxWidth: '300px',
-            wordWrap: 'break-word',
-            borderRadius: '20px',
+            display: 'flex',
+            gap: '0.5rem',
+            alignItems: 'center',
+            '&:hover': {
+              '.message-options': {
+                display: 'flex',
+              },
+            },
           }}
         >
-          {message}
+          {!isReceived && (
+            <MessageOptions setIsDeleted={setIsDeleted} id={id} />
+          )}
+          {senderAvatar && <Avatar sx={{ mt: '-35px' }} src={senderAvatar} />}
+          {!senderAvatar && isReceived && (
+            <div style={{ width: '40px', height: '40px' }} />
+          )}
+          <Box
+            sx={{
+              background: isReceived ? '#F2FCF5' : '#2CB674',
+              color: isReceived ? '#000' : '#fff',
+              textAlign: isReceived ? 'left' : 'right',
+              direction: isReceived ? 'ltr' : 'rtl',
+              alignSelf: isReceived ? 'left' : 'right',
+              marginBottom: '4px',
+              padding: '5px 10px',
+              width: 'fit-content',
+              maxWidth: '300px',
+              wordWrap: 'break-word',
+              borderRadius: '20px',
+            }}
+          >
+            {message}
+          </Box>
         </Box>
-      </Box>
-    </section>
+      </section>
+    </Box>
   );
 };
 
