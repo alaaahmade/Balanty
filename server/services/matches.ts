@@ -74,6 +74,7 @@ export const getAllMatches = async (): Promise<matchesInterface> => {
     include: [
       { model: User, as: 'ownerUser' },
       { model: User, as: 'stadiumMatch' },
+      { model: User, as: 'Players' },
     ],
   });
 
@@ -89,5 +90,3 @@ export const getAllMatches = async (): Promise<matchesInterface> => {
     };
   }
 };
-
-//l want to git the stadium left joined whit matches
