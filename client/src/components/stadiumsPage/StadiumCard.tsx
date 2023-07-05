@@ -12,7 +12,7 @@ import {
   FlexBox,
   ImageBox,
   StadiumCardBox,
-} from './StadiumPage.styled';
+} from './StadiumsPage.styled';
 
 import { StadiumDataProps } from '../../interfaces';
 
@@ -94,6 +94,7 @@ const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
                 sx={{
                   transform: 'rotateY(180deg)',
                 }}
+                readOnly
               />
             </Box>
           </Box>

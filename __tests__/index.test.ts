@@ -420,6 +420,29 @@ test('test for not exist Stadium should return 404 with "هذا الملعب غ�
 //         expect(res.status).toBe(404);
 //         expect(res.type).toBe('application/json');
 
+describe('GET /api/v1/review/player/5', () => {
+  test('responds from /api/v1/review/player/5 with JSON and 200 status code', done => {
+    request(app)
+      .get('/api/v1/review/player/5')
+      .end((error, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        const { data } = JSON.parse(res.text);
+        expect(data.value).toBe(4);
+        expect(data.playerId).toBe(4);
+        expect(data.stadiumId).toBe(5);
+        expect(data.value).toBe(4);
+        expect(data.playerId).toBe(4);
+        expect(data.stadiumId).toBe(5);
+
+        done();
+        if (error) {
+          done(error);
+        }
+      });
+  });
+});
+
 describe('GET /api/v1/stadiums/all/1', () => {
   test('responds from /api/v1/stadiums/all/1 with JSON and 200 status code', done => {
     request(app)
@@ -431,7 +454,6 @@ describe('GET /api/v1/stadiums/all/1', () => {
         const { data } = JSON.parse(res.text);
         expect(Array.isArray(data)).toBe(true);
         expect(data.length).toBe(8);
-
         done();
         if (error) {
           done(error);
@@ -439,6 +461,7 @@ describe('GET /api/v1/stadiums/all/1', () => {
       });
   });
 });
+
 afterAll(() => {
   sequelize.close();
 });
