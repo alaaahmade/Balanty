@@ -8,10 +8,11 @@ import {
   Contact,
 } from '../components';
 import Footer from '../components/footer/footer';
+import { RedirectProvider } from '../context/RedirectContext';
 
 const LandingPage: FC = (): ReactElement => {
   return (
-    <>
+    <RedirectProvider>
       <Header />
       <HeroSection />
       <Definition />
@@ -19,7 +20,7 @@ const LandingPage: FC = (): ReactElement => {
       <BestStadiums />
       <Contact />
       <Footer />
-    </>
+    </RedirectProvider>
   );
 };
 
