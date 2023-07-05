@@ -1,7 +1,7 @@
 import { FC, ReactElement, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Typography } from '@mui/material';
+import { Avatar, Typography } from '@mui/material';
 
 import axios from 'axios';
 import { BorderBox, StyledImag, StyledUserCart } from '../../index';
@@ -60,7 +60,11 @@ const UserCart: FC<UserCardProps> = ({
         >
           {username}
         </Typography>
-        <StyledImag src={avatar} alt="userImage" />
+        {avatar ? (
+          <StyledImag src={avatar} alt="userImage" />
+        ) : (
+          <Avatargit >{username[0]}</Avatargit>
+        )}
       </StyledUserCart>
     </BorderBox>
   );
