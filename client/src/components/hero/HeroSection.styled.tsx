@@ -48,7 +48,7 @@ export const Wrapper = styled(Box)<Props>(({ imageUrl }) => ({
   backgroundPosition: 'center',
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
-  transition: 'all 0.3s linear',
+  transition: 'all 0.5s linear',
 
   '&: hover': {
     width: '280%',
