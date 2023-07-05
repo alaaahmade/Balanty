@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
-import { User } from '../models';
+import { Gallery, Player, Stadium, User } from '../models';
 import { CustomError } from '../utils';
 import { generateToken } from '../utils/jwt/generateToken';
-import { UserData } from '../interfaces/auth';
+import { UserData, newStadium, newUser } from '../interfaces/auth';
 import { signupSchema, loginSchema } from '../validations';
 import { userLoginAttrs } from '../interfaces/auth';
 
@@ -29,7 +29,19 @@ const signupService = async (
     role,
   });
 
-  const token = await generateToken({ username, email, phone, role });
+  const token = await generateToken({
+    username,
+    email,
+    phone,
+    role,
+    id: (newUser as newUser).id,
+  });
+  if (role === 'stadium') {
+    const stadium = await Stadium.create({ UserId: (newUser as newUser).id });
+    await Gallery.create({ StadiumId: (stadium as newStadium).id });
+  } else {
+    await Player.create({ UserId: (newUser as newUser).id });
+  }
 
   return { newUser, token };
 };
