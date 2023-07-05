@@ -86,8 +86,31 @@ interface IMatchMessage {
   message: string;
   updatedAt: string;
   createdAt: string;
+  User: {
+    email: string;
+    id: number;
+    phone: string;
+    role: string;
+    username: string;
+    updatedAt: string;
+    createdAt: string;
+    Player?: {
+      UserId: number;
+      avatar: string;
+      age: number;
+      position: string;
+      cover: string;
+      bio: string;
+    } | null;
+    Stadium?: {
+      user_id: number;
+      address: string;
+      description: string;
+      price: number;
+      ground: string;
+    } | null;
+  };
 }
-
 export interface IMatchDataProps {
   status: number;
   data: {
