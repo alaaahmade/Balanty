@@ -31,6 +31,7 @@ const ImageSlider: FC<StadiumProfileProps> = ({
   editGallery,
   deleteDialog,
   setDeleteDialog,
+  EditAble,
 }): ReactElement => {
   const [Active, setActive] = useState(0);
   const [imageHover, setImageHover] = useState(false);
@@ -121,7 +122,7 @@ const ImageSlider: FC<StadiumProfileProps> = ({
                   onMouseEnter={() => setImageHover(true)}
                   onMouseLeave={() => setImageHover(false)}
                 >
-                  {imageHover && (
+                  {EditAble && imageHover && (
                     <>
                       <EditGalleryButton
                         onClick={() => handleAddImage(image.id)}

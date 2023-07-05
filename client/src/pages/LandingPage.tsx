@@ -9,22 +9,25 @@ import {
   Contact,
 } from '../components';
 import Footer from '../components/footer/footer';
+import { RedirectProvider } from '../context/RedirectContext';
 
 const LandingPage: FC = (): ReactElement => {
   return (
-    <Box
-      sx={{
-        mt: '5%',
-      }}
-    >
-      <Header />
-      <HeroSection />
-      <Definition />
-      <Features />
-      <BestStadiums />
-      <Contact />
-      <Footer />
-    </Box>
+    <RedirectProvider>
+      <Box
+        sx={{
+          mt: '5%',
+        }}
+      >
+        <Header />
+        <HeroSection />
+        <Definition />
+        <Features />
+        <BestStadiums />
+        <Contact />
+        <Footer />
+      </Box>
+    </RedirectProvider>
   );
 };
 
