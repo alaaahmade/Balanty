@@ -18,6 +18,7 @@ import LinkWrap from './Link';
 import { loginSchema } from '../../validation';
 import { loginProps, AuthContextData } from '../../interfaces';
 import { AuthContext } from '../../context';
+import ErrorAlert from '../ErrorAlert';
 
 const LoginWrapper: FC = (): ReactElement => {
   const {
@@ -111,22 +112,7 @@ const LoginWrapper: FC = (): ReactElement => {
           </SignButton>
         </Box>
       </Form>
-      {errorMessage && (
-        <Stack
-          sx={{
-            width: '45%',
-            position: 'absolute',
-            right: '2rem',
-            bottom: '2rem',
-            zIndex: '1000',
-          }}
-          spacing={2}
-        >
-          <Alert severity="error">
-            {errorMessage} — <strong>تفحصه!</strong>
-          </Alert>
-        </Stack>
-      )}
+      {errorMessage && <ErrorAlert errorMessage={errorMessage} />}
     </Wrapper>
   );
 };
