@@ -3,6 +3,7 @@ import {
   getPlayerService,
   getPlayersService,
   playerMatchesService,
+  playerAvatarService,
   updatePlayerService,
 } from '../services/player';
 
@@ -41,6 +42,18 @@ const playerMatches: RequestHandler = async (
   res.status(response?.status).json(response);
 };
 
+const playerAvatar: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const { id } = req.params;
+  const response = (await playerAvatarService(+id)) as {
+    status: number;
+    data: string;
+  };
+  res.status(response.status).json(response);
+};
+
 const getPlayers: RequestHandler = async (
   req: Request,
   res: Response,
@@ -52,4 +65,4 @@ const getPlayers: RequestHandler = async (
   res.status(response.status).json(response);
 };
 
-export { getPlayer, updatePlayer, playerMatches, getPlayers };
+export { getPlayer, updatePlayer, playerMatches, getPlayers, playerAvatar };

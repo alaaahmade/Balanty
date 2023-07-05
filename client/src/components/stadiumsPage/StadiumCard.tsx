@@ -25,7 +25,7 @@ const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
   const navigate = useNavigate();
 
   const averageRating =
-    StadiumsReviews.reduce((sum, review) => sum + review.value, 0) /
+    StadiumsReviews.reduce((sum, review) => sum + +review.value, 0) /
     StadiumsReviews.length;
 
   const handleGoToProfile = () => {

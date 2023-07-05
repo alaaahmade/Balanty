@@ -26,7 +26,7 @@ const Stadium: FC<Props> = ({
   description,
 }): ReactElement => {
   const averageRating =
-    rate.reduce((sum, review) => sum + review.value, 0) / rate.length;
+    rate.reduce((sum, review) => sum + +review.value, 0) / rate.length;
   return (
     <Card
       sx={{
