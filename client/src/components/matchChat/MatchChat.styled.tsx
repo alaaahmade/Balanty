@@ -108,3 +108,18 @@ export const CustomizeLink = styled(Link)({
     textDecoration: 'underline',
   },
 });
+
+interface Props {
+  isReceived: boolean;
+}
+export const MessageBox = styled(Box)<Props>(({ isReceived }) => ({
+  textAlign: isReceived ? 'left' : 'right',
+  direction: isReceived ? 'ltr' : 'rtl',
+  alignSelf: isReceived ? 'left' : 'right',
+  marginBottom: '4px',
+  padding: '5px 10px',
+  width: 'fit-content',
+  maxWidth: '300px',
+  wordWrap: 'break-word',
+  borderRadius: '20px',
+}));
