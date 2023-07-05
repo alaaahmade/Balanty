@@ -58,7 +58,7 @@ const BioSection = ({
   };
 
   const averageRating =
-    ratingArray.reduce((sum, review) => sum + review.value, 0) /
+    ratingArray.reduce((sum, review) => sum + +review.value, 0) /
     ratingArray.length;
 
   const handleUpdate = async () => {
@@ -104,7 +104,7 @@ const BioSection = ({
   const addNewReview = async (rate: number) => {
     try {
       await axios.post(`/api/v1/review/${id}`, {
-        value: rate,
+        value: rate.toString(),
       });
       setNewRating(rate);
     } catch (error) {
@@ -115,7 +115,7 @@ const BioSection = ({
   const getPlayerReview = async () => {
     try {
       const { data } = await axios.get(`/api/v1/review/player/${id}`);
-      setPlayerRating(data.data.value || 0);
+      setPlayerRating(data.data ? data.data.value : 0);
     } catch (error) {
       navigate('/serverError');
     }
@@ -273,7 +273,11 @@ const BioSection = ({
           </FlexBox>
         </FlexBox>
         {!EditAble && (
-          <Box>
+          <FlexBox
+            sx={{
+              gap: '10px',
+            }}
+          >
             <Rating
               name="half-rating"
               value={+newRating || +playerRating}
@@ -285,7 +289,8 @@ const BioSection = ({
                 transform: 'rotateY(180deg)',
               }}
             />
-          </Box>
+            : قيم الموقع
+          </FlexBox>
         )}
         {editMode ? (
           <Box
