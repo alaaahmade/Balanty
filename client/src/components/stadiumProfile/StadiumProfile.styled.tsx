@@ -101,6 +101,7 @@ export const EditInputs = styled(TextField)({
     color: '#11508fa3',
     textAlign: 'right',
     paddingRight: '10px',
+    padding: '0 10px 0 0',
   },
   width: '90%',
   padding: 0,
