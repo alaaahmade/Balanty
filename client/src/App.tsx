@@ -23,12 +23,10 @@ const router = createBrowserRouter([
     path: '/',
     children: [
       { index: true, element: <LandingPage /> },
-      { path: '/match/:matchId', element: <MatchRoomPage /> },
       { path: '/player/login', element: <LoginWrapper /> },
       { path: '/stadium/login', element: <LoginWrapper /> },
       { path: '/player/signup', element: <SignupWrapper /> },
       { path: '/stadium/signup', element: <SignupWrapper /> },
-      { path: '/profile/player/:id', element: <PlayerProfile /> },
     ],
   },
   {
@@ -39,12 +37,16 @@ const router = createBrowserRouter([
         path: 'stadiums/',
         element: <StadiumsPage />,
       },
+      { path: 'match/:matchId', element: <MatchRoomPage /> },
     ],
   },
   {
     path: '/profile',
     element: <RootLayout />,
-    children: [{ path: 'stadium/:id', element: <StadiumProfile /> }],
+    children: [
+      { path: 'stadium/:id', element: <StadiumProfile /> },
+      { path: 'player/:id', element: <PlayerProfile /> },
+    ],
   },
   { path: '*', element: <h1>error</h1> },
 ]);

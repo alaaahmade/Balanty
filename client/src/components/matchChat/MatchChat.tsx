@@ -32,7 +32,7 @@ import ErrorAlert from '../ErrorAlert';
 
 const MatchChat = () => {
   const { pathname } = useLocation();
-  const matchId = Number(pathname.split('/')[2]);
+  const matchId = Number(pathname.split('/')[3]);
 
   const [matchData, setMatchData] = useState<IMatchDataProps>({
     status: 0,
@@ -92,7 +92,7 @@ const MatchChat = () => {
           const axiosError = error as AxiosError<CustomErrorResponse>;
           if (axiosError.response) {
             const errorResponse = axiosError.response.data.data;
-            if (errorResponse.status === 500) {
+            if (errorResponse?.status === 500) {
               navigate('/servererror');
             }
             setErrorMessage(errorResponse?.message);
@@ -122,7 +122,7 @@ const MatchChat = () => {
             const axiosError = error as AxiosError<CustomErrorResponse>;
             if (axiosError.response) {
               const errorResponse = axiosError.response.data.data;
-              if (errorResponse.status === 500) {
+              if (errorResponse?.status === 500) {
                 navigate('/servererror');
               }
               setErrorMessage(errorResponse?.message);
@@ -205,7 +205,6 @@ const MatchChat = () => {
                 key={message.id}
                 id={message.id}
                 message={message.message}
-                // time={message.createdAt}
                 senderAvatar={
                   message.UserId !== user?.id &&
                   message.UserId !== arr[i - 1]?.UserId
