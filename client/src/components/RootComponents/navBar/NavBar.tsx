@@ -19,7 +19,8 @@ const NavBar = (): ReactElement => {
           style={{
             color: '#3BB64B',
             fontWeight: 'bold',
-            fontSize: '30px',
+            fontSize: '28px',
+            marginBottom: '1 rem',
           }}
         />
       </StyledLabel>
