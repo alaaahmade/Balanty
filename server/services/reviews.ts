@@ -29,8 +29,7 @@ export const getReviewService = async (
 export const addReviewService = async (
   req: Request,
 ): Promise<{ status: number; data: string | object }> => {
-  // const { UserId } = req.user; this id will comming from checkAuth middillware
-  const UserId = 4; //and this will removed
+  const UserId = req.user?.id;
   const { stadiumId } = req.params;
   const { body } = req;
 
