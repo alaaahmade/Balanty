@@ -1,16 +1,14 @@
 import React, { Key, Dispatch, SetStateAction } from 'react';
 import { Box } from '@mui/system';
-import { Avatar, Typography } from '@mui/material';
+import { Avatar } from '@mui/material';
 import MessageOptions from './MessageOptions';
-import { CustomizeLink } from './MatchChat.styled';
+import { CustomizeLink, MessageBox } from './MatchChat.styled';
 
 interface Props {
   id: Key | null | undefined;
   message: string;
-  // time: string;
   senderName: string | number;
-  // eslint-disable-next-line react/require-default-props
-  senderAvatar?: string | null;
+  senderAvatar: string | null;
   isReceived: boolean;
   setIsDeleted: Dispatch<SetStateAction<object>>;
   role: string | undefined;
@@ -19,7 +17,6 @@ interface Props {
 const Message = ({
   id,
   message,
-  // time,
   senderAvatar,
   senderName,
   isReceived,
@@ -59,23 +56,15 @@ const Message = ({
           {!senderAvatar && isReceived && (
             <div style={{ width: '40px', height: '40px' }} />
           )}
-          <Box
-            sx={{
-              background: isReceived ? '#F2FCF5' : '#2CB674',
+          <MessageBox
+            isReceived
+            style={{
+              backgroundColor: isReceived ? '#F2FCF5' : '#2CB674',
               color: isReceived ? '#000' : '#fff',
-              textAlign: isReceived ? 'left' : 'right',
-              direction: isReceived ? 'ltr' : 'rtl',
-              alignSelf: isReceived ? 'left' : 'right',
-              marginBottom: '4px',
-              padding: '5px 10px',
-              width: 'fit-content',
-              maxWidth: '300px',
-              wordWrap: 'break-word',
-              borderRadius: '20px',
             }}
           >
             {message}
-          </Box>
+          </MessageBox>
         </Box>
       </section>
     </Box>
