@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 import { CustomRequest, IServiceResponse } from '../interfaces';
 import { Match, Stadium, User } from '../models';
-import matchSchema from '../validations';
+import { matchSchema } from '../validations';
 import { matchesInterface } from '../interfaces/matchInterfaces';
 
 export const createMatchService = async (
@@ -22,9 +22,11 @@ export const createMatchService = async (
     };
   }
   const data = await matchSchema.validateAsync(body);
-  const ExisteStadium = await Stadium.findOne({ where: { UserId: StadiumId } });
+  const isStadiumExist = await Stadium.findOne({
+    where: { UserId: StadiumId },
+  });
 
-  if (!ExisteStadium) {
+  if (!isStadiumExist) {
     return {
       status: 401,
       data: 'هذا الملعب غير متاح',
@@ -42,7 +44,7 @@ export const createMatchService = async (
           ],
         },
       ],
-      UserId: StadiumId,
+      stadiumId: StadiumId,
     },
   });
 
@@ -50,7 +52,7 @@ export const createMatchService = async (
     const DBData = await Match.create({
       ...data,
       owner_id,
-      UserId: StadiumId,
+      stadiumId: StadiumId,
     });
     return {
       status: 201,
@@ -65,11 +67,11 @@ export const createMatchService = async (
 export const getAllMatches = async (): Promise<matchesInterface> => {
   const currentDate = Date.now();
   const currentDateObject = new Date(currentDate);
-  const currentDateFormated = currentDateObject.toISOString();
+  const currentDateFormatted = currentDateObject.toISOString();
 
   const matches = await Match.findAll({
     where: {
-      [Op.or]: [{ startDate: { [Op.gt]: currentDateFormated } }],
+      [Op.or]: [{ startDate: { [Op.gt]: currentDateFormatted } }],
     },
     include: [
       { model: User, as: 'ownerUser' },

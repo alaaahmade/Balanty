@@ -3,7 +3,7 @@ import { sequelize } from '../database';
 
 class Match extends Model {
   declare owner_id: number;
-  declare StadiumId: number;
+  declare stadiumId: number;
   declare title: string;
   declare description: string;
   declare startDate: Date;

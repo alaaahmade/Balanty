@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
+    "buildDB": "cross-env NODE_ENV=development ts-node server/database/config/build.ts",
     "buildDB-dev": " cross-env NODE_ENV=development BUILD_DB=true ts-node server/database/config/build.ts",
     "buildDB-production": " cross-env NODE_ENV=production BUILD_DB=true ts-node server/database/config/build.ts",
     "buildDB-test": " cross-env NODE_ENV=test BUILD_DB=true ts-node server/database/config/build.ts",
@@ -47,6 +48,7 @@
     "typescript": "^4.0.2"
   },
   "dependencies": {
+    "@cloudinary/url-gen": "^1.10.1",
     "@fullcalendar/react": "^6.1.8",
     "@types/jest": "^29.1.2",
     "@types/supertest": "^2.0.12",

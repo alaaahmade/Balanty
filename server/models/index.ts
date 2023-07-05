@@ -28,6 +28,7 @@ User.belongsToMany(Match, {
   as: 'Matches',
   foreignKey: 'userId',
 });
+
 Match.belongsToMany(User, {
   through: 'MatchPlayer',
   as: 'Players',
@@ -43,7 +44,7 @@ Message.belongsTo(User);
 
 // Match with Message
 Match.hasMany(Message, {
-  as: 'matchMessage',
+  as: 'MatchMessages',
 });
 Message.belongsTo(Match);
 

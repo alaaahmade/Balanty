@@ -1,98 +1,165 @@
-import 'react-slideshow-image/dist/styles.css';
+import { FC, ReactElement, useEffect, useState } from 'react';
 import { Slide } from 'react-slideshow-image';
-import { Box } from '@mui/system';
+
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useState } from 'react';
+import { Box } from '@mui/material';
+
 import {
   ArrowStyle,
+  DeleteButton,
+  EditGalleryButton,
   SliderBox,
   SliderImage,
   ThumbnailBox,
   ThumbnailImage,
 } from './StadiumProfile.styled';
 
-// This set we will get from backend response
-const images = [
-  {
-    url: 'https://uploads-ssl.webflow.com/624377e20c9e225e2e55e2ed/63da5edbf5049c7b148898d4_soccer-players-action-professional-stadium.jpg',
-    id: 0,
-  },
-  {
-    url: 'https://images.livemint.com/img/2022/12/06/1600x900/Stadium_974_1670308763958_1670308770302_1670308770302.jpg',
-    id: 1,
-  },
-  {
-    url: 'https://populous.com/wp-content/uploads/2018/01/Populous_Tottenham-Hotspur-Stadium_Credit-Edward-Hill_3-1504x846.jpg',
-    id: 2,
-  },
-  {
-    url: 'https://hips.hearstapps.com/hmg-prod/images/tottenham-stadium-plans-3-1531502457.jpg?crop=1xw:0.7995594713656388xh;center,top&resize=1200:*',
-    id: 3,
-  },
-];
+import {
+  StadiumGallery,
+  StadiumProfileProps,
+} from '../../interfaces/StadiumProfile';
 
-const ImageSlider = () => {
+import EditGalleryPopup from './EditGallaryPopup';
+import DeleteDialog from './DeleteDialog';
+
+import 'react-slideshow-image/dist/styles.css';
+
+const ImageSlider: FC<StadiumProfileProps> = ({
+  gallery,
+  setEditGallery,
+  editGallery,
+  deleteDialog,
+  setDeleteDialog,
+}): ReactElement => {
   const [Active, setActive] = useState(0);
+  const [imageHover, setImageHover] = useState(false);
+  const [ImageId, setImageId] = useState(0);
+  const [StadiumId, setStadiumId] = useState<number>(0);
+  const [loading, setLoading] = useState(false);
+
+  const deleteDialogOpen = (id: number) => {
+    setImageId(id);
+    setDeleteDialog(true);
+  };
+
+  const deleteDialogClose = () => {
+    setDeleteDialog(false);
+  };
 
   const handleSlideChange = (currentSlide: number, e: number) => {
-    const { id } = images[e];
+    const { id } = gallery[e];
     setActive(id);
   };
 
+  const handleAddImage = (id: number) => {
+    setImageId(id);
+    setEditGallery(true);
+  };
+
+  useEffect(() => {
+    setStadiumId(gallery[0].StadiumId);
+  }, [gallery]);
+
   return (
-    <SliderBox>
-      <Slide
-        prevArrow={
-          <ArrowStyle
-            onAbort={() => {
-              setActive(0);
-            }}
-            style={{ left: '20px' }}
-          >
-            <ArrowBackIosIcon />
-          </ArrowStyle>
-        }
-        nextArrow={
-          <ArrowStyle style={{ right: '20px' }}>
-            <ArrowForwardIosIcon />
-          </ArrowStyle>
-        }
-        onChange={handleSlideChange}
-      >
-        {images.map(image => {
-          return (
-            <Box
-              key={image.id}
-              sx={{
-                width: '100%',
-                height: '85vh',
-              }}
-            >
-              <SliderImage
-                sx={{
-                  backgroundImage: `url(${image.url})`,
-                }}
-              />
-            </Box>
-          );
-        })}
-      </Slide>
-      <ThumbnailBox
+    <Box>
+      <DeleteDialog
+        deleteDialog={deleteDialog}
+        handleClose={deleteDialogClose}
+        ImageId={ImageId}
+        StadiumId={StadiumId}
+        loading={loading}
+        setLoading={setLoading}
+      />
+      <EditGalleryPopup
+        editGallery={editGallery}
+        setEditGallery={setEditGallery}
+        ImageId={ImageId}
+        StadiumId={StadiumId}
+        gallery={gallery}
+        loading={loading}
+        setLoading={setLoading}
+      />
+      <SliderBox
         sx={{
-          mt: '5px',
+          ml: '20px',
         }}
       >
-        {images.map(e => (
-          <ThumbnailImage
-            sx={{
-              backgroundImage: `url(${e.url})`,
-              scale: e.id === Active ? ' 1.2' : '1',
-            }}
-          />
-        ))}
-      </ThumbnailBox>
-    </SliderBox>
+        <Slide
+          prevArrow={
+            <ArrowStyle
+              onAbort={() => {
+                setActive(0);
+              }}
+              style={{ left: '20px' }}
+            >
+              <ArrowBackIosIcon />
+            </ArrowStyle>
+          }
+          nextArrow={
+            <ArrowStyle style={{ right: '20px' }}>
+              <ArrowForwardIosIcon />
+            </ArrowStyle>
+          }
+          onChange={handleSlideChange}
+        >
+          {gallery.map((image: StadiumGallery) => {
+            return (
+              <Box
+                key={image.id}
+                sx={{
+                  width: '100%',
+                  height: '75vh',
+                  mt: '6%',
+                }}
+              >
+                <SliderImage
+                  sx={{
+                    position: 'relative',
+                    backgroundImage: `url(${image.image})`,
+                  }}
+                  onMouseEnter={() => setImageHover(true)}
+                  onMouseLeave={() => setImageHover(false)}
+                >
+                  {imageHover && (
+                    <>
+                      <EditGalleryButton
+                        onClick={() => handleAddImage(image.id)}
+                      >
+                        تعديل
+                      </EditGalleryButton>
+
+                      {gallery.length > 1 && (
+                        <DeleteButton
+                          onClick={() => deleteDialogOpen(image.id)}
+                        />
+                      )}
+                    </>
+                  )}
+                </SliderImage>
+              </Box>
+            );
+          })}
+        </Slide>
+        <ThumbnailBox
+          sx={{
+            mt: '5px',
+            p: '0 1%',
+          }}
+        >
+          {gallery.map((e: StadiumGallery) => (
+            <ThumbnailImage
+              key={e.id}
+              sx={{
+                p: '0 20px',
+                backgroundImage: `url(${e.image})`,
+                scale: e.id === Active ? ' 1.2' : '1',
+              }}
+            />
+          ))}
+        </ThumbnailBox>
+      </SliderBox>
+    </Box>
   );
 };
 

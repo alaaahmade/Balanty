@@ -1,5 +1,5 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ReactElement } from 'react';
+<<<<<<< HEAD
 // import { ThemeProvider } from '@emotion/react';
 import RootLayout from './layouts/RootLayout';
 import { LandingPage } from './pages';
@@ -8,16 +8,34 @@ import { open, useCustomOpen } from './context';
 import { StatsContextProvider } from './context/CreateMatch';
 import StadiumProfile from './pages/StadiumProfile';
 import MatchesPage from './components/matchesPage/Match';
+=======
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from '@emotion/react';
+import RootLayout from './layouts/RootLayout';
+import { LandingPage } from './pages';
+import LoginWrapper from './components/auth/LoginWrapper';
+import SignupWrapper from './components/auth/SignupWrapper';
+import { AuthProvider } from './context/AuthContext';
+import LightTheme from './themes';
+import {
+  open,
+  useCustomOpen,
+  UpdateGalleryContextProvider,
+  StatsContextProvider,
+} from './context';
+import StadiumProfile from './pages/StadiumProfile';
+import StadiumsPage from './pages/Stadiums';
+>>>>>>> 97fd6654736af41a8c19b4af896b03def098141e
 
 const router = createBrowserRouter([
   {
     path: '/',
     children: [
       { index: true, element: <LandingPage /> },
-      { path: '/player/login', element: <h1>player login</h1> },
-      { path: '/stadium/login', element: <h1>stadium login</h1> },
-      { path: '/player/signup', element: <h1>player signup</h1> },
-      { path: '/stadium/signup', element: <h1>stadium signup</h1> },
+      { path: '/player/login', element: <LoginWrapper /> },
+      { path: '/stadium/login', element: <LoginWrapper /> },
+      { path: '/player/signup', element: <SignupWrapper /> },
+      { path: '/stadium/signup', element: <SignupWrapper /> },
     ],
   },
   {
@@ -25,8 +43,13 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
+<<<<<<< HEAD
         path: 'matches',
         element: <MatchesPage />,
+=======
+        path: 'stadiums',
+        element: <StadiumsPage />,
+>>>>>>> 97fd6654736af41a8c19b4af896b03def098141e
       },
     ],
   },
@@ -34,17 +57,31 @@ const router = createBrowserRouter([
   {
     path: '/profile',
     element: <RootLayout />,
-    children: [{ path: 'stadium', element: <StadiumProfile /> }],
+    children: [{ path: 'stadium/:id', element: <StadiumProfile /> }],
   },
   { path: '*', element: <h1>error</h1> },
 ]);
 const App = (): ReactElement => {
   return (
+<<<<<<< HEAD
     <open.Provider value={useCustomOpen()}>
       <StatsContextProvider>
         <RouterProvider router={router} />
       </StatsContextProvider>
     </open.Provider>
+=======
+    <ThemeProvider theme={LightTheme}>
+      <AuthProvider>
+        <open.Provider value={useCustomOpen()}>
+          <StatsContextProvider>
+            <UpdateGalleryContextProvider>
+              <RouterProvider router={router} />
+            </UpdateGalleryContextProvider>
+          </StatsContextProvider>
+        </open.Provider>
+      </AuthProvider>
+    </ThemeProvider>
+>>>>>>> 97fd6654736af41a8c19b4af896b03def098141e
   );
 };
 

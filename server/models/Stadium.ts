@@ -11,10 +11,16 @@ class Stadium extends Model {
 
 Stadium.init(
   {
-    address: { type: DataTypes.STRING },
-    description: { type: DataTypes.STRING },
-    price: { type: DataTypes.INTEGER },
-    ground: { type: DataTypes.STRING(50) },
+    address: { type: DataTypes.STRING, defaultValue: 'لم يتم ادخال عنوان' },
+    description: {
+      type: DataTypes.STRING,
+      defaultValue: 'لم يتم ادخال وصف',
+    },
+    price: { type: DataTypes.INTEGER, defaultValue: 0 },
+    ground: {
+      type: DataTypes.STRING(50),
+      defaultValue: 'يمكنك اضافة نوع الارضية ',
+    },
   },
   {
     sequelize,
