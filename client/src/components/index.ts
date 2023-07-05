@@ -56,3 +56,4 @@ export {
 
 export { default as StadiumCard } from './stadiumsPage/StadiumCard';
 export { StadiumPageBox } from './stadiumsPage/StadiumPage.styled';
+export { default as SkeletonLoader } from './stadiumsPage/Loader';

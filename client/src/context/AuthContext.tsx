@@ -4,15 +4,19 @@ import React, {
   useCallback,
   useState,
   useMemo,
-  ReactNode,
 } from 'react';
 
 import axios, { AxiosError } from 'axios';
+
+// eslint-disable-next-line camelcase
+import jwt_decode from 'jwt-decode';
+
 import {
   AuthContextData,
   User,
   signupProps,
   CustomErrorResponse,
+  ChildrenProps,
 } from '../interfaces';
 
 export const AuthContext = createContext<AuthContextData>({
@@ -29,12 +33,11 @@ export const AuthContext = createContext<AuthContextData>({
   errorMessage: '',
 });
 
-interface ChildrenProps {
-  children: ReactNode;
-}
-
 export const AuthProvider: FC<ChildrenProps> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const token = String(document.cookie.slice(6)) || null;
+  const decodedToken = token && jwt_decode(token);
+
+  const [user, setUser] = useState<User | null>(decodedToken as User);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   function isAxiosError(error: unknown): error is AxiosError {
@@ -50,7 +53,6 @@ export const AuthProvider: FC<ChildrenProps> = ({ children }) => {
 
       setUser(response.data.data.user);
       localStorage.setItem('user', JSON.stringify(response.data.data.user));
-      // navigate('/home');
     } catch (error) {
       if (isAxiosError(error)) {
         const axiosError = error as AxiosError<CustomErrorResponse>;

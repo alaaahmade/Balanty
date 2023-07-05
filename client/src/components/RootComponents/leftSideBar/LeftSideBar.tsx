@@ -1,7 +1,8 @@
+import { FC, ReactElement, useContext } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { BsPersonFillAdd, BsFillFilePersonFill } from 'react-icons/bs';
 import { MdStadium } from 'react-icons/md';
-import { FC, ReactElement } from 'react';
+
 import { Box } from '@mui/material';
 import UserCart from './UserCart';
 import SideBarLink from './SideBarLink';
@@ -11,9 +12,12 @@ import {
   StyledButton,
   StyledTypography,
 } from '../../index';
-import { LeftSideBarInterface } from '../../../interfaces';
+import { LeftSideBarInterface, User } from '../../../interfaces';
+import { AuthContext } from '../../../context';
 
 const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
+  const { user } = useContext(AuthContext);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -26,7 +30,11 @@ const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
         boxShadow: '-1px 4px 6px 1px rgba(0, 0, 0, 0.15)',
       }}
     >
-      <UserCart />
+      <UserCart
+        username={(user as User).username}
+        userId={(user as User).id}
+        role={(user as User).role}
+      />
 
       <Box
         sx={{
