@@ -15,6 +15,8 @@ import {
 import StadiumProfile from './pages/StadiumProfile';
 import StadiumsPage from './pages/Stadiums';
 import { AuthProvider } from './context/AuthContext';
+import NotFoundPage from './pages/NotFound';
+import InternalServerErrorPage from './pages/ServerError';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +34,7 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
-        path: 'stadiums/',
+        path: 'stadiums',
         element: <StadiumsPage />,
       },
     ],
@@ -42,7 +44,12 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [{ path: 'stadium/:id', element: <StadiumProfile /> }],
   },
-  { path: '*', element: <h1>error</h1> },
+  {
+    path: '/serverError',
+    element: <InternalServerErrorPage />,
+  },
+
+  { path: '*', element: <NotFoundPage /> },
 ]);
 const App = (): ReactElement => {
   return (
