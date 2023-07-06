@@ -332,3 +332,20 @@ export const getBestStadiumsService = async (): Promise<{
     data: topThreeStadiums,
   };
 };
+export const searchStadiumsService = async (req: Request) => {
+  const { search } = req.query;
+
+  const searchResult = await User.findOne({
+    where: {
+      username: {
+        [Op.iLike]: String(search),
+      },
+      role: 'STADIUM',
+    },
+  });
+
+  return {
+    status: 200,
+    data: searchResult,
+  };
+};
