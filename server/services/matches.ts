@@ -7,8 +7,8 @@ import { matchesInterface } from '../interfaces/matchInterfaces';
 export const createMatchService = async (
   req: CustomRequest,
 ): Promise<IServiceResponse> => {
-  const { body, userData } = req;
-  const owner_id = userData?.owner_id;
+  const { body, user } = req;
+  const ownerId = user?.id;
   const { StadiumId, startDate, endDate } = body;
   const newStartTime = startDate;
   const newEndTime = endDate;
@@ -51,7 +51,7 @@ export const createMatchService = async (
   if (!Exist) {
     const DBData = await Match.create({
       ...data,
-      owner_id,
+      ownerId,
       stadiumId: StadiumId,
     });
     return {
