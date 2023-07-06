@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
+import * as io from 'socket.io-client';
 import RootLayout from './layouts/RootLayout';
 import { LandingPage } from './pages';
 import MatchRoomPage from './pages/MatchRoomPage';
@@ -18,6 +19,8 @@ import StadiumsPage from './pages/Stadiums';
 import PlayerProfile from './pages/PlayerProfile';
 import MatchesPage from './components/matchesPage/Match';
 import { AuthProvider } from './context/AuthContext';
+
+const socket = io.connect('http://localhost:8080');
 
 const router = createBrowserRouter([
   {
@@ -38,11 +41,11 @@ const router = createBrowserRouter([
         path: 'stadiums/',
         element: <StadiumsPage />,
       },
-      { path: 'match/:matchId', element: <MatchRoomPage /> },
       {
         path: 'matches',
         element: <MatchesPage />,
       },
+      { path: 'match/:matchId', element: <MatchRoomPage socket={socket} /> },
     ],
   },
 

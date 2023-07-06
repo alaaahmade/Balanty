@@ -5,6 +5,8 @@ import React, {
   KeyboardEvent,
   useRef,
   useContext,
+  FC,
+  ReactElement,
 } from 'react';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
@@ -17,20 +19,27 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
+import { Socket } from 'socket.io-client';
 import {
   AddMessageBar,
   IconBackground,
   MessageInput,
+  MessagesWrapper,
   Wrapper,
 } from './MatchChat.styled';
 import Message from './Message';
-import { CustomErrorResponse, IMatchDataProps } from '../../interfaces';
+import {
+  CustomErrorResponse,
+  IMatchDataProps,
+  IMatchMessage,
+} from '../../interfaces';
 
 import ChatImage from '../../assets/chat.svg';
 import { AuthContext } from '../../context';
 import ErrorAlert from '../ErrorAlert';
+import { IMessageData } from '../../interfaces/matchInterface';
 
-const MatchChat = () => {
+const MatchChat: FC<{ socket: Socket }> = ({ socket }): ReactElement => {
   const { pathname } = useLocation();
   const matchId = Number(pathname.split('/')[3]);
 
@@ -53,6 +62,8 @@ const MatchChat = () => {
     },
   });
 
+  const [matchMessages, setMatchMessages] = useState<IMatchMessage[]>([]);
+
   const [messageInput, setMessageInput] = useState<string>('');
   const [newMessage, setNewMessage] = useState<object | null>(null);
   const [isIconPickerShown, setIsIconPickerShown] = useState<boolean>(false);
@@ -66,8 +77,6 @@ const MatchChat = () => {
 
   const { user } = useContext(AuthContext);
 
-  const matchMessages = matchData?.data?.match?.MatchMessages;
-
   const handleScrollChat = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTo({
@@ -80,41 +89,56 @@ const MatchChat = () => {
   function isAxiosError(error: unknown): error is AxiosError {
     return (error as AxiosError).isAxiosError !== undefined;
   }
+  useEffect(() => {
+    socket.on('messageResponse', (newData: IMessageData) => {
+      setMatchMessages([
+        ...matchMessages,
+        newData.data.newMessage,
+      ] as IMatchMessage[]);
+      setNewMessage(newData.data.newMessage);
+      handleScrollChat();
+    });
+    console.log(newMessage, 'newMessage');
+    console.log(user, 'my user');
+  }, [socket, matchMessages]);
+
+  const getMessageRequest = async () => {
+    try {
+      const response = await axios.get(`/api/v1/message/match/${matchId}`);
+      setMatchData(response.data);
+      setMatchMessages(response.data?.data?.match?.MatchMessages);
+    } catch (error) {
+      if (isAxiosError(error)) {
+        const axiosError = error as AxiosError<CustomErrorResponse>;
+        if (axiosError.response) {
+          const errorResponse = axiosError.response.data.data;
+          if (errorResponse?.status === 500) {
+            navigate('/servererror');
+          }
+          setErrorMessage(errorResponse?.message);
+        }
+      } else {
+        setErrorMessage((error as Error).message);
+      }
+    }
+  };
 
   useEffect(() => {
     handleScrollChat();
-    (async () => {
-      try {
-        const response = await axios.get(`/api/v1/message/match/${matchId}`);
-        setMatchData(response.data);
-      } catch (error) {
-        if (isAxiosError(error)) {
-          const axiosError = error as AxiosError<CustomErrorResponse>;
-          if (axiosError.response) {
-            const errorResponse = axiosError.response.data.data;
-            if (errorResponse?.status === 500) {
-              navigate('/servererror');
-            }
-            setErrorMessage(errorResponse?.message);
-          }
-        } else {
-          setErrorMessage((error as Error).message);
-        }
-      }
-    })();
-  }, [newMessage, isDeleted]);
+    getMessageRequest();
+  }, [isDeleted, socket]);
 
   const addMessage = () => {
     if (messageInput.trim()) {
       (async () => {
         try {
-          const response = await axios.post(`/api/v1/message`, {
+          socket.emit('message', {
             senderId: user?.id,
             matchId: matchData?.data?.match?.id,
             message: messageInput.trim(),
           });
+
           setMessageInput('');
-          setNewMessage(response.data);
           setIsIconPickerShown(false);
           handleScrollChat();
         } catch (error) {
@@ -183,7 +207,7 @@ const MatchChat = () => {
         </Typography>
       </Box>
 
-      <Box style={{ flexGrow: '2', marginTop: '0.5rem' }}>
+      <MessagesWrapper ref={scrollContainerRef}>
         {matchMessages?.length > 0 ? (
           matchMessages.map((message, i, arr) => {
             return (
@@ -199,6 +223,7 @@ const MatchChat = () => {
                     : null
                 }
                 senderName={message.User?.username}
+                senderId={message.UserId}
                 isReceived={message.UserId !== user?.id}
                 setIsDeleted={setIsDeleted}
                 role={message.User?.role}
@@ -230,7 +255,7 @@ const MatchChat = () => {
             </Typography>
           </>
         )}
-      </Box>
+      </MessagesWrapper>
       {isIconPickerShown && (
         <Box
           style={{

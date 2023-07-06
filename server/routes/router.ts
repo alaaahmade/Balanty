@@ -13,8 +13,8 @@ router.use('/matches', checkAuth, matchRouter);
 router.use('/user', authRouter);
 router.use('/stadiums', checkAuth, stadiumRouter);
 router.use('/players', playerRouter);
-router.use('/message', chatRouter);
 router.use('/review', checkAuth, reviewRouter);
+router.use('/message', checkAuth, chatRouter);
 
 router.get('/', (req: Request, res: Response): void => {
   res.json({
