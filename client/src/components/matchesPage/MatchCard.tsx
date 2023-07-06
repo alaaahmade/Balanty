@@ -46,13 +46,15 @@ interface MatchCardProps {
 
 const CenteredCard = styled(Card)({
   margin: 'auto',
-  marginTop: '10%',
+  marginTop: '2%',
+  marginBottom: '10px',
   display: 'flex',
   justifyContent: 'center',
+
   width: '50%',
   height: '300px',
   padding: '10px 25px 10px 10px',
-  border: '1px solid grey',
+  border: '1px solid #eee',
 });
 
 const MatchCardContainer = styled(Box)({
@@ -68,7 +70,7 @@ const MatchCardContent = styled(CardContent)({
 
 const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
   return (
-    <Box>
+    <Box sx={{ paddingTop: '40px' }}>
       <CenteredCard>
         <MatchCardContainer sx={{ paddingLeft: '10px' }}>
           <MatchCardContent sx={{ width: '300px' }}>
