@@ -20,7 +20,7 @@ interface Match {
     username: string;
     Stadium: {
       stadiumGallery: {
-        image: any;
+        image: string;
       }[];
     };
   };
@@ -50,7 +50,6 @@ const CenteredCard = styled(Card)({
   marginBottom: '10px',
   display: 'flex',
   justifyContent: 'center',
-
   width: '50%',
   height: '300px',
   padding: '10px 25px 10px 10px',

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import MatchCard from './MatchCard';
 
 interface Match {
@@ -13,7 +14,7 @@ interface Match {
     username: string;
     Stadium: {
       stadiumGallery: {
-        image: any;
+        image: string;
       }[];
     };
   };
@@ -37,16 +38,16 @@ const MatchesPage = (): React.ReactElement => {
   const [matches, setMatches] = useState<Match[]>([]);
   const [error, setError] = useState<string>('');
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     (async () => {
       try {
         const response = await axios.get('/api/v1/matches');
-        console.log(response, 'response');
-
         setMatches(response.data.data);
       } catch (err) {
         setError('Error fetching match data');
-        console.log(err);
+        navigate('/serverError');
       }
     })();
   }, []);
