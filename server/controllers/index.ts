@@ -15,6 +15,10 @@ export {
   getStadiums,
   UpdateStadiumData,
   getBestStadiums,
+  searchStadiums,
+  deleteStadiumImage,
+  UpdateStadiumGallery,
+  AddStadiumImage,
 } from './stadiums';
 
 export {

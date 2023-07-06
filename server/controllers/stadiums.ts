@@ -14,6 +14,7 @@ import {
   UpdateStadiumGalleryService,
   deleteStadiumImageService,
   getBestStadiumsService,
+  searchStadiumsService,
 } from '../services/stadiums';
 
 export const getAllStadiums: RequestHandler = async (
@@ -100,5 +101,13 @@ export const getBestStadiums: RequestHandler = async (
   res: Response,
 ): Promise<void> => {
   const response = await getBestStadiumsService();
+  res.status(response.status).json(response);
+};
+
+export const searchStadiums: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const response = await searchStadiumsService(req);
   res.status(response.status).json(response);
 };
