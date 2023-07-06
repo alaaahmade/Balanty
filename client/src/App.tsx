@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
 import RootLayout from './layouts/RootLayout';
 import { LandingPage } from './pages';
+import MatchRoomPage from './pages/MatchRoomPage';
 import LoginWrapper from './components/auth/LoginWrapper';
 import SignupWrapper from './components/auth/SignupWrapper';
 import LightTheme from './themes';
@@ -14,6 +15,7 @@ import {
 } from './context';
 import StadiumProfile from './pages/StadiumProfile';
 import StadiumsPage from './pages/Stadiums';
+import PlayerProfile from './pages/PlayerProfile';
 import MatchesPage from './components/matchesPage/Match';
 import { AuthProvider } from './context/AuthContext';
 
@@ -36,6 +38,7 @@ const router = createBrowserRouter([
         path: 'stadiums/',
         element: <StadiumsPage />,
       },
+      { path: 'match/:matchId', element: <MatchRoomPage /> },
       {
         path: 'matches',
         element: <MatchesPage />,
@@ -46,7 +49,10 @@ const router = createBrowserRouter([
   {
     path: '/profile',
     element: <RootLayout />,
-    children: [{ path: 'stadium/:id', element: <StadiumProfile /> }],
+    children: [
+      { path: 'stadium/:id', element: <StadiumProfile /> },
+      { path: 'player/:id', element: <PlayerProfile /> },
+    ],
   },
   { path: '*', element: <h1>error</h1> },
 ]);
