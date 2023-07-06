@@ -106,6 +106,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
                   sx={{
                     fontWeight: 'bold',
                     display: 'inline',
+                    color: '#000000',
                   }}
                 >
                   الوقت
@@ -117,6 +118,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
                   sx={{
                     fontWeight: 'bold',
                     display: 'inline',
+                    color: '#000000',
                   }}
                 >
                   :عدد المقاعد
@@ -135,6 +137,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
                   sx={{
                     fontWeight: 'bold',
                     display: 'inline',
+                    color: '#000000',
                   }}
                 >
                   الملعب:
@@ -147,6 +150,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
                   sx={{
                     fontWeight: 'bold',
                     display: 'inline',
+                    color: '#000000',
                   }}
                 />
 
@@ -154,6 +158,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
                   sx={{
                     fontWeight: 'bold',
                     display: 'inline',
+                    color: '#000000',
                   }}
                 >
                   :المسؤول عن اللعبة
@@ -183,6 +188,11 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
                 sx={{
                   width: '65px',
                   height: '30px',
+                  background: '#eee',
+                  borderRadius: '5px',
+                  gap: '10px',
+                  color: '#2CB674',
+                  borderColor: '#2CB674',
                 }}
               >
                 انضام
