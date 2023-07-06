@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const utils_1 = require("../utils");
+const controllers_1 = require("../controllers");
+const reviewRouter = (0, express_1.Router)();
+reviewRouter.get('/:stadiumId', (0, utils_1.errorWrapper)(controllers_1.getReview));
+reviewRouter.get('/player/:stadiumId', (0, utils_1.errorWrapper)(controllers_1.getPlayerReview));
+reviewRouter.post('/:stadiumId', (0, utils_1.errorWrapper)(controllers_1.addReview));
+exports.default = reviewRouter;
