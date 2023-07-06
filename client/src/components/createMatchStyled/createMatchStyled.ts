@@ -14,7 +14,7 @@ export const StyledAutocomplete = styled(Autocomplete)({
     textAlign: 'right',
   },
   '& + .MuiAutocomplete-popper .MuiAutocomplete-option': {
-    backgroundColor: '#D9D9D9',
+    backgroundColor: '#F1FCF5',
   },
 });
 

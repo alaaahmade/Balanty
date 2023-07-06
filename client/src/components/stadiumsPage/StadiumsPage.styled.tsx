@@ -9,7 +9,7 @@ export const StadiumCardBox = styled(Box)({
   borderRadius: '5px',
   alignItems: 'center',
   padding: '10px',
-  backgroundColor: '#d9d9d938',
+  backgroundColor: '#F1FCF5',
 });
 
 export const CardContainer = styled(Box)({

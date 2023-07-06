@@ -15,7 +15,7 @@ const InternalServerErrorPage = () => {
       />
       <ErrorSubtitle variant="h3">خطأ في الخادم الداخلي</ErrorSubtitle>
       <ButtonContainer>
-        <ErrorButton href="#" variant="contained">
+        <ErrorButton href="/" variant="contained">
           العودة إلى الصفحة الرئيسية
         </ErrorButton>
       </ButtonContainer>

@@ -19,7 +19,6 @@ export const StyledButton = styled(Button)({
   height: '35px',
   background: '#2CB674',
   borderRadius: '5px',
-  marginTop: '12px',
   gap: '10px',
   color: '#fff',
   // marginBottom: '30px',

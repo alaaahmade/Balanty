@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
 import RootLayout from './layouts/RootLayout';
 import { LandingPage } from './pages';
+import MatchRoomPage from './pages/MatchRoomPage';
 import LoginWrapper from './components/auth/LoginWrapper';
 import SignupWrapper from './components/auth/SignupWrapper';
 import LightTheme from './themes';
@@ -14,9 +15,12 @@ import {
 } from './context';
 import StadiumProfile from './pages/StadiumProfile';
 import StadiumsPage from './pages/Stadiums';
+import PlayerProfile from './pages/PlayerProfile';
+import MatchesPage from './components/matchesPage/Match';
 import { AuthProvider } from './context/AuthContext';
 import NotFoundPage from './pages/NotFound';
 import InternalServerErrorPage from './pages/ServerError';
+import PlayersPage from './pages/PlayersPage';
 
 const router = createBrowserRouter([
   {
@@ -37,12 +41,25 @@ const router = createBrowserRouter([
         path: 'stadiums',
         element: <StadiumsPage />,
       },
+      {
+        path: 'players/',
+        element: <PlayersPage />,
+      },
+      { path: 'match/:matchId', element: <MatchRoomPage /> },
+      {
+        path: 'matches',
+        element: <MatchesPage />,
+      },
     ],
   },
+
   {
     path: '/profile',
     element: <RootLayout />,
-    children: [{ path: 'stadium/:id', element: <StadiumProfile /> }],
+    children: [
+      { path: 'stadium/:id', element: <StadiumProfile /> },
+      { path: 'player/:id', element: <PlayerProfile /> },
+    ],
   },
   {
     path: '/serverError',

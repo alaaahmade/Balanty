@@ -28,7 +28,7 @@ export const StyledLogo = styled('img')({
 export const StyledSearchInput = styled(Input)({
   width: '40%',
   height: '12px',
-  background: '#D9D9D9',
+  background: '#F2FCF5',
   borderRadius: '5px',
   padding: '18px',
   br: '4px',
@@ -38,7 +38,7 @@ export const StyledSearchInput = styled(Input)({
 });
 
 export const StyledMnu = styled(GiHamburgerMenu)({
-  color: '#D9D9D9',
+  color: '#F2FCF5',
   cursor: 'pointer',
   fontSize: '25px',
   marginRight: '70px',

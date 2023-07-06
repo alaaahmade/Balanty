@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useContext } from 'react';
-import { Alert, Box, Stack } from '@mui/material';
+import { Box } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Control, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -18,6 +18,7 @@ import LinkWrap from './Link';
 import { loginSchema } from '../../validation';
 import { loginProps, AuthContextData } from '../../interfaces';
 import { AuthContext } from '../../context';
+import ErrorAlert from '../ErrorAlert';
 
 const LoginWrapper: FC = (): ReactElement => {
   const {
@@ -111,22 +112,7 @@ const LoginWrapper: FC = (): ReactElement => {
           </SignButton>
         </Box>
       </Form>
-      {errorMessage && (
-        <Stack
-          sx={{
-            width: '45%',
-            position: 'absolute',
-            right: '2rem',
-            bottom: '2rem',
-            zIndex: '1000',
-          }}
-          spacing={2}
-        >
-          <Alert severity="error">
-            {errorMessage} — <strong>تفحصه!</strong>
-          </Alert>
-        </Stack>
-      )}
+      {errorMessage && <ErrorAlert errorMessage={errorMessage} />}
     </Wrapper>
   );
 };
