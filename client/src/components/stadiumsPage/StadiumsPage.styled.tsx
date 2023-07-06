@@ -3,13 +3,11 @@ import { Box } from '@mui/material';
 
 export const StadiumCardBox = styled(Box)({
   width: 'calc(100% - 560px)',
-  boxShadow: '-2px 2px 5px #ccc, 1px -1px 2px #cccccc4a',
   height: '250px',
   display: 'flex',
   borderRadius: '5px',
   alignItems: 'center',
   padding: '10px',
-  backgroundColor: '#d9d9d938',
 });
 
 export const CardContainer = styled(Box)({

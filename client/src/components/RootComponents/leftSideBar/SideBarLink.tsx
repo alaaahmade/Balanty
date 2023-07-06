@@ -1,8 +1,7 @@
 import { ReactElement } from 'react';
 
-import { SideLink } from '../../styledRootComponent';
-
 import '../../../App.css';
+import { DarkSideLink } from '../../styledRootComponent/LiftSideBarStyledComponent';
 
 interface SideBarLinkProps {
   text: string;
@@ -11,7 +10,10 @@ interface SideBarLinkProps {
 
 const SideBarLink = ({ text, icon }: SideBarLinkProps): ReactElement => {
   return (
-    <SideLink
+    <DarkSideLink
+      style={{
+        backgroundColor: 'wight',
+      }}
       to={
         text === 'الصفحة الرئيسية'
           ? '/home'
@@ -26,7 +28,7 @@ const SideBarLink = ({ text, icon }: SideBarLinkProps): ReactElement => {
     >
       {text}
       {icon}
-    </SideLink>
+    </DarkSideLink>
   );
 };
 

@@ -69,7 +69,6 @@ export const BioBox = styled(Box)({
   maxWidth: '350px',
   minWidth: '350px',
   minHeight: '480px',
-
   ml: '3%',
   padding: '10px',
   border: '0.1px solid #D9D9D9',

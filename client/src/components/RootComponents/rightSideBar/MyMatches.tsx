@@ -11,6 +11,7 @@ const MyMatches = ({ stadium }: MyMatchesProps): ReactElement => {
     <StyledMyMatches
       sx={{
         mt: '15px',
+        backgroundColor: theme => theme.palette.primary.grayColor,
       }}
     >
       <StyledButton

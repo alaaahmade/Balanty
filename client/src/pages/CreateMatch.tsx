@@ -105,21 +105,29 @@ const CreateMatch: React.FC<createMatchInterface> = ({
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <AppBar sx={{ position: 'relative', backgroundColor: '#01031C' }}>
-          <Toolbar>
+        <AppBar
+          sx={{
+            position: 'relative',
+            backgroundColor: theme => theme.palette.primary.second,
+          }}
+        >
+          <Toolbar sx={{}}>
             <IconButton
               edge="start"
               color="inherit"
               onClick={handleClose}
               aria-label="close"
-              sx={{
-                color: '#fff',
-              }}
+              sx={{ color: theme => theme.palette.primary.main }}
             >
               <CloseIcon />
             </IconButton>
             <Typography
-              sx={{ ml: 76, flex: 1, color: '#fff' }}
+              sx={{
+                ml: 76,
+                flex: 1,
+                color: '#fff',
+                color: theme => theme.palette.primary.main,
+              }}
               variant="h6"
               component="div"
             >
@@ -127,7 +135,7 @@ const CreateMatch: React.FC<createMatchInterface> = ({
             </Typography>
             <Button
               sx={{
-                color: '#fff',
+                color: theme => theme.palette.primary.main,
               }}
               autoFocus
               color="inherit"

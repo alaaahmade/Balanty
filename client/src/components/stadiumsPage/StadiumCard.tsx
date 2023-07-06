@@ -33,7 +33,12 @@ const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
   };
 
   return (
-    <StadiumCardBox>
+    <StadiumCardBox
+      sx={{
+        boxShadow: `-2px 2px 5px #ccc, 1px -1px 2px #cccccc4a`,
+        backgroundColor: theme => theme.palette.primary.grayColor,
+      }}
+    >
       <CardContainer>
         <DetailsBox>
           <Typography

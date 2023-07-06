@@ -54,12 +54,17 @@ const DeleteDialog: FC<deleteDialogProps> = ({
         <DialogTitle
           sx={{
             textAlign: 'right',
+            backgroundColor: theme => theme.palette.primary.grayColor,
           }}
           id="alert-dialog-title"
         >
           هل انت متأكد من أنك تريد حذف هذه الصورة؟
         </DialogTitle>
-        <DialogContent>
+        <DialogContent
+          sx={{
+            backgroundColor: theme => theme.palette.primary.grayColor,
+          }}
+        >
           <DialogContentText
             sx={{
               textAlign: 'right',
@@ -70,7 +75,11 @@ const DeleteDialog: FC<deleteDialogProps> = ({
             الشخصي
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
+        <DialogActions
+          sx={{
+            backgroundColor: theme => theme.palette.primary.grayColor,
+          }}
+        >
           <Button onClick={handleClose}>الغاء</Button>
           <Button onClick={HandleAgree} autoFocus>
             موافق

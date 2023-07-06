@@ -27,6 +27,7 @@ const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
       sx={{
         right: 0,
         borderLeft: '0.4px solid #ccc',
+        backgroundColor: theme => theme.palette.primary.backGroundColor,
         boxShadow: '-1px 4px 6px 1px rgba(0, 0, 0, 0.15)',
       }}
     >
@@ -46,7 +47,11 @@ const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
         <SideBarLink text="الملاعب" icon={<MdStadium />} />
         <SideBarLink text="اخر اللاعبين" icon={<BsFillFilePersonFill />} />
       </Box>
-      <CreateMatchBox>
+      <CreateMatchBox
+        sx={{
+          backgroundColor: theme => theme.palette.primary.grayColor,
+        }}
+      >
         <StyledTypography>
           يمكنك انشاء مباراة ودعوة اصدقائك للانضمام اليك
         </StyledTypography>

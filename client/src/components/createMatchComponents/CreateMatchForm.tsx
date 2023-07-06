@@ -113,7 +113,12 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
   return (
     <DialogInputsBox>
       <StyledSearchInput
-        sx={{ mt: '25px', width: '80%', border: '1px solid #ccc' }}
+        sx={{
+          mt: '25px',
+          width: '80%',
+          border: '1px solid #ccc',
+          backgroundColor: theme => theme.palette.primary.grayColor,
+        }}
         placeholder="عنوان المباراة"
         onChange={handleMatchName}
         disableUnderline
@@ -124,6 +129,7 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
           width: '80%',
           p: '20px',
           border: '1px solid #ccc',
+          backgroundColor: theme => theme.palette.primary.grayColor,
         }}
         placeholder="عدد اللاعبين"
         type="number"
@@ -149,13 +155,16 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
         sx={{
           width: '80%',
           mt: '25px',
-          backgroundColor: '#EDF7FF',
+          backgroundColor: theme => theme.palette.primary.grayColor,
           borderRadius: '5px',
           border: '1px solid #ccc',
         }}
         onChange={handleDescription}
       />
       <StyledAutocomplete
+        sx={{
+          backgroundColor: theme => theme.palette.primary.grayColor,
+        }}
         disablePortal
         id="combo-box-demo"
         options={Stadiums}

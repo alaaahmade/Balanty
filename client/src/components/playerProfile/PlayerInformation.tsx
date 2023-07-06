@@ -69,6 +69,7 @@ const PlayerInformation = ({
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'flex-end',
+          backgroundColor: theme => theme.palette.primary.grayColor,
         }}
       >
         <FlexBox sx={{ justifyContent: 'space-between' }}>

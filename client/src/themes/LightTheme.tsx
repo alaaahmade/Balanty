@@ -10,8 +10,8 @@ const LightTheme = createTheme({
       main: '#2CB674',
       second: '#01031C',
       contrastText: '#000',
-      wightColor: '#fff',
-      grayColor: '#D9D9D9',
+      backGroundColor: '#fff',
+      grayColor: '#F2FCF5',
     },
   },
 });

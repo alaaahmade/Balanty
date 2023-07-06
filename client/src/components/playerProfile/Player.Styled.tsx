@@ -92,7 +92,6 @@ export const BioBox = styled(Box)({
   marginLeft: '42px',
   padding: '10px',
   border: '1px solid #ccc',
-  backgroundColor: '#F2FCF5',
   display: 'flex',
   flexDirection: 'column',
   gap: '2px',

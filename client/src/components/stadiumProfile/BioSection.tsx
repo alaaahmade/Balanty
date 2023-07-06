@@ -128,7 +128,13 @@ const BioSection = ({
 
   return (
     <Box>
-      <BioBox onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOut}>
+      <BioBox
+        sx={{
+          backgroundColor: theme => theme.palette.primary.grayColor,
+        }}
+        onMouseEnter={handleMouseOver}
+        onMouseLeave={handleMouseOut}
+      >
         <Box>
           {hov && !editMode && (
             <InputAdornment position="end">

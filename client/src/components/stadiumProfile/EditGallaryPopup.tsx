@@ -152,14 +152,20 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
 
         <DialogTitle
           sx={{
+            width: '100%',
+            backgroundColor: theme => theme.palette.primary.grayColor,
             textAlign: 'right',
             color: '#4c8942',
-            mr: '32px',
+            pr: '32px',
           }}
         >
           اضافة صورة جديدة
         </DialogTitle>
-        <DialogContentBox>
+        <DialogContentBox
+          sx={{
+            backgroundColor: theme => theme.palette.primary.grayColor,
+          }}
+        >
           <InputLabel htmlFor="input">
             <SelectBox
               sx={{
@@ -200,7 +206,11 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
             />
           </InputLabel>
         </DialogContentBox>
-        <DialogActions>
+        <DialogActions
+          sx={{
+            backgroundColor: theme => theme.palette.primary.grayColor,
+          }}
+        >
           <SelectButtonsBox
             sx={{
               mb: '10px',

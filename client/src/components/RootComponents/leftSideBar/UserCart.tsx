@@ -36,20 +36,29 @@ const UserCart: FC<UserCardProps> = ({
 
   return (
     <BorderBox
+      sx={{
+        '& :hover': {
+          color: theme => theme.palette.primary.main,
+        },
+      }}
       onClick={() => {
         navigate(`/profile/${role}/${userId}`);
       }}
     >
       <StyledUserCart
         sx={{
+          background: theme => theme.palette.primary.grayColor,
           m: '15px 0',
+        }}
+        onClick={() => {
+          navigate(`/profile/${role}/${userId}`);
         }}
       >
         <Typography
           sx={{
             transition: '0.2s',
             '& :hover': {
-              color: '#2CB674',
+              color: theme => theme.palette.primary.main,
             },
           }}
         >
