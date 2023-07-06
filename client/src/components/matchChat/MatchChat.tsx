@@ -98,8 +98,6 @@ const MatchChat: FC<{ socket: Socket }> = ({ socket }): ReactElement => {
       setNewMessage(newData.data.newMessage);
       handleScrollChat();
     });
-    console.log(newMessage, 'newMessage');
-    console.log(user, 'my user');
   }, [socket, matchMessages]);
 
   const getMessageRequest = async () => {
