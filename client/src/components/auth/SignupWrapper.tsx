@@ -1,11 +1,10 @@
 import React, { FC, ReactElement, useContext } from 'react';
 
-import { Alert, Box } from '@mui/material';
+import { Box } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Stack } from '@mui/system';
 import {
   Form,
   ImageWrap,
@@ -20,6 +19,7 @@ import LinkWrap from './Link';
 import { signupProps } from '../../interfaces';
 import { signupSchema } from '../../validation';
 import { AuthContext } from '../../context';
+import ErrorAlert from '../ErrorAlert';
 
 const SignupWrapper: FC = (): ReactElement => {
   const {
@@ -48,7 +48,6 @@ const SignupWrapper: FC = (): ReactElement => {
   }
   const onSubmit: SubmitHandler<signupProps> = async data => {
     await signup(data, isplayer);
-
     navigate('/home');
   };
   return (
@@ -137,22 +136,7 @@ const SignupWrapper: FC = (): ReactElement => {
           </SignButton>
         </Box>
       </Form>
-      {errorMessage && (
-        <Stack
-          sx={{
-            width: '45%',
-            position: 'absolute',
-            right: '2rem',
-            bottom: '2rem',
-            zIndex: '1000',
-          }}
-          spacing={2}
-        >
-          <Alert severity="error">
-            {errorMessage} — <strong>تفحصه!</strong>
-          </Alert>
-        </Stack>
-      )}
+      {errorMessage && <ErrorAlert errorMessage={errorMessage} />}
     </Wrapper>
   );
 };
