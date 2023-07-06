@@ -29,8 +29,7 @@ export const getReviewService = async (
 export const addReviewService = async (
   req: Request,
 ): Promise<{ status: number; data: string | object }> => {
-  // const { UserId } = req.user; this id will comming from checkAuth middillware
-  const UserId = 4; //and this will removed
+  const UserId = req.user?.id;
   const { stadiumId } = req.params;
   const { body } = req;
 
@@ -74,4 +73,43 @@ export const addReviewService = async (
       data: newReview,
     };
   }
+};
+
+export const getPlayerReviewService = async (
+  req: Request,
+): Promise<{ status: number; data: object | string | null }> => {
+  const playerId = req.user?.id;
+  const { stadiumId } = req.params;
+
+  if (!playerId) {
+    return {
+      status: 401,
+      data: 'UnAuthorize',
+    };
+  }
+
+  const checkPlayer = await User.findOne({ where: { id: playerId } });
+  const checkStadium = await Stadium.findOne({ where: { id: stadiumId } });
+
+  if (!checkStadium) {
+    return {
+      status: 404,
+      data: '! هذا الملعب غير موجود ',
+    };
+  } else if (!checkPlayer) {
+    return {
+      status: 404,
+      data: '! هذا اللاعب غير موجود ',
+    };
+  }
+
+  const playerReview = await Review.findOne({
+    where: { playerId, stadiumId },
+    attributes: ['id', 'value', 'playerId', 'stadiumId'],
+  });
+
+  return {
+    status: 200,
+    data: playerReview,
+  };
 };

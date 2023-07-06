@@ -17,7 +17,7 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
 }): ReactElement => {
   return (
     <StyledBoxFeatures>
-      <StyledImageFeatures src={imageSrc} alt="" />
+      <StyledImageFeatures src={imageSrc} alt="image" />
       <StyledDescriptionFeatures>{description}</StyledDescriptionFeatures>
     </StyledBoxFeatures>
   );

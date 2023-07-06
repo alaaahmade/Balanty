@@ -49,20 +49,21 @@ const CenteredCard = styled(Card)({
   marginTop: '10%',
   display: 'flex',
   justifyContent: 'center',
-  width: '55%',
-  padding: '10px 5% 10px 10px',
+  width: '50%',
+  height: '300px',
+  padding: '10px 25px 10px 10px',
   border: '1px solid grey',
 });
 
 const MatchCardContainer = styled(Box)({
   display: 'flex',
-  gap: '55px',
+  gap: '40px',
 });
 
 const MatchCardContent = styled(CardContent)({
   display: 'flex',
   flexDirection: 'column',
-  gap: '20px',
+  gap: '2px',
 });
 
 const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
@@ -70,17 +71,6 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
     <Box>
       <CenteredCard>
         <MatchCardContainer sx={{ paddingLeft: '10px' }}>
-          <img
-            style={{
-              width: '400px',
-              height: '400px',
-              top: '6px',
-              left: '1px',
-              borderRadius: '5px',
-            }}
-            src={match.stadiumMatch.Stadium.stadiumGallery[0].image}
-            alt="Cover"
-          />
           <MatchCardContent sx={{ width: '300px' }}>
             <Typography
               variant="h6"
@@ -93,7 +83,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
               sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                marginBottom: '10%',
+                marginBottom: '20px',
               }}
             >
               <Typography variant="body1">
@@ -129,7 +119,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
               sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                marginBottom: '10%',
+                marginBottom: '10px',
               }}
             >
               <Typography variant="body1">
@@ -172,14 +162,14 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
               sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                marginBottom: '10%',
+                marginBottom: '10px',
               }}
             >
               <StyledButton
                 sx={{
                   width: '65px',
                   height: '30px',
-                  marginBottom: '10%',
+                  marginBottom: '10px',
                 }}
               >
                 زيارة
@@ -189,7 +179,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
               sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                marginBottom: '10%',
+                marginBottom: '10px',
               }}
             >
               <StyledButton
@@ -215,6 +205,17 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
               </StyledButton>
             </Box>
           </MatchCardContent>
+          <img
+            style={{
+              width: '350px',
+              height: '280px',
+              top: '6px',
+              left: '1px',
+              borderRadius: '5px',
+            }}
+            src={match.stadiumMatch.Stadium.stadiumGallery[0].image}
+            alt="Cover"
+          />
         </MatchCardContainer>
       </CenteredCard>
     </Box>

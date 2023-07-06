@@ -12,7 +12,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { EditGalleryPopupProps } from '../../interfaces';
 
@@ -41,6 +41,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   const [imageError, setImageError] = useState(false);
 
   const { setAgree, Agree } = useContext(UpdateGalleryContext);
+  const { id } = useParams();
 
   const fileInput = useRef<HTMLInputElement>(null);
 
@@ -67,6 +68,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
       `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
       formData,
     );
+
     return data.secure_url;
   };
 
@@ -98,6 +100,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
           image: newUrl,
           id: ImageId,
           StadiumId,
+          userId: id,
         });
 
         setLoading(false);
@@ -123,6 +126,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
         const res = await axios.post('/api/v1/stadiums/gallery', {
           image: newUrl,
           StadiumId,
+          userId: id,
         });
         setLoading(false);
         setAgree(!Agree);

@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { Box, Typography, Link } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { Facebook, Twitter, LinkedIn, Instagram } from '@mui/icons-material';
 import {
   StyledFooter,
@@ -7,6 +7,7 @@ import {
   StyledLinks,
   StyledIcons,
 } from './footer.styled';
+import { ScrollLink } from '../header/Header.styled';
 
 const Footer: React.FC = (): ReactElement => {
   return (
@@ -18,18 +19,18 @@ const Footer: React.FC = (): ReactElement => {
     >
       <StyledLogo variant="h6">بلنتي لوغو</StyledLogo>
       <StyledLinks>
-        <Link href="https://example.com/contact" color="inherit">
+        <ScrollLink activeClass="active" smooth spy to="contactUs">
           تواصل معنا
-        </Link>
-        <Link href="https://example.com/services" color="inherit">
+        </ScrollLink>
+        <ScrollLink activeClass="active" smooth spy to="servicesLink">
           خدماتنا
-        </Link>
-        <Link href="https://example.com/about" color="inherit">
+        </ScrollLink>
+        <ScrollLink activeClass="active" smooth spy to="definitionLink">
           عن موقعنا
-        </Link>
-        <Link href="https://example.com/home" color="inherit">
+        </ScrollLink>
+        <ScrollLink activeClass="active" smooth spy to="mainLink">
           الرئيسية
-        </Link>
+        </ScrollLink>
       </StyledLinks>
       <Typography variant="body2" align="center">
         بلنتي هو موقع حجوزات ملاعب كرة القدم وتشبيك اللاعبين ببعضهم الذي يوفر

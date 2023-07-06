@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useContext } from 'react';
 import { Alert, Box, Stack } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Control, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import {
@@ -67,10 +67,10 @@ const LoginWrapper: FC = (): ReactElement => {
               isplayer === 'true' ? 'ادخل اسم اللاعب' : 'ادخل اسم الملعب'
             }
             errors={errors}
-            control={control}
+            control={control as Control<loginProps | FieldValues>}
           />
           <InputWrap
-            control={control}
+            control={control as Control<loginProps | FieldValues>}
             name="password"
             type="password"
             label="كلمة المرور"

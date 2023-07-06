@@ -1,22 +1,47 @@
 import bcrypt from 'bcrypt';
-import { User } from '../models';
+import { Gallery, Player, Stadium, User } from '../models';
 import { CustomError } from '../utils';
 import { generateToken } from '../utils/jwt/generateToken';
-import { UserData } from '../interfaces/auth';
+import { UserData, newStadium, newUser } from '../interfaces/auth';
 import { signupSchema, loginSchema } from '../validations';
 import { userLoginAttrs } from '../interfaces/auth';
+import { Op } from 'sequelize';
 
 const signupService = async (
   userData: UserData,
-): Promise<{ newUser: object; token: string }> => {
+): Promise<{
+  status: number;
+  data: object | string;
+  token?: string | null;
+}> => {
   const { username, email, password, phone, role } = userData;
 
   await signupSchema.validateAsync(userData);
 
-  const userExists = await User.findOne({ where: { username } });
+  const userExists = await User.findOne({
+    where: {
+      [Op.or]: [{ username }, { email }, { phone }],
+    },
+  });
 
-  if (userExists) {
-    throw new CustomError(500, 'User already exists');
+  if (userExists?.username === username) {
+    return {
+      status: 409,
+      data: 'اسم المستخدم موجود',
+    };
+  }
+  if (userExists?.email === email) {
+    console.log('email');
+    return {
+      status: 409,
+      data: 'هذا الايميل مستخدم',
+    };
+  }
+  if ((userExists?.phone ?? 0) === phone) {
+    return {
+      status: 409,
+      data: 'هذا الهاتف مستخدم',
+    };
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -29,9 +54,26 @@ const signupService = async (
     role,
   });
 
-  const token = await generateToken({ username, email, phone, role });
+  const token = await generateToken({
+    username,
+    email,
+    phone,
+    role,
+    id: newUser.id,
+  });
 
-  return { newUser, token };
+  if (role === 'stadium') {
+    const stadium = await Stadium.create({ UserId: (newUser as newUser).id });
+    await Gallery.create({ StadiumId: (stadium as newStadium).id });
+  } else {
+    await Player.create({ UserId: (newUser as newUser).id });
+  }
+
+  return {
+    status: 201,
+    data: newUser,
+    token,
+  };
 };
 
 const loginService = async (

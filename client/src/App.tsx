@@ -5,7 +5,6 @@ import RootLayout from './layouts/RootLayout';
 import { LandingPage } from './pages';
 import LoginWrapper from './components/auth/LoginWrapper';
 import SignupWrapper from './components/auth/SignupWrapper';
-import { AuthProvider } from './context/AuthContext';
 import LightTheme from './themes';
 import {
   open,
@@ -16,6 +15,7 @@ import {
 import StadiumProfile from './pages/StadiumProfile';
 import StadiumsPage from './pages/Stadiums';
 import MatchesPage from './components/matchesPage/Match';
+import { AuthProvider } from './context/AuthContext';
 
 const router = createBrowserRouter([
   {
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
-        path: 'stadiums',
+        path: 'stadiums/',
         element: <StadiumsPage />,
       },
       {

@@ -111,11 +111,15 @@ export const getStadiumProfileService = async (
   };
 };
 
-export const getStadiumsService = async (): Promise<{
+export const getStadiumsService = async (
+  req: Request,
+): Promise<{
   status: number;
   data: object;
 }> => {
-  const response = await User.findAll({
+  const { page } = req.params;
+
+  const Stadiums = await User.findAll({
     where: { role: 'STADIUM' },
     attributes: ['id', 'username'],
     include: [
@@ -133,9 +137,14 @@ export const getStadiumsService = async (): Promise<{
     ],
   });
 
+  const pageSize = 8;
+  const startIndex = ((+page as number) - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const paginatedItems = Stadiums.slice(startIndex, endIndex);
+
   return {
     status: 200,
-    data: response,
+    data: paginatedItems,
   };
 };
 export const UpdateStadiumDataService = async (
@@ -144,8 +153,8 @@ export const UpdateStadiumDataService = async (
   status: number;
   data: string | { message: string; stadiumResult: number; UserResult: number };
 }> => {
-  // const { StadiumId } = req.UserData this will happen after create protected routes
-  const StadiumId = 5; //and this will removed
+  const StadiumId = req.user?.id;
+
   const { body } = req;
 
   const isStadiumExist = await Stadium.findOne({
@@ -182,13 +191,12 @@ export const UpdateStadiumGalleryService = async (
   data: string | object;
 }> => {
   const {
-    body: { image, id, StadiumId },
+    body: { image, id, StadiumId, userId },
   } = req;
 
-  // const { StadiumId } = req.UserData this will happen after create protected routes
-  const checkAuthId = 5; //and this will removed
+  const checkAuthId = req.user?.id;
 
-  if (StadiumId !== checkAuthId) {
+  if (+userId !== +(checkAuthId as number)) {
     return {
       status: 401,
       data: 'UnAuthorize',
@@ -221,14 +229,11 @@ export const AddStadiumImageService = async (
   data: string | object;
 }> => {
   const { body } = req;
-  const { StadiumId } = body;
+  const { StadiumId, userId } = body;
 
-  // const { StadiumId } = req.UserData this will happen after create protected routes
-  const checkAuthId = 5; //and this will removed
+  const checkAuthId = req.user?.id;
 
-  if (StadiumId !== checkAuthId) {
-    console.log(StadiumId, checkAuthId);
-
+  if (+userId !== +(checkAuthId as number)) {
     return {
       status: 401,
       data: 'UnAuthorize',
@@ -254,11 +259,10 @@ export const AddStadiumImageService = async (
 export const deleteStadiumImageService = async (
   req: Request,
 ): Promise<{ status: number; data: string | number }> => {
-  const { ImageId, StadiumId } = req.params;
-  // const checkAuthId = req.UserData.StadiumId; this will happen after create protected routes
-  const checkAuthId = 5;
+  const { ImageId, StadiumId, userId } = req.params;
+  const checkAuthId = req.user?.id;
 
-  if (+StadiumId !== checkAuthId) {
+  if (+userId !== +(checkAuthId as number)) {
     return {
       status: 401,
       data: 'UnAuthorize',
@@ -280,4 +284,51 @@ export const deleteStadiumImageService = async (
   });
 
   return { status: 204, data: result };
+};
+
+export const getBestStadiumsService = async (): Promise<{
+  status: number;
+  data: object;
+}> => {
+  const Stadiums = await User.findAll({
+    where: { role: 'STADIUM' },
+    attributes: ['id', 'username'],
+    include: [
+      {
+        model: Stadium,
+        include: [
+          {
+            model: Gallery,
+            as: 'stadiumGallery',
+            limit: 1,
+          },
+        ],
+      },
+      { model: Review, as: 'StadiumsReviews', attributes: ['value'] },
+    ],
+  });
+
+  const stadiumWithAverage = Stadiums.map((stadium: User) => {
+    const totalReviews = (stadium.StadiumsReviews as Review[]).length;
+    const averageReview =
+      (stadium.StadiumsReviews as Review[]).reduce(
+        (sum: number, review: { value: string }) => sum + +review.value,
+        0,
+      ) / totalReviews;
+
+    stadium.StadiumsReviews = averageReview || 0;
+
+    return stadium;
+  });
+
+  const sortedStadiums = stadiumWithAverage.sort(
+    (a, b) => (b.StadiumsReviews as number) - (a.StadiumsReviews as number),
+  );
+
+  const topThreeStadiums = sortedStadiums.slice(0, 3);
+
+  return {
+    status: 200,
+    data: topThreeStadiums,
+  };
 };

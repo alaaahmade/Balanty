@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export const HeroSectionWrapper = styled(Box)({
   display: 'flex',
@@ -58,7 +59,16 @@ export const Wrapper = styled(Box)<Props>(({ imageUrl }) => ({
   },
 }));
 
-export const CustomizedButton = styled(Button)({
+export const CustomizedButton = styled(Link)({
+  borderRadius: '3px',
+  textDecoration: 'none',
+  color: '#fff',
+  border: '1px solid #fff',
+  position: 'absolute',
+  bottom: '70px',
+  right: '120px',
+  transform: 'translateX(-50%)',
+  display: 'block',
   '&:hover': {
     background: 'rgba(0,0,0,0.5)',
     borderColor: '#fff',

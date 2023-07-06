@@ -1,3 +1,5 @@
+import { Stadium, User } from '../models';
+
 export interface UserData {
   id: number;
   username: string;
@@ -14,8 +16,16 @@ export interface userLoginAttrs {
 }
 
 export interface IUser {
+  id: number;
   username: string;
   email: string;
   phone: number;
   role: string;
+}
+
+export interface newUser extends User {
+  id: number;
+}
+export interface newStadium extends Stadium {
+  id: number;
 }
