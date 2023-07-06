@@ -38,6 +38,10 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
+        index: true,
+        element: <MatchesPage />,
+      },
+      {
         path: 'stadiums',
         element: <StadiumsPage />,
       },
@@ -46,10 +50,6 @@ const router = createBrowserRouter([
         element: <PlayersPage />,
       },
       { path: 'match/:matchId', element: <MatchRoomPage /> },
-      {
-        path: 'matches',
-        element: <MatchesPage />,
-      },
     ],
   },
 
