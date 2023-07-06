@@ -36,24 +36,19 @@ const UserCart: FC<UserCardProps> = ({
 
   return (
     <BorderBox
-      sx={{
-        pb: '30px',
-      }}
       onClick={() => {
         navigate(`/profile/${role}/${userId}`);
       }}
     >
       <StyledUserCart
         sx={{
-          mt: '25px',
+          m: '15px 0',
         }}
       >
         <Typography
           sx={{
-            fontWeight: 'bold',
             transition: '0.2s',
-            cursor: 'pointer',
-            '&:hover': {
+            '& :hover': {
               color: '#2CB674',
             },
           }}
@@ -61,7 +56,12 @@ const UserCart: FC<UserCardProps> = ({
           {username}
         </Typography>
         {avatar ? (
-          <StyledImag src={avatar} alt="userImage" />
+          <StyledImag
+            sx={{
+              mr: '30px',
+              backgroundImage: `url(${avatar})`,
+            }}
+          />
         ) : (
           <Avatar>{username[0]}</Avatar>
         )}

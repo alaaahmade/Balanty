@@ -1,7 +1,7 @@
 import express, { Express, json, urlencoded } from 'express';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
-
+import cors from 'cors';
 import { router } from './routes/router';
 import serverError from './middleware/errorMiddleware';
 
@@ -12,6 +12,9 @@ app.use([
   urlencoded({ extended: false }),
   compression(),
   cookieParser(),
+  cors({
+    origin: 'http://localhost:5173',
+  }),
 ]);
 
 app.use('/api/v1', router);

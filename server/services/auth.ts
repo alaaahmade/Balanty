@@ -24,8 +24,6 @@ const signupService = async (
     },
   });
 
-  console.log(userExists);
-
   if (userExists?.username === username) {
     return {
       status: 409,
@@ -61,8 +59,9 @@ const signupService = async (
     email,
     phone,
     role,
-    id: (newUser as newUser).id,
+    id: newUser.id,
   });
+
   if (role === 'stadium') {
     const stadium = await Stadium.create({ UserId: (newUser as newUser).id });
     await Gallery.create({ StadiumId: (stadium as newStadium).id });

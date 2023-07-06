@@ -2,20 +2,18 @@ import { Typography } from '@mui/material';
 import { Box, styled } from '@mui/system';
 
 export const StyledMyMatches = styled(Box)({
-  width: '90%',
+  width: '100%',
   height: '46px',
   backgroundColor: '#D9D9D9',
-  borderRadius: '5px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  padding: '0 15px',
+  padding: '0 20px',
 });
 export const StyledWorldMatches = styled(Box)({
-  width: '90%',
+  width: '100%',
   height: '80px',
   backgroundColor: '#D9D9D9',
-  borderRadius: '5px',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',

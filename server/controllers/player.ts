@@ -1,7 +1,9 @@
 import { Request, RequestHandler, Response } from 'express';
 import {
   getPlayerService,
+  getPlayersService,
   playerMatchesService,
+  playerAvatarService,
   updatePlayerService,
 } from '../services/player';
 
@@ -40,4 +42,27 @@ const playerMatches: RequestHandler = async (
   res.status(response?.status).json(response);
 };
 
-export { getPlayer, updatePlayer, playerMatches };
+const playerAvatar: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const { id } = req.params;
+  const response = (await playerAvatarService(+id)) as {
+    status: number;
+    data: string;
+  };
+  res.status(response.status).json(response);
+};
+
+const getPlayers: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const response = (await getPlayersService(req)) as {
+    status: number;
+    data: object;
+  };
+  res.status(response.status).json(response);
+};
+
+export { getPlayer, updatePlayer, playerMatches, getPlayers, playerAvatar };

@@ -2,7 +2,7 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../database';
 
 class Match extends Model {
-  declare owner_id: number;
+  declare ownerId: number;
   declare stadiumId: number;
   declare title: string;
   declare description: string;

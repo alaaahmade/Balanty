@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { FormControl, OutlinedInput } from '@mui/material';
+import { FormControl, OutlinedInput, Box } from '@mui/material';
 import { Control, Controller, FieldValues } from 'react-hook-form';
 import { InputLabel } from './LoginWrapper.styled';
 import { InputProps, signupProps } from '../../interfaces';
@@ -13,7 +13,7 @@ const InputWrap: FC<InputProps> = ({
   name,
 }) => {
   return (
-    <div style={{ marginBottom: '1rem' }}>
+    <Box style={{ marginBottom: '1rem' }}>
       <InputLabel>{label}</InputLabel>
       <FormControl sx={{ width: '45ch' }}>
         <Controller
@@ -44,7 +44,7 @@ const InputWrap: FC<InputProps> = ({
           </p>
         )}
       </FormControl>
-    </div>
+    </Box>
   );
 };
 
