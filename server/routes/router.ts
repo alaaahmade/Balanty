@@ -11,7 +11,7 @@ const router: Router = Router();
 router.use('/matches', checkAuth, matchRouter);
 
 router.use('/user', authRouter);
-router.use('/stadiums', checkAuth, stadiumRouter);
+router.use('/stadiums', stadiumRouter);
 router.use('/players', playerRouter);
 router.use('/message', chatRouter);
 router.use('/review', checkAuth, reviewRouter);
