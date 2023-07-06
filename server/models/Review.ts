@@ -13,7 +13,7 @@ Review.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        min: 1,
+        min: 0.5,
         max: 5,
       },
     },
