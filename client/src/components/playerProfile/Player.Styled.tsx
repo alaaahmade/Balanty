@@ -3,7 +3,7 @@ import { Box, styled } from '@mui/system';
 
 export const Cover = styled('img')({
   width: '100%',
-  height: 220,
+  height: 320,
 });
 export const AvatarWrapper = styled('div')({
   width: '100%',
