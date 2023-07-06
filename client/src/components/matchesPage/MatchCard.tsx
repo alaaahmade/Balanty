@@ -49,14 +49,14 @@ const CenteredCard = styled(Card)({
   marginTop: '10%',
   display: 'flex',
   justifyContent: 'center',
-  width: '60%',
+  width: '55%',
   padding: '10px 5% 10px 10px',
   border: '1px solid grey',
 });
 
 const MatchCardContainer = styled(Box)({
   display: 'flex',
-  gap: '80px',
+  gap: '55px',
 });
 
 const MatchCardContent = styled(CardContent)({
@@ -81,7 +81,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
             src={match.stadiumMatch.Stadium.stadiumGallery[0].image}
             alt="Cover"
           />
-          <MatchCardContent sx={{ width: '350px' }}>
+          <MatchCardContent sx={{ width: '300px' }}>
             <Typography
               variant="h6"
               component="h3"
@@ -168,15 +168,23 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
             {match.Players.map(player => (
               <img src={player.cover} alt="Player Cover" key={player.id} />
             ))}
-            <StyledButton
+            <Box
               sx={{
-                width: '65px',
-                height: '30px',
+                display: 'flex',
+                justifyContent: 'space-between',
                 marginBottom: '10%',
               }}
             >
-              زيارة
-            </StyledButton>
+              <StyledButton
+                sx={{
+                  width: '65px',
+                  height: '30px',
+                  marginBottom: '10%',
+                }}
+              >
+                زيارة
+              </StyledButton>
+            </Box>
             <Box
               sx={{
                 display: 'flex',
