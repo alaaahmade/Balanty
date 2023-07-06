@@ -150,9 +150,6 @@ const getPlayersService = async (
     offset: offset,
   });
 
-  console.log('search', search);
-  console.log(players[0]);
-
   const totalPages = Math.ceil(count / pageSize);
   const paginatedItems = players;
 

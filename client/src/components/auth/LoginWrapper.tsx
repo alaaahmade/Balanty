@@ -16,7 +16,7 @@ import TitleWrap from './Title';
 import GoogleIcon from '../../assets/image-2.svg';
 import LinkWrap from './Link';
 import { loginSchema } from '../../validation';
-import { loginProps, AuthContextData } from '../../interfaces';
+import { loginProps, AuthContextData, signupProps } from '../../interfaces';
 import { AuthContext } from '../../context';
 import ErrorAlert from '../ErrorAlert';
 
@@ -68,10 +68,14 @@ const LoginWrapper: FC = (): ReactElement => {
               isplayer === 'true' ? 'ادخل اسم اللاعب' : 'ادخل اسم الملعب'
             }
             errors={errors}
-            control={control as Control<loginProps | FieldValues>}
+            control={
+              control as unknown as Control<signupProps> | Control<FieldValues>
+            }
           />
           <InputWrap
-            control={control as Control<loginProps | FieldValues>}
+            control={
+              control as unknown as Control<signupProps> | Control<FieldValues>
+            }
             name="password"
             type="password"
             label="كلمة المرور"

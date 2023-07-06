@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { FormControl, OutlinedInput, Box } from '@mui/material';
-import { Control, Controller, FieldValues } from 'react-hook-form';
+import { Control, Controller, DeepPartial, FieldValues } from 'react-hook-form';
 import { InputLabel } from './LoginWrapper.styled';
-import { InputProps, signupProps } from '../../interfaces';
+import { InputProps } from '../../interfaces';
 
 const InputWrap: FC<InputProps> = ({
   type,
@@ -18,7 +18,7 @@ const InputWrap: FC<InputProps> = ({
       <FormControl sx={{ width: '45ch' }}>
         <Controller
           name={name}
-          control={control as Control<signupProps | FieldValues>}
+          control={control as Control<DeepPartial<FieldValues>>}
           render={({ field }) => (
             <OutlinedInput
               className="outline-input"

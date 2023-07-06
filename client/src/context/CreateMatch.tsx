@@ -35,7 +35,7 @@ export const StatsContextProvider = ({ children }: MyContextProviderProps) => {
     StadiumId: 0,
   });
   const contextValue = useContext(open);
-  const { openPage } = contextValue;
+  const { openPage } = contextValue as OpenContextValue;
 
   useEffect(() => {
     setMatch({

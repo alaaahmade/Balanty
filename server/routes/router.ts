@@ -17,11 +17,4 @@ router.use('/players', playerRouter);
 router.use('/message', chatRouter);
 router.use('/review', errorWrapper(checkAuth), reviewRouter);
 
-router.get('/', (req: Request, res: Response): void => {
-  res.json({
-    status: 200,
-    msg: 'ok',
-  });
-});
-
 export { router };

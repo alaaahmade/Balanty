@@ -1,5 +1,4 @@
 import { ReactElement } from 'react';
-import { Box } from '@mui/material';
 import MyMatches from './MyMatches';
 import RightSideBarTitle from './RightSideBarTitle';
 import WorldMatch from './WorldMatch';
