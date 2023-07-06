@@ -1,5 +1,5 @@
 import { IMatchMessage, IResponseProps } from '../interfaces';
-import { Match, Message } from '../models';
+import { Match, Message, Player, Stadium, User } from '../models';
 
 const addMessageService = async ({
   message,
@@ -52,6 +52,28 @@ const getAllMessagesService = async (
       {
         model: Message,
         as: 'MatchMessages',
+        include: [
+          {
+            model: User,
+            attributes: [
+              'createdAt',
+              'email',
+              'id',
+              'phone',
+              'role',
+              'updatedAt',
+              'username',
+            ],
+            include: [
+              {
+                model: Player,
+              },
+              {
+                model: Stadium,
+              },
+            ],
+          },
+        ],
       },
     ],
   });
