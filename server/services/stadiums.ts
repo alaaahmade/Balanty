@@ -153,8 +153,8 @@ export const UpdateStadiumDataService = async (
   status: number;
   data: string | { message: string; stadiumResult: number; UserResult: number };
 }> => {
-  // const { StadiumId } = req.UserData this will happen after create protected routes
-  const StadiumId = 5; //and this will removed
+  const StadiumId = req.user?.id;
+
   const { body } = req;
 
   const isStadiumExist = await Stadium.findOne({
@@ -191,13 +191,12 @@ export const UpdateStadiumGalleryService = async (
   data: string | object;
 }> => {
   const {
-    body: { image, id, StadiumId },
+    body: { image, id, StadiumId, userId },
   } = req;
 
-  // const { StadiumId } = req.UserData this will happen after create protected routes
-  const checkAuthId = 5; //and this will removed
+  const checkAuthId = req.user?.id;
 
-  if (StadiumId !== checkAuthId) {
+  if (+userId !== +(checkAuthId as number)) {
     return {
       status: 401,
       data: 'UnAuthorize',
@@ -230,12 +229,11 @@ export const AddStadiumImageService = async (
   data: string | object;
 }> => {
   const { body } = req;
-  const { StadiumId } = body;
+  const { StadiumId, userId } = body;
 
-  // const { StadiumId } = req.UserData this will happen after create protected routes
-  const checkAuthId = 5; //and this will removed
+  const checkAuthId = req.user?.id;
 
-  if (+StadiumId !== +checkAuthId) {
+  if (+userId !== +(checkAuthId as number)) {
     return {
       status: 401,
       data: 'UnAuthorize',
@@ -261,11 +259,10 @@ export const AddStadiumImageService = async (
 export const deleteStadiumImageService = async (
   req: Request,
 ): Promise<{ status: number; data: string | number }> => {
-  const { ImageId, StadiumId } = req.params;
-  // const checkAuthId = req.UserData.StadiumId; this will happen after create protected routes
-  const checkAuthId = 5;
+  const { ImageId, StadiumId, userId } = req.params;
+  const checkAuthId = req.user?.id;
 
-  if (+StadiumId !== checkAuthId) {
+  if (+userId !== +(checkAuthId as number)) {
     return {
       status: 401,
       data: 'UnAuthorize',
