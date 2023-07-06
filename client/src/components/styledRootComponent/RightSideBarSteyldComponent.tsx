@@ -4,7 +4,7 @@ import { Box, styled } from '@mui/system';
 export const StyledMyMatches = styled(Box)({
   width: '100%',
   height: '46px',
-  backgroundColor: '#D9D9D9',
+  backgroundColor: '#F2FCF5',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -13,7 +13,7 @@ export const StyledMyMatches = styled(Box)({
 export const StyledWorldMatches = styled(Box)({
   width: '100%',
   height: '80px',
-  backgroundColor: '#D9D9D9',
+  backgroundColor: '#F2FCF5',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
