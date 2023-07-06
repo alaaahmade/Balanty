@@ -151,22 +151,8 @@ const MatchChat = () => {
 
   return (
     <Wrapper ref={scrollContainerRef}>
-      <Box
-        style={{
-          position: 'sticky',
-          top: '0',
-          left: '0',
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '0.5rem 0',
-          background: '#fff',
-          borderBottom: '1px solid #eee',
-          zIndex: '1000',
-        }}
-      >
-        <div
+      <Box>
+        <Box
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -191,13 +177,13 @@ const MatchChat = () => {
               }}
             />
           </IconBackground>
-        </div>
+        </Box>
         <Typography variant="h4" sx={{ fontSize: '20px', fontWeight: 'bold' }}>
           {matchData?.data?.match?.title}
         </Typography>
       </Box>
 
-      <div style={{ flexGrow: '2', marginTop: '0.5rem' }}>
+      <Box style={{ flexGrow: '2', marginTop: '0.5rem' }}>
         {matchMessages?.length > 0 ? (
           matchMessages.map((message, i, arr) => {
             return (
@@ -244,9 +230,9 @@ const MatchChat = () => {
             </Typography>
           </>
         )}
-      </div>
+      </Box>
       {isIconPickerShown && (
-        <div
+        <Box
           style={{
             display: 'block',
             position: 'sticky',
@@ -259,11 +245,11 @@ const MatchChat = () => {
               handleEmojiSelect(emoji.native)
             }
           />
-        </div>
+        </Box>
       )}
 
       <AddMessageBar>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+        <Box style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
           <IconBackground>
             <AttachFileIcon
               style={{
@@ -284,7 +270,7 @@ const MatchChat = () => {
               }}
             />
           </IconBackground>
-        </div>
+        </Box>
         <MessageInput
           value={messageInput}
           onChange={handleInput}

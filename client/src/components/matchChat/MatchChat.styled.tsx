@@ -123,3 +123,17 @@ export const MessageBox = styled(Box)<Props>(({ isReceived }) => ({
   wordWrap: 'break-word',
   borderRadius: '20px',
 }));
+
+export const MatchHeaderSection = styled(Box)({
+  position: 'sticky',
+  top: '0',
+  left: '0',
+  width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  padding: '0.5rem 0',
+  background: '#fff',
+  borderBottom: '1px solid #eee',
+  zIndex: '1000',
+});
