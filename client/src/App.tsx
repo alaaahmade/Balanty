@@ -18,6 +18,7 @@ import StadiumsPage from './pages/Stadiums';
 import PlayerProfile from './pages/PlayerProfile';
 import MatchesPage from './components/matchesPage/Match';
 import { AuthProvider } from './context/AuthContext';
+import PlayersPage from './pages/PlayersPage';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: 'stadiums/',
         element: <StadiumsPage />,
+      },
+      {
+        path: 'players/',
+        element: <PlayersPage />,
       },
       { path: 'match/:matchId', element: <MatchRoomPage /> },
       {
