@@ -285,3 +285,50 @@ export const deleteStadiumImageService = async (
 
   return { status: 204, data: result };
 };
+
+export const getBestStadiumsService = async (): Promise<{
+  status: number;
+  data: object;
+}> => {
+  const Stadiums = await User.findAll({
+    where: { role: 'STADIUM' },
+    attributes: ['id', 'username'],
+    include: [
+      {
+        model: Stadium,
+        include: [
+          {
+            model: Gallery,
+            as: 'stadiumGallery',
+            limit: 1,
+          },
+        ],
+      },
+      { model: Review, as: 'StadiumsReviews', attributes: ['value'] },
+    ],
+  });
+
+  const stadiumWithAverage = Stadiums.map((stadium: User) => {
+    const totalReviews = (stadium.StadiumsReviews as Review[]).length;
+    const averageReview =
+      (stadium.StadiumsReviews as Review[]).reduce(
+        (sum: number, review: { value: string }) => sum + +review.value,
+        0,
+      ) / totalReviews;
+
+    stadium.StadiumsReviews = averageReview || 0;
+
+    return stadium;
+  });
+
+  const sortedStadiums = stadiumWithAverage.sort(
+    (a, b) => (b.StadiumsReviews as number) - (a.StadiumsReviews as number),
+  );
+
+  const topThreeStadiums = sortedStadiums.slice(0, 3);
+
+  return {
+    status: 200,
+    data: topThreeStadiums,
+  };
+};

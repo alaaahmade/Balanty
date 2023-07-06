@@ -1,11 +1,8 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Typography, Box, InputAdornment, Button } from '@mui/material';
+import { Typography, Box, InputAdornment, Button, Rating } from '@mui/material';
 
-import StarIcon from '@mui/icons-material/Star';
-
-import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { Edit } from '@mui/icons-material';
 
 import axios from 'axios';
@@ -33,12 +30,16 @@ const BioSection = ({
   setEditMode,
   EditAble,
 }: BioSectionProps): ReactElement => {
-  const { description, price, ground, address } = userData.Stadium;
-  const { username, phone } = userData;
-  const [hov, setHove] = useState(false);
-  const [mouseOver, setMouseOver] = useState(false);
-  const [validation, setValidation] = useState('');
+  const [ratingArray, setRatingArray] = useState<{ value: number }[]>([]);
+  const [hov, setHove] = useState<boolean>(false);
+  const [mouseOver, setMouseOver] = useState<boolean>(false);
+  const [validation, setValidation] = useState<string>('');
   const [newData, setNewData] = useState<updatedValue>({});
+  const [newRating, setNewRating] = useState<number>(0);
+  const [playerRating, setPlayerRating] = useState<number>(0);
+
+  const { description, price, ground, address, id } = userData.Stadium;
+  const { username, phone } = userData;
 
   const navigate = useNavigate();
 
@@ -46,6 +47,20 @@ const BioSection = ({
     setEditMode(true);
     setMouseOver(false);
   };
+
+  const getReview = async () => {
+    try {
+      const { data } = await axios.get(`/api/v1/review/${id}`);
+      setRatingArray(data.data);
+    } catch (error) {
+      navigate('/serverError');
+    }
+  };
+
+  const averageRating =
+    ratingArray.reduce((sum, review) => sum + +review.value, 0) /
+    ratingArray.length;
+
   const handleUpdate = async () => {
     try {
       updatedValueSchema.validateSync(newData);
@@ -86,6 +101,31 @@ const BioSection = ({
     setHove(true);
   };
 
+  const addNewReview = async (rate: number) => {
+    try {
+      await axios.post(`/api/v1/review/${id}`, {
+        value: rate.toString(),
+      });
+      setNewRating(rate);
+    } catch (error) {
+      navigate('/serverError');
+    }
+  };
+
+  const getPlayerReview = async () => {
+    try {
+      const { data } = await axios.get(`/api/v1/review/player/${id}`);
+      setPlayerRating(data.data ? data.data.value : 0);
+    } catch (error) {
+      navigate('/serverError');
+    }
+  };
+
+  useEffect(() => {
+    getReview();
+    getPlayerReview();
+  }, [id, newRating]);
+
   return (
     <Box>
       <BioBox onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOut}>
@@ -110,17 +150,15 @@ const BioSection = ({
           </Typography>
         </FlexBox>
         <FlexBox>
-          <FlexBox
+          <Rating
+            name="half-rating"
+            value={averageRating}
+            precision={0.5}
             sx={{
-              color: 'yellow',
+              transform: 'rotateY(180deg)',
             }}
-          >
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-          </FlexBox>
+            readOnly
+          />
           <Typography variant="h5" sx={{ ml: '5px' }}>
             : التقييم
           </Typography>
@@ -235,32 +273,24 @@ const BioSection = ({
           </FlexBox>
         </FlexBox>
         {!EditAble && (
-          <Box
+          <FlexBox
             sx={{
-              display: 'flex',
-              justifyContent: 'flex-end',
+              gap: '10px',
             }}
           >
-            <Box
-              sx={{
-                color: 'yellow',
+            <Rating
+              name="half-rating"
+              value={+newRating || +playerRating}
+              precision={0.5}
+              onChange={e => {
+                addNewReview(+(e.target as HTMLInputElement).value);
               }}
-            >
-              <StarBorderIcon />
-              <StarBorderIcon />
-              <StarBorderIcon />
-              <StarBorderIcon />
-              <StarBorderIcon />
-            </Box>
-            <Typography
               sx={{
-                width: '7rem',
-                textAlign: 'right',
+                transform: 'rotateY(180deg)',
               }}
-            >
-              : اضافة تقييم
-            </Typography>
-          </Box>
+            />
+            : قيم الموقع
+          </FlexBox>
         )}
         {editMode ? (
           <Box

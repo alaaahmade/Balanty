@@ -11,11 +11,13 @@ import {
   AddStadiumImage,
   UpdateStadiumGallery,
   deleteStadiumImage,
+  getBestStadiums,
 } from '../controllers/stadiums';
 
 export const stadiumRouter: Router = Router();
 
 stadiumRouter.get('/', errorWrapper(getAllStadiums));
+stadiumRouter.get('/best', errorWrapper(getBestStadiums));
 stadiumRouter.get('/all/:page', errorWrapper(getStadiums));
 stadiumRouter.get('/details/:id', errorWrapper(getStadiumDetails));
 stadiumRouter.get('/profile/:id', errorWrapper(getStadiumProfile));

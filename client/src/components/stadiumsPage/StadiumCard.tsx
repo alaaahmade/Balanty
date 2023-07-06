@@ -12,7 +12,7 @@ import {
   FlexBox,
   ImageBox,
   StadiumCardBox,
-} from './StadiumPage.styled';
+} from './StadiumsPage.styled';
 
 import { StadiumDataProps } from '../../interfaces';
 
@@ -25,7 +25,7 @@ const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
   const navigate = useNavigate();
 
   const averageRating =
-    StadiumsReviews.reduce((sum, review) => sum + review.value, 0) /
+    StadiumsReviews.reduce((sum, review) => sum + +review.value, 0) /
     StadiumsReviews.length;
 
   const handleGoToProfile = () => {
@@ -94,6 +94,7 @@ const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
                 sx={{
                   transform: 'rotateY(180deg)',
                 }}
+                readOnly
               />
             </Box>
           </Box>

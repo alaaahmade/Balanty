@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Box } from '@mui/system';
+import { NavLink } from 'react-router-dom';
 
 export const CreateMatchBox = styled(Box)({
   width: '80%',
@@ -11,41 +12,46 @@ export const CreateMatchBox = styled(Box)({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
+  position: 'absolute',
+  bottom: '40px',
 });
 
 export const StyledUserCart = styled(Box)({
-  width: '190px',
+  width: '100%',
   height: '50px',
   background: '#D9D9D9',
-  borderRadius: '5px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  gap: '15px',
-  border: '0.1px solid rgb(133 133 133)',
-});
-
-export const StyledImag = styled('img')({
-  width: '35px',
-  height: '35px',
-  cursor: 'pointer',
-  objectFit: 'cover',
-  borderRadius: '50%',
-  outline: '2px solid rgb(133 133 133)',
-});
-
-export const StyledSideBarLink = styled(Box)({
-  width: '70%',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
+  gap: '15px',
+});
+
+export const StyledImag = styled(Box)({
+  width: '37px',
+  height: '37px',
+  cursor: 'pointer',
+  borderRadius: '50%',
+  outline: '1px solid rgb(133 133 133)',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+});
+
+export const SideLink = styled(NavLink)({
+  fontSize: '18px',
+  padding: '10px 30px 10px 0',
+  textDecoration: 'none',
+  color: 'inherit',
+  width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  paddingRight: '30px',
   gap: '20px',
-  fontSize: '25px',
   cursor: 'pointer',
   transition: '0.2s ease',
   '&:hover': {
     color: '#2CB674',
-    outline: '1px solid #2CB674',
-    padding: '5px 8px',
+    padding: '15px 30px 15px 0',
+    backgroundColor: '#D9D9D9',
   },
 });

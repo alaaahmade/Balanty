@@ -68,6 +68,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
       `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
       formData,
     );
+
     return data.secure_url;
   };
 

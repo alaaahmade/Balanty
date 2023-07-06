@@ -34,7 +34,6 @@ export { default as LeftSideBar } from './RootComponents/leftSideBar/LeftSideBar
 export { default as RightSideBar } from './RootComponents/rightSideBar/RightSideBar';
 
 export {
-  StyledSideBarLink,
   StyledImag,
   StyledUserCart,
   CreateMatchBox,
@@ -56,5 +55,5 @@ export {
 } from './styledRootComponent/Nav';
 
 export { default as StadiumCard } from './stadiumsPage/StadiumCard';
-export { StadiumPageBox } from './stadiumsPage/StadiumPage.styled';
+export { StadiumPageBox } from './stadiumsPage/StadiumsPage.styled';
 export { default as SkeletonLoader } from './stadiumsPage/Loader';

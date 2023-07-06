@@ -13,6 +13,7 @@ import {
   AddStadiumImageService,
   UpdateStadiumGalleryService,
   deleteStadiumImageService,
+  getBestStadiumsService,
 } from '../services/stadiums';
 
 export const getAllStadiums: RequestHandler = async (
@@ -91,5 +92,13 @@ export const deleteStadiumImage: RequestHandler = async (
 ): Promise<void> => {
   const response = await deleteStadiumImageService(req);
 
+  res.status(response.status).json(response);
+};
+
+export const getBestStadiums: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const response = await getBestStadiumsService();
   res.status(response.status).json(response);
 };

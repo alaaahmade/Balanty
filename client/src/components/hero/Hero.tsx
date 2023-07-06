@@ -26,17 +26,12 @@ const Hero: FC<Props> = ({ image, type }): ReactElement => {
         />
       )}
       <CustomizedButton
-        variant="outlined"
-        sx={{
-          color: '#fff',
-          borderColor: '#fff',
-          position: 'absolute',
-          bottom: '70px',
-          right: '120px',
-          transform: 'translateX(-50%)',
+        style={{
+          padding: '7px',
         }}
+        to={type === 'لاعب' ? '/player/signup' : '/stadium/signup'}
       >
-        إنضم ك{type}
+        انضم ك{type}
       </CustomizedButton>
     </Wrapper>
   );

@@ -2,25 +2,32 @@ import { styled } from '@mui/system';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-export const StyledBoxFeatures = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 50px;
-`;
+export const StyledBoxFeatures = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  margin: '0 50px 40px 50px',
+  width: '30%',
+  textAlign: 'center',
+});
 
 export const StyledImageFeatures = styled('img')`
-  width: 248.34px;
-  height: 176.6px;
+  width: 300px;
+  height: 200px;
+  padding: 10px;
 `;
 
 export const StyledDescriptionFeatures = styled(Typography)`
-  margin-top: 60px;
+  margin-top: 10px;
 `;
 
-export const StyledTitleF = styled(Typography)`
-  font-weight: 700;
-  font-size: 48px;
-  margin-bottom: 30px;
-  padding-top: 60px;
-`;
+export const StyledTitleF = styled(Typography)({
+  fontWeight: 700,
+  fontSize: '48px',
+  marginBottom: '30px',
+  paddingTop: '60px',
+  width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+});

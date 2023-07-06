@@ -4,12 +4,10 @@ import { sequelize } from '../server/database';
 import build from '../server/database/config/build';
 
 let token = '';
-// 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVtYW4iLCJlbWFpbCI6ImVtYW5yQGFkbWluLmNvbSIsInBob25lIjoiMTIzODU2Nzk5Iiwicm9sZSI6InN0YWRpdW0iLCJpZCI6MTEsImlhdCI6MTY4ODU1OTI4NX0.F_1jKA0r1I7OX70A4xsiCnCJAoLMAbJJ5Sg-ZFxPI8g';
 
 beforeAll(async () => {
   await build();
 });
-
 describe('test GitHub Actions CICD Piplines', () => {
   test('test for husky', done => {
     expect(3).toBe(3);
@@ -88,7 +86,7 @@ describe('GET /api/v1/stadiums', () => {
       });
   });
 
-  test('responds from /api/v1/stadiums/details/2 with JSON and 200 status code', done => {
+  test('responds from /api/v1/stadiums/details/2 with JSON and 401 status code', done => {
     request(app)
       .get('/api/v1/stadiums/details/2')
       .set('Accept', 'application/json')
@@ -130,26 +128,26 @@ describe('GET /api/v1/matches/stadium/5', () => {
         }
       });
   });
-});
 
-test('test for not exist Stadium should return 404 with "هذا الملعب غير متاح"', done => {
-  request(app)
-    .get('/api/v1/stadiums/profile/500')
-    .set('Accept', 'application/json')
-    .set('Cookie', `token=${token}`)
-    .end((err, res) => {
-      if (err) {
-        done(err);
-      }
-      expect(res.status).toBe(401);
-      expect(res.type).toBe('application/json');
-      expect(typeof res).toBe('object');
-      const response = JSON.parse(res.text);
-      const { data } = response;
-      expect(response.status).toBe(401);
-      expect(data).toBe('هذا الملعب غير متاح');
-      done();
-    });
+  test('test for not exist Stadium should return 404 with "هذا الملعب غير متاح"', done => {
+    request(app)
+      .get('/api/v1/stadiums/profile/500')
+      .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
+      .end((err, res) => {
+        if (err) {
+          done(err);
+        }
+        expect(res.status).toBe(401);
+        expect(res.type).toBe('application/json');
+        expect(typeof res).toBe('object');
+        const response = JSON.parse(res.text);
+        const { data } = response;
+        expect(response.status).toBe(401);
+        expect(data).toBe('هذا الملعب غير متاح');
+        done();
+      });
+  });
 });
 
 describe('GET /api/v1/stadiums/profiles', () => {
@@ -298,7 +296,6 @@ describe('patch /api/v1/stadiums/edit', () => {
       });
   });
 });
-
 describe('Post /api/v1/stadiums/gallery', () => {
   test('responds from /api/v1/stadiums/gallery get 200 status code', done => {
     request(app)
@@ -416,7 +413,7 @@ describe('Patch /api/v1/stadiums/gallery', () => {
       .set('Accept', 'application/json')
       .set('Cookie', `token=${token}`)
       .send({
-        id: 27,
+        id: 26,
         image:
           'https://i2-prod.mirror.co.uk/incoming/article23119598.ece/ALTERNATES/s1227b/0_Stadiums-of-the-future.jpg',
         StadiumId: 13,
@@ -440,9 +437,9 @@ describe('Patch /api/v1/stadiums/gallery', () => {
 });
 
 describe('delete /api/v1/stadiums/gallery/:ImageId/:StadiumId/userId', () => {
-  test('responds from /api/v1/stadiums/gallery/17/13/17 get 204 status code', done => {
+  test('responds from /api/v1/stadiums/gallery/18/5/17 get 204 status code', done => {
     request(app)
-      .delete('/api/v1/stadiums/gallery/19/5/17')
+      .delete('/api/v1/stadiums/gallery/18/5/17')
       .set('Accept', 'application/json')
       .set('Cookie', `token=${token}`)
       .end((err, res) => {
@@ -479,11 +476,11 @@ describe('post /api/v1/review/5', () => {
       .post('/api/v1/review/5')
       .set('Accept', 'application/json')
       .set('Cookie', `token=${token}`)
-      .send({ value: 4 })
+      .send({ value: '4' })
       .end((error, res) => {
         expect(res.status).toBe(200);
         const { data } = JSON.parse(res.text);
-        expect(data.value).toBe(4);
+        expect(data.value).toBe('4');
         done();
         if (error) {
           done(error);
@@ -503,7 +500,7 @@ describe('GET /api/v1/review/5', () => {
         expect(res.type).toBe('application/json');
         const { data } = JSON.parse(res.text);
         expect(Array.isArray(data)).toBe(true);
-        expect(data[0].value).toBe(4);
+        expect(data[0].value).toBe('4');
         expect(data[0].playerId).toBe(17);
         expect(data[0].stadiumId).toBe(5);
         done();
@@ -530,6 +527,49 @@ describe('GET /api/v1/review/5', () => {
   });
 });
 
+describe('GET /api/v1/players/avatar/1', () => {
+  test('responds from /api/v1/players/avatar/1 with JSON and 200 status code', done => {
+    request(app)
+      .get('/api/v1/players/avatar/1')
+      .set('Accept', 'application/json')
+      .set('Cookie', `token=${token}`)
+      .end((error, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        const { data } = JSON.parse(res.text);
+        expect(Array.isArray(data)).toBe(false);
+        expect(typeof data).toBe('string');
+        expect(data).toBe(
+          'https://www.yourstru.ly/wp-content/uploads/2022/12/2022-12-22_12_lionel-messi-biograph.webp',
+        );
+        done();
+        if (error) {
+          done(error);
+        }
+      });
+  });
+});
+
+describe('GET /api/v1/review/player/5', () => {
+  test('responds from /api/v1/review/player/5 with JSON and 200 status code', done => {
+    request(app)
+      .get('/api/v1/review/player/5')
+      .set('Cookie', `token=${token}`)
+      .end((error, res) => {
+        expect(res.status).toBe(200);
+        expect(res.type).toBe('application/json');
+        const { data } = JSON.parse(res.text);
+        expect(data.value).toBe('4');
+        expect(data.playerId).toBe(17);
+        expect(data.stadiumId).toBe(5);
+        done();
+        if (error) {
+          done(error);
+        }
+      });
+  });
+});
+
 describe('GET /api/v1/stadiums/all/1', () => {
   test('responds from /api/v1/stadiums/all/1 with JSON and 200 status code', done => {
     request(app)
@@ -542,7 +582,6 @@ describe('GET /api/v1/stadiums/all/1', () => {
         const { data } = JSON.parse(res.text);
         expect(Array.isArray(data)).toBe(true);
         expect(data.length).toBe(8);
-
         done();
         if (error) {
           done(error);
@@ -550,6 +589,7 @@ describe('GET /api/v1/stadiums/all/1', () => {
       });
   });
 });
+
 afterAll(() => {
   sequelize.close();
 });

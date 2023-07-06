@@ -31,4 +31,5 @@ export type {
   EditGalleryPopupProps,
 } from './StadiumProfile';
 
+export type { Page } from './landingPage';
 export type { UserCardProps } from './rootLayout';

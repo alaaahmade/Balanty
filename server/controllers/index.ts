@@ -14,6 +14,14 @@ export {
   getStadiumMatches,
   getStadiums,
   UpdateStadiumData,
+  getBestStadiums,
 } from './stadiums';
 
-export { getReview, addReview } from './reviews';
+export {
+  playerAvatar,
+  getPlayer,
+  playerMatches,
+  updatePlayer,
+  getPlayers,
+} from './player';
+export { getReview, addReview, getPlayerReview } from './reviews';
