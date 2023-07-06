@@ -10,7 +10,7 @@ import {
 import { FollowsInfoWrapper } from '../components/playerProfile/Player.Styled';
 import { error } from '../interfaces/PLayerProfile';
 
-const Profile = () => {
+const PlayerProfile = () => {
   const [editMode, setEditMode] = useState(false);
   const [cover, setCover] = useState<string>('');
   const [avatar, setAvatar] = useState<string>('');
@@ -65,4 +65,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default PlayerProfile;

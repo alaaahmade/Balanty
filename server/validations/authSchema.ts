@@ -35,7 +35,7 @@ const signupSchema = Joi.object({
 });
 
 const loginSchema = Joi.object({
-  username: Joi.string().alphanum().min(4).max(25).required().messages({
+  username: Joi.string().min(5).max(25).required().messages({
     'string.empty': 'هذا الحقل لا يمكن أن يكون فارغ',
     'string.min': 'يجب ألا يقل هذا الحقل عن 5 أحرف',
     'string.max': 'يجب ألا يزيد هذا الحقل عن 25 حرفًا',

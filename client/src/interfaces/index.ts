@@ -6,6 +6,7 @@ export type {
   OpenContextValue,
   LeftSideBarInterface,
   MyContextProviderProps,
+  IMatchDataProps,
 } from './matchInterface';
 
 export type {
