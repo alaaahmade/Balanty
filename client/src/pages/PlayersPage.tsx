@@ -73,8 +73,6 @@ const PlayersPage = (): ReactElement => {
 
   return (
     <Box>
-      <NavBar />
-      <LeftSideBar />
       <TypeSearch searchValue={searchValue} setSearchValue={setSearchValue} />
       <RightSideBar />
       <CardsWrapper>
@@ -85,7 +83,7 @@ const PlayersPage = (): ReactElement => {
             sx={{ marginTop: '30px', backgroundColor: '#2CB674' }}
             severity="info"
           >
-            No player Matches your search!
+            ! لا يوجد لاعبين بهذا الاسم
           </Alert>
         )}
       </CardsWrapper>
