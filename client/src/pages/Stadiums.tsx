@@ -1,10 +1,18 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { ChangeEvent, ReactElement, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner';
+import SearchIcon from '@mui/icons-material/Search';
+import ClearIcon from '@mui/icons-material/Clear';
 
 import axios from 'axios';
 
-import { Typography } from '@mui/material';
+import {
+  Alert,
+  Box,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
 
 import { SkeletonLoader, StadiumCard, StadiumPageBox } from '../components';
 
@@ -12,10 +20,13 @@ import { StadiumDataProps } from '../interfaces';
 
 const StadiumsPage = (): ReactElement => {
   const [stadiumData, setStadiumData] = useState<StadiumDataProps[]>([]);
+  const [stadiumSearch, setStadiumSearch] = useState<StadiumDataProps[]>([]);
   const [page, setPage] = useState<number>(1);
   const [first, setFirst] = useState<boolean>(true);
   const [end, setEnd] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [clearIcon, setClearIcon] = useState(false);
+  const [value, setValue] = useState<string>('');
   const navigate = useNavigate();
 
   const fetchStadiumsData = async () => {
@@ -30,6 +41,24 @@ const StadiumsPage = (): ReactElement => {
       navigate('/serverError');
       setIsLoading(false);
     }
+  };
+
+  const handleChange = async (element: ChangeEvent<HTMLInputElement>) => {
+    setValue(element.target.value);
+    setClearIcon(true);
+    try {
+      const { data } = await axios.get(
+        `/api/v1/stadiums/search?search=${element.target.value}`,
+      );
+      setStadiumSearch(data.data);
+    } catch (error) {
+      navigate('/serverError');
+    }
+  };
+
+  const handleClear = () => {
+    setClearIcon(false);
+    setValue('');
   };
 
   const handleScroll = () => {
@@ -61,9 +90,59 @@ const StadiumsPage = (): ReactElement => {
         mt: '5.5%',
       }}
     >
-      {stadiumData.map(stadium => (
-        <StadiumCard key={stadium.id} stadiumData={stadium} />
-      ))}
+      <Box
+        sx={{
+          width: 'calc(100% - 800px)',
+        }}
+      >
+        <TextField
+          size="small"
+          variant="outlined"
+          value={value}
+          placeholder="بحث"
+          onChange={handleChange}
+          sx={{
+            width: '100%',
+            borderColor: '#2CB674',
+            direction: 'right',
+            '& input': {
+              textAlign: 'right',
+            },
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+            endAdornment: clearIcon && (
+              <InputAdornment
+                position="end"
+                onClick={handleClear}
+                style={{ cursor: 'pointer' }}
+              >
+                <ClearIcon style={{ color: '#999' }} />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Box>
+      {!value ? (
+        stadiumData.map(stadium => (
+          <StadiumCard key={stadium.id} stadiumData={stadium} />
+        ))
+      ) : stadiumSearch.length ? (
+        stadiumSearch.map(stadium => (
+          <StadiumCard key={stadium.id} stadiumData={stadium} />
+        ))
+      ) : (
+        <Alert
+          sx={{ marginTop: '30px', backgroundColor: '#2CB674' }}
+          severity="info"
+        >
+          ! لا يوجد ملاعب بهذا الاسم
+        </Alert>
+      )}
       {first && <SkeletonLoader />}
       {isLoading && (
         <ThreeDots

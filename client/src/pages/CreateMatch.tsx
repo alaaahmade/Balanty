@@ -112,13 +112,27 @@ const CreateMatch: React.FC<createMatchInterface> = ({
               color="inherit"
               onClick={handleClose}
               aria-label="close"
+              sx={{
+                color: '#fff',
+              }}
             >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 76, flex: 1 }} variant="h6" component="div">
+            <Typography
+              sx={{ ml: 76, flex: 1, color: '#fff' }}
+              variant="h6"
+              component="div"
+            >
               انشاء مباراة
             </Typography>
-            <Button autoFocus color="inherit" onClick={HandleCreateEvent}>
+            <Button
+              sx={{
+                color: '#fff',
+              }}
+              autoFocus
+              color="inherit"
+              onClick={HandleCreateEvent}
+            >
               انشاء
             </Button>
           </Toolbar>
