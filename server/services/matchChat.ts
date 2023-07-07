@@ -138,6 +138,7 @@ const deleteMessageService: (
       status: 200,
       data: {
         message: 'Message deleted successfully',
+        deletedMessage: message,
       },
     };
   } else {

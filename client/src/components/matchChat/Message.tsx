@@ -1,4 +1,4 @@
-import React, { Key, Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { Box } from '@mui/system';
 import { Avatar } from '@mui/material';
 import MessageOptions from './MessageOptions';
@@ -6,17 +6,19 @@ import { CustomizeLink, MessageBox } from './MatchChat.styled';
 import { IMessageProps } from '../../interfaces';
 
 const Message = ({
+  socket,
   id,
   senderId,
   message,
   senderAvatar,
   senderName,
   isReceived,
-  setIsDeleted,
   role,
+  matchMessages,
+  setMatchMessages,
 }: IMessageProps) => {
   return (
-    <Box sx={{ mt: senderAvatar ? '10px' : 'auto' }}>
+    <Box sx={{ mt: senderAvatar && '10px' }}>
       {senderAvatar && (
         <CustomizeLink to={`/profile/${role}/${senderId}`}>
           {senderName}
@@ -42,7 +44,12 @@ const Message = ({
           }}
         >
           {!isReceived && (
-            <MessageOptions setIsDeleted={setIsDeleted} id={id} />
+            <MessageOptions
+              matchMessages={matchMessages}
+              setMatchMessages={setMatchMessages}
+              socket={socket}
+              id={id}
+            />
           )}
           {senderAvatar && <Avatar sx={{ mt: '-35px' }} src={senderAvatar} />}
           {!senderAvatar && isReceived && (

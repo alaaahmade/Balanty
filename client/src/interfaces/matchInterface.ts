@@ -1,4 +1,5 @@
 import { Dispatch, Key, ReactNode, SetStateAction } from 'react';
+import { Socket } from 'socket.io-client';
 import { IEvent } from '../pages/CreateMatch';
 
 export interface Option {
@@ -116,7 +117,7 @@ export interface IMessageData {
   status: number;
   data: {
     message: string;
-    newMessage: IMatchMessage;
+    newMessage?: IMatchMessage;
   };
 }
 export interface IMatchDataProps {
@@ -145,6 +146,8 @@ export interface IMessageProps {
   senderName: string | number;
   senderAvatar: string | null;
   isReceived: boolean;
-  setIsDeleted: Dispatch<SetStateAction<object>>;
   role: string | undefined;
+  socket: Socket;
+  matchMessages: IMatchMessage[];
+  setMatchMessages: Dispatch<SetStateAction<IMatchMessage[]>>;
 }

@@ -88,7 +88,6 @@ export const getAllMatches = async (): Promise<matchesInterface> => {
       { model: User, as: 'Players' },
     ],
   });
-  console.log(matches);
 
   if (matches.length > 0) {
     return {

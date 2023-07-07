@@ -19,6 +19,9 @@ import StadiumsPage from './pages/Stadiums';
 import PlayerProfile from './pages/PlayerProfile';
 import MatchesPage from './components/matchesPage/Match';
 import { AuthProvider } from './context/AuthContext';
+import NotFoundPage from './pages/NotFound';
+import InternalServerErrorPage from './pages/ServerError';
+import PlayersPage from './pages/PlayersPage';
 
 const socket = io.connect('http://localhost:8080');
 
@@ -38,12 +41,16 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
-        path: 'stadiums/',
+        index: true,
+        element: <MatchesPage />,
+      },
+      {
+        path: 'stadiums',
         element: <StadiumsPage />,
       },
       {
-        path: 'matches',
-        element: <MatchesPage />,
+        path: 'players/',
+        element: <PlayersPage />,
       },
       { path: 'match/:matchId', element: <MatchRoomPage socket={socket} /> },
     ],
@@ -57,7 +64,12 @@ const router = createBrowserRouter([
       { path: 'player/:id', element: <PlayerProfile /> },
     ],
   },
-  { path: '*', element: <h1>error</h1> },
+  {
+    path: '/serverError',
+    element: <InternalServerErrorPage />,
+  },
+
+  { path: '*', element: <NotFoundPage /> },
 ]);
 const App = (): ReactElement => {
   return (

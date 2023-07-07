@@ -23,6 +23,7 @@ import { Socket } from 'socket.io-client';
 import {
   AddMessageBar,
   IconBackground,
+  MatchHeaderSection,
   MessageInput,
   MessagesWrapper,
   Wrapper,
@@ -65,9 +66,7 @@ const MatchChat: FC<{ socket: Socket }> = ({ socket }): ReactElement => {
   const [matchMessages, setMatchMessages] = useState<IMatchMessage[]>([]);
 
   const [messageInput, setMessageInput] = useState<string>('');
-  const [newMessage, setNewMessage] = useState<object | null>(null);
   const [isIconPickerShown, setIsIconPickerShown] = useState<boolean>(false);
-  const [isDeleted, setIsDeleted] = useState<object | null>(null);
 
   const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -95,7 +94,6 @@ const MatchChat: FC<{ socket: Socket }> = ({ socket }): ReactElement => {
         ...matchMessages,
         newData.data.newMessage,
       ] as IMatchMessage[]);
-      setNewMessage(newData.data.newMessage);
       handleScrollChat();
     });
   }, [socket, matchMessages]);
@@ -124,7 +122,7 @@ const MatchChat: FC<{ socket: Socket }> = ({ socket }): ReactElement => {
   useEffect(() => {
     handleScrollChat();
     getMessageRequest();
-  }, [isDeleted, socket]);
+  }, [socket]);
 
   const addMessage = () => {
     if (messageInput.trim()) {
@@ -173,43 +171,18 @@ const MatchChat: FC<{ socket: Socket }> = ({ socket }): ReactElement => {
 
   return (
     <Wrapper ref={scrollContainerRef}>
-      <Box>
-        <Box
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '1rem',
-          }}
-        >
-          <IconBackground>
-            <VideocamOutlinedIcon
-              style={{
-                fill: '#2CB674',
-                width: '23px',
-                height: '23px',
-              }}
-            />
-          </IconBackground>
-          <IconBackground>
-            <CallOutlinedIcon
-              style={{
-                fill: '#2CB674',
-                width: '23px',
-                height: '23px',
-              }}
-            />
-          </IconBackground>
-        </Box>
+      <MatchHeaderSection>
         <Typography variant="h4" sx={{ fontSize: '20px', fontWeight: 'bold' }}>
           {matchData?.data?.match?.title}
         </Typography>
-      </Box>
+      </MatchHeaderSection>
 
       <MessagesWrapper ref={scrollContainerRef}>
         {matchMessages?.length > 0 ? (
           matchMessages.map((message, i, arr) => {
             return (
               <Message
+                socket={socket}
                 key={message.id}
                 id={message.id}
                 message={message.message}
@@ -223,8 +196,9 @@ const MatchChat: FC<{ socket: Socket }> = ({ socket }): ReactElement => {
                 senderName={message.User?.username}
                 senderId={message.UserId}
                 isReceived={message.UserId !== user?.id}
-                setIsDeleted={setIsDeleted}
                 role={message.User?.role}
+                matchMessages={matchMessages}
+                setMatchMessages={setMatchMessages}
               />
             );
           })
@@ -273,15 +247,6 @@ const MatchChat: FC<{ socket: Socket }> = ({ socket }): ReactElement => {
 
       <AddMessageBar>
         <Box style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-          <IconBackground>
-            <AttachFileIcon
-              style={{
-                fill: '#2CB674',
-                width: '23px',
-                height: '23px',
-              }}
-            />
-          </IconBackground>
           <IconBackground
             onClick={() => setIsIconPickerShown(!isIconPickerShown)}
           >

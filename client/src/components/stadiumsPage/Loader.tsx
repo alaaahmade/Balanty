@@ -6,8 +6,9 @@ const SkeletonLoader = () => {
 
   return (
     <DotsLoaderBox>
-      {SkeletonArray.map(() => (
+      {SkeletonArray.map(e => (
         <Skeleton
+          key={e}
           sx={{ bgcolor: 'grey.350', borderRadius: '5px' }}
           variant="rectangular"
           width="calc(100% - 560px)"

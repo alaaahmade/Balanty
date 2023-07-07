@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 export const CreateMatchBox = styled(Box)({
   width: '80%',
   height: '110px',
-  backgroundColor: '#D9D9D9',
+  backgroundColor: '#F2FCF5',
   borderRadius: '5px',
   mt: '120px',
   display: 'flex',
@@ -19,7 +19,7 @@ export const CreateMatchBox = styled(Box)({
 export const StyledUserCart = styled(Box)({
   width: '100%',
   height: '50px',
-  background: '#D9D9D9',
+  background: '#F2FCF5',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
@@ -52,6 +52,6 @@ export const SideLink = styled(NavLink)({
   '&:hover': {
     color: '#2CB674',
     padding: '15px 30px 15px 0',
-    backgroundColor: '#D9D9D9',
+    backgroundColor: '#F2FCF5',
   },
 });
