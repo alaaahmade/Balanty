@@ -1,6 +1,6 @@
 import { FC, ReactNode, createContext, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box } from '@mui/material';
+
 import { AuthContext } from './AuthContext';
 
 export const RedirectContext = createContext<null>(null);

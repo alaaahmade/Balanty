@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material';
+import { PaletteColorOptions, createTheme } from '@mui/material';
 
 const LightTheme = createTheme({
   typography: {
@@ -12,7 +12,7 @@ const LightTheme = createTheme({
       contrastText: '#000',
       backGroundColor: '#fff',
       grayColor: '#F2FCF5',
-    },
+    } as PaletteColorOptions,
   },
 });
 

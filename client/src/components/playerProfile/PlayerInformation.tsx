@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { Edit } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import { FlexBox } from '../stadiumProfile/StadiumProfile.styled';
 import { BioBox } from './Player.Styled';
 import EditInput from '../stadiumProfile/EditInput';
@@ -25,6 +26,8 @@ const PlayerInformation = ({
 }: profileInfoProps): ReactElement => {
   const [validation, setValidation] = useState<updatedValue>({});
   const [newData, setNewData] = useState<updatedValue>({});
+
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setEditMode(true);
@@ -53,7 +56,7 @@ const PlayerInformation = ({
 
         setValidation(validationErrors);
       } else {
-        console.error(error);
+        navigate('/serverError');
       }
     }
   };
