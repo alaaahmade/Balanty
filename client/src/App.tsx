@@ -1,6 +1,5 @@
 import { ReactElement } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { ThemeProvider } from '@emotion/react';
 import * as io from 'socket.io-client';
 import RootLayout from './layouts/RootLayout';
 import { LandingPage } from './pages';
