@@ -61,8 +61,18 @@ const AccountMenu = (): React.ReactElement => {
         onClick={handleClose}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        PaperProps={{
+          style: {
+            backgroundColor: isDarkMode ? '#181818' : '#fff',
+          },
+        }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          sx={{
+            backgroundColor: isDarkMode ? '#181818' : '#fff',
+          }}
+          onClick={handleClose}
+        >
           <Link
             to={
               user?.role === 'stadium'
@@ -82,7 +92,13 @@ const AccountMenu = (): React.ReactElement => {
             My Account
           </Link>
         </MenuItem>
-        <MenuItem onClick={handleTheme}>
+        <MenuItem
+          sx={{
+            color: isDarkMode ? '#fff' : '#000',
+            backgroundColor: isDarkMode ? '#181818' : '#fff',
+          }}
+          onClick={handleTheme}
+        >
           {!isDarkMode ? (
             <>
               <ListItemIcon>
@@ -93,13 +109,23 @@ const AccountMenu = (): React.ReactElement => {
           ) : (
             <>
               <ListItemIcon>
-                <LightModeIcon fontSize="small" />
+                <LightModeIcon
+                  fontSize="small"
+                  sx={{
+                    color: 'yellow',
+                  }}
+                />
               </ListItemIcon>
               Light Mode
             </>
           )}
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          sx={{
+            backgroundColor: isDarkMode ? '#181818' : '#fff',
+          }}
+          onClick={handleClose}
+        >
           <ListItemIcon>
             <Logout fontSize="small" sx={{ fill: '#2cb676' }} />
           </ListItemIcon>
