@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useContext } from 'react';
-import { Button } from '@mui/material';
+import { Typography } from '@mui/material';
 import { AuthContext } from '../../context';
 import { AuthContextData } from '../../interfaces';
 
@@ -9,7 +9,15 @@ const LogoutButton: FC = (): ReactElement => {
   const handleLogout = async () => {
     await logout();
   };
-  return <Button onClick={handleLogout}>Logout</Button>;
+  return (
+    <Typography
+      color="#2cb676"
+      sx={{ fontWeight: '600' }}
+      onClick={handleLogout}
+    >
+      Logout
+    </Typography>
+  );
 };
 
 export default LogoutButton;
