@@ -60,4 +60,8 @@ jobs:
           # The hostname used to communicate with the PostgreSQL service container
           TEST_URL: postgres://balanty:123456@localhost:5432/balanty
           SECRET_KEY: fljuhpgr,gpfdjfvitm,vpvnfkjbfb
+          EMAIL: balantypro@gmail.com
+          EMAIL_PASSWORD: lpkvuhrztdzfgcdr
+          PRODUCT: فريق بلنتي
+          PRODUCT_LINK: http://54.93.229.206/
 

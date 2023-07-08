@@ -37,13 +37,6 @@ export const StyledSearchInput = styled(Input)({
   },
 });
 
-export const StyledMnu = styled(GiHamburgerMenu)({
-  color: '#F2FCF5',
-  cursor: 'pointer',
-  fontSize: '25px',
-  marginRight: '70px',
-});
-
 export const StyledLabel = styled('label')({
   position: 'absolute',
   left: '66%',
