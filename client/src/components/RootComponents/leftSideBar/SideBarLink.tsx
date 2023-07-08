@@ -2,7 +2,9 @@ import { ReactElement } from 'react';
 
 import '../../../App.css';
 import { useTheme } from '@emotion/react';
+import { Theme } from '@mui/material';
 import { DarkSideLink } from '../../styledRootComponent/LiftSideBarStyledComponent';
+import { customPalette } from '../../playerProfile/PlayerBackground';
 
 interface SideBarLinkProps {
   text: string;
@@ -14,11 +16,13 @@ const SideBarLink = ({ text, icon }: SideBarLinkProps): ReactElement => {
   return (
     <DarkSideLink
       sx={{
-        backgroundColor: currentTheme.palette.primary.grayColor,
-        color: currentTheme.palette.primary.contrastText,
+        backgroundColor: ((currentTheme as Theme).palette as customPalette)
+          .customColors.grayColor,
+        color: (currentTheme as Theme).palette.primary.contrastText,
         '&:hover': {
-          backgroundColor: currentTheme.palette.primary.backGroundColor,
-          color: currentTheme.palette.primary.main,
+          backgroundColor: ((currentTheme as Theme).palette as customPalette)
+            .customColors.backGroundColor,
+          color: (currentTheme as Theme).palette.primary.main,
           padding: '15px 30px 15px 0',
         },
       }}

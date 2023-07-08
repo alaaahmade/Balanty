@@ -7,6 +7,7 @@ import axios from 'axios';
 import { BorderBox, StyledImag, StyledUserCart } from '../../index';
 
 import { UserCardProps } from '../../../interfaces';
+import { customPalette } from '../../playerProfile/PlayerBackground';
 
 const UserCard: FC<UserCardProps> = ({
   username,
@@ -49,7 +50,8 @@ const UserCard: FC<UserCardProps> = ({
     >
       <StyledUserCart
         sx={{
-          background: theme => theme.palette.primary.backGroundColor,
+          background: theme =>
+            (theme.palette as customPalette).customColors.backGroundColor,
           m: '15px 0',
         }}
         onClick={() => {

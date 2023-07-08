@@ -17,6 +17,7 @@ import {
 import { SkeletonLoader, StadiumCard, StadiumPageBox } from '../components';
 
 import { StadiumDataProps } from '../interfaces';
+import { customPalette } from '../components/playerProfile/PlayerBackground';
 
 const StadiumsPage = (): ReactElement => {
   const [stadiumData, setStadiumData] = useState<StadiumDataProps[]>([]);
@@ -104,12 +105,14 @@ const StadiumsPage = (): ReactElement => {
           sx={{
             width: '100%',
             border: '1px solid ',
-            borderColor: theme => theme.palette.primary.grayColor,
+            borderColor: theme =>
+              (theme.palette as customPalette).customColors.grayColor,
             borderRadius: '4px',
             direction: 'right',
             mt: '20px',
             color: theme => theme.palette.primary.main,
-            backgroundColor: theme => theme.palette.primary.grayColor,
+            backgroundColor: theme =>
+              (theme.palette as customPalette).customColors.grayColor,
             '& input': {
               color: theme => theme.palette.primary.main,
               textAlign: 'right',

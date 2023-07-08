@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { TextField, InputAdornment, Box } from '@mui/material';
+import { TextField, InputAdornment, Box, Theme } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useTheme } from '@emotion/react';
+import { customPalette } from '../playerProfile/PlayerBackground';
 
 interface TypeSearchProps {
   searchValue: string;
@@ -49,12 +50,16 @@ const TypeSearch: React.FC<TypeSearchProps> = ({
           sx={{
             borderColor: '#2CB674',
             marginTop: '80px',
-            backgroundColor: currentTheme.palette.primary.grayColor,
-            border: `1px solid ${currentTheme.palette.primary.grayColor}`,
+            backgroundColor: ((currentTheme as Theme).palette as customPalette)
+              .customColors.grayColor,
+            border: `1px solid ${
+              ((currentTheme as Theme).palette as customPalette).customColors
+                .grayColor
+            }`,
             borderRadius: '4px',
             width: '100%',
             '& input': {
-              color: currentTheme.palette.primary.contrastText,
+              color: (currentTheme as Theme).palette.primary.contrastText,
               textAlign: 'right',
             },
           }}
@@ -63,7 +68,7 @@ const TypeSearch: React.FC<TypeSearchProps> = ({
               <InputAdornment position="start">
                 <SearchIcon
                   sx={{
-                    color: currentTheme.palette.primary.contrastText,
+                    color: (currentTheme as Theme).palette.primary.contrastText,
                   }}
                 />
               </InputAdornment>

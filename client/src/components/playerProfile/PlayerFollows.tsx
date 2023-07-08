@@ -1,17 +1,26 @@
 import React from 'react';
-import { Avatar, Typography } from '@mui/material';
+import { Avatar, Typography, Theme, SxProps, Palette } from '@mui/material';
 import { FollowCard, FollowButton } from './Player.Styled';
+
+interface PlayerPalette extends Palette {
+  customColors: { grayColor: string };
+}
+
+interface CustomTheme extends Theme {
+  palette: PlayerPalette;
+}
 
 const PlayerFollows: React.FC<{ action: string; username: string }> = ({
   action,
   username,
 }) => {
+  const customStyles: SxProps<CustomTheme> = {
+    backgroundColor: (theme: CustomTheme) =>
+      theme.palette.customColors.grayColor,
+  };
+
   return (
-    <FollowCard
-      sx={{
-        backgroundColor: theme => theme.palette.primary.grayColor,
-      }}
-    >
+    <FollowCard sx={customStyles as SxProps}>
       <FollowButton>{action}</FollowButton>
       <Typography sx={{ flexGrow: '2', direction: 'rtl' }} gutterBottom>
         {username}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Avatar, Typography } from '@mui/material';
 import { FollowButton, PlayerCard } from './PlayerPage.styled';
+import { customPalette } from '../playerProfile/PlayerBackground';
 
 interface PlayerDataProps {
   id: number;
@@ -16,7 +17,8 @@ const Card: React.FC<{ playerData: PlayerDataProps }> = ({ playerData }) => {
   return (
     <PlayerCard
       sx={{
-        backgroundColor: theme => theme.palette.primary.grayColor,
+        backgroundColor: theme =>
+          (theme.palette as customPalette).customColors.grayColor,
         color: theme => theme.palette.primary.contrastText,
       }}
     >

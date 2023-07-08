@@ -13,6 +13,7 @@ import { Box } from '@mui/material';
 import { deleteDialogProps } from '../../interfaces/StadiumProfile';
 import Loader from './Loader';
 import { UpdateGalleryContext } from '../../context';
+import { customPalette } from '../playerProfile/PlayerBackground';
 
 const DeleteDialog: FC<deleteDialogProps> = ({
   handleClose,
@@ -54,7 +55,8 @@ const DeleteDialog: FC<deleteDialogProps> = ({
         <DialogTitle
           sx={{
             textAlign: 'right',
-            backgroundColor: theme => theme.palette.primary.grayColor,
+            backgroundColor: theme =>
+              (theme.palette as customPalette).customColors.grayColor,
           }}
           id="alert-dialog-title"
         >
@@ -62,7 +64,8 @@ const DeleteDialog: FC<deleteDialogProps> = ({
         </DialogTitle>
         <DialogContent
           sx={{
-            backgroundColor: theme => theme.palette.primary.grayColor,
+            backgroundColor: theme =>
+              (theme.palette as customPalette).customColors.grayColor,
           }}
         >
           <DialogContentText
@@ -77,7 +80,8 @@ const DeleteDialog: FC<deleteDialogProps> = ({
         </DialogContent>
         <DialogActions
           sx={{
-            backgroundColor: theme => theme.palette.primary.grayColor,
+            backgroundColor: theme =>
+              (theme.palette as customPalette).customColors.grayColor,
           }}
         >
           <Button onClick={handleClose}>الغاء</Button>

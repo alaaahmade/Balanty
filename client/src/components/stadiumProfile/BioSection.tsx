@@ -23,6 +23,7 @@ import {
 } from '../../interfaces';
 
 import { updatedValueSchema } from '../../validation';
+import { customPalette } from '../playerProfile/PlayerBackground';
 
 const BioSection = ({
   userData,
@@ -130,7 +131,8 @@ const BioSection = ({
     <Box>
       <BioBox
         sx={{
-          backgroundColor: theme => theme.palette.primary.grayColor,
+          backgroundColor: theme =>
+            (theme.palette as customPalette).customColors.grayColor,
           color: theme => theme.palette.primary.main,
         }}
         onMouseEnter={handleMouseOver}

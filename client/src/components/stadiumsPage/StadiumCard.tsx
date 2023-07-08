@@ -1,7 +1,7 @@
 import { FC, ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Box, Rating, Typography } from '@mui/material';
+import { Box, Rating, Theme, Typography } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import { useTheme } from '@emotion/react';
@@ -16,6 +16,7 @@ import {
 } from './StadiumsPage.styled';
 
 import { StadiumDataProps } from '../../interfaces';
+import { customPalette } from '../playerProfile/PlayerBackground';
 
 const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
   stadiumData,
@@ -38,8 +39,15 @@ const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
   return (
     <StadiumCardBox
       sx={{
-        boxShadow: `-2px 2px 5px  ${currentTheme.palette.primary.grayColor}, 1px -1px 2px ${currentTheme.palette.primary.grayColor}`,
-        backgroundColor: theme => theme.palette.primary.grayColor,
+        boxShadow: `-2px 2px 5px  ${
+          ((currentTheme as Theme).palette as customPalette).customColors
+            .grayColor
+        }, 1px -1px 2px ${
+          ((currentTheme as Theme).palette as customPalette).customColors
+            .grayColor
+        }`,
+        backgroundColor: theme =>
+          (theme.palette as customPalette).customColors.grayColor,
         color: theme => theme.palette.primary.contrastText,
       }}
     >

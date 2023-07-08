@@ -8,6 +8,7 @@ import {
   InputLabel,
 } from '@mui/material';
 import { StyledButton } from '../styledRootComponent/SideComponents';
+import { customPalette } from '../playerProfile/PlayerBackground';
 
 interface Match {
   id: number;
@@ -73,8 +74,10 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
     <Box sx={{ paddingTop: '5px' }}>
       <CenteredCard
         sx={{
-          backgroundColor: theme => theme.palette.primary.grayColor,
-          borderColor: theme => theme.palette.primary.grayColor,
+          backgroundColor: theme =>
+            (theme.palette as customPalette).customColors.grayColor,
+          borderColor: theme =>
+            (theme.palette as customPalette).customColors.grayColor,
         }}
       >
         <MatchCardContainer>

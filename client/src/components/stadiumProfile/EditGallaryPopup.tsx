@@ -26,6 +26,7 @@ import {
 } from './StadiumProfile.styled';
 import Loader from './Loader';
 import { UpdateGalleryContext } from '../../context';
+import { customPalette } from '../playerProfile/PlayerBackground';
 
 const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   editGallery,
@@ -153,7 +154,8 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
         <DialogTitle
           sx={{
             width: '100%',
-            backgroundColor: theme => theme.palette.primary.grayColor,
+            backgroundColor: theme =>
+              (theme.palette as customPalette).customColors.grayColor,
             textAlign: 'right',
             color: '#4c8942',
             pr: '32px',
@@ -163,7 +165,8 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
         </DialogTitle>
         <DialogContentBox
           sx={{
-            backgroundColor: theme => theme.palette.primary.grayColor,
+            backgroundColor: theme =>
+              (theme.palette as customPalette).customColors.grayColor,
           }}
         >
           <InputLabel htmlFor="input">
@@ -208,7 +211,8 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
         </DialogContentBox>
         <DialogActions
           sx={{
-            backgroundColor: theme => theme.palette.primary.grayColor,
+            backgroundColor: theme =>
+              (theme.palette as customPalette).customColors.grayColor,
           }}
         >
           <SelectButtonsBox

@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useContext } from 'react';
 import { Box } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Control, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { Control, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import {
@@ -16,7 +16,7 @@ import TitleWrap from './Title';
 import GoogleIcon from '../../assets/image-2.svg';
 import LinkWrap from './Link';
 import { loginSchema } from '../../validation';
-import { loginProps, AuthContextData } from '../../interfaces';
+import { loginProps, AuthContextData, signupProps } from '../../interfaces';
 import { AuthContext } from '../../context';
 import ErrorAlert from '../ErrorAlert';
 
@@ -68,10 +68,10 @@ const LoginWrapper: FC = (): ReactElement => {
               isplayer === 'true' ? 'ادخل اسم اللاعب' : 'ادخل اسم الملعب'
             }
             errors={errors}
-            control={control as Control<loginProps | FieldValues>}
+            control={control as unknown as Control<signupProps>}
           />
           <InputWrap
-            control={control as Control<loginProps | FieldValues>}
+            control={control as unknown as Control<signupProps>}
             name="password"
             type="password"
             label="كلمة المرور"

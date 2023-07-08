@@ -1,12 +1,20 @@
 import { ReactElement } from 'react';
+
+import { Theme, useTheme } from '@mui/material';
+
 import { StyledLogo, StyledNavBox } from '../../index';
+
 import AccountMenu from './AccountMenu';
 
+import { customPalette } from '../../playerProfile/PlayerBackground';
+
 const NavBar = (): ReactElement => {
+  const currentTheme = useTheme();
   return (
     <StyledNavBox
       sx={{
-        backgroundColor: theme => theme.palette.primary.second,
+        backgroundColor: ((currentTheme as Theme).palette as customPalette)
+          .customColors.second,
       }}
     >
       <AccountMenu />

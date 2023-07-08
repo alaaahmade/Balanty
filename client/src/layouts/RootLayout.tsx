@@ -9,6 +9,7 @@ import CreateMatch from '../pages/CreateMatch';
 
 import { open } from '../context';
 import ProtectedProvider from '../context/ProtectedContext';
+import { customPalette } from '../components/playerProfile/PlayerBackground';
 
 const RootLayout: React.FC = (): ReactElement => {
   const [Profile, setProfile] = useState(false);
@@ -33,7 +34,8 @@ const RootLayout: React.FC = (): ReactElement => {
           width: '100%',
           minHeight: '100vh',
           pb: '1px',
-          backgroundColor: theme => theme.palette.primary.backGroundColor,
+          backgroundColor: theme =>
+            (theme.palette as customPalette).customColors.backGroundColor,
         }}
       >
         <NavBar />

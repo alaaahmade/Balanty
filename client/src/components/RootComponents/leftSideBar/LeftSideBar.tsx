@@ -14,6 +14,7 @@ import {
 } from '../../index';
 import { LeftSideBarInterface, User } from '../../../interfaces';
 import { AuthContext } from '../../../context';
+import { customPalette } from '../../playerProfile/PlayerBackground';
 
 const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
   const { user } = useContext(AuthContext);
@@ -50,7 +51,8 @@ const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
       </Box>
       <CreateMatchBox
         sx={{
-          backgroundColor: theme => theme.palette.primary.backGroundColor,
+          backgroundColor: theme =>
+            (theme.palette as customPalette).customColors.backGroundColor,
           color: theme => theme.palette.primary.main,
         }}
       >

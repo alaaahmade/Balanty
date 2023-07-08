@@ -27,6 +27,7 @@ import {
   CreateMatchCalendar,
 } from '../components/createMatchComponents';
 import MatchSchema from '../validation/MatchSchema';
+import { customPalette } from '../components/playerProfile/PlayerBackground';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -108,7 +109,8 @@ const CreateMatch: React.FC<createMatchInterface> = ({
         <AppBar
           sx={{
             position: 'relative',
-            backgroundColor: theme => theme.palette.primary.second,
+            backgroundColor: theme =>
+              (theme.palette as customPalette).customColors.second,
           }}
         >
           <Toolbar sx={{}}>
@@ -125,7 +127,6 @@ const CreateMatch: React.FC<createMatchInterface> = ({
               sx={{
                 ml: 76,
                 flex: 1,
-                color: '#fff',
                 color: theme => theme.palette.primary.main,
               }}
               variant="h6"
