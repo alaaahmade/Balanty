@@ -7,6 +7,8 @@ const { DEV_DB_URL, DATABASE_URL, TEST_URL, NODE_ENV, SECRET_KEY } =
 export const nodeEnv = NODE_ENV;
 export const { PORT } = process.env || 8080;
 export const { BUILD_DB } = process.env;
+export const { EMAIL, EMAIL_PASSWORD, PRODUCT, PRODUCT_LINK } = process.env;
+
 interface connectionOption {
   dialect: Dialect;
   dialectOptions: {
