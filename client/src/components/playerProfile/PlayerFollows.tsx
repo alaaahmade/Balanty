@@ -7,7 +7,11 @@ const PlayerFollows: React.FC<{ action: string; username: string }> = ({
   username,
 }) => {
   return (
-    <FollowCard>
+    <FollowCard
+      sx={{
+        backgroundColor: theme => theme.palette.primary.grayColor,
+      }}
+    >
       <FollowButton>{action}</FollowButton>
       <Typography sx={{ flexGrow: '2', direction: 'rtl' }} gutterBottom>
         {username}

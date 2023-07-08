@@ -8,7 +8,7 @@ import { BorderBox, StyledImag, StyledUserCart } from '../../index';
 
 import { UserCardProps } from '../../../interfaces';
 
-const UserCart: FC<UserCardProps> = ({
+const UserCard: FC<UserCardProps> = ({
   username,
   userId,
   role,
@@ -37,8 +37,10 @@ const UserCart: FC<UserCardProps> = ({
   return (
     <BorderBox
       sx={{
+        backgroundColor: theme => theme.palette.primary.grayColor,
+        color: theme => theme.palette.primary.main,
         '& :hover': {
-          color: theme => theme.palette.primary.main,
+          backgroundColor: theme => theme.palette.primary.backGroundColor,
         },
       }}
       onClick={() => {
@@ -47,7 +49,7 @@ const UserCart: FC<UserCardProps> = ({
     >
       <StyledUserCart
         sx={{
-          background: theme => theme.palette.primary.grayColor,
+          background: theme => theme.palette.primary.backGroundColor,
           m: '15px 0',
         }}
         onClick={() => {
@@ -72,11 +74,17 @@ const UserCart: FC<UserCardProps> = ({
             }}
           />
         ) : (
-          <Avatar>{username[0]}</Avatar>
+          <Avatar
+            sx={{
+              mr: '30px',
+            }}
+          >
+            {username[0]}
+          </Avatar>
         )}
       </StyledUserCart>
     </BorderBox>
   );
 };
 
-export default UserCart;
+export default UserCard;

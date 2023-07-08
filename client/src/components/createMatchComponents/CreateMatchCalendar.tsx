@@ -16,6 +16,7 @@ const CreateMatchCalendar = () => {
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'flex-end',
+        backgroundColor: theme => theme.palette.primary.backGroundColor,
       }}
     >
       <Box

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import MatchCard from './MatchCard';
+import { Box } from '@mui/system';
+import MatchCard from '../components/matchesPage/MatchCard';
 
 interface Match {
   id: number;
@@ -51,20 +52,19 @@ const MatchesPage = (): React.ReactElement => {
       }
     })();
   }, []);
-  const duplicatedMatches = matches
-    .slice(0, 3)
-    .flatMap(match => [match, match, match]);
 
   return (
-    <div>
+    <Box
+      sx={{
+        pt: '10%',
+      }}
+    >
       {error ? (
         <p>{error}</p>
       ) : (
-        duplicatedMatches.map(match => (
-          <MatchCard key={match.id} match={match} />
-        ))
+        matches.map(match => <MatchCard key={match.id} match={match} />)
       )}
-    </div>
+    </Box>
   );
 };
 

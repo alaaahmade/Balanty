@@ -14,15 +14,26 @@ interface PlayerDataProps {
 
 const Card: React.FC<{ playerData: PlayerDataProps }> = ({ playerData }) => {
   return (
-    <PlayerCard>
+    <PlayerCard
+      sx={{
+        backgroundColor: theme => theme.palette.primary.grayColor,
+        color: theme => theme.palette.primary.contrastText,
+      }}
+    >
       <FollowButton>متابعة</FollowButton>
-      <Typography sx={{ flexGrow: '2', direction: 'rtl' }} gutterBottom>
+      <Typography
+        sx={{ flexGrow: '2', direction: 'rtl', mr: '20px' }}
+        gutterBottom
+      >
         {playerData.username}
       </Typography>
 
       <Avatar
         alt="Remy Sharp"
-        src="https://i.insider.com/5fbe52b350e71a00115574c4?width=700"
+        src={`${
+          playerData.Player.avatar ||
+          'https://i.insider.com/5fbe52b350e71a00115574c4?width=700}'
+        } `}
         sx={{
           width: 80,
           height: 80,

@@ -31,6 +31,9 @@ const RootLayout: React.FC = (): ReactElement => {
       <Box
         sx={{
           width: '100%',
+          minHeight: '100vh',
+          pb: '1px',
+          backgroundColor: theme => theme.palette.primary.backGroundColor,
         }}
       >
         <NavBar />

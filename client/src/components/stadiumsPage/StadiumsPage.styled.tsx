@@ -5,7 +5,7 @@ export const StadiumCardBox = styled(Box)({
   width: 'calc(100% - 560px)',
   height: '250px',
   display: 'flex',
-  borderRadius: '5px',
+  borderRadius: '4px',
   alignItems: 'center',
   padding: '10px',
 });

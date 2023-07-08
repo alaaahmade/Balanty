@@ -6,7 +6,11 @@ const PlayerBackground = ({ avatar, cover }: playerBackgroundProps) => {
   return (
     <MainWrapper>
       <AvatarWrapper>
-        <Cover alt="backgroundimage" src={cover} />
+        <Cover
+          sx={{
+            backgroundImage: `url(${cover})`,
+          }}
+        />
         <Avatar
           alt="Remy Sharp"
           src={avatar}
@@ -15,7 +19,8 @@ const PlayerBackground = ({ avatar, cover }: playerBackgroundProps) => {
             height: 145,
             marginTop: -10,
             marginRight: '2.5em',
-            border: '6px solid #fff',
+            border: '6px solid ',
+            borderColor: theme => theme.palette.primary.backGroundColor,
           }}
         />
       </AvatarWrapper>

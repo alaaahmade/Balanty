@@ -5,6 +5,7 @@ import axios from 'axios';
 import { TextField, Box } from '@mui/material';
 
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '@emotion/react';
 import {
   CreateMatchButtons,
   DialogInputsBox,
@@ -30,6 +31,8 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
     match,
     setMatch,
   } = states;
+  const currentTheme = useTheme();
+
   const getOptionLabel = (Stadium: Option) => Stadium.username;
 
   const handleClose = () => {
@@ -111,13 +114,19 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
   };
 
   return (
-    <DialogInputsBox>
+    <DialogInputsBox
+      sx={{
+        backgroundColor: theme => theme.palette.primary.backGroundColor,
+      }}
+    >
       <StyledSearchInput
         sx={{
           mt: '25px',
           width: '80%',
-          border: '1px solid #ccc',
+          border: '1px solid ',
+          borderColor: theme => theme.palette.primary.main,
           backgroundColor: theme => theme.palette.primary.grayColor,
+          color: theme => theme.palette.primary.main,
         }}
         placeholder="عنوان المباراة"
         onChange={handleMatchName}
@@ -128,7 +137,9 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
           mt: '25px',
           width: '80%',
           p: '20px',
-          border: '1px solid #ccc',
+          border: '1px solid ',
+          borderColor: theme => theme.palette.primary.main,
+          color: theme => theme.palette.primary.main,
           backgroundColor: theme => theme.palette.primary.grayColor,
         }}
         placeholder="عدد اللاعبين"
@@ -144,6 +155,7 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
             style: {
               textAlign: 'right',
               padding: '7px 40px',
+              color: currentTheme.palette.primary.main,
             },
           },
         }}
@@ -157,13 +169,24 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
           mt: '25px',
           backgroundColor: theme => theme.palette.primary.grayColor,
           borderRadius: '5px',
-          border: '1px solid #ccc',
+          border: '1px solid ',
+          borderColor: theme => theme.palette.primary.main,
         }}
         onChange={handleDescription}
       />
       <StyledAutocomplete
         sx={{
+          borderColor: theme => theme.palette.primary.main,
+          color: theme => theme.palette.primary.main,
           backgroundColor: theme => theme.palette.primary.grayColor,
+          '& input': {
+            color: theme => theme.palette.primary.main,
+            backgroundColor: theme => theme.palette.primary.grayColor,
+          },
+          '& + .MuiAutocomplete-popper .MuiAutocomplete-option': {
+            backgroundColor: theme => theme.palette.primary.grayColor,
+            color: theme => theme.palette.primary.main,
+          },
         }}
         disablePortal
         id="combo-box-demo"

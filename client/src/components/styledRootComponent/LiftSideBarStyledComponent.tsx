@@ -1,6 +1,6 @@
-import styled from '@emotion/styled';
-import { Box } from '@mui/system';
 import { NavLink } from 'react-router-dom';
+
+import { Box, styled } from '@mui/material';
 
 export const CreateMatchBox = styled(Box)({
   width: '80%',
@@ -58,7 +58,6 @@ export const DarkSideLink = styled(NavLink)({
   fontSize: '18px',
   padding: '10px 30px 10px 0',
   textDecoration: 'none',
-  color: '#2CB674',
   width: '100%',
   display: 'flex',
   alignItems: 'center',
@@ -67,8 +66,4 @@ export const DarkSideLink = styled(NavLink)({
   gap: '20px',
   cursor: 'pointer',
   transition: '0.2s ease',
-  '&:hover': {
-    padding: '15px 30px 15px 0',
-    backgroundColor: '#000',
-  },
 });

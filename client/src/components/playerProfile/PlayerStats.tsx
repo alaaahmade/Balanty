@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Box } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import { red } from '@mui/material/colors';
 import PlayerFollows from './PlayerFollows';
 
 const PlayerStats = () => {
@@ -26,7 +27,10 @@ const PlayerStats = () => {
           sx={{
             marginLeft: 42,
             '& .MuiTabs-indicator': {
-              backgroundColor: '#2CB674', // Change this to the desired border bottom color
+              backgroundColor: '#2CB674',
+            },
+            '& .MuiTab-root': {
+              color: '#2CB674',
             },
           }}
         >
@@ -44,7 +48,6 @@ const PlayerStats = () => {
           <PlayerFollows action="إلغاء المتابعة" username="ahmed" />
         )}
         {value === 1 && <PlayerFollows action="متابعة" username="reema" />}
-        {/* {value === 0 && <PlayerActions />} */}
       </Box>
     </Box>
   );

@@ -35,6 +35,14 @@ const EditInput: React.FC<Props> = ({
       sx={{
         textAlign: 'right',
         direction: 'right',
+        '& .css-66dh3a-MuiInputBase-input-MuiInput-input.Mui-disabled': {
+          textAlign: 'right',
+
+          WebkitTextFillColor: theme => theme.palette.primary.wightColor,
+        },
+        '& .css-1x51dt5-MuiInputBase-input-MuiInput-input.Mui-disabled': {
+          WebkitTextFillColor: theme => theme.palette.primary.wightColor,
+        },
       }}
       InputProps={{
         disableUnderline: true,

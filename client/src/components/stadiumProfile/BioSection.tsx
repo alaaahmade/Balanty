@@ -131,6 +131,7 @@ const BioSection = ({
       <BioBox
         sx={{
           backgroundColor: theme => theme.palette.primary.grayColor,
+          color: theme => theme.palette.primary.main,
         }}
         onMouseEnter={handleMouseOver}
         onMouseLeave={handleMouseOut}

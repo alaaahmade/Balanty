@@ -1,6 +1,6 @@
 import { PaletteColorOptions, createTheme } from '@mui/material';
 
-const LightTheme = createTheme({
+const DarkTheme = createTheme({
   typography: {
     fontFamily: 'IBM Plex Sans Arabic',
   },
@@ -8,12 +8,13 @@ const LightTheme = createTheme({
   palette: {
     primary: {
       main: '#2CB674',
-      second: '#01031C',
-      contrastText: '#000',
-      backGroundColor: '#fff',
-      grayColor: '#F2FCF5',
+      second: '#181818',
+      contrastText: '#2CB674',
+      backGroundColor: '#000',
+      grayColor: '#181818',
+      wightColor: '#fff',
     } as PaletteColorOptions,
   },
 });
 
-export default LightTheme;
+export default DarkTheme;

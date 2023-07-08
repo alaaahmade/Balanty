@@ -111,11 +111,6 @@ export const EditInputs = styled(TextField)({
   },
   '& .css-66dh3a-MuiInputBase-input-MuiInput-input.Mui-disabled': {
     textAlign: 'right',
-
-    WebkitTextFillColor: '#01031C',
-  },
-  '& .css-1x51dt5-MuiInputBase-input-MuiInput-input.Mui-disabled': {
-    WebkitTextFillColor: '#01031C',
   },
 });
 

@@ -16,11 +16,12 @@ import {
 import StadiumProfile from './pages/StadiumProfile';
 import StadiumsPage from './pages/Stadiums';
 import PlayerProfile from './pages/PlayerProfile';
-import MatchesPage from './components/matchesPage/Match';
+import MatchesPage from './pages/Match';
 import { AuthProvider } from './context/AuthContext';
 import NotFoundPage from './pages/NotFound';
 import InternalServerErrorPage from './pages/ServerError';
 import PlayersPage from './pages/PlayersPage';
+import DarkTheme from './themes/DarkThem';
 
 const router = createBrowserRouter([
   {
@@ -70,7 +71,7 @@ const router = createBrowserRouter([
 ]);
 const App = (): ReactElement => {
   return (
-    <ThemeProvider theme={LightTheme}>
+    <ThemeProvider theme={DarkTheme}>
       <AuthProvider>
         <open.Provider value={useCustomOpen()}>
           <StatsContextProvider>

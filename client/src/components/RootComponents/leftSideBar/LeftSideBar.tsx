@@ -4,7 +4,7 @@ import { BsPersonFillAdd, BsFillFilePersonFill } from 'react-icons/bs';
 import { MdStadium } from 'react-icons/md';
 
 import { Box } from '@mui/material';
-import UserCart from './UserCart';
+import UserCard from './UserCard';
 import SideBarLink from './SideBarLink';
 import {
   CreateMatchBox,
@@ -26,12 +26,13 @@ const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
     <SideBox
       sx={{
         right: 0,
-        borderLeft: '0.4px solid #ccc',
-        backgroundColor: theme => theme.palette.primary.backGroundColor,
+        borderLeft: '1px solid ',
+        borderLeftColor: theme => theme.palette.primary.grayColor,
+        backgroundColor: theme => theme.palette.primary.grayColor,
         boxShadow: '-1px 4px 6px 1px rgba(0, 0, 0, 0.15)',
       }}
     >
-      <UserCart
+      <UserCard
         username={(user as User).username}
         userId={(user as User).id}
         role={(user as User).role}
@@ -49,10 +50,15 @@ const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
       </Box>
       <CreateMatchBox
         sx={{
-          backgroundColor: theme => theme.palette.primary.grayColor,
+          backgroundColor: theme => theme.palette.primary.backGroundColor,
+          color: theme => theme.palette.primary.main,
         }}
       >
-        <StyledTypography>
+        <StyledTypography
+          sx={{
+            mb: '10px',
+          }}
+        >
           يمكنك انشاء مباراة ودعوة اصدقائك للانضمام اليك
         </StyledTypography>
 

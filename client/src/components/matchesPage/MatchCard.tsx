@@ -7,6 +7,7 @@ import {
   Box,
   InputLabel,
 } from '@mui/material';
+import { textAlign } from '@mui/system';
 import { StyledButton } from '../styledRootComponent/SideComponents';
 
 interface Match {
@@ -46,19 +47,20 @@ interface MatchCardProps {
 
 const CenteredCard = styled(Card)({
   margin: 'auto',
-  marginTop: '2%',
   marginBottom: '10px',
   display: 'flex',
   justifyContent: 'center',
   width: '50%',
   height: '300px',
-  padding: '10px 25px 10px 10px',
-  border: '1px solid #eee',
+  padding: '10px',
+  border: '1px solid ',
 });
 
 const MatchCardContainer = styled(Box)({
   display: 'flex',
   gap: '40px',
+  alignItems: 'center',
+  justifyContent: 'center',
 });
 
 const MatchCardContent = styled(CardContent)({
@@ -69,22 +71,33 @@ const MatchCardContent = styled(CardContent)({
 
 const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
   return (
-    <Box sx={{ paddingTop: '40px' }}>
-      <CenteredCard>
-        <MatchCardContainer sx={{ paddingLeft: '10px' }}>
-          <MatchCardContent sx={{ width: '300px' }}>
+    <Box sx={{ paddingTop: '5px' }}>
+      <CenteredCard
+        sx={{
+          backgroundColor: theme => theme.palette.primary.grayColor,
+          borderColor: theme => theme.palette.primary.grayColor,
+        }}
+      >
+        <MatchCardContainer>
+          <MatchCardContent sx={{ width: '50%', textAlign: 'right' }}>
             <Typography
               variant="h6"
               component="h3"
-              sx={{ display: 'flex', justifyContent: 'center' }}
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                mr: '-30px',
+                color: theme => theme.palette.primary.contrastText,
+              }}
             >
               {match.title}
             </Typography>
             <Box
               sx={{
                 display: 'flex',
-                justifyContent: 'space-between',
-                marginBottom: '20px',
+                flexDirection: 'column',
+                gap: '20px',
+                m: '10px 20px 10px 0px',
               }}
             >
               <Typography variant="body1">
@@ -97,10 +110,11 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
                   sx={{
                     fontWeight: 'bold',
                     display: 'inline',
-                    color: '#000000',
+                    color: theme => theme.palette.primary.contrastText,
+                    ml: '10px',
                   }}
                 >
-                  الوقت
+                  : الوقت
                 </InputLabel>
               </Typography>
               <Typography variant="body1">
@@ -109,26 +123,21 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
                   sx={{
                     fontWeight: 'bold',
                     display: 'inline',
-                    color: '#000000',
+                    ml: '10px',
+                    color: theme => theme.palette.primary.contrastText,
                   }}
                 >
-                  :عدد المقاعد
+                  : المقاعد المتاحة
                 </InputLabel>
               </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                marginBottom: '10px',
-              }}
-            >
+
               <Typography variant="body1">
                 <InputLabel
                   sx={{
                     fontWeight: 'bold',
                     display: 'inline',
-                    color: '#000000',
+                    ml: '10px',
+                    color: theme => theme.palette.primary.contrastText,
                   }}
                 >
                   الملعب:
@@ -149,26 +158,48 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
                   sx={{
                     fontWeight: 'bold',
                     display: 'inline',
-                    color: '#000000',
+                    ml: '10px',
+                    color: theme => theme.palette.primary.contrastText,
                   }}
                 >
                   :المسؤول عن اللعبة
                 </InputLabel>
               </Typography>
+              {match.Players.map(player => (
+                <img src={player.cover} alt="Player Cover" key={player.id} />
+              ))}
             </Box>
-            {match.Players.map(player => (
-              <img src={player.cover} alt="Player Cover" key={player.id} />
-            ))}
+
             <Box
               sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
                 marginBottom: '10px',
+                width: '100%',
+              }}
+            />
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-evenly',
+                mb: '10px',
+                mr: '-30px',
               }}
             >
               <StyledButton
                 sx={{
-                  width: '65px',
+                  width: '80px',
+                  height: '30px',
+                  borderRadius: '5px',
+                  gap: '10px',
+                  borderColor: '#2CB674',
+                }}
+              >
+                انضم
+              </StyledButton>
+              <StyledButton
+                sx={{
+                  width: '80px',
                   height: '30px',
                   marginBottom: '10px',
                 }}
@@ -176,43 +207,13 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
                 زيارة
               </StyledButton>
             </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                marginBottom: '10px',
-              }}
-            >
-              <StyledButton
-                sx={{
-                  width: '65px',
-                  height: '30px',
-                  background: '#eee',
-                  borderRadius: '5px',
-                  gap: '10px',
-                  color: '#2CB674',
-                  borderColor: '#2CB674',
-                }}
-              >
-                انضام
-              </StyledButton>
-              <StyledButton
-                sx={{
-                  width: '100px',
-                  height: '30px',
-                }}
-              >
-                معرفة المزيد
-              </StyledButton>
-            </Box>
           </MatchCardContent>
           <img
             style={{
-              width: '350px',
+              width: '55%',
               height: '280px',
-              top: '6px',
-              left: '1px',
               borderRadius: '5px',
+              // marginRight: '15px',
             }}
             src={match.stadiumMatch.Stadium.stadiumGallery[0].image}
             alt="Cover"
