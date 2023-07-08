@@ -50,7 +50,6 @@ export {
   StyledNavBox,
   StyledLogo,
   StyledSearchInput,
-  StyledMnu,
   StyledLabel,
 } from './styledRootComponent/Nav';
 
