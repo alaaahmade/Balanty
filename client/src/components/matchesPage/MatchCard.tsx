@@ -50,7 +50,7 @@ const CenteredCard = styled(Card)({
   marginBottom: '10px',
   display: 'flex',
   justifyContent: 'center',
-  width: '50%',
+  width: '55%',
   height: '300px',
   padding: '10px',
   border: '1px solid ',
@@ -66,6 +66,7 @@ const MatchCardContainer = styled(Box)({
 const MatchCardContent = styled(CardContent)({
   display: 'flex',
   flexDirection: 'column',
+
   gap: '2px',
 });
 
@@ -78,149 +79,160 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
             (theme.palette as customPalette).customColors.grayColor,
           borderColor: theme =>
             (theme.palette as customPalette).customColors.grayColor,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
         }}
       >
         <MatchCardContainer>
-          <MatchCardContent sx={{ width: '50%', textAlign: 'right' }}>
-            <Typography
-              variant="h6"
-              component="h3"
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                mr: '-30px',
-                color: theme => theme.palette.primary.contrastText,
-              }}
-            >
-              {match.title}
-            </Typography>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '20px',
-                m: '10px 20px 10px 0px',
-              }}
-            >
-              <Typography variant="body1">
-                {new Date(match.startDate).toLocaleDateString('en-US', {
-                  day: 'numeric',
-                  month: 'short',
-                  year: 'numeric',
-                })}
-                <InputLabel
-                  sx={{
-                    fontWeight: 'bold',
-                    display: 'inline',
-                    color: theme => theme.palette.primary.contrastText,
-                    ml: '10px',
-                  }}
-                >
-                  : الوقت
-                </InputLabel>
-              </Typography>
-              <Typography variant="body1">
-                {match.seats}
-                <InputLabel
-                  sx={{
-                    fontWeight: 'bold',
-                    display: 'inline',
-                    ml: '10px',
-                    color: theme => theme.palette.primary.contrastText,
-                  }}
-                >
-                  : المقاعد المتاحة
-                </InputLabel>
-              </Typography>
-
-              <Typography variant="body1">
-                <InputLabel
-                  sx={{
-                    fontWeight: 'bold',
-                    display: 'inline',
-                    ml: '10px',
-                    color: theme => theme.palette.primary.contrastText,
-                  }}
-                >
-                  الملعب:
-                </InputLabel>
-                {match.stadiumMatch.username}
-              </Typography>
-              <Typography variant="body1">
-                {match.ownerUser.username}
-                <InputLabel
-                  sx={{
-                    fontWeight: 'bold',
-                    display: 'inline',
-                    color: '#000000',
-                  }}
-                />
-
-                <InputLabel
-                  sx={{
-                    fontWeight: 'bold',
-                    display: 'inline',
-                    ml: '10px',
-                    color: theme => theme.palette.primary.contrastText,
-                  }}
-                >
-                  :المسؤول عن اللعبة
-                </InputLabel>
-              </Typography>
-              {match.Players.map(player => (
-                <img src={player.cover} alt="Player Cover" key={player.id} />
-              ))}
-            </Box>
-
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                marginBottom: '10px',
-                width: '100%',
-              }}
-            />
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-evenly',
-                mb: '10px',
-                mr: '-30px',
-              }}
-            >
-              <StyledButton
-                sx={{
-                  width: '80px',
-                  height: '30px',
-                  borderRadius: '5px',
-                  gap: '10px',
-                  borderColor: '#2CB674',
-                }}
-              >
-                انضم
-              </StyledButton>
-              <StyledButton
-                sx={{
-                  width: '80px',
-                  height: '30px',
-                  marginBottom: '10px',
-                }}
-              >
-                زيارة
-              </StyledButton>
-            </Box>
-          </MatchCardContent>
-          <img
-            style={{
-              width: '55%',
-              height: '280px',
-              borderRadius: '5px',
-              // marginRight: '15px',
+          <Box
+            sx={{
+              width: '100%',
             }}
-            src={match.stadiumMatch.Stadium.stadiumGallery[0].image}
-            alt="Cover"
-          />
+          >
+            <MatchCardContent
+              sx={{
+                textAlign: 'right',
+              }}
+            >
+              <Typography
+                variant="h6"
+                component="h3"
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  color: theme => theme.palette.primary.contrastText,
+                }}
+              >
+                {match.title}
+              </Typography>
+              <Box
+                sx={{
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-end',
+                  alignItems: 'center',
+                  gap: '15px',
+                  m: '10px 80px 10px 0px',
+                }}
+              >
+                <Typography variant="body1">
+                  {new Date(match.startDate).toLocaleDateString('en-US', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric',
+                  })}
+                  <InputLabel
+                    sx={{
+                      fontWeight: 'bold',
+                      display: 'inline',
+                      color: theme => theme.palette.primary.contrastText,
+                      ml: '10px',
+                    }}
+                  >
+                    : الوقت
+                  </InputLabel>
+                </Typography>
+                <Typography variant="body1">
+                  {match.seats}
+                  <InputLabel
+                    sx={{
+                      fontWeight: 'bold',
+                      display: 'inline',
+                      ml: '10px',
+                      color: theme => theme.palette.primary.contrastText,
+                    }}
+                  >
+                    : المقاعد المتاحة
+                  </InputLabel>
+                </Typography>
+
+                <Typography variant="body1">
+                  <InputLabel
+                    sx={{
+                      fontWeight: 'bold',
+                      display: 'inline',
+                      ml: '10px',
+                      color: theme => theme.palette.primary.contrastText,
+                    }}
+                  >
+                    الملعب:
+                  </InputLabel>
+                  {match.stadiumMatch.username}
+                </Typography>
+                <Typography variant="body1">
+                  {match.ownerUser.username}
+                  <InputLabel
+                    sx={{
+                      fontWeight: 'bold',
+                      display: 'inline',
+                      color: '#000000',
+                    }}
+                  />
+
+                  <InputLabel
+                    sx={{
+                      fontWeight: 'bold',
+                      display: 'inline',
+                      ml: '10px',
+                      color: theme => theme.palette.primary.contrastText,
+                    }}
+                  >
+                    :المسؤول عن اللعبة
+                  </InputLabel>
+                </Typography>
+              </Box>
+
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  marginBottom: '10px',
+                  width: '100%',
+                }}
+              />
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-evenly',
+                  mb: '10px',
+                }}
+              >
+                <StyledButton
+                  sx={{
+                    width: '80px',
+                    height: '30px',
+                    borderRadius: '5px',
+                    gap: '10px',
+                    borderColor: '#2CB674',
+                  }}
+                >
+                  انضم
+                </StyledButton>
+                <StyledButton
+                  sx={{
+                    width: '80px',
+                    height: '30px',
+                    marginBottom: '10px',
+                  }}
+                >
+                  زيارة
+                </StyledButton>
+              </Box>
+            </MatchCardContent>
+          </Box>
         </MatchCardContainer>
+        <Box
+          sx={{
+            width: '55%',
+            height: '280px',
+            borderRadius: '5px',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundImage: `url(${match.stadiumMatch.Stadium.stadiumGallery[0].image})`,
+          }}
+        />
       </CenteredCard>
     </Box>
   );

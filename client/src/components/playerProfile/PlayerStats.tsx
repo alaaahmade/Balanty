@@ -18,6 +18,7 @@ const PlayerStats = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
+        ml: -8,
       }}
     >
       <Box>

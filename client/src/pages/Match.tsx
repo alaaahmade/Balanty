@@ -1,8 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/system';
 import MatchCard from '../components/matchesPage/MatchCard';
+import { open } from '../context';
+
+interface Player {
+  id: number;
+  avatar: string;
+  age: number;
+  position: string;
+  cover: string;
+  bio: string;
+}
 
 interface Match {
   id: number;
@@ -22,36 +32,30 @@ interface Match {
   ownerUser: {
     username: string;
   };
-  // eslint-disable-next-line no-use-before-define
   Players: Player[];
-}
-
-interface Player {
-  id: number;
-  avatar: string;
-  age: number;
-  position: string;
-  cover: string;
-  bio: string;
 }
 
 const MatchesPage = (): React.ReactElement => {
   const [matches, setMatches] = useState<Match[]>([]);
   const [error, setError] = useState<string>('');
 
+  const { openPage } = useContext(open);
+
   const navigate = useNavigate();
 
+  const getMatches = async () => {
+    try {
+      const response = await axios.get('/api/v1/matches');
+      setMatches(response.data.data);
+    } catch (err) {
+      setError('Error fetching match data');
+      navigate('/serverError');
+    }
+  };
+
   useEffect(() => {
-    (async () => {
-      try {
-        const response = await axios.get('/api/v1/matches');
-        setMatches(response.data.data);
-      } catch (err) {
-        setError('Error fetching match data');
-        navigate('/serverError');
-      }
-    })();
-  }, []);
+    getMatches();
+  }, [openPage]);
 
   return (
     <Box

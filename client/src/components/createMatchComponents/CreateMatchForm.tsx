@@ -117,7 +117,7 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
   return (
     <DialogInputsBox
       sx={{
-        backgroundColor: theme => theme.palette.primary.backGroundColor,
+        backgroundColor: theme => theme.palette.customColors.backGroundColor,
       }}
     >
       <StyledSearchInput

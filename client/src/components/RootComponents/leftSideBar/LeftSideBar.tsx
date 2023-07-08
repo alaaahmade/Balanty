@@ -28,8 +28,8 @@ const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
       sx={{
         right: 0,
         borderLeft: '1px solid ',
-        borderLeftColor: theme => theme.palette.primary.grayColor,
-        backgroundColor: theme => theme.palette.primary.grayColor,
+        borderLeftColor: theme => theme.palette.customColors.grayColor,
+        backgroundColor: theme => theme.palette.customColors.grayColor,
         boxShadow: '-1px 4px 6px 1px rgba(0, 0, 0, 0.15)',
       }}
     >

@@ -121,7 +121,7 @@ const Calendar: FC<Props> = ({ type }): ReactElement => {
   return (
     <Box
       sx={{
-        backgroundColor: theme => theme.palette.primary.grayColor,
+        backgroundColor: theme => theme.palette.customColors.grayColor,
         borderRadius: '5px',
         width: '100%',
         height: '100%',
