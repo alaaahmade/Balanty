@@ -7,7 +7,6 @@ import {
   Box,
   InputLabel,
 } from '@mui/material';
-import { textAlign } from '@mui/system';
 import { StyledButton } from '../styledRootComponent/SideComponents';
 
 interface Match {

@@ -1,16 +1,13 @@
 import { ReactElement } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import RootLayout from './layouts/RootLayout';
-import { LandingPage } from './pages';
-import MatchRoomPage from './pages/MatchRoomPage';
-import LoginWrapper from './components/auth/LoginWrapper';
-import SignupWrapper from './components/auth/SignupWrapper';
+
 import {
   open,
   useCustomOpen,
   UpdateGalleryContextProvider,
   StatsContextProvider,
 } from './context';
+
 import StadiumProfile from './pages/StadiumProfile';
 import StadiumsPage from './pages/Stadiums';
 import PlayerProfile from './pages/PlayerProfile';
@@ -20,6 +17,11 @@ import NotFoundPage from './pages/NotFound';
 import InternalServerErrorPage from './pages/ServerError';
 import PlayersPage from './pages/PlayersPage';
 import { ThemeProviderWrapper } from './context/ThemeContext';
+import RootLayout from './layouts/RootLayout';
+import { LandingPage } from './pages';
+import MatchRoomPage from './pages/MatchRoomPage';
+import LoginWrapper from './components/auth/LoginWrapper';
+import SignupWrapper from './components/auth/SignupWrapper';
 
 const router = createBrowserRouter([
   {

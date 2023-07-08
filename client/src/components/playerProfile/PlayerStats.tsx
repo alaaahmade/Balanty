@@ -1,8 +1,9 @@
 import { useState } from 'react';
+
 import { Box } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { red } from '@mui/material/colors';
+
 import PlayerFollows from './PlayerFollows';
 
 const PlayerStats = () => {
