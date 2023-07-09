@@ -20,10 +20,10 @@ import {
   updatedValueError,
   updatedValue,
   BioSectionProps,
+  customPalette,
 } from '../../interfaces';
 
 import { updatedValueSchema } from '../../validation';
-import { customPalette } from '../playerProfile/PlayerBackground';
 
 const BioSection = ({
   userData,

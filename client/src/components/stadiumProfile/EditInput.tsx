@@ -1,7 +1,6 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { EditInputs } from './StadiumProfile.styled';
-import { Props, updatedValue } from '../../interfaces';
-import { customPalette } from '../playerProfile/PlayerBackground';
+import { Props, customPalette, updatedValue } from '../../interfaces';
 
 const EditInput: React.FC<Props> = ({
   lastValue,

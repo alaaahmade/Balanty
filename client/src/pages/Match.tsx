@@ -45,7 +45,7 @@ const MatchesPage = (): React.ReactElement => {
         placeholder="بحث"
         // onChange={handleChange}
         sx={{
-          width: 'calc(100% - 555px)',
+          width: 'calc(100% - 560px)',
           border: '1px solid ',
           borderColor: theme =>
             (theme.palette as customPalette).customColors.grayColor,

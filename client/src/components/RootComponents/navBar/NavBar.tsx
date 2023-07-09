@@ -5,8 +5,7 @@ import { Theme, useTheme } from '@mui/material';
 import { StyledLogo, StyledNavBox } from '../../index';
 
 import AccountMenu from './AccountMenu';
-
-import { customPalette } from '../../playerProfile/PlayerBackground';
+import { customPalette } from '../../../interfaces';
 
 const NavBar = (): ReactElement => {
   const currentTheme = useTheme();

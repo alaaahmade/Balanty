@@ -14,7 +14,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
-import { EditGalleryPopupProps } from '../../interfaces';
+import { EditGalleryPopupProps, customPalette } from '../../interfaces';
 
 import {
   DialogContentBox,
@@ -26,7 +26,6 @@ import {
 } from './StadiumProfile.styled';
 import Loader from './Loader';
 import { UpdateGalleryContext } from '../../context';
-import { customPalette } from '../playerProfile/PlayerBackground';
 
 const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   editGallery,

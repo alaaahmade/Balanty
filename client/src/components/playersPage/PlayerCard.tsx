@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, Typography } from '@mui/material';
 import { FollowButton, PlayerCard } from './PlayerPage.styled';
-import { customPalette } from '../playerProfile/PlayerBackground';
+import { customPalette } from '../../interfaces';
 
 interface PlayerDataProps {
   id: number;

@@ -16,7 +16,7 @@ const CenteredCard = styled(Card)({
   marginBottom: '10px',
   display: 'flex',
   justifyContent: 'center',
-  width: '55%',
+  width: 'calc(100% - 560px)',
   height: '300px',
   padding: '10px',
   border: '1px solid ',

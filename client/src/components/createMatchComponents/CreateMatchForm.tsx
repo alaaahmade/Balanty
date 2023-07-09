@@ -18,8 +18,12 @@ import { statsContext } from '../../context/CreateMatch';
 import { StyledButton } from '../styledRootComponent/SideComponents';
 
 import { CreateMatchFormProps } from '../../interfaces/matchInterface';
-import { Option, createMatchError, prevInterface } from '../../interfaces';
-import { customPalette } from '../playerProfile/PlayerBackground';
+import {
+  Option,
+  createMatchError,
+  customPalette,
+  prevInterface,
+} from '../../interfaces';
 
 const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
   const states = useContext(statsContext);

@@ -12,9 +12,8 @@ import {
   StyledButton,
   StyledTypography,
 } from '../../index';
-import { LeftSideBarInterface, User } from '../../../interfaces';
+import { LeftSideBarInterface, User, customPalette } from '../../../interfaces';
 import { AuthContext } from '../../../context';
-import { customPalette } from '../../playerProfile/PlayerBackground';
 
 const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
   const { user } = useContext(AuthContext);

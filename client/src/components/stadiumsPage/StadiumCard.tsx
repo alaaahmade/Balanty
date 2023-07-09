@@ -15,8 +15,7 @@ import {
   StadiumCardBox,
 } from './StadiumsPage.styled';
 
-import { StadiumDataProps } from '../../interfaces';
-import { customPalette } from '../playerProfile/PlayerBackground';
+import { StadiumDataProps, customPalette } from '../../interfaces';
 
 const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
   stadiumData,

@@ -13,7 +13,7 @@ import { Box } from '@mui/material';
 import { deleteDialogProps } from '../../interfaces/StadiumProfile';
 import Loader from './Loader';
 import { UpdateGalleryContext } from '../../context';
-import { customPalette } from '../playerProfile/PlayerBackground';
+import { customPalette } from '../../interfaces';
 
 const DeleteDialog: FC<deleteDialogProps> = ({
   handleClose,

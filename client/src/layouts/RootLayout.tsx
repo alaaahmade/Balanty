@@ -9,7 +9,7 @@ import CreateMatch from '../pages/CreateMatch';
 
 import { open } from '../context';
 import ProtectedProvider from '../context/ProtectedContext';
-import { customPalette } from '../components/playerProfile/PlayerBackground';
+import { customPalette } from '../interfaces';
 
 const RootLayout: React.FC = (): ReactElement => {
   const [Profile, setProfile] = useState(false);

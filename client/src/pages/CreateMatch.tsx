@@ -19,6 +19,7 @@ import '../fullcalendar-custom.css';
 import {
   createMatchError,
   createMatchInterface,
+  customPalette,
   prevInterface,
 } from '../interfaces';
 import { statsContext } from '../context/CreateMatch';
@@ -27,7 +28,6 @@ import {
   CreateMatchCalendar,
 } from '../components/createMatchComponents';
 import MatchSchema from '../validation/MatchSchema';
-import { customPalette } from '../components/playerProfile/PlayerBackground';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -35,7 +35,6 @@ const Transition = React.forwardRef(function Transition(
   },
   ref: React.Ref<unknown>,
 ) {
-  // eslint-disable-next-line react/jsx-props-no-spreading
   return <Slide direction="right" ref={ref} {...props} />;
 });
 
