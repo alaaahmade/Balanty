@@ -32,7 +32,6 @@ const signupService = async (
     };
   }
   if (userExists?.email === email) {
-    console.log('email');
     return {
       status: 409,
       data: 'هذا الايميل مستخدم',

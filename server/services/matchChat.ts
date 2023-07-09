@@ -12,11 +12,44 @@ const addMessageService = async ({
     message,
   });
 
+  const match = await Match.findOne({
+    where: { id: matchId },
+    include: [
+      {
+        model: Message,
+        where: { id: newMessage.id },
+        as: 'MatchMessages',
+        include: [
+          {
+            model: User,
+            attributes: [
+              'createdAt',
+              'email',
+              'id',
+              'phone',
+              'role',
+              'updatedAt',
+              'username',
+            ],
+            include: [
+              {
+                model: Player,
+              },
+              {
+                model: Stadium,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+
   return {
     status: 201,
     data: {
       message: 'Message added successfully',
-      newMessage,
+      newMessage: match?.dataValues.MatchMessages[0],
     },
   };
 };
@@ -105,6 +138,7 @@ const deleteMessageService: (
       status: 200,
       data: {
         message: 'Message deleted successfully',
+        deletedMessage: message,
       },
     };
   } else {

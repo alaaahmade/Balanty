@@ -1,17 +1,12 @@
 import { ReactElement } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import {
-  open,
-  useCustomOpen,
-  UpdateGalleryContextProvider,
-  StatsContextProvider,
-} from './context';
+
+import * as io from 'socket.io-client';
 
 import StadiumProfile from './pages/StadiumProfile';
 import StadiumsPage from './pages/Stadiums';
 import PlayerProfile from './pages/PlayerProfile';
 import MatchesPage from './pages/Match';
-import { AuthProvider } from './context/AuthContext';
 import NotFoundPage from './pages/NotFound';
 import InternalServerErrorPage from './pages/ServerError';
 import PlayersPage from './pages/PlayersPage';
@@ -21,6 +16,16 @@ import { LandingPage } from './pages';
 import MatchRoomPage from './pages/MatchRoomPage';
 import LoginWrapper from './components/auth/LoginWrapper';
 import SignupWrapper from './components/auth/SignupWrapper';
+
+import {
+  open,
+  useCustomOpen,
+  UpdateGalleryContextProvider,
+  StatsContextProvider,
+} from './context';
+import { AuthProvider } from './context/AuthContext';
+
+const socket = io.connect('http://localhost:8080');
 
 const router = createBrowserRouter([
   {
@@ -49,7 +54,7 @@ const router = createBrowserRouter([
         path: 'players/',
         element: <PlayersPage />,
       },
-      { path: 'match/:matchId', element: <MatchRoomPage /> },
+      { path: 'match/:matchId', element: <MatchRoomPage socket={socket} /> },
     ],
   },
 

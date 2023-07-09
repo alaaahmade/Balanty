@@ -1,32 +1,26 @@
-import React, { Key, Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { Box } from '@mui/system';
 import { Avatar } from '@mui/material';
 import MessageOptions from './MessageOptions';
 import { CustomizeLink, MessageBox } from './MatchChat.styled';
-
-interface Props {
-  id: Key | null | undefined;
-  message: string;
-  senderName: string | number;
-  senderAvatar: string | null;
-  isReceived: boolean;
-  setIsDeleted: Dispatch<SetStateAction<object>>;
-  role: string | undefined;
-}
+import { IMessageProps } from '../../interfaces';
 
 const Message = ({
+  socket,
   id,
+  senderId,
   message,
   senderAvatar,
   senderName,
   isReceived,
-  setIsDeleted,
   role,
-}: Props) => {
+  matchMessages,
+  setMatchMessages,
+}: IMessageProps) => {
   return (
-    <Box sx={{ mt: senderAvatar ? '10px' : 'auto' }}>
+    <Box sx={{ mt: senderAvatar && '10px' }}>
       {senderAvatar && (
-        <CustomizeLink to={`/profile/${role}/${id}`}>
+        <CustomizeLink to={`/profile/${role}/${senderId}`}>
           {senderName}
         </CustomizeLink>
       )}
@@ -50,17 +44,24 @@ const Message = ({
           }}
         >
           {!isReceived && (
-            <MessageOptions setIsDeleted={setIsDeleted} id={id} />
+            <MessageOptions
+              matchMessages={matchMessages}
+              setMatchMessages={setMatchMessages}
+              socket={socket}
+              id={id}
+            />
           )}
           {senderAvatar && <Avatar sx={{ mt: '-35px' }} src={senderAvatar} />}
           {!senderAvatar && isReceived && (
-            <div style={{ width: '40px', height: '40px' }} />
+            <Box style={{ width: '40px', height: '40px' }} />
           )}
           <MessageBox
-            isReceived
             style={{
               backgroundColor: isReceived ? '#F2FCF5' : '#2CB674',
               color: isReceived ? '#000' : '#fff',
+              textAlign: isReceived ? 'left' : 'right',
+              direction: isReceived ? 'ltr' : 'rtl',
+              alignSelf: isReceived ? 'left' : 'right',
             }}
           >
             {message}
