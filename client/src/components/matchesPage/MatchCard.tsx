@@ -80,6 +80,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
                   justifyContent: 'flex-end',
                   alignItems: 'center',
                   gap: '15px',
+                  color: theme => theme.palette.primary.contrastText,
                   m: '10px 80px 10px 0px',
                 }}
               >

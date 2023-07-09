@@ -87,6 +87,9 @@ const LoginWrapper: FC = (): ReactElement => {
             <OtherLink href="/">عودة إلى الرئيسية</OtherLink>
           </div>
           <SignButton
+            sx={{
+              color: 'white',
+            }}
             onClick={handleSubmit(onSubmit)}
             variant="contained"
             disableElevation

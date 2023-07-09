@@ -27,7 +27,7 @@ const InputWrap: FC<InputProps> = ({
                   borderColor: '#2cb674',
                 },
                 '& input': {
-                  height: '0.8em', // Adjust the height value as needed
+                  height: '0.8em',
                   caretColor: '#2cb674',
                 },
               }}

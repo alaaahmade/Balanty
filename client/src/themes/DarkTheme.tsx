@@ -11,9 +11,7 @@ const DarkTheme = createTheme({
       main: '#2CB674',
       contrastText: '#2CB674',
     },
-    text: {
-      primary: '#fff',
-    },
+
     customColors: {
       grayColor: '#181818',
       wightColor: '#fff',

@@ -12,7 +12,7 @@ const LightTheme = createTheme({
       contrastText: '#000',
     },
     text: {
-      primary: '#fff',
+      primary: '#000',
     },
     customColors: {
       grayColor: '#F2FCF5',
