@@ -25,7 +25,7 @@ import {
 import { ThemeProviderWrapper } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
 
-const socket = io.connect('http://3.75.142.65');
+const socket = io.connect('http://3.75.142.65/');
 
 const router = createBrowserRouter([
   {
