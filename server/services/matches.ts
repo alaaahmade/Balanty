@@ -3,6 +3,8 @@ import { CustomRequest, IServiceResponse } from '../interfaces';
 import { Gallery, Match, Stadium, User } from '../models';
 import { matchSchema } from '../validations';
 import { matchesInterface } from '../interfaces/matchInterfaces';
+import { Request } from 'express';
+import { sequelize } from '../database';
 
 export const createMatchService = async (
   req: CustomRequest,
@@ -100,4 +102,53 @@ export const getAllMatches = async (): Promise<matchesInterface> => {
       data: 'لا يوجد مباريات',
     };
   }
+};
+
+export const JoinToMatchService = async (
+  req: Request,
+): Promise<{ status: number; data: User | null | string }> => {
+  const playerId = req.user?.id;
+  const matchId = 3;
+  const checkExist = await User.findOne({
+    where: { id: playerId, role: 'player' },
+  });
+
+  if (!checkExist) {
+    return {
+      status: 404,
+      data: 'هذا اللاعب غير موجود',
+    };
+  }
+
+  const user = await User.findByPk(playerId);
+  const match = await Match.findByPk(matchId);
+
+  if (user !== null && match !== null) {
+    const transaction = await sequelize.transaction();
+
+    const data = await sequelize.models.MatchPlayer.findOne({
+      where: { userId: playerId, matchId },
+    });
+
+    if (!data) {
+      await sequelize.models.MatchPlayer.create(
+        {
+          userId: user.id,
+          matchId: match.id,
+        },
+        { transaction },
+      );
+    } else {
+      return {
+        status: 401,
+        data: 'لا يمكنك الانضمام مرتين في نفس الدوري',
+      };
+    }
+
+    await transaction.commit();
+  }
+  return {
+    status: 200,
+    data: checkExist,
+  };
 };

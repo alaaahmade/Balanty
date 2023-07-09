@@ -1,6 +1,10 @@
 import { Response, RequestHandler } from 'express';
 import { CustomRequest, IServiceResponse } from '../interfaces';
-import { createMatchService, getAllMatches } from '../services';
+import {
+  JoinToMatchService,
+  createMatchService,
+  getAllMatches,
+} from '../services';
 
 export const createMatch: RequestHandler = async (
   req: CustomRequest,
@@ -15,5 +19,13 @@ export const getMatches: RequestHandler = async (
   res: Response,
 ): Promise<void> => {
   const data = await getAllMatches();
+  res.status(data.status).json(data);
+};
+
+export const JoinToMatch: RequestHandler = async (
+  req: CustomRequest,
+  res: Response,
+): Promise<void> => {
+  const data = await JoinToMatchService(req);
   res.status(data.status).json(data);
 };
