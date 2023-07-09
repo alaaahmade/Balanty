@@ -8,11 +8,43 @@ const addMessageService = async ({ message, senderId, matchId, }) => {
         MatchId: matchId,
         message,
     });
+    const match = await models_1.Match.findOne({
+        where: { id: matchId },
+        include: [
+            {
+                model: models_1.Message,
+                where: { id: newMessage.id },
+                as: 'MatchMessages',
+                include: [
+                    {
+                        model: models_1.User,
+                        attributes: [
+                            'createdAt',
+                            'email',
+                            'id',
+                            'phone',
+                            'role',
+                            'updatedAt',
+                            'username',
+                        ],
+                        include: [
+                            {
+                                model: models_1.Player,
+                            },
+                            {
+                                model: models_1.Stadium,
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+    });
     return {
         status: 201,
         data: {
             message: 'Message added successfully',
-            newMessage,
+            newMessage: match?.dataValues.MatchMessages[0],
         },
     };
 };
@@ -93,6 +125,7 @@ const deleteMessageService = async (id) => {
             status: 200,
             data: {
                 message: 'Message deleted successfully',
+                deletedMessage: message,
             },
         };
     }

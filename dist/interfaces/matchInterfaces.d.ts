@@ -11,6 +11,7 @@ export interface IMatchMessage {
 export interface IResponseProps {
     status: number;
     data: {
+        deletedMessage?: object;
         message?: string | object;
         newMessage?: object;
         messages?: object[];
