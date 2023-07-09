@@ -4,7 +4,7 @@ import { sequelize } from '../database';
 class Message extends Model {
   declare message: string;
   declare UserId: number;
-  id: any;
+  id: unknown;
 }
 
 Message.init(
