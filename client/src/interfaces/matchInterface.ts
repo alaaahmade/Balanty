@@ -1,4 +1,5 @@
 import { Dispatch, Key, ReactNode, SetStateAction } from 'react';
+import { Socket } from 'socket.io-client';
 import { IEvent } from '../pages/CreateMatch';
 
 export interface Option {
@@ -79,7 +80,7 @@ export interface CreateMatchFormProps {
   setOpen: (newValue: boolean) => void;
 }
 
-interface IMatchMessage {
+export interface IMatchMessage {
   id: Key | null | undefined;
   UserId: number;
   MatchId: number;
@@ -111,6 +112,14 @@ interface IMatchMessage {
     } | null;
   };
 }
+
+export interface IMessageData {
+  status: number;
+  data: {
+    message: string;
+    newMessage?: IMatchMessage;
+  };
+}
 export interface IMatchDataProps {
   status: number;
   data: {
@@ -128,4 +137,17 @@ export interface IMatchDataProps {
       updatedAt: string;
     };
   };
+}
+
+export interface IMessageProps {
+  id: Key | null | undefined;
+  senderId: number;
+  message: string;
+  senderName: string | number;
+  senderAvatar: string | null;
+  isReceived: boolean;
+  role: string | undefined;
+  socket: Socket;
+  matchMessages: IMatchMessage[];
+  setMatchMessages: Dispatch<SetStateAction<IMatchMessage[]>>;
 }

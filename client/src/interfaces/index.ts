@@ -7,6 +7,8 @@ export type {
   LeftSideBarInterface,
   MyContextProviderProps,
   IMatchDataProps,
+  IMatchMessage,
+  IMessageProps,
 } from './matchInterface';
 
 export type {

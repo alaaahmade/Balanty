@@ -1,7 +1,8 @@
 import { ReactElement, FC } from 'react';
+import { Socket } from 'socket.io-client';
 import MatchChat from '../components/matchChat/MatchChat';
 
-const MatchRoomPage: FC = (): ReactElement => {
+const MatchRoomPage: FC<{ socket: Socket }> = ({ socket }): ReactElement => {
   return (
     <section
       style={{
@@ -11,7 +12,7 @@ const MatchRoomPage: FC = (): ReactElement => {
         gap: '2rem',
       }}
     >
-      <MatchChat />
+      <MatchChat socket={socket} />
     </section>
   );
 };

@@ -21,6 +21,13 @@ export const Wrapper = styled(Box)({
   margin: '1rem 0',
   height: '1000px',
   maxHeight: '90vh',
+});
+
+export const MessagesWrapper = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  flexGrow: '2',
+  padding: '0.5rem 1rem',
   overflow: 'auto !important',
 
   '&::-webkit-scrollbar-track': {
@@ -45,7 +52,6 @@ export const AddMessageBar = styled(Box)({
   alignItems: 'center',
   gap: '0.6rem',
   borderTop: '1px solid #eee',
-  marginTop: '1rem',
   position: 'sticky',
   bottom: '0',
   left: '0',
@@ -109,29 +115,21 @@ export const CustomizeLink = styled(Link)({
   },
 });
 
-interface Props {
-  isReceived: boolean;
-}
-export const MessageBox = styled(Box)<Props>(({ isReceived }) => ({
-  textAlign: isReceived ? 'left' : 'right',
-  direction: isReceived ? 'ltr' : 'rtl',
-  alignSelf: isReceived ? 'left' : 'right',
+export const MessageBox = styled(Box)({
   marginBottom: '4px',
   padding: '5px 10px',
   width: 'fit-content',
   maxWidth: '300px',
   wordWrap: 'break-word',
   borderRadius: '20px',
-}));
+});
 
 export const MatchHeaderSection = styled(Box)({
   position: 'sticky',
   top: '0',
   left: '0',
   width: '100%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
+  direction: 'rtl',
   padding: '0.5rem 0',
   background: '#fff',
   borderBottom: '1px solid #eee',

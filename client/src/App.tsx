@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import * as io from 'socket.io-client';
 import RootLayout from './layouts/RootLayout';
 import { LandingPage } from './pages';
 import MatchRoomPage from './pages/MatchRoomPage';
@@ -20,6 +21,8 @@ import NotFoundPage from './pages/NotFound';
 import InternalServerErrorPage from './pages/ServerError';
 import PlayersPage from './pages/PlayersPage';
 import { ThemeProviderWrapper } from './context/ThemeContext';
+
+const socket = io.connect('http://localhost:8080');
 
 const router = createBrowserRouter([
   {
@@ -48,7 +51,7 @@ const router = createBrowserRouter([
         path: 'players/',
         element: <PlayersPage />,
       },
-      { path: 'match/:matchId', element: <MatchRoomPage /> },
+      { path: 'match/:matchId', element: <MatchRoomPage socket={socket} /> },
     ],
   },
 
