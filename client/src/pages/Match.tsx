@@ -5,11 +5,14 @@ import { Box } from '@mui/system';
 
 import axios from 'axios';
 
+import { InputAdornment, TextField } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import ClearIcon from '@mui/icons-material/Clear';
 import MatchCard from '../components/matchesPage/MatchCard';
 
 import { open } from '../context';
 
-import { Match } from '../interfaces';
+import { Match, customPalette } from '../interfaces';
 
 const MatchesPage = (): React.ReactElement => {
   const [matches, setMatches] = useState<Match[]>([]);
@@ -34,11 +37,51 @@ const MatchesPage = (): React.ReactElement => {
   }, [openPage]);
 
   return (
-    <Box
-      sx={{
-        pt: '10%',
-      }}
-    >
+    <Box sx={{}}>
+      <TextField
+        size="small"
+        variant="outlined"
+        // value={value}
+        placeholder="بحث"
+        // onChange={handleChange}
+        sx={{
+          width: 'calc(100% - 555px)',
+          border: '1px solid ',
+          borderColor: theme =>
+            (theme.palette as customPalette).customColors.grayColor,
+          borderRadius: '4px',
+          direction: 'right',
+          m: '5.3% 50% 20px',
+          transform: 'translateX(-50%)',
+          color: theme => theme.palette.primary.main,
+          backgroundColor: theme =>
+            (theme.palette as customPalette).customColors.grayColor,
+          '& input': {
+            color: theme => theme.palette.primary.main,
+            textAlign: 'right',
+          },
+        }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon
+                sx={{
+                  color: theme => theme.palette.primary.main,
+                }}
+              />
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment
+              position="end"
+              // onClick={handleClear}
+              style={{ cursor: 'pointer' }}
+            >
+              <ClearIcon style={{ color: '#999' }} />
+            </InputAdornment>
+          ),
+        }}
+      />
       {error ? (
         <p>{error}</p>
       ) : (

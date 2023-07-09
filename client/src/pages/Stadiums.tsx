@@ -16,8 +16,7 @@ import {
 
 import { SkeletonLoader, StadiumCard, StadiumPageBox } from '../components';
 
-import { StadiumDataProps } from '../interfaces';
-import { customPalette } from '../components/playerProfile/PlayerBackground';
+import { StadiumDataProps, customPalette } from '../interfaces';
 
 const StadiumsPage = (): ReactElement => {
   const [stadiumData, setStadiumData] = useState<StadiumDataProps[]>([]);
