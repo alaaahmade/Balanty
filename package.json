@@ -70,6 +70,7 @@
     "pg": "^8.11.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.32.0",
+    "socket.io": "^4.7.1",
     "super": "^0.2.3",
     "supertest": "^6.3.3",
     "ts-jest": "^29.0.3",

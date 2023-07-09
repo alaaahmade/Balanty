@@ -1,8 +1,16 @@
 import { Box, IconButton } from '@mui/material';
-import React, { ReactElement, FC, SetStateAction, Dispatch, Key } from 'react';
+import React, {
+  ReactElement,
+  FC,
+  SetStateAction,
+  Dispatch,
+  Key,
+  useEffect,
+} from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import styled from '@emotion/styled';
-import axios from 'axios';
+import { Socket } from 'socket.io-client';
+import { IMatchMessage } from '../../interfaces';
 
 const MessageOptionsBox = styled(Box)({
   display: 'none',
@@ -13,12 +21,24 @@ const MessageOptionsBox = styled(Box)({
 
 const MessageOptions: FC<{
   id: Key | null | undefined;
-  setIsDeleted: Dispatch<SetStateAction<object>>;
-}> = ({ id, setIsDeleted }): ReactElement => {
+  socket: Socket;
+  matchMessages: IMatchMessage[];
+  setMatchMessages: Dispatch<SetStateAction<IMatchMessage[]>>;
+}> = ({ id, socket, matchMessages, setMatchMessages }): ReactElement => {
   const handleDeleteClick = async () => {
-    const deletedMessage = await axios.delete(`/api/v1/message/${id}`);
-    setIsDeleted(deletedMessage);
+    socket.emit('delete', {
+      id,
+    });
   };
+
+  useEffect(() => {
+    socket.on('messageDeleted', (deletedMessage: IMatchMessage) => {
+      const messages = matchMessages.filter(
+        (message: IMatchMessage) => message.id !== deletedMessage?.id,
+      );
+      setMatchMessages(messages);
+    });
+  }, [socket, matchMessages]);
 
   return (
     <MessageOptionsBox className="message-options">

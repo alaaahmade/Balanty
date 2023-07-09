@@ -14,7 +14,7 @@ router.use('/matches', errorWrapper(checkAuth), matchRouter);
 router.use('/user', authRouter);
 router.use('/stadiums', stadiumRouter);
 router.use('/players', playerRouter);
-router.use('/message', chatRouter);
+router.use('/message', errorWrapper(checkAuth), chatRouter);
 router.use('/review', errorWrapper(checkAuth), reviewRouter);
 
 export { router };

@@ -1,10 +1,10 @@
-import app from './app';
+import server from './chat';
 import { PORT } from './config';
 
 const startServer = async (): Promise<void> => {
   try {
     console.log('Connection has been established successfully.');
-    app.listen(PORT, (): void => {
+    server.listen(PORT, (): void => {
       console.log(`server is running on http://localhost:${PORT}`);
     });
   } catch (error) {

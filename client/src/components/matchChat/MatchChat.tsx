@@ -5,6 +5,8 @@ import React, {
   KeyboardEvent,
   useRef,
   useContext,
+  FC,
+  ReactElement,
 } from 'react';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
@@ -17,20 +19,28 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
+import { Socket } from 'socket.io-client';
 import {
   AddMessageBar,
   IconBackground,
+  MatchHeaderSection,
   MessageInput,
+  MessagesWrapper,
   Wrapper,
 } from './MatchChat.styled';
 import Message from './Message';
-import { CustomErrorResponse, IMatchDataProps } from '../../interfaces';
+import {
+  CustomErrorResponse,
+  IMatchDataProps,
+  IMatchMessage,
+} from '../../interfaces';
 
 import ChatImage from '../../assets/chat.svg';
 import { AuthContext } from '../../context';
 import ErrorAlert from '../ErrorAlert';
+import { IMessageData } from '../../interfaces/matchInterface';
 
-const MatchChat = () => {
+const MatchChat: FC<{ socket: Socket }> = ({ socket }): ReactElement => {
   const { pathname } = useLocation();
   const matchId = Number(pathname.split('/')[3]);
 
@@ -53,10 +63,10 @@ const MatchChat = () => {
     },
   });
 
+  const [matchMessages, setMatchMessages] = useState<IMatchMessage[]>([]);
+
   const [messageInput, setMessageInput] = useState<string>('');
-  const [newMessage, setNewMessage] = useState<object | null>(null);
   const [isIconPickerShown, setIsIconPickerShown] = useState<boolean>(false);
-  const [isDeleted, setIsDeleted] = useState<object | null>(null);
 
   const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -65,8 +75,6 @@ const MatchChat = () => {
   const navigate = useNavigate();
 
   const { user } = useContext(AuthContext);
-
-  const matchMessages = matchData?.data?.match?.MatchMessages;
 
   const handleScrollChat = () => {
     if (scrollContainerRef.current) {
@@ -80,41 +88,53 @@ const MatchChat = () => {
   function isAxiosError(error: unknown): error is AxiosError {
     return (error as AxiosError).isAxiosError !== undefined;
   }
+  useEffect(() => {
+    socket.on('messageResponse', (newData: IMessageData) => {
+      setMatchMessages([
+        ...matchMessages,
+        newData.data.newMessage,
+      ] as IMatchMessage[]);
+      handleScrollChat();
+    });
+  }, [socket, matchMessages]);
+
+  const getMessageRequest = async () => {
+    try {
+      const response = await axios.get(`/api/v1/message/match/${matchId}`);
+      setMatchData(response.data);
+      setMatchMessages(response.data?.data?.match?.MatchMessages);
+    } catch (error) {
+      if (isAxiosError(error)) {
+        const axiosError = error as AxiosError<CustomErrorResponse>;
+        if (axiosError.response) {
+          const errorResponse = axiosError.response.data.data;
+          if (errorResponse?.status === 500) {
+            navigate('/servererror');
+          }
+          setErrorMessage(errorResponse?.message);
+        }
+      } else {
+        setErrorMessage((error as Error).message);
+      }
+    }
+  };
 
   useEffect(() => {
     handleScrollChat();
-    (async () => {
-      try {
-        const response = await axios.get(`/api/v1/message/match/${matchId}`);
-        setMatchData(response.data);
-      } catch (error) {
-        if (isAxiosError(error)) {
-          const axiosError = error as AxiosError<CustomErrorResponse>;
-          if (axiosError.response) {
-            const errorResponse = axiosError.response.data.data;
-            if (errorResponse?.status === 500) {
-              navigate('/servererror');
-            }
-            setErrorMessage(errorResponse?.message);
-          }
-        } else {
-          setErrorMessage((error as Error).message);
-        }
-      }
-    })();
-  }, [newMessage, isDeleted]);
+    getMessageRequest();
+  }, [socket]);
 
   const addMessage = () => {
     if (messageInput.trim()) {
       (async () => {
         try {
-          const response = await axios.post(`/api/v1/message`, {
+          socket.emit('message', {
             senderId: user?.id,
             matchId: matchData?.data?.match?.id,
             message: messageInput.trim(),
           });
+
           setMessageInput('');
-          setNewMessage(response.data);
           setIsIconPickerShown(false);
           handleScrollChat();
         } catch (error) {
@@ -151,43 +171,18 @@ const MatchChat = () => {
 
   return (
     <Wrapper ref={scrollContainerRef}>
-      <Box>
-        <Box
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '1rem',
-          }}
-        >
-          <IconBackground>
-            <VideocamOutlinedIcon
-              style={{
-                fill: '#2CB674',
-                width: '23px',
-                height: '23px',
-              }}
-            />
-          </IconBackground>
-          <IconBackground>
-            <CallOutlinedIcon
-              style={{
-                fill: '#2CB674',
-                width: '23px',
-                height: '23px',
-              }}
-            />
-          </IconBackground>
-        </Box>
+      <MatchHeaderSection>
         <Typography variant="h4" sx={{ fontSize: '20px', fontWeight: 'bold' }}>
           {matchData?.data?.match?.title}
         </Typography>
-      </Box>
+      </MatchHeaderSection>
 
-      <Box style={{ flexGrow: '2', marginTop: '0.5rem' }}>
+      <MessagesWrapper ref={scrollContainerRef}>
         {matchMessages?.length > 0 ? (
           matchMessages.map((message, i, arr) => {
             return (
               <Message
+                socket={socket}
                 key={message.id}
                 id={message.id}
                 message={message.message}
@@ -199,9 +194,11 @@ const MatchChat = () => {
                     : null
                 }
                 senderName={message.User?.username}
+                senderId={message.UserId}
                 isReceived={message.UserId !== user?.id}
-                setIsDeleted={setIsDeleted}
                 role={message.User?.role}
+                matchMessages={matchMessages}
+                setMatchMessages={setMatchMessages}
               />
             );
           })
@@ -230,7 +227,7 @@ const MatchChat = () => {
             </Typography>
           </>
         )}
-      </Box>
+      </MessagesWrapper>
       {isIconPickerShown && (
         <Box
           style={{
@@ -250,15 +247,6 @@ const MatchChat = () => {
 
       <AddMessageBar>
         <Box style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-          <IconBackground>
-            <AttachFileIcon
-              style={{
-                fill: '#2CB674',
-                width: '23px',
-                height: '23px',
-              }}
-            />
-          </IconBackground>
           <IconBackground
             onClick={() => setIsIconPickerShown(!isIconPickerShown)}
           >
