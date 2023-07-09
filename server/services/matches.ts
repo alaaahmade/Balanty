@@ -4,7 +4,6 @@ import { Gallery, Match, Stadium, User } from '../models';
 import { matchSchema } from '../validations';
 import { matchesInterface } from '../interfaces/matchInterfaces';
 import { Request } from 'express';
-import { sequelize } from '../database';
 import MatchPlayer from '../models/MatchPlayer';
 
 export const createMatchService = async (
@@ -67,13 +66,10 @@ export const createMatchService = async (
     data: '! هذا الوقت محجوز',
   };
 };
-export const getAllMatches = async (
-  req: Request,
-): Promise<matchesInterface | any> => {
+export const getAllMatches = async (): Promise<matchesInterface> => {
   const currentDate = Date.now();
   const currentDateObject = new Date(currentDate);
   const currentDateFormatted = currentDateObject.toISOString();
-  const userId = req.user?.id;
 
   const matches = await Match.findAll({
     where: {
@@ -95,18 +91,10 @@ export const getAllMatches = async (
     ],
   });
 
-  const playerMatch = await MatchPlayer.findOne({
-    where: {
-      userId: { [Op.not]: userId },
-    },
-    include: [{ model: Match, as: 'Players' }],
-  });
-  // console.log(data);
-
   if (matches.length > 0) {
     return {
       status: 200,
-      data: playerMatch,
+      data: matches,
     };
   } else {
     return {
@@ -118,7 +106,7 @@ export const getAllMatches = async (
 
 export const JoinToMatchService = async (
   req: Request,
-): Promise<{ status: number; data: User | null | string }> => {
+): Promise<{ status: number; data: MatchPlayer | null | string }> => {
   const playerId = req.user?.id;
   const { matchId } = req.params;
   const checkExist = await User.findOne({
@@ -135,25 +123,23 @@ export const JoinToMatchService = async (
   const user = await User.findByPk(playerId);
   const match = await Match.findByPk(matchId);
 
-  if (user !== null && match !== null) {
-    const data = await MatchPlayer.findOne({
-      where: { userId: playerId, matchId },
-    });
+  const data = await MatchPlayer.findOne({
+    where: { userId: playerId, matchId },
+  });
 
-    if (data) {
-      return {
-        status: 401,
-        data: 'لا يمكنك الانضمام مرتين في نفس الدوري',
-      };
-    } else {
-      await MatchPlayer.create({
-        userId: user.id,
-        matchId: match.id,
-      });
-    }
+  if (data) {
+    return {
+      status: 401,
+      data: 'لا يمكنك الانضمام مرتين في نفس الدوري',
+    };
   }
+  const matchP = await MatchPlayer.create({
+    userId: user?.id,
+    matchId: match?.id,
+  });
+
   return {
     status: 200,
-    data: checkExist,
+    data: matchP,
   };
 };
