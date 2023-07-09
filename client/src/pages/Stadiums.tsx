@@ -108,7 +108,7 @@ const StadiumsPage = (): ReactElement => {
               (theme.palette as customPalette).customColors.grayColor,
             borderRadius: '4px',
             direction: 'right',
-            mt: '20px',
+            mt: '30px',
             color: theme => theme.palette.primary.main,
             backgroundColor: theme =>
               (theme.palette as customPalette).customColors.grayColor,

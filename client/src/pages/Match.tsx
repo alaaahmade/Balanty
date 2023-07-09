@@ -51,7 +51,7 @@ const MatchesPage = (): React.ReactElement => {
             (theme.palette as customPalette).customColors.grayColor,
           borderRadius: '4px',
           direction: 'right',
-          m: '5.3% 50% 20px',
+          m: '6% 50% 20px',
           transform: 'translateX(-50%)',
           color: theme => theme.palette.primary.main,
           backgroundColor: theme =>
