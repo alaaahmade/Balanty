@@ -108,7 +108,7 @@ export const JoinToMatchService = async (
   req: Request,
 ): Promise<{ status: number; data: User | null | string }> => {
   const playerId = req.user?.id;
-  const matchId = 3;
+  const { matchId } = req.params;
   const checkExist = await User.findOne({
     where: { id: playerId, role: 'player' },
   });

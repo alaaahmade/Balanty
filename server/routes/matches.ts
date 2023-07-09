@@ -12,6 +12,6 @@ const matchRouter: Router = Router();
 matchRouter.get('/', errorWrapper(getMatches));
 matchRouter.post('/', errorWrapper(createMatch));
 matchRouter.get('/stadium/:stadiumId', errorWrapper(getStadiumMatches));
-matchRouter.get('/join/', errorWrapper(JoinToMatch));
+matchRouter.get('/join/:matchId', errorWrapper(JoinToMatch));
 
 export default matchRouter;
