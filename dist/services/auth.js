@@ -10,6 +10,8 @@ const utils_1 = require("../utils");
 const generateToken_1 = require("../utils/jwt/generateToken");
 const validations_1 = require("../validations");
 const sequelize_1 = require("sequelize");
+const mailBuilder_1 = require("./mailBuilder");
+const sendEmail_1 = __importDefault(require("./sendEmail"));
 const signupService = async (userData) => {
     const { username, email, password, phone, role } = userData;
     await validations_1.signupSchema.validateAsync(userData);
@@ -43,6 +45,19 @@ const signupService = async (userData) => {
         email,
         password: hashedPassword,
         role,
+    });
+    const { emailBody, emailText } = (0, mailBuilder_1.generateEmail)({
+        name: username,
+        greeting: 'مرحباً',
+        signature: 'شكراً لكم',
+        intro: 'نحن سعداء لانضمامك إلى مجتمعنا. كعضو في بلنتي، لديك الآن وصول إلى مجموعة كبيرة من الخدمات. سواء كنت هنا للانضمام لمباراة  ينوى عقدها أو إنشاء مباراتك الخاصة ، لا تتردد في استكشاف منصتنا وإخبار أصدقائك عنها!',
+        outro: ' إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في التواصل معنا. نحن هنا للمساعدة!',
+    });
+    await (0, sendEmail_1.default)({
+        to: email,
+        subject: '!تم تفعيل الحساب بنجاح',
+        text: emailText,
+        message: emailBody,
     });
     const token = await (0, generateToken_1.generateToken)({
         username,

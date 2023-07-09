@@ -4,6 +4,7 @@ declare const SECRET_KEY: string | undefined;
 export declare const nodeEnv: string | undefined;
 export declare const PORT: string | undefined;
 export declare const BUILD_DB: string | undefined;
+export declare const EMAIL: string | undefined, EMAIL_PASSWORD: string | undefined, PRODUCT: string | undefined, PRODUCT_LINK: string | undefined;
 interface connectionOption {
     dialect: Dialect;
     dialectOptions: {

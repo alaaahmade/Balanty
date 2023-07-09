@@ -1,12 +1,14 @@
 "use strict";
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dbUrl = exports.sequelizeOption = exports.SECRET_KEY = exports.BUILD_DB = exports.PORT = exports.nodeEnv = void 0;
+exports.dbUrl = exports.sequelizeOption = exports.SECRET_KEY = exports.PRODUCT_LINK = exports.PRODUCT = exports.EMAIL_PASSWORD = exports.EMAIL = exports.BUILD_DB = exports.PORT = exports.nodeEnv = void 0;
 require("dotenv/config");
 const { DEV_DB_URL, DATABASE_URL, TEST_URL, NODE_ENV, SECRET_KEY } = process.env;
 exports.SECRET_KEY = SECRET_KEY;
 exports.nodeEnv = NODE_ENV;
 exports.PORT = (process.env || 8080).PORT;
 exports.BUILD_DB = process.env.BUILD_DB;
+_a = process.env, exports.EMAIL = _a.EMAIL, exports.EMAIL_PASSWORD = _a.EMAIL_PASSWORD, exports.PRODUCT = _a.PRODUCT, exports.PRODUCT_LINK = _a.PRODUCT_LINK;
 if (!NODE_ENV || !SECRET_KEY) {
     throw new Error('Invalid Environment Variables');
 }
