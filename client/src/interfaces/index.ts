@@ -17,6 +17,7 @@ export type {
   AuthContextData,
   CustomErrorResponse,
   ChildrenProps,
+  sinupProps,
 } from './authInterfaces';
 
 export type { StadiumDataProps } from './stadiumsPage';
@@ -33,4 +34,20 @@ export type {
 } from './StadiumProfile';
 
 export type { Page } from './landingPage';
-export type { UserCardProps } from './rootLayout';
+export type {
+  UserCardProps,
+  SideBarLinkProps,
+  MyMatchesProps,
+  RightSideBarTitleProps,
+  TeamNameProps,
+} from './rootLayout';
+
+export type {
+  customPalette,
+  CustomTheme,
+  PlayerPalette,
+  ThemeContextType,
+  CustomPaletteOptions,
+} from './Theme';
+
+export type { Match, Player } from './matches';

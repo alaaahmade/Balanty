@@ -1,15 +1,7 @@
-import { Avatar, Palette } from '@mui/material';
+import { Avatar } from '@mui/material';
 import { Cover, AvatarWrapper, MainWrapper } from './Player.Styled';
 import { playerBackgroundProps } from '../../interfaces/PLayerProfile';
-
-export interface customPalette extends Palette {
-  customColors: {
-    grayColor: string;
-    wightColor: string;
-    backGroundColor: string;
-    second: string;
-  };
-}
+import { customPalette } from '../../interfaces';
 
 const PlayerBackground = ({ avatar, cover }: playerBackgroundProps) => {
   return (

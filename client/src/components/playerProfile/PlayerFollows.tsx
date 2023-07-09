@@ -1,14 +1,7 @@
 import React from 'react';
-import { Avatar, Typography, Theme, SxProps, Palette } from '@mui/material';
+import { Avatar, Typography, SxProps } from '@mui/material';
 import { FollowCard, FollowButton } from './Player.Styled';
-
-interface PlayerPalette extends Palette {
-  customColors: { grayColor: string };
-}
-
-interface CustomTheme extends Theme {
-  palette: PlayerPalette;
-}
+import { CustomTheme } from '../../interfaces';
 
 const PlayerFollows: React.FC<{ action: string; username: string }> = ({
   action,

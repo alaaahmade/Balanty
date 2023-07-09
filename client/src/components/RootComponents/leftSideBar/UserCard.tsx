@@ -6,8 +6,7 @@ import { Avatar, Typography } from '@mui/material';
 import axios from 'axios';
 import { BorderBox, StyledImag, StyledUserCart } from '../../index';
 
-import { UserCardProps } from '../../../interfaces';
-import { customPalette } from '../../playerProfile/PlayerBackground';
+import { UserCardProps, customPalette } from '../../../interfaces';
 
 const UserCard: FC<UserCardProps> = ({
   username,

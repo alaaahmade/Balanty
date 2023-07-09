@@ -1,13 +1,5 @@
-import { createTheme, PaletteOptions } from '@mui/material';
-
-export interface CustomPaletteOptions extends PaletteOptions {
-  customColors: {
-    grayColor: string;
-    wightColor: string;
-    backGroundColor: string;
-    second: string;
-  };
-}
+import { createTheme } from '@mui/material';
+import { CustomPaletteOptions } from '../interfaces';
 
 const DarkTheme = createTheme({
   typography: {

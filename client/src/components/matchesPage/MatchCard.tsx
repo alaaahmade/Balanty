@@ -8,42 +8,8 @@ import {
   InputLabel,
 } from '@mui/material';
 import { StyledButton } from '../styledRootComponent/SideComponents';
-import { customPalette } from '../playerProfile/PlayerBackground';
-
-interface Match {
-  id: number;
-  title: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-  seats: number;
-  stadiumMatch: {
-    username: string;
-    Stadium: {
-      stadiumGallery: {
-        image: string;
-      }[];
-    };
-  };
-  ownerUser: {
-    username: string;
-  };
-  // eslint-disable-next-line no-use-before-define
-  Players: Player[];
-}
-
-interface Player {
-  id: number;
-  avatar: string;
-  age: number;
-  position: string;
-  cover: string;
-  bio: string;
-}
-
-interface MatchCardProps {
-  match: Match;
-}
+import { customPalette } from '../../interfaces';
+import { MatchCardProps } from '../../interfaces/matches';
 
 const CenteredCard = styled(Card)({
   margin: 'auto',

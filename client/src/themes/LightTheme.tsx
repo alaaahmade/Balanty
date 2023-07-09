@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material';
-import { CustomPaletteOptions } from './DarkTheme';
+import { CustomPaletteOptions } from '../interfaces';
 
 const LightTheme = createTheme({
   typography: {

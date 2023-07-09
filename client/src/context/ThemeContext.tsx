@@ -1,12 +1,7 @@
 import React, { FC, createContext, useMemo, useState } from 'react';
 import { ThemeProvider } from '@mui/material';
-import { ChildrenProps } from '../interfaces';
+import { ChildrenProps, ThemeContextType } from '../interfaces';
 import { DarkTheme, LightTheme } from '../themes';
-
-interface ThemeContextType {
-  isDarkMode: boolean;
-  toggleTheme: () => void;
-}
 
 export const ThemeContext = createContext<ThemeContextType>({
   isDarkMode: true,

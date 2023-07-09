@@ -3,7 +3,7 @@ import { TextField, InputAdornment, Box, Theme } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useTheme } from '@emotion/react';
-import { customPalette } from '../playerProfile/PlayerBackground';
+import { customPalette } from '../../interfaces';
 
 interface TypeSearchProps {
   searchValue: string;

@@ -1,9 +1,6 @@
 import { Typography } from '@mui/material';
 import { ReactElement } from 'react';
-
-interface RightSideBarTitleProps {
-  title: string;
-}
+import { RightSideBarTitleProps } from '../../../interfaces';
 
 const RightSideBarTitle = ({ title }: RightSideBarTitleProps): ReactElement => {
   return (

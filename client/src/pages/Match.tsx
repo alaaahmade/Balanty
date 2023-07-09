@@ -1,39 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
 import { Box } from '@mui/system';
+
+import axios from 'axios';
+
 import MatchCard from '../components/matchesPage/MatchCard';
+
 import { open } from '../context';
 
-interface Player {
-  id: number;
-  avatar: string;
-  age: number;
-  position: string;
-  cover: string;
-  bio: string;
-}
-
-interface Match {
-  id: number;
-  title: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-  seats: number;
-  stadiumMatch: {
-    username: string;
-    Stadium: {
-      stadiumGallery: {
-        image: string;
-      }[];
-    };
-  };
-  ownerUser: {
-    username: string;
-  };
-  Players: Player[];
-}
+import { Match } from '../interfaces';
 
 const MatchesPage = (): React.ReactElement => {
   const [matches, setMatches] = useState<Match[]>([]);

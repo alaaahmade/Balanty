@@ -4,12 +4,7 @@ import '../../../App.css';
 import { useTheme } from '@emotion/react';
 import { Theme } from '@mui/material';
 import { DarkSideLink } from '../../styledRootComponent/LiftSideBarStyledComponent';
-import { customPalette } from '../../playerProfile/PlayerBackground';
-
-interface SideBarLinkProps {
-  text: string;
-  icon: React.ReactNode;
-}
+import { customPalette, SideBarLinkProps } from '../../../interfaces';
 
 const SideBarLink = ({ text, icon }: SideBarLinkProps): ReactElement => {
   const currentTheme = useTheme();
