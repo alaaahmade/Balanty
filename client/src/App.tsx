@@ -7,7 +7,6 @@ import StadiumProfile from './pages/StadiumProfile';
 import StadiumsPage from './pages/Stadiums';
 import PlayerProfile from './pages/PlayerProfile';
 import MatchesPage from './pages/Match';
-import { AuthProvider } from './context/AuthContext';
 import NotFoundPage from './pages/NotFound';
 import InternalServerErrorPage from './pages/ServerError';
 import PlayersPage from './pages/PlayersPage';
@@ -24,6 +23,7 @@ import {
   StatsContextProvider,
 } from './context';
 import { ThemeProviderWrapper } from './context/ThemeContext';
+import { AuthProvider } from './context/AuthContext';
 
 const socket = io.connect('http://localhost:8080');
 
