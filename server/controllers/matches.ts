@@ -18,7 +18,7 @@ export const getMatches: RequestHandler = async (
   req: CustomRequest,
   res: Response,
 ): Promise<void> => {
-  const data = await getAllMatches();
+  const data = await getAllMatches(req);
   res.status(data.status).json(data);
 };
 

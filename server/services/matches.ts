@@ -5,6 +5,7 @@ import { matchSchema } from '../validations';
 import { matchesInterface } from '../interfaces/matchInterfaces';
 import { Request } from 'express';
 import { sequelize } from '../database';
+import MatchPlayer from '../models/MatchPlayer';
 
 export const createMatchService = async (
   req: CustomRequest,
@@ -66,10 +67,13 @@ export const createMatchService = async (
     data: '! هذا الوقت محجوز',
   };
 };
-export const getAllMatches = async (): Promise<matchesInterface> => {
+export const getAllMatches = async (
+  req: Request,
+): Promise<matchesInterface | any> => {
   const currentDate = Date.now();
   const currentDateObject = new Date(currentDate);
   const currentDateFormatted = currentDateObject.toISOString();
+  const userId = req.user?.id;
 
   const matches = await Match.findAll({
     where: {
@@ -91,10 +95,18 @@ export const getAllMatches = async (): Promise<matchesInterface> => {
     ],
   });
 
+  const playerMatch = await MatchPlayer.findOne({
+    where: {
+      userId: { [Op.not]: userId },
+    },
+    include: [{ model: Match, as: 'Players' }],
+  });
+  // console.log(data);
+
   if (matches.length > 0) {
     return {
       status: 200,
-      data: matches,
+      data: playerMatch,
     };
   } else {
     return {
@@ -124,28 +136,21 @@ export const JoinToMatchService = async (
   const match = await Match.findByPk(matchId);
 
   if (user !== null && match !== null) {
-    const transaction = await sequelize.transaction();
-
-    const data = await sequelize.models.MatchPlayer.findOne({
+    const data = await MatchPlayer.findOne({
       where: { userId: playerId, matchId },
     });
 
-    if (!data) {
-      await sequelize.models.MatchPlayer.create(
-        {
-          userId: user.id,
-          matchId: match.id,
-        },
-        { transaction },
-      );
-    } else {
+    if (data) {
       return {
         status: 401,
         data: 'لا يمكنك الانضمام مرتين في نفس الدوري',
       };
+    } else {
+      await MatchPlayer.create({
+        userId: user.id,
+        matchId: match.id,
+      });
     }
-
-    await transaction.commit();
   }
   return {
     status: 200,
