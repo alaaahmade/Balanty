@@ -6,7 +6,6 @@ export const SideBox = styled(Box)({
   width: '240px',
   minHeight: 'calc(100vh - 50px)',
   top: '3.2em',
-  backgroundColor: '#FFFFFF',
   borderTop: 0,
   display: 'flex',
   flexDirection: 'column',

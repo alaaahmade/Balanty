@@ -72,6 +72,7 @@ const PlayerInformation = ({
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'flex-end',
+          backgroundColor: theme => theme.palette.primary.grayColor,
         }}
       >
         <FlexBox sx={{ justifyContent: 'space-between' }}>
@@ -86,7 +87,13 @@ const PlayerInformation = ({
             </IconButton>
           </InputAdornment>
 
-          <Typography variant="h5" sx={{ ml: '5px' }}>
+          <Typography
+            variant="h5"
+            sx={{
+              ml: '5px',
+              color: theme => theme.palette.primary.contrastText,
+            }}
+          >
             معلومات شخصية
           </Typography>
         </FlexBox>
@@ -105,6 +112,7 @@ const PlayerInformation = ({
               sx={{
                 width: '7rem',
                 textAlign: 'right',
+                color: theme => theme.palette.primary.contrastText,
                 fontWeight: 700,
               }}
             >
@@ -135,6 +143,7 @@ const PlayerInformation = ({
               sx={{
                 width: '8rem',
                 textAlign: 'right',
+                color: theme => theme.palette.primary.contrastText,
                 fontWeight: 700,
               }}
             >
@@ -165,6 +174,7 @@ const PlayerInformation = ({
               sx={{
                 width: '8rem',
                 textAlign: 'right',
+                color: theme => theme.palette.primary.contrastText,
                 fontWeight: 700,
               }}
             >
@@ -195,6 +205,7 @@ const PlayerInformation = ({
               sx={{
                 width: '5rem',
                 textAlign: 'right',
+                color: theme => theme.palette.primary.contrastText,
                 fontWeight: 700,
               }}
             >

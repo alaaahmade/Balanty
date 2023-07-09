@@ -1,17 +1,26 @@
 import { ReactElement } from 'react';
 
-import { SideLink } from '../../styledRootComponent';
-
 import '../../../App.css';
-
-interface SideBarLinkProps {
-  text: string;
-  icon: React.ReactNode;
-}
+import { useTheme } from '@emotion/react';
+import { Theme } from '@mui/material';
+import { DarkSideLink } from '../../styledRootComponent/LiftSideBarStyledComponent';
+import { customPalette, SideBarLinkProps } from '../../../interfaces';
 
 const SideBarLink = ({ text, icon }: SideBarLinkProps): ReactElement => {
+  const currentTheme = useTheme();
   return (
-    <SideLink
+    <DarkSideLink
+      sx={{
+        backgroundColor: ((currentTheme as Theme).palette as customPalette)
+          .customColors.grayColor,
+        color: (currentTheme as Theme).palette.primary.contrastText,
+        '&:hover': {
+          backgroundColor: ((currentTheme as Theme).palette as customPalette)
+            .customColors.backGroundColor,
+          color: (currentTheme as Theme).palette.primary.main,
+          padding: '15px 30px 15px 0',
+        },
+      }}
       to={
         text === 'الصفحة الرئيسية'
           ? '/home'
@@ -20,13 +29,13 @@ const SideBarLink = ({ text, icon }: SideBarLinkProps): ReactElement => {
           : text === 'الملاعب'
           ? '/home/stadiums'
           : text === 'اخر اللاعبين'
-          ? '/home/lastPlayer'
+          ? '/home/players'
           : '/home'
       }
     >
       {text}
       {icon}
-    </SideLink>
+    </DarkSideLink>
   );
 };
 

@@ -16,7 +16,7 @@ import {
 
 import { SkeletonLoader, StadiumCard, StadiumPageBox } from '../components';
 
-import { StadiumDataProps } from '../interfaces';
+import { StadiumDataProps, customPalette } from '../interfaces';
 
 const StadiumsPage = (): ReactElement => {
   const [stadiumData, setStadiumData] = useState<StadiumDataProps[]>([]);
@@ -87,12 +87,12 @@ const StadiumsPage = (): ReactElement => {
   return (
     <StadiumPageBox
       sx={{
-        mt: '5.5%',
+        mt: '3.7%',
       }}
     >
       <Box
         sx={{
-          width: 'calc(100% - 800px)',
+          width: 'calc(100% - 560px)',
         }}
       >
         <TextField
@@ -103,16 +103,28 @@ const StadiumsPage = (): ReactElement => {
           onChange={handleChange}
           sx={{
             width: '100%',
-            borderColor: '#2CB674',
+            border: '1px solid ',
+            borderColor: theme =>
+              (theme.palette as customPalette).customColors.grayColor,
+            borderRadius: '4px',
             direction: 'right',
+            mt: '20px',
+            color: theme => theme.palette.primary.main,
+            backgroundColor: theme =>
+              (theme.palette as customPalette).customColors.grayColor,
             '& input': {
+              color: theme => theme.palette.primary.main,
               textAlign: 'right',
             },
           }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <SearchIcon />
+                <SearchIcon
+                  sx={{
+                    color: theme => theme.palette.primary.main,
+                  }}
+                />
               </InputAdornment>
             ),
             endAdornment: clearIcon && (

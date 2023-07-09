@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useContext } from 'react';
 import { Box } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Control, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { Control, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import {
@@ -68,14 +68,10 @@ const LoginWrapper: FC = (): ReactElement => {
               isplayer === 'true' ? 'ادخل اسم اللاعب' : 'ادخل اسم الملعب'
             }
             errors={errors}
-            control={
-              control as unknown as Control<signupProps> | Control<FieldValues>
-            }
+            control={control as unknown as Control<signupProps>}
           />
           <InputWrap
-            control={
-              control as unknown as Control<signupProps> | Control<FieldValues>
-            }
+            control={control as unknown as Control<signupProps>}
             name="password"
             type="password"
             label="كلمة المرور"
@@ -91,6 +87,9 @@ const LoginWrapper: FC = (): ReactElement => {
             <OtherLink href="/">عودة إلى الرئيسية</OtherLink>
           </div>
           <SignButton
+            sx={{
+              color: 'white',
+            }}
             onClick={handleSubmit(onSubmit)}
             variant="contained"
             disableElevation

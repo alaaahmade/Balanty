@@ -48,7 +48,15 @@ const PlayerProfile = () => {
 
   return (
     <>
-      {cover && avatar && <PlayerBackground cover={cover} avatar={avatar} />}
+      <PlayerBackground
+        cover={
+          cover ||
+          'https://frontofficesports.com/wp-content/uploads/2022/12/FOS-PM-22-12.20-Ronaldo-Saudi-2030.jpg'
+        }
+        avatar={
+          avatar || 'https://s.hs-data.com/bilder/spieler/gross/13029.jpg'
+        }
+      />
       <PlayerActions username={username} />
       <FollowsInfoWrapper>
         <PlayerInformation

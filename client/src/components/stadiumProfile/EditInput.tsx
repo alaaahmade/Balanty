@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { EditInputs } from './StadiumProfile.styled';
-import { Props, updatedValue } from '../../interfaces';
+import { Props, customPalette, updatedValue } from '../../interfaces';
 
 const EditInput: React.FC<Props> = ({
   lastValue,
@@ -35,6 +35,16 @@ const EditInput: React.FC<Props> = ({
       sx={{
         textAlign: 'right',
         direction: 'right',
+        '& .css-66dh3a-MuiInputBase-input-MuiInput-input.Mui-disabled': {
+          textAlign: 'right',
+
+          WebkitTextFillColor: theme =>
+            (theme.palette as customPalette).customColors.wightColor,
+        },
+        '& .css-1x51dt5-MuiInputBase-input-MuiInput-input.Mui-disabled': {
+          WebkitTextFillColor: theme =>
+            (theme.palette as customPalette).customColors.wightColor,
+        },
       }}
       InputProps={{
         disableUnderline: true,

@@ -70,6 +70,10 @@ export interface OpenContextValue {
   date: string;
   setDate: Dispatch<SetStateAction<string>>;
 }
+export interface useCustomOpenI extends OpenContextValue {
+  openPage: boolean;
+  updateOpen: (newValue: boolean) => void;
+}
 
 export interface MyContextProviderProps {
   children: ReactNode;

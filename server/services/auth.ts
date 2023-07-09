@@ -6,7 +6,8 @@ import { UserData, newStadium, newUser } from '../interfaces/auth';
 import { signupSchema, loginSchema } from '../validations';
 import { userLoginAttrs } from '../interfaces/auth';
 import { Op } from 'sequelize';
-
+import { generateEmail } from './mailBuilder';
+import sendEmail from './sendEmail';
 const signupService = async (
   userData: UserData,
 ): Promise<{
@@ -51,6 +52,23 @@ const signupService = async (
     email,
     password: hashedPassword,
     role,
+  });
+
+  const { emailBody, emailText } = generateEmail({
+    name: username,
+    greeting: 'مرحباً',
+    signature: 'شكراً لكم',
+    intro:
+      'نحن سعداء لانضمامك إلى مجتمعنا. كعضو في بلنتي، لديك الآن وصول إلى مجموعة كبيرة من الخدمات. سواء كنت هنا للانضمام لمباراة  ينوى عقدها أو إنشاء مباراتك الخاصة ، لا تتردد في استكشاف منصتنا وإخبار أصدقائك عنها!',
+    outro:
+      ' إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في التواصل معنا. نحن هنا للمساعدة!',
+  });
+
+  await sendEmail({
+    to: email,
+    subject: '!تم تفعيل الحساب بنجاح',
+    text: emailText,
+    message: emailBody,
   });
 
   const token = await generateToken({

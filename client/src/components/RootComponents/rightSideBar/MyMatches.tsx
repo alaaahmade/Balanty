@@ -1,16 +1,17 @@
-import { Typography } from '@mui/material';
 import { ReactElement } from 'react';
+
+import { Typography } from '@mui/material';
+
 import { StyledButton, StyledMyMatches } from '../../index';
 
-interface MyMatchesProps {
-  stadium: string;
-}
+import { MyMatchesProps } from '../../../interfaces';
 
 const MyMatches = ({ stadium }: MyMatchesProps): ReactElement => {
   return (
     <StyledMyMatches
       sx={{
         mt: '15px',
+        backgroundColor: theme => theme.palette.customColors.backGroundColor,
       }}
     >
       <StyledButton

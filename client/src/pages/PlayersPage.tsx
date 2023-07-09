@@ -6,7 +6,6 @@ import axios from 'axios';
 import SkeletonLoader from '../components/playersPage/Loader';
 import Card from '../components/playersPage/PlayerCard';
 import { CardsWrapper } from '../components/playersPage/PlayerPage.styled';
-import RightSideBar from '../components/RootComponents/rightSideBar/RightSideBar';
 import TypeSearch from '../components/playersPage/InputSearch';
 import { errorI, PlayerDataProps } from '../interfaces/PlayerPage';
 
@@ -72,7 +71,6 @@ const PlayersPage = (): ReactElement => {
   return (
     <Box>
       <TypeSearch searchValue={searchValue} setSearchValue={setSearchValue} />
-      <RightSideBar />
       <CardsWrapper>
         {playerData.length > 0 ? (
           playerData.map(player => <Card key={player.id} playerData={player} />)

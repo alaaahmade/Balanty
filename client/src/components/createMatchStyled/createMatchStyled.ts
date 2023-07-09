@@ -5,16 +5,13 @@ import { Box } from '@mui/system';
 export const StyledAutocomplete = styled(Autocomplete)({
   width: '80%',
   height: '39px',
-  background: '#EDF7FF',
   borderRadius: '5px',
   br: '4px',
   marginTop: '25px',
+  border: '1px solid ',
   '& .MuiInputBase-input': {
     height: 6,
     textAlign: 'right',
-  },
-  '& + .MuiAutocomplete-popper .MuiAutocomplete-option': {
-    backgroundColor: '#F1FCF5',
   },
 });
 

@@ -2,9 +2,10 @@ import React, { FC, useContext } from 'react';
 
 import axios from 'axios';
 
-import { TextField, Box } from '@mui/material';
+import { TextField, Box, Theme } from '@mui/material';
 
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '@emotion/react';
 import {
   CreateMatchButtons,
   DialogInputsBox,
@@ -17,7 +18,12 @@ import { statsContext } from '../../context/CreateMatch';
 import { StyledButton } from '../styledRootComponent/SideComponents';
 
 import { CreateMatchFormProps } from '../../interfaces/matchInterface';
-import { Option, createMatchError, prevInterface } from '../../interfaces';
+import {
+  Option,
+  createMatchError,
+  customPalette,
+  prevInterface,
+} from '../../interfaces';
 
 const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
   const states = useContext(statsContext);
@@ -30,6 +36,8 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
     match,
     setMatch,
   } = states;
+  const currentTheme = useTheme();
+
   const getOptionLabel = (Stadium: Option) => Stadium.username;
 
   const handleClose = () => {
@@ -111,9 +119,21 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
   };
 
   return (
-    <DialogInputsBox>
+    <DialogInputsBox
+      sx={{
+        backgroundColor: theme => theme.palette.customColors.backGroundColor,
+      }}
+    >
       <StyledSearchInput
-        sx={{ mt: '25px', width: '80%', border: '1px solid #ccc' }}
+        sx={{
+          mt: '25px',
+          width: '80%',
+          border: '1px solid ',
+          borderColor: (currentTheme as Theme).palette.primary.main,
+          backgroundColor: ((currentTheme as Theme).palette as customPalette)
+            .customColors.grayColor,
+          color: (currentTheme as Theme).palette.primary.main,
+        }}
         placeholder="عنوان المباراة"
         onChange={handleMatchName}
         disableUnderline
@@ -123,7 +143,11 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
           mt: '25px',
           width: '80%',
           p: '20px',
-          border: '1px solid #ccc',
+          border: '1px solid ',
+          borderColor: (currentTheme as Theme).palette.primary.main,
+          color: (currentTheme as Theme).palette.primary.main,
+          backgroundColor: ((currentTheme as Theme).palette as customPalette)
+            .customColors.grayColor,
         }}
         placeholder="عدد اللاعبين"
         type="number"
@@ -138,6 +162,7 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
             style: {
               textAlign: 'right',
               padding: '7px 40px',
+              color: (currentTheme as Theme).palette.primary.main,
             },
           },
         }}
@@ -149,13 +174,31 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
         sx={{
           width: '80%',
           mt: '25px',
-          backgroundColor: '#EDF7FF',
+          backgroundColor: ((currentTheme as Theme).palette as customPalette)
+            .customColors.grayColor,
           borderRadius: '5px',
-          border: '1px solid #ccc',
+          border: '1px solid ',
+          borderColor: (currentTheme as Theme).palette.primary.main,
         }}
         onChange={handleDescription}
       />
       <StyledAutocomplete
+        sx={{
+          borderColor: (currentTheme as Theme).palette.primary.main,
+          color: (currentTheme as Theme).palette.primary.main,
+          backgroundColor: ((currentTheme as Theme).palette as customPalette)
+            .customColors.grayColor,
+          '& input': {
+            color: (currentTheme as Theme).palette.primary.main,
+            backgroundColor: ((currentTheme as Theme).palette as customPalette)
+              .customColors.grayColor,
+          },
+          '& + .MuiAutocomplete-popper .MuiAutocomplete-option': {
+            backgroundColor: ((currentTheme as Theme).palette as customPalette)
+              .customColors.grayColor,
+            color: (currentTheme as Theme).palette.primary.main,
+          },
+        }}
         disablePortal
         id="combo-box-demo"
         options={Stadiums}

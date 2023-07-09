@@ -4,7 +4,7 @@ import { BsPersonFillAdd, BsFillFilePersonFill } from 'react-icons/bs';
 import { MdStadium } from 'react-icons/md';
 
 import { Box } from '@mui/material';
-import UserCart from './UserCart';
+import UserCard from './UserCard';
 import SideBarLink from './SideBarLink';
 import {
   CreateMatchBox,
@@ -12,7 +12,7 @@ import {
   StyledButton,
   StyledTypography,
 } from '../../index';
-import { LeftSideBarInterface, User } from '../../../interfaces';
+import { LeftSideBarInterface, User, customPalette } from '../../../interfaces';
 import { AuthContext } from '../../../context';
 
 const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
@@ -26,11 +26,13 @@ const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
     <SideBox
       sx={{
         right: 0,
-        borderLeft: '0.4px solid #ccc',
+        borderLeft: '1px solid ',
+        borderLeftColor: theme => theme.palette.customColors.grayColor,
+        backgroundColor: theme => theme.palette.customColors.grayColor,
         boxShadow: '-1px 4px 6px 1px rgba(0, 0, 0, 0.15)',
       }}
     >
-      <UserCart
+      <UserCard
         username={(user as User).username}
         userId={(user as User).id}
         role={(user as User).role}
@@ -46,8 +48,18 @@ const LeftSideBar: FC<LeftSideBarInterface> = ({ setOpen }): ReactElement => {
         <SideBarLink text="الملاعب" icon={<MdStadium />} />
         <SideBarLink text="اخر اللاعبين" icon={<BsFillFilePersonFill />} />
       </Box>
-      <CreateMatchBox>
-        <StyledTypography>
+      <CreateMatchBox
+        sx={{
+          backgroundColor: theme =>
+            (theme.palette as customPalette).customColors.backGroundColor,
+          color: theme => theme.palette.primary.main,
+        }}
+      >
+        <StyledTypography
+          sx={{
+            mb: '10px',
+          }}
+        >
           يمكنك انشاء مباراة ودعوة اصدقائك للانضمام اليك
         </StyledTypography>
 

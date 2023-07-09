@@ -8,6 +8,7 @@ const WorldMatch = (): ReactElement => {
     <StyledWorldMatches
       sx={{
         mt: '15px',
+        backgroundColor: theme => theme.palette.customColors.backGroundColor,
       }}
     >
       <Typography

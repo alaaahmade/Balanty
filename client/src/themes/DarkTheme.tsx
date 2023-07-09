@@ -1,7 +1,7 @@
 import { createTheme } from '@mui/material';
 import { CustomPaletteOptions } from '../interfaces';
 
-const LightTheme = createTheme({
+const DarkTheme = createTheme({
   typography: {
     fontFamily: 'IBM Plex Sans Arabic',
   },
@@ -9,18 +9,16 @@ const LightTheme = createTheme({
   palette: {
     primary: {
       main: '#2CB674',
-      contrastText: '#000',
+      contrastText: '#2CB674',
     },
-    text: {
-      primary: '#000',
-    },
+
     customColors: {
-      grayColor: '#F2FCF5',
+      grayColor: '#181818',
       wightColor: '#fff',
-      backGroundColor: '#fff',
-      second: '#01031C',
+      backGroundColor: '#000',
+      second: '#181818',
     },
   } as CustomPaletteOptions,
 });
 
-export default LightTheme;
+export default DarkTheme;
