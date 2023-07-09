@@ -11,7 +11,7 @@ export const ThemeContext = createContext<ThemeContextType>({
 });
 
 export const ThemeProviderWrapper: FC<ChildrenProps> = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
   const toggleTheme = () => {
     setIsDarkMode(prev => {
       localStorage.setItem('theme', JSON.stringify(!prev));
@@ -25,7 +25,9 @@ export const ThemeProviderWrapper: FC<ChildrenProps> = ({ children }) => {
 
   useEffect(() => {
     const theme = JSON.parse(localStorage.getItem('theme') as string);
-    setIsDarkMode(theme);
+    if (theme !== null) {
+      setIsDarkMode(theme);
+    }
   }, [isDarkMode]);
 
   return (
