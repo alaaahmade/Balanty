@@ -66,11 +66,13 @@ export const createMatchService = async (
     data: '! هذا الوقت محجوز',
   };
 };
-export const getAllMatches = async (): Promise<matchesInterface> => {
+export const getAllMatches = async (
+  req: Request,
+): Promise<matchesInterface> => {
   const currentDate = Date.now();
   const currentDateObject = new Date(currentDate);
   const currentDateFormatted = currentDateObject.toISOString();
-
+  const userId = req.user?.id;
   const matches = await Match.findAll({
     where: {
       [Op.or]: [{ startDate: { [Op.gt]: currentDateFormatted } }],
@@ -91,10 +93,16 @@ export const getAllMatches = async (): Promise<matchesInterface> => {
     ],
   });
 
+  const playerMatches = await MatchPlayer.findAll({
+    where: { userId },
+    attributes: ['matchId'],
+  });
+
   if (matches.length > 0) {
     return {
       status: 200,
       data: matches,
+      playerMatches,
     };
   } else {
     return {
