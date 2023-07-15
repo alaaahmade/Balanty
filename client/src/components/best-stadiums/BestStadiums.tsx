@@ -27,6 +27,7 @@ const BestStadiums: FC = (): ReactElement => {
       <StadiumsWrap>
         {stadiums.map((stadium: StadiumDataProps) => (
           <Stadium
+            key={stadium.id}
             image={stadium.Stadium.stadiumGallery[0].image}
             name={stadium.username}
             rate={stadium.StadiumsReviews}

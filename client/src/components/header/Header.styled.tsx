@@ -20,7 +20,7 @@ export const CustomizedButton = styled(Link)({
 });
 
 export const Logo = styled('img')({
-  width: '350px',
+  width: '130px',
   height: '100%',
   marginRight: '-110px',
   marginLeft: '-150px',

@@ -9,12 +9,13 @@ import {
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 
-export const StyledContainer = styled(Container)({
-  display: 'flex',
-  justifyContent: 'space-between',
-  gap: '130px',
-  textAlign: 'right',
-});
+export const StyledContainer = styled(Container)`
+  display: flex;
+  justify-content: center;
+  gap: 130px;
+  text-align: right;
+  padding: 60px 125px;
+`;
 
 export const StyledBox = styled(Box)`
   background-color: #f6f6f5;
@@ -31,9 +32,15 @@ export const StyledTypographyContact = styled(Typography)`
 `;
 
 export const StyledTextField = styled(TextField)`
+  legend {
+    float: right;
+  }
   label {
     text-align: right;
     right: 25px;
+    background-color: #fffffe;
+    width: fit-content;
+    padding: 0 1rem;
   }
   text-align: rtl;
   direction: rtl;
@@ -47,6 +54,8 @@ export const StyledButtonContact = styled(Button)`
   width: 100%;
   margin-top: 20px;
   padding: 5px;
+  color: #fff;
+
   &:hover {
     background-color: #00a871;
   }

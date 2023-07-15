@@ -7,7 +7,13 @@ const Feature: React.FC = (): ReactElement => {
   return (
     <Box id="servicesLink">
       <StyledTitleF>احجز, العب, شارك, شوت</StyledTitleF>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          padding: '50px 125px',
+        }}
+      >
         <FeatureSection
           imageSrc="https://res.cloudinary.com/dtpbcx2kv/image/upload/v1688465399/hbn3hcjtk4yiovgy58pi.svg"
           description=" كرة القدم هي رياضة شعبية ومحبوبة حول العالم. تتميز اللعبة بجماعيتها وتطلب التعاون والتنسيق بين اللاعبين وهي وسيلة للترفيه والتنافس وبناء الروح الرياضية."
