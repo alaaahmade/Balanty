@@ -1,23 +1,20 @@
 import React, { ReactElement } from 'react';
 import { Box, Typography } from '@mui/material';
 import { Facebook, Twitter, LinkedIn, Instagram } from '@mui/icons-material';
-import {
-  StyledFooter,
-  StyledLogo,
-  StyledLinks,
-  StyledIcons,
-} from './footer.styled';
-import { ScrollLink } from '../header/Header.styled';
+import { Link } from 'react-router-dom';
+import { StyledFooter, StyledLinks, StyledIcons } from './footer.styled';
+import { Logo, ScrollLink } from '../header/Header.styled';
 
 const Footer: React.FC = (): ReactElement => {
   return (
-    <StyledFooter
-      sx={{
-        mt: '30px',
-        mb: '-30px',
-      }}
-    >
-      <StyledLogo variant="h6">بلنتي لوغو</StyledLogo>
+    <StyledFooter>
+      <Link to="/">
+        <Logo
+          style={{ marginLeft: '0' }}
+          src="https://res.cloudinary.com/df3ydvucj/image/upload/v1689453636/%D8%A8%D9%84%D9%86%D8%AA%D9%8A_1-01_1_qqlmfb.svg"
+          alt="logo"
+        />
+      </Link>
       <StyledLinks>
         <ScrollLink activeClass="active" smooth spy to="contactUs">
           تواصل معنا
@@ -40,10 +37,18 @@ const Footer: React.FC = (): ReactElement => {
       </Typography>
       <Box>
         <StyledIcons>
-          <Facebook />
-          <Twitter />
-          <LinkedIn />
-          <Instagram />
+          <Link to="/" style={{ color: '#fff' }}>
+            <Facebook />
+          </Link>
+          <Link to="/" style={{ color: '#fff' }}>
+            <Twitter />
+          </Link>
+          <Link to="/" style={{ color: '#fff' }}>
+            <LinkedIn />
+          </Link>
+          <Link to="/" style={{ color: '#fff' }}>
+            <Instagram />
+          </Link>
         </StyledIcons>
       </Box>
     </StyledFooter>

@@ -3,14 +3,16 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { Link } from '@mui/material';
 
-export const StyledFooter = styled('footer')`
-  background-color: #01031c;
-  color: #fff;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+export const StyledFooter = styled(Box)({
+  backgroundColor: '#01031c',
+  color: '#fff',
+  padding: '20px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  marginTop: '30px',
+  marginBottom: '-30px',
+});
 
 export const StyledLogo = styled(Typography)`
   font-family: 'Roboto';
