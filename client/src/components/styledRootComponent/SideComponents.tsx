@@ -6,7 +6,6 @@ export const SideBox = styled(Box)({
   width: '240px',
   minHeight: 'calc(100vh - 50px)',
   top: '3.2em',
-  backgroundColor: '#FFFFFF',
   borderTop: 0,
   display: 'flex',
   flexDirection: 'column',
@@ -21,7 +20,6 @@ export const StyledButton = styled(Button)({
   borderRadius: '5px',
   gap: '10px',
   color: '#fff',
-  // marginBottom: '30px',
   '&:hover': {
     backgroundColor: 'transparent',
     color: '#2CB674',

@@ -6,9 +6,9 @@ import { Avatar, Typography } from '@mui/material';
 import axios from 'axios';
 import { BorderBox, StyledImag, StyledUserCart } from '../../index';
 
-import { UserCardProps } from '../../../interfaces';
+import { UserCardProps, customPalette } from '../../../interfaces';
 
-const UserCart: FC<UserCardProps> = ({
+const UserCard: FC<UserCardProps> = ({
   username,
   userId,
   role,
@@ -36,20 +36,32 @@ const UserCart: FC<UserCardProps> = ({
 
   return (
     <BorderBox
+      sx={{
+        backgroundColor: theme => theme.palette.primary.grayColor,
+        color: theme => theme.palette.primary.main,
+        '& :hover': {
+          backgroundColor: theme => theme.palette.primary.backGroundColor,
+        },
+      }}
       onClick={() => {
         navigate(`/profile/${role}/${userId}`);
       }}
     >
       <StyledUserCart
         sx={{
+          background: theme =>
+            (theme.palette as customPalette).customColors.backGroundColor,
           m: '15px 0',
+        }}
+        onClick={() => {
+          navigate(`/profile/${role}/${userId}`);
         }}
       >
         <Typography
           sx={{
             transition: '0.2s',
             '& :hover': {
-              color: '#2CB674',
+              color: theme => theme.palette.primary.main,
             },
           }}
         >
@@ -63,11 +75,17 @@ const UserCart: FC<UserCardProps> = ({
             }}
           />
         ) : (
-          <Avatar>{username[0]}</Avatar>
+          <Avatar
+            sx={{
+              mr: '30px',
+            }}
+          >
+            {username[0]}
+          </Avatar>
         )}
       </StyledUserCart>
     </BorderBox>
   );
 };
 
-export default UserCart;
+export default UserCard;

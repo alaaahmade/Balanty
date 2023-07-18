@@ -18,8 +18,6 @@ export interface InputProps {
   type: string;
   label: string;
   placeholder: string;
-  // errors: FieldErrors<signupProps | loginProps>;
-  // control: Control<signupProps, any> | Control<loginProps, any>;
 
   errors: { [key in keyof signupProps | keyof loginProps]?: FieldError };
   control: Control<signupProps> | Control<FieldValues>;
@@ -52,4 +50,12 @@ export interface CustomErrorResponse {
 
 export interface ChildrenProps {
   children: ReactNode;
+}
+
+export interface sinupProps {
+  image: string;
+  name: string;
+  rate: { value: number }[];
+  address: string;
+  description: string;
 }

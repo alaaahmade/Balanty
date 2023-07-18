@@ -13,6 +13,7 @@ import { Box } from '@mui/material';
 import { deleteDialogProps } from '../../interfaces/StadiumProfile';
 import Loader from './Loader';
 import { UpdateGalleryContext } from '../../context';
+import { customPalette } from '../../interfaces';
 
 const DeleteDialog: FC<deleteDialogProps> = ({
   handleClose,
@@ -54,12 +55,19 @@ const DeleteDialog: FC<deleteDialogProps> = ({
         <DialogTitle
           sx={{
             textAlign: 'right',
+            backgroundColor: theme =>
+              (theme.palette as customPalette).customColors.grayColor,
           }}
           id="alert-dialog-title"
         >
           هل انت متأكد من أنك تريد حذف هذه الصورة؟
         </DialogTitle>
-        <DialogContent>
+        <DialogContent
+          sx={{
+            backgroundColor: theme =>
+              (theme.palette as customPalette).customColors.grayColor,
+          }}
+        >
           <DialogContentText
             sx={{
               textAlign: 'right',
@@ -70,7 +78,12 @@ const DeleteDialog: FC<deleteDialogProps> = ({
             الشخصي
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
+        <DialogActions
+          sx={{
+            backgroundColor: theme =>
+              (theme.palette as customPalette).customColors.grayColor,
+          }}
+        >
           <Button onClick={handleClose}>الغاء</Button>
           <Button onClick={HandleAgree} autoFocus>
             موافق

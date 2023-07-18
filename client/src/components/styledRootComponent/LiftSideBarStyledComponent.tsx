@@ -1,11 +1,10 @@
-import styled from '@emotion/styled';
-import { Box } from '@mui/system';
 import { NavLink } from 'react-router-dom';
+
+import { Box, styled } from '@mui/material';
 
 export const CreateMatchBox = styled(Box)({
   width: '80%',
   height: '110px',
-  backgroundColor: '#F2FCF5',
   borderRadius: '5px',
   mt: '120px',
   display: 'flex',
@@ -19,7 +18,6 @@ export const CreateMatchBox = styled(Box)({
 export const StyledUserCart = styled(Box)({
   width: '100%',
   height: '50px',
-  background: '#F2FCF5',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-end',
@@ -36,7 +34,7 @@ export const StyledImag = styled(Box)({
   backgroundPosition: 'center',
 });
 
-export const SideLink = styled(NavLink)({
+export const WightSideLink = styled(NavLink)({
   fontSize: '18px',
   padding: '10px 30px 10px 0',
   textDecoration: 'none',
@@ -54,4 +52,18 @@ export const SideLink = styled(NavLink)({
     padding: '15px 30px 15px 0',
     backgroundColor: '#F2FCF5',
   },
+});
+
+export const DarkSideLink = styled(NavLink)({
+  fontSize: '18px',
+  padding: '10px 30px 10px 0',
+  textDecoration: 'none',
+  width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  paddingRight: '30px',
+  gap: '20px',
+  cursor: 'pointer',
+  transition: '0.2s ease',
 });

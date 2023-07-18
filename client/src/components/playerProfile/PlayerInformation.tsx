@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { Edit } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import { FlexBox } from '../stadiumProfile/StadiumProfile.styled';
 import { BioBox } from './Player.Styled';
 import EditInput from '../stadiumProfile/EditInput';
@@ -25,6 +26,8 @@ const PlayerInformation = ({
 }: profileInfoProps): ReactElement => {
   const [validation, setValidation] = useState<updatedValue>({});
   const [newData, setNewData] = useState<updatedValue>({});
+
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setEditMode(true);
@@ -53,7 +56,7 @@ const PlayerInformation = ({
 
         setValidation(validationErrors);
       } else {
-        console.error(error);
+        navigate('/serverError');
       }
     }
   };
@@ -69,6 +72,7 @@ const PlayerInformation = ({
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'flex-end',
+          backgroundColor: theme => theme.palette.primary.grayColor,
         }}
       >
         <FlexBox sx={{ justifyContent: 'space-between' }}>
@@ -83,7 +87,13 @@ const PlayerInformation = ({
             </IconButton>
           </InputAdornment>
 
-          <Typography variant="h5" sx={{ ml: '5px' }}>
+          <Typography
+            variant="h5"
+            sx={{
+              ml: '5px',
+              color: theme => theme.palette.primary.contrastText,
+            }}
+          >
             معلومات شخصية
           </Typography>
         </FlexBox>
@@ -102,6 +112,7 @@ const PlayerInformation = ({
               sx={{
                 width: '7rem',
                 textAlign: 'right',
+                color: theme => theme.palette.primary.contrastText,
                 fontWeight: 700,
               }}
             >
@@ -132,6 +143,7 @@ const PlayerInformation = ({
               sx={{
                 width: '8rem',
                 textAlign: 'right',
+                color: theme => theme.palette.primary.contrastText,
                 fontWeight: 700,
               }}
             >
@@ -162,6 +174,7 @@ const PlayerInformation = ({
               sx={{
                 width: '8rem',
                 textAlign: 'right',
+                color: theme => theme.palette.primary.contrastText,
                 fontWeight: 700,
               }}
             >
@@ -192,6 +205,7 @@ const PlayerInformation = ({
               sx={{
                 width: '5rem',
                 textAlign: 'right',
+                color: theme => theme.palette.primary.contrastText,
                 fontWeight: 700,
               }}
             >

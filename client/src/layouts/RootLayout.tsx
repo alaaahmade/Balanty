@@ -9,6 +9,7 @@ import CreateMatch from '../pages/CreateMatch';
 
 import { open } from '../context';
 import ProtectedProvider from '../context/ProtectedContext';
+import { customPalette } from '../interfaces';
 
 const RootLayout: React.FC = (): ReactElement => {
   const [Profile, setProfile] = useState(false);
@@ -31,6 +32,10 @@ const RootLayout: React.FC = (): ReactElement => {
       <Box
         sx={{
           width: '100%',
+          minHeight: '100vh',
+          pb: '1px',
+          backgroundColor: theme =>
+            (theme.palette as customPalette).customColors.backGroundColor,
         }}
       >
         <NavBar />

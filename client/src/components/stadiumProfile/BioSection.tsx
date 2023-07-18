@@ -20,6 +20,7 @@ import {
   updatedValueError,
   updatedValue,
   BioSectionProps,
+  customPalette,
 } from '../../interfaces';
 
 import { updatedValueSchema } from '../../validation';
@@ -128,7 +129,15 @@ const BioSection = ({
 
   return (
     <Box>
-      <BioBox onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOut}>
+      <BioBox
+        sx={{
+          backgroundColor: theme =>
+            (theme.palette as customPalette).customColors.grayColor,
+          color: theme => theme.palette.primary.main,
+        }}
+        onMouseEnter={handleMouseOver}
+        onMouseLeave={handleMouseOut}
+      >
         <Box>
           {hov && !editMode && (
             <InputAdornment position="end">

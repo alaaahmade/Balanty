@@ -1,18 +1,20 @@
 import { Typography, Tab, Card, Button } from '@mui/material';
 import { Box, styled } from '@mui/system';
 
-export const Cover = styled('img')({
+export const Cover = styled(Box)({
   width: '100%',
   height: 320,
+  backgroundPosition: 'top',
+  backgroundSize: 'cover',
 });
-export const AvatarWrapper = styled('div')({
+export const AvatarWrapper = styled(Box)({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-end',
 });
 
-export const MainWrapper = styled('div')({
+export const MainWrapper = styled(Box)({
   flexDirection: 'column',
   display: 'flex',
   justifyContent: 'center',
@@ -21,7 +23,7 @@ export const MainWrapper = styled('div')({
   marginRight: '240px',
 });
 
-export const ActionsWrapper = styled('div')({
+export const ActionsWrapper = styled(Box)({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
@@ -31,7 +33,7 @@ export const ActionsWrapper = styled('div')({
   marginRight: '32%',
   padding: '0 1rem',
 });
-export const ButtonsWrapper = styled('div')({
+export const ButtonsWrapper = styled(Box)({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
@@ -66,7 +68,7 @@ export const StyledTab = styled(Tab)({
     color: 'black',
   },
 });
-export const ContentWrapper = styled('div')({
+export const ContentWrapper = styled(Box)({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
@@ -74,12 +76,12 @@ export const ContentWrapper = styled('div')({
 
 export const Text = styled(Typography)({});
 
-export const FollowsInfoWrapper = styled('div')({
+export const FollowsInfoWrapper = styled(Box)({
   display: 'flex',
   flexDirection: 'row',
 });
 
-export const FollowsWrapper = styled('div')({
+export const FollowsWrapper = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
@@ -92,7 +94,6 @@ export const BioBox = styled(Box)({
   marginLeft: '42px',
   padding: '10px',
   border: '1px solid #ccc',
-  backgroundColor: '#F2FCF5',
   display: 'flex',
   flexDirection: 'column',
   gap: '2px',

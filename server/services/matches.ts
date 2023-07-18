@@ -118,7 +118,7 @@ export const JoinToMatchService = async (
   const playerId = req.user?.id;
   const { matchId } = req.params;
   const checkExist = await User.findOne({
-    where: { id: playerId, role: 'player' },
+    where: { id: playerId },
   });
 
   if (!checkExist) {

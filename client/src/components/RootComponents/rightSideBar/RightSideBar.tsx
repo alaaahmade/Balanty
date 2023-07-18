@@ -1,5 +1,4 @@
 import { ReactElement } from 'react';
-import { Box } from '@mui/material';
 import MyMatches from './MyMatches';
 import RightSideBarTitle from './RightSideBarTitle';
 import WorldMatch from './WorldMatch';
@@ -25,7 +24,11 @@ const RightSideBar = (): ReactElement => {
     <SideBox
       sx={{
         left: 0,
-        borderRight: '0.4px solid #ccc',
+        borderRight: '1px solid ',
+        borderRightColor: theme => theme.palette.customColors.grayColor,
+        backgroundColor: theme => theme.palette.customColors.grayColor,
+        color: theme => theme.palette.primary.contrastText,
+        boxShadow: '-1px 4px 6px 1px rgba(0, 0, 0, 0.15)',
       }}
     >
       <BorderBox

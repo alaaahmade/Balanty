@@ -1,9 +1,10 @@
 import { FC, ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Box, Rating, Typography } from '@mui/material';
+import { Box, Rating, Theme, Typography } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
+import { useTheme } from '@emotion/react';
 import { StyledButton } from '..';
 import {
   ButtonBox,
@@ -14,7 +15,7 @@ import {
   StadiumCardBox,
 } from './StadiumsPage.styled';
 
-import { StadiumDataProps } from '../../interfaces';
+import { StadiumDataProps, customPalette } from '../../interfaces';
 
 const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
   stadiumData,
@@ -23,6 +24,8 @@ const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
   const { description, address, stadiumGallery } = Stadium;
 
   const navigate = useNavigate();
+
+  const currentTheme = useTheme();
 
   const averageRating =
     StadiumsReviews.reduce((sum, review) => sum + +review.value, 0) /
@@ -33,7 +36,20 @@ const StadiumCard: FC<{ stadiumData: StadiumDataProps }> = ({
   };
 
   return (
-    <StadiumCardBox>
+    <StadiumCardBox
+      sx={{
+        boxShadow: `-2px 2px 5px  ${
+          ((currentTheme as Theme).palette as customPalette).customColors
+            .grayColor
+        }, 1px -1px 2px ${
+          ((currentTheme as Theme).palette as customPalette).customColors
+            .grayColor
+        }`,
+        backgroundColor: theme =>
+          (theme.palette as customPalette).customColors.grayColor,
+        color: theme => theme.palette.primary.contrastText,
+      }}
+    >
       <CardContainer>
         <DetailsBox>
           <Typography

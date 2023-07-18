@@ -114,6 +114,9 @@ const SignupWrapper: FC = (): ReactElement => {
             onClick={handleSubmit(onSubmit)}
             variant="contained"
             disableElevation
+            sx={{
+              color: 'white',
+            }}
           >
             تسجيل دخول
           </SignButton>

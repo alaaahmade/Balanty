@@ -1,22 +1,35 @@
 import styled from '@emotion/styled';
 import { Autocomplete } from '@mui/material';
 import { Box } from '@mui/system';
+import { CustomTheme, customPalette } from '../../interfaces';
 
-export const StyledAutocomplete = styled(Autocomplete)({
+export const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
   width: '80%',
   height: '39px',
-  background: '#EDF7FF',
   borderRadius: '5px',
-  br: '4px',
+  borderTopRightRadius: '4px',
   marginTop: '25px',
+  border: '1px solid',
+  borderColor: ((theme as CustomTheme).palette as customPalette).primary
+    .contrastText,
+  color: ((theme as CustomTheme).palette as customPalette).primary.contrastText,
+  backgroundColor: ((theme as CustomTheme).palette as customPalette)
+    .customColors.grayColor,
   '& .MuiInputBase-input': {
-    height: 6,
+    height: '6px',
     textAlign: 'right',
   },
-  '& + .MuiAutocomplete-popper .MuiAutocomplete-option': {
-    backgroundColor: '#F1FCF5',
+  '& input': {
+    color: (theme as CustomTheme).palette.primary.contrastText,
+    backgroundColor: ((theme as CustomTheme).palette as customPalette)
+      .customColors.grayColor,
   },
-});
+  '& + .MuiAutocomplete-popper .MuiAutocomplete-option': {
+    backgroundColor: ((theme as CustomTheme).palette as customPalette)
+      .customColors.grayColor,
+    color: (theme as CustomTheme).palette.primary.main,
+  },
+}));
 
 export const DialogBox = styled(Box)({
   display: 'flex',

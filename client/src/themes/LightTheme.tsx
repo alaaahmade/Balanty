@@ -1,19 +1,26 @@
 import { createTheme } from '@mui/material';
+import { CustomPaletteOptions } from '../interfaces';
 
 const LightTheme = createTheme({
   typography: {
     fontFamily: 'IBM Plex Sans Arabic',
   },
-  direction: 'rtl', // before: 'ltr', after: 'rtl'
+  direction: 'rtl',
   palette: {
     primary: {
       main: '#2CB674',
-      second: '#01031C',
       contrastText: '#000',
-      wightColor: '#fff',
-      grayColor: '#D9D9D9',
     },
-  },
+    text: {
+      primary: '#000',
+    },
+    customColors: {
+      grayColor: '#F2FCF5',
+      wightColor: '#fff',
+      backGroundColor: '#fff',
+      second: '#01031C',
+    },
+  } as CustomPaletteOptions,
 });
 
 export default LightTheme;

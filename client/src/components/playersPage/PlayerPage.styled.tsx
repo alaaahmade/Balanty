@@ -22,14 +22,14 @@ export const PlayerCard = styled(Card)({
   justifyContent: 'space-between',
   alignItems: 'center',
   gap: '12px',
-  height: '100px',
+  height: '110px',
   marginTop: '22px',
   border: 'none',
-  boxShadow:
-    '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 1px rgb(222 222 222), 0px 1px 3px 0px #2cb67400',
+  // boxShadow:
+  //   '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 1px rgb(222 222 222), 0px 1px 3px 0px #2cb67400',
   padding: '0 2rem',
   borderTop: '0.1px solid #0000002b',
-  width: '500px',
+  width: 'calc(100% - 700px)',
 });
 
 export const FollowButton = styled(Button)({

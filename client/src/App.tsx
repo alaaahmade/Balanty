@@ -1,26 +1,29 @@
 import { ReactElement } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
 import * as io from 'socket.io-client';
+
+import StadiumProfile from './pages/StadiumProfile';
+import StadiumsPage from './pages/Stadiums';
+import PlayerProfile from './pages/PlayerProfile';
+import MatchesPage from './pages/Match';
+import NotFoundPage from './pages/NotFound';
+import InternalServerErrorPage from './pages/ServerError';
+import PlayersPage from './pages/PlayersPage';
+import { ThemeProviderWrapper } from './context/ThemeContext';
 import RootLayout from './layouts/RootLayout';
 import { LandingPage } from './pages';
 import MatchRoomPage from './pages/MatchRoomPage';
 import LoginWrapper from './components/auth/LoginWrapper';
 import SignupWrapper from './components/auth/SignupWrapper';
+
 import {
   open,
   useCustomOpen,
   UpdateGalleryContextProvider,
   StatsContextProvider,
 } from './context';
-import StadiumProfile from './pages/StadiumProfile';
-import StadiumsPage from './pages/Stadiums';
-import PlayerProfile from './pages/PlayerProfile';
-import MatchesPage from './components/matchesPage/Match';
 import { AuthProvider } from './context/AuthContext';
-import NotFoundPage from './pages/NotFound';
-import InternalServerErrorPage from './pages/ServerError';
-import PlayersPage from './pages/PlayersPage';
-import { ThemeProviderWrapper } from './context/ThemeContext';
 
 const socket = io.connect('http://localhost:8080');
 

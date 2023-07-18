@@ -1,9 +1,6 @@
 import { ReactElement } from 'react';
 import { StyledTeamName } from '../../index';
-
-interface TeamNameProps {
-  text: string;
-}
+import { TeamNameProps } from '../../../interfaces';
 
 const TeamName = ({ text }: TeamNameProps): ReactElement => {
   return <StyledTeamName>{text}</StyledTeamName>;

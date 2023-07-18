@@ -9,16 +9,9 @@ import {
 } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { LocationWrap } from './BestStadiums.styled';
+import { sinupProps } from '../../interfaces';
 
-interface Props {
-  image: string;
-  name: string;
-  rate: { value: number }[];
-  address: string;
-  description: string;
-}
-
-const Stadium: FC<Props> = ({
+const Stadium: FC<sinupProps> = ({
   image,
   name,
   rate,

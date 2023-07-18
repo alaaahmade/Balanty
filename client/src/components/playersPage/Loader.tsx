@@ -1,5 +1,6 @@
 import { Skeleton } from '@mui/material';
 import { DotsLoaderBox } from './PlayerPage.styled';
+import { customPalette } from '../../interfaces';
 
 const SkeletonLoader = () => {
   return (
@@ -11,7 +12,8 @@ const SkeletonLoader = () => {
             // eslint-disable-next-line react/no-array-index-key
             key={index}
             sx={{
-              bgcolor: 'grey.350',
+              bgcolor: theme =>
+                (theme.palette as customPalette).customColors.grayColor,
               borderRadius: '5px',
               width: '500px',
               height: '100px',

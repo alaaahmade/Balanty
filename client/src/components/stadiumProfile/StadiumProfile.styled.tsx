@@ -69,7 +69,6 @@ export const BioBox = styled(Box)({
   maxWidth: '350px',
   minWidth: '350px',
   minHeight: '480px',
-
   ml: '3%',
   padding: '10px',
   border: '0.1px solid #D9D9D9',
@@ -112,11 +111,6 @@ export const EditInputs = styled(TextField)({
   },
   '& .css-66dh3a-MuiInputBase-input-MuiInput-input.Mui-disabled': {
     textAlign: 'right',
-
-    WebkitTextFillColor: '#01031C',
-  },
-  '& .css-1x51dt5-MuiInputBase-input-MuiInput-input.Mui-disabled': {
-    WebkitTextFillColor: '#01031C',
   },
 });
 
