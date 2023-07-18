@@ -17,6 +17,7 @@ const ProfileCalender = (): ReactElement => {
         sx={{
           mb: '25px',
           mt: '-60px',
+          color: theme => theme.palette.primary.contrastText,
         }}
       >
         الحجوزات
