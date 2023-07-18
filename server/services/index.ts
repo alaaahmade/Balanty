@@ -29,3 +29,13 @@ export {
   addReviewService,
   getPlayerReviewService,
 } from './reviews';
+
+export {
+  getPlayerService,
+  updatePlayerService,
+  playerMatchesService,
+  playerAvatarService,
+  getPlayersService,
+  updateCoverService,
+  updateAvatarService,
+} from './player';

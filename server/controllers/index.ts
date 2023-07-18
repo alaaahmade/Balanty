@@ -27,5 +27,7 @@ export {
   playerMatches,
   updatePlayer,
   getPlayers,
+  updateCover,
+  updateAvatar,
 } from './player';
 export { getReview, addReview, getPlayerReview } from './reviews';

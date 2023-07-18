@@ -38,9 +38,7 @@ const updatePlayerService = async (
   status: number;
   data: string | object;
 }> => {
-  // const { UserId } = req.UserData;
-
-  const playerId = 5;
+  const playerId = req.user?.id;
   const { body } = req;
   const isPLayerExist = await Player.findOne({ where: { UserId: playerId } });
 
@@ -164,10 +162,64 @@ const getPlayersService = async (
   };
 };
 
+const updateCoverService = async (req: Request) => {
+  const { newCover } = req.body;
+  const { playerId } = req.params;
+  const UserId = req.user?.id;
+
+  const isPLayerExist = await Player.findOne({
+    where: { UserId, id: playerId },
+  });
+  if (!isPLayerExist) {
+    return {
+      status: 401,
+      data: 'هذا اللاعب غير متاح',
+    };
+  }
+
+  const updateCover = await Player.update(
+    { cover: newCover },
+    { where: { id: playerId } },
+  );
+
+  return {
+    status: 200,
+    data: +updateCover === 1 ? 'successful' : 'fail',
+  };
+};
+
+const updateAvatarService = async (req: Request) => {
+  const { newAvatar } = req.body;
+  const { playerId } = req.params;
+  const UserId = req.user?.id;
+
+  const isPLayerExist = await Player.findOne({
+    where: { UserId, id: playerId },
+  });
+  if (!isPLayerExist) {
+    return {
+      status: 401,
+      data: 'هذا اللاعب غير متاح',
+    };
+  }
+
+  const updateCover = await Player.update(
+    { avatar: newAvatar },
+    { where: { id: playerId } },
+  );
+
+  return {
+    status: 200,
+    data: +updateCover === 1 ? 'successful' : 'fail',
+  };
+};
+
 export {
   getPlayerService,
   updatePlayerService,
   playerMatchesService,
   playerAvatarService,
   getPlayersService,
+  updateCoverService,
+  updateAvatarService,
 };

@@ -5,7 +5,9 @@ import {
   playerMatchesService,
   playerAvatarService,
   updatePlayerService,
-} from '../services/player';
+  updateCoverService,
+  updateAvatarService,
+} from '../services';
 
 const getPlayer: RequestHandler = async (
   req: Request,
@@ -65,4 +67,27 @@ const getPlayers: RequestHandler = async (
   res.status(response.status).json(response);
 };
 
-export { getPlayer, updatePlayer, playerMatches, getPlayers, playerAvatar };
+const updateCover: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const response = await updateCoverService(req);
+  res.status(response.status).json(response);
+};
+
+const updateAvatar: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const response = await updateAvatarService(req);
+  res.status(response.status).json(response);
+};
+export {
+  getPlayer,
+  updatePlayer,
+  playerMatches,
+  getPlayers,
+  playerAvatar,
+  updateCover,
+  updateAvatar,
+};
