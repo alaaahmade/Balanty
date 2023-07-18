@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import {
   Card,
   CardContent,
@@ -7,6 +9,9 @@ import {
   Box,
   InputLabel,
 } from '@mui/material';
+
+import axios from 'axios';
+
 import { StyledButton } from '../styledRootComponent/SideComponents';
 
 interface Player {
@@ -41,6 +46,8 @@ interface Match {
 
 interface MatchCardProps {
   match: Match;
+  join: boolean;
+  setJoin: Dispatch<SetStateAction<boolean>>;
 }
 
 const CenteredCard = styled(Card)({
@@ -66,11 +73,20 @@ const MatchCardContent = styled(CardContent)({
   gap: '2px',
 });
 
-const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
+const MatchCard: React.FC<MatchCardProps> = ({ match, join, setJoin }) => {
   const seatsNum = match.seats - match.Players.length;
+  const navigate = useNavigate();
 
+  const handleJoin = async () => {
+    try {
+      await axios.get(`/api/v1/matches/join/${match.id}`);
+      setJoin(!join);
+    } catch (error) {
+      navigate('/serverError');
+    }
+  };
   return (
-    <Box sx={{ paddingTop: '40px' }}>
+    <Box sx={{ paddingTop: '40px', width: '100%' }}>
       <CenteredCard>
         <MatchCardContainer sx={{ paddingLeft: '10px' }}>
           <MatchCardContent sx={{ width: '300px' }}>
@@ -187,8 +203,9 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
                   color: '#2CB674',
                   borderColor: '#2CB674',
                 }}
+                onClick={handleJoin}
               >
-                انضام
+                انضم
               </StyledButton>
               <StyledButton
                 sx={{
