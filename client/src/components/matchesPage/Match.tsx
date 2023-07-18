@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Alert, Box } from '@mui/material';
 import MatchCard from './MatchCard';
+import { open } from '../../context';
 
 interface Match {
   id: number;
@@ -37,34 +39,59 @@ interface Player {
 const MatchesPage = (): React.ReactElement => {
   const [matches, setMatches] = useState<Match[]>([]);
   const [error, setError] = useState<string>('');
+  const [join, setJoin] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
+  const { openPage } = useContext(open);
+
+  const getMatches = async () => {
+    try {
+      const response = await axios.get('/api/v1/matches');
+      const playerMatches = response.data.playerMatches.map(
+        (match: { matchId: number }) => match.matchId,
+      );
+      const filteredMatches = response.data.data.filter(
+        (math: Match) => !playerMatches.includes(math.id),
+      );
+      setMatches(filteredMatches);
+    } catch (err) {
+      setError('Error fetching match data');
+      navigate('/serverError');
+    }
+  };
+
   useEffect(() => {
-    (async () => {
-      try {
-        const response = await axios.get('/api/v1/matches');
-        setMatches(response.data.data);
-      } catch (err) {
-        setError('Error fetching match data');
-        navigate('/serverError');
-      }
-    })();
-  }, []);
-  const duplicatedMatches = matches
-    .slice(0, 3)
-    .flatMap(match => [match, match, match]);
+    getMatches();
+  }, [openPage, join]);
 
   return (
-    <div>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '100%',
+      }}
+    >
       {error ? (
         <p>{error}</p>
       ) : (
-        duplicatedMatches.map(match => (
-          <MatchCard key={match.id} match={match} />
+        matches.map(match => (
+          <MatchCard
+            key={match.id}
+            join={join}
+            setJoin={setJoin}
+            match={match}
+          />
         ))
       )}
-    </div>
+      {!matches.length && (
+        <Alert severity="success" sx={{ marginTop: '8%', width: '300px' }}>
+          لا يوجد دوريات حاليا
+        </Alert>
+      )}
+    </Box>
   );
 };
 
