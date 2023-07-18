@@ -14,9 +14,12 @@ Player.init(
   {
     avatar: { type: DataTypes.TEXT },
     age: { type: DataTypes.INTEGER },
-    position: { type: DataTypes.STRING(100) },
+    position: {
+      type: DataTypes.STRING(100),
+      defaultValue: 'لم يتم ادخال مركز',
+    },
     cover: { type: DataTypes.TEXT },
-    bio: { type: DataTypes.TEXT },
+    bio: { type: DataTypes.TEXT, defaultValue: 'لم يتم ادخال وصف' },
   },
   {
     sequelize,
