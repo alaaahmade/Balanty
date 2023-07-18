@@ -17,7 +17,10 @@ Player.init(
       defaultValue:
         'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png',
     },
-    age: { type: DataTypes.INTEGER, defaultValue: 'لم يتم ادخال عمر' },
+    age: {
+      type: DataTypes.STRING,
+      defaultValue: 'لم يتم ادخال عمر',
+    },
     position: {
       type: DataTypes.STRING(100),
       defaultValue: 'لم يتم ادخال مركز',
