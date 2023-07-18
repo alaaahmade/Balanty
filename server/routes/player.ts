@@ -17,5 +17,5 @@ playerRouter.get('/profile/:id', errorWrapper(getPlayer));
 playerRouter.get('/profile/:id/matches', errorWrapper(playerMatches));
 playerRouter.get('/avatar/:id', errorWrapper(playerAvatar));
 playerRouter.patch('/profile/edit', errorWrapper(updatePlayer));
-playerRouter.post('/cover/:playerId', errorWrapper(updateCover));
-playerRouter.post('/avatar/:playerId', errorWrapper(updateAvatar));
+playerRouter.patch('/cover/:playerId', errorWrapper(updateCover));
+playerRouter.patch('/avatar/:playerId', errorWrapper(updateAvatar));
