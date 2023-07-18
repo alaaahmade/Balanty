@@ -162,7 +162,9 @@ const getPlayersService = async (
   };
 };
 
-const updateCoverService = async (req: Request) => {
+const updateCoverService = async (
+  req: Request,
+): Promise<{ status: number; data: string }> => {
   const { newCover } = req.body;
   const { playerId } = req.params;
   const UserId = req.user?.id;
@@ -188,7 +190,9 @@ const updateCoverService = async (req: Request) => {
   };
 };
 
-const updateAvatarService = async (req: Request) => {
+const updateAvatarService = async (
+  req: Request,
+): Promise<{ status: number; data: string }> => {
   const { newAvatar } = req.body;
   const { playerId } = req.params;
   const UserId = req.user?.id;
