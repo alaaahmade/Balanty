@@ -80,6 +80,7 @@ const ImageSlider: FC<StadiumProfileProps> = ({
         gallery={gallery}
         loading={loading}
         setLoading={setLoading}
+        type="stadium"
       />
       <SliderBox
         sx={{
