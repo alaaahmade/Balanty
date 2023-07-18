@@ -1,6 +1,7 @@
 import { Box, Input } from '@mui/material';
 import { styled } from '@mui/system';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { CustomTheme, customPalette } from '../../interfaces';
 
 export const StyledNavBox = styled(Box)({
   position: 'fixed',
@@ -24,17 +25,23 @@ export const StyledLogo = styled('img')({
   marginTop: '15px',
 });
 
-export const StyledSearchInput = styled(Input)({
-  width: '40%',
+export const StyledSearchInput = styled(Input)(({ theme }) => ({
   height: '12px',
   background: '#F2FCF5',
   borderRadius: '5px',
   padding: '18px',
   br: '4px',
+  width: '80%',
+  p: '20px',
+  border: '1px solid ',
+  borderColor: (theme as CustomTheme).palette.primary.contrastText,
+  color: (theme as CustomTheme).palette.primary.contrastText,
+  backgroundColor: ((theme as CustomTheme).palette as customPalette)
+    .customColors.grayColor,
   '& input': {
     textAlign: 'Right',
   },
-});
+}));
 
 export const StyledMnu = styled(GiHamburgerMenu)({
   cursor: 'pointer',
