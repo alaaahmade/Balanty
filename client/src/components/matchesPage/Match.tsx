@@ -51,18 +51,13 @@ const MatchesPage = (): React.ReactElement => {
       }
     })();
   }, []);
-  const duplicatedMatches = matches
-    .slice(0, 3)
-    .flatMap(match => [match, match, match]);
 
   return (
     <div>
       {error ? (
         <p>{error}</p>
       ) : (
-        duplicatedMatches.map(match => (
-          <MatchCard key={match.id} match={match} />
-        ))
+        matches.map(match => <MatchCard key={match.id} match={match} />)
       )}
     </div>
   );
