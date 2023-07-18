@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Box } from '@mui/system';
-
 import axios from 'axios';
 
-import { InputAdornment, TextField } from '@mui/material';
+import { InputAdornment, TextField, Alert, Box } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import MatchCard from '../components/matchesPage/MatchCard';
@@ -17,6 +15,7 @@ import { Match, customPalette } from '../interfaces';
 const MatchesPage = (): React.ReactElement => {
   const [matches, setMatches] = useState<Match[]>([]);
   const [error, setError] = useState<string>('');
+  const [join, setJoin] = useState<boolean>(false);
 
   const { openPage } = useContext(open);
 
@@ -25,17 +24,21 @@ const MatchesPage = (): React.ReactElement => {
   const getMatches = async () => {
     try {
       const response = await axios.get('/api/v1/matches');
-      setMatches(response.data.data);
+      const playerMatches = response.data.playerMatches.map(
+        (match: { matchId: number }) => match.matchId,
+      );
+      const filteredMatches = response.data.data.filter(
+        (math: Match) => !playerMatches.includes(math.id),
+      );
+      setMatches(filteredMatches);
     } catch (err) {
       setError('Error fetching match data');
       navigate('/serverError');
     }
   };
-
   useEffect(() => {
     getMatches();
-  }, [openPage]);
-
+  }, [openPage, join]);
   return (
     <Box
       sx={{
@@ -96,8 +99,28 @@ const MatchesPage = (): React.ReactElement => {
       >
         {error ? (
           <p>{error}</p>
+        ) : matches.length > 0 ? (
+          matches.map(match => (
+            <MatchCard
+              key={match.id}
+              match={match}
+              setJoin={setJoin}
+              join={join}
+            />
+          ))
         ) : (
-          matches.map(match => <MatchCard key={match.id} match={match} />)
+          <Alert
+            sx={{
+              marginTop: '30px',
+              backgroundColor: '#2CB674',
+              width: '300px',
+              ml: '50%',
+              transform: 'translate(-50%)',
+            }}
+            severity="info"
+          >
+            ! لا يوجد مباريات في الوقت الحالي
+          </Alert>
         )}
       </Box>
     </Box>

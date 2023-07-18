@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export interface Player {
   id: number;
   avatar: string;
@@ -29,4 +31,6 @@ export interface Match {
 }
 export interface MatchCardProps {
   match: Match;
+  join: boolean;
+  setJoin: Dispatch<SetStateAction<boolean>>;
 }

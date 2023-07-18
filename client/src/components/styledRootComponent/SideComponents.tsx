@@ -20,7 +20,6 @@ export const StyledButton = styled(Button)({
   borderRadius: '5px',
   gap: '10px',
   color: '#fff',
-  // marginBottom: '30px',
   '&:hover': {
     backgroundColor: 'transparent',
     color: '#2CB674',
