@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction } from 'react';
 export interface playerBackgroundProps {
   avatar: string;
   cover: string;
+  playerId: number;
 }
 
 export interface props {

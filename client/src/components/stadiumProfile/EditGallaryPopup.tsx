@@ -31,10 +31,11 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   editGallery,
   setEditGallery,
   ImageId,
-  StadiumId,
+  userId,
   gallery,
   loading,
   setLoading,
+  type,
 }): ReactElement => {
   const [newImage, setNewImage] = useState<string>('');
   const [newFile, setNewFile] = useState<File>();
@@ -90,16 +91,16 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
   };
 
   const handleSave = async () => {
-    try {
-      setLoading(true);
-      if (!newFile) {
-        setImageError(true);
-      } else {
+    if (!newFile) {
+      setImageError(true);
+    } else if (type === 'stadium') {
+      try {
+        setLoading(true);
         const newUrl = await uploadImage(newFile as File);
         const res = await axios.patch('/api/v1/stadiums/gallery', {
           image: newUrl,
           id: ImageId,
-          StadiumId,
+          StadiumId: userId,
           userId: id,
         });
 
@@ -109,10 +110,46 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
         if (res.data.status !== 200) {
           navigate('serverError');
         }
+      } catch (error) {
+        setLoading(false);
+        navigate('serverError');
       }
-    } catch (error) {
-      setLoading(false);
-      navigate('serverError');
+    } else if (type === 'avatar') {
+      setLoading(true);
+      try {
+        const newUrl = await uploadImage(newFile as File);
+        const res = await axios.patch(`/api/v1/players/avatar/${userId}`, {
+          newAvatar: newUrl,
+        });
+
+        setLoading(false);
+        setAgree(!Agree);
+        handleClose();
+        if (res.data.status !== 200) {
+          navigate('serverError');
+        }
+      } catch (error) {
+        setLoading(false);
+        navigate('serverError');
+      }
+    } else if (type === 'cover') {
+      setLoading(true);
+      try {
+        const newUrl = await uploadImage(newFile as File);
+        const res = await axios.patch(`/api/v1/players/cover/${userId}`, {
+          newCover: newUrl,
+        });
+
+        setLoading(false);
+        setAgree(!Agree);
+        handleClose();
+        if (res.data.status !== 200) {
+          navigate('serverError');
+        }
+      } catch (error) {
+        setLoading(false);
+        navigate('serverError');
+      }
     }
   };
 
@@ -125,7 +162,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
         const newUrl = await uploadImage(newFile as File);
         const res = await axios.post('/api/v1/stadiums/gallery', {
           image: newUrl,
-          StadiumId,
+          StadiumId: userId,
           userId: id,
         });
         setLoading(false);
@@ -174,6 +211,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
                 mt: '10px',
                 border,
                 backgroundImage: `url(${newImage})`,
+                backgroundPosition: type === 'stadium' ? 'bottom' : 'center',
               }}
             >
               {imageError ? (
@@ -220,7 +258,7 @@ const EditGalleryPopup: FC<EditGalleryPopupProps> = ({
             }}
           >
             <GalleryAction onClick={handleClose}>الغاء</GalleryAction>
-            {gallery.length < 4 && (
+            {type === 'stadium' && gallery.length < 4 && (
               <GalleryAction onClick={handleAddNew}>
                 اضافة كصورة جديدة
               </GalleryAction>

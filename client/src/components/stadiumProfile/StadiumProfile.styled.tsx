@@ -117,7 +117,6 @@ export const EditInputs = styled(TextField)({
 export const EditGalleryButton = styled(Button)({
   position: 'absolute',
   bottom: '4%',
-  right: '2%',
   color: '#01031C',
   margin: 0,
   backgroundColor: '#ffffff75',
@@ -158,7 +157,6 @@ export const SelectBox = styled(Box)({
   borderRadius: '5px',
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'bottom',
   position: 'relative',
 });
 

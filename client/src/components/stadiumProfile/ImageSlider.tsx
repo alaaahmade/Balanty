@@ -76,7 +76,7 @@ const ImageSlider: FC<StadiumProfileProps> = ({
         editGallery={editGallery}
         setEditGallery={setEditGallery}
         ImageId={ImageId}
-        StadiumId={StadiumId}
+        userId={StadiumId}
         gallery={gallery}
         loading={loading}
         setLoading={setLoading}
@@ -126,6 +126,9 @@ const ImageSlider: FC<StadiumProfileProps> = ({
                   {EditAble && imageHover && (
                     <>
                       <EditGalleryButton
+                        sx={{
+                          right: '2%',
+                        }}
                         onClick={() => handleAddImage(image.id)}
                       >
                         تعديل
