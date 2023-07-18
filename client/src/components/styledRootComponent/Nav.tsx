@@ -1,6 +1,5 @@
 import { Box, Input } from '@mui/material';
 import { styled } from '@mui/system';
-import { GiHamburgerMenu } from 'react-icons/gi';
 
 export const StyledNavBox = styled(Box)({
   position: 'fixed',
