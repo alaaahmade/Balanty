@@ -29,5 +29,6 @@ export const StyledTitleF = styled(Typography)({
   width: '100%',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
+  padding: '20px 260px',
+  justifyContent: 'space-between',
 });

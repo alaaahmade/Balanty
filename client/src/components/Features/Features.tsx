@@ -6,7 +6,12 @@ import { StyledTitleF } from './Features.styled';
 const Feature: React.FC = (): ReactElement => {
   return (
     <Box id="servicesLink">
-      <StyledTitleF>احجز, العب, شارك, شوت</StyledTitleF>
+      <StyledTitleF>
+        <span>شوت</span>
+        <span>شارك</span>
+        <span>العب</span>
+        <span>احجز</span>
+      </StyledTitleF>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <FeatureSection
           imageSrc="https://res.cloudinary.com/dtpbcx2kv/image/upload/v1688465399/hbn3hcjtk4yiovgy58pi.svg"
