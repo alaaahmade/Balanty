@@ -14,6 +14,15 @@ import axios from 'axios';
 
 import { StyledButton } from '../styledRootComponent/SideComponents';
 
+interface Player {
+  id: number;
+  avatar: string;
+  age: number;
+  position: string;
+  cover: string;
+  bio: string;
+}
+
 interface Match {
   id: number;
   title: string;
@@ -32,17 +41,7 @@ interface Match {
   ownerUser: {
     username: string;
   };
-  // eslint-disable-next-line no-use-before-define
   Players: Player[];
-}
-
-interface Player {
-  id: number;
-  avatar: string;
-  age: number;
-  position: string;
-  cover: string;
-  bio: string;
 }
 
 interface MatchCardProps {
@@ -75,6 +74,7 @@ const MatchCardContent = styled(CardContent)({
 });
 
 const MatchCard: React.FC<MatchCardProps> = ({ match, join, setJoin }) => {
+  const seatsNum = match.seats - match.Players.length;
   const navigate = useNavigate();
 
   const handleJoin = async () => {
@@ -114,6 +114,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match, join, setJoin }) => {
                   sx={{
                     fontWeight: 'bold',
                     display: 'inline',
+                    ml: '5px',
                     color: '#000000',
                   }}
                 >
@@ -121,15 +122,16 @@ const MatchCard: React.FC<MatchCardProps> = ({ match, join, setJoin }) => {
                 </InputLabel>
               </Typography>
               <Typography variant="body1">
-                {match.seats}
+                {match.seats}/{seatsNum}
                 <InputLabel
                   sx={{
                     fontWeight: 'bold',
                     display: 'inline',
                     color: '#000000',
+                    ml: '5px',
                   }}
                 >
-                  :عدد المقاعد
+                  :المقاعد المتاحة
                 </InputLabel>
               </Typography>
             </Box>
@@ -145,6 +147,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match, join, setJoin }) => {
                   sx={{
                     fontWeight: 'bold',
                     display: 'inline',
+                    ml: '5px',
                     color: '#000000',
                   }}
                 >
@@ -158,14 +161,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match, join, setJoin }) => {
                   sx={{
                     fontWeight: 'bold',
                     display: 'inline',
-                    color: '#000000',
-                  }}
-                />
-
-                <InputLabel
-                  sx={{
-                    fontWeight: 'bold',
-                    display: 'inline',
+                    ml: '5px',
                     color: '#000000',
                   }}
                 >
@@ -173,9 +169,6 @@ const MatchCard: React.FC<MatchCardProps> = ({ match, join, setJoin }) => {
                 </InputLabel>
               </Typography>
             </Box>
-            {match.Players.map(player => (
-              <img src={player.cover} alt="Player Cover" key={player.id} />
-            ))}
             <Box
               sx={{
                 display: 'flex',

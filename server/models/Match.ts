@@ -9,6 +9,7 @@ class Match extends Model {
   declare startDate: Date;
   declare endDate: Date;
   declare seats: number;
+  declare id: number;
 }
 
 Match.init(
