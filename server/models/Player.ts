@@ -15,7 +15,7 @@ Player.init(
     avatar: {
       type: DataTypes.TEXT,
       defaultValue:
-        'https://www.yourstru.ly/wp-content/uploads/2022/12/2022-12-22_12_lionel-messi-biograph.webp',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png',
     },
     age: { type: DataTypes.INTEGER, defaultValue: 'لم يتم ادخال عمر' },
     position: {
