@@ -28,6 +28,7 @@ export interface Match {
     username: string;
   };
   Players: Player[];
+  stadiumId: number;
 }
 export interface MatchCardProps {
   match: Match;

@@ -29,6 +29,7 @@ const MatchCard: React.FC<MatchCardProps> = ({
       navigate('/serverError');
     }
   };
+
   return (
     <Box sx={{ paddingTop: '5px' }}>
       <CenteredCard
@@ -52,6 +53,7 @@ const MatchCard: React.FC<MatchCardProps> = ({
                   display: 'flex',
                   justifyContent: 'center',
                   color: theme => theme.palette.primary.contrastText,
+                  mr: '70px',
                 }}
               >
                 {match.title}
@@ -90,11 +92,11 @@ const MatchCard: React.FC<MatchCardProps> = ({
                     sx={{
                       fontWeight: 'bold',
                       display: 'inline',
-                      color: '#000000',
+                      color: theme => theme.palette.primary.contrastText,
                       ml: '5px',
                     }}
                   >
-                    :المقاعد المتاحة
+                    : المقاعد المتاحة
                   </InputLabel>
                 </Typography>
                 <Typography variant="body1">
@@ -166,8 +168,11 @@ const MatchCard: React.FC<MatchCardProps> = ({
                     height: '30px',
                     marginBottom: '10px',
                   }}
+                  onClick={() => {
+                    navigate(`/profile/stadium/${match.stadiumId}`);
+                  }}
                 >
-                  زيارة
+                  زيارة الملعب
                 </StyledButton>
               </Box>
             </MatchCardContent>
