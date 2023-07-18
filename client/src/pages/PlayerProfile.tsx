@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {
@@ -9,6 +9,7 @@ import {
 } from '../components/playerProfile';
 import { FollowsInfoWrapper } from '../components/playerProfile/Player.Styled';
 import { error } from '../interfaces/PLayerProfile';
+import { UpdateGalleryContext } from '../context';
 
 const PlayerProfile = () => {
   const [editMode, setEditMode] = useState(false);
@@ -19,13 +20,15 @@ const PlayerProfile = () => {
   const [position, setPosition] = useState<string>('');
   const [age, setAge] = useState<number>(0);
   const [phone, setPhone] = useState<number>(0);
+  const [playerId, setPlayerId] = useState<number>(0);
 
   const navigate = useNavigate();
   const { id } = useParams();
+  const { Agree } = useContext(UpdateGalleryContext);
 
-  const fetchData = async (playerId: string) => {
+  const fetchData = async (Id: string) => {
     try {
-      const { data } = await axios.get(`/api/v1/players/profile/${playerId}`);
+      const { data } = await axios.get(`/api/v1/players/profile/${Id}`);
       setCover(data.data.Player.cover);
       setAvatar(data.data.Player.avatar);
       setPhone(data.data.phone);
@@ -33,6 +36,7 @@ const PlayerProfile = () => {
       setBio(data.data.Player.bio);
       setPosition(data.data.Player.position);
       setAge(data.data.Player.age);
+      setPlayerId(data.data.Player.id);
     } catch (err) {
       if ((err as error).response?.status === 401) {
         navigate('/pageNotFound');
@@ -43,8 +47,8 @@ const PlayerProfile = () => {
   };
 
   useEffect(() => {
-    fetchData(id ?? '');
-  }, [id]);
+    fetchData(id as string);
+  }, [id, Agree]);
 
   return (
     <>
@@ -56,6 +60,7 @@ const PlayerProfile = () => {
         avatar={
           avatar || 'https://s.hs-data.com/bilder/spieler/gross/13029.jpg'
         }
+        playerId={playerId}
       />
       <PlayerActions username={username} />
       <FollowsInfoWrapper>

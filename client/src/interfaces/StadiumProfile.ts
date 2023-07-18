@@ -72,11 +72,12 @@ export interface BioSectionProps {
 export interface EditGalleryPopupProps {
   editGallery: boolean;
   setEditGallery: Dispatch<SetStateAction<boolean>>;
-  ImageId: number;
-  StadiumId: number;
+  ImageId?: number;
+  userId: number;
   gallery: object[];
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
+  type: string;
 }
 
 export interface deleteDialogProps {
