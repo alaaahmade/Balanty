@@ -129,10 +129,10 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
           mt: '25px',
           width: '80%',
           border: '1px solid ',
-          borderColor: (currentTheme as Theme).palette.primary.main,
+          borderColor: (currentTheme as Theme).palette.primary.contrastText,
           backgroundColor: ((currentTheme as Theme).palette as customPalette)
             .customColors.grayColor,
-          color: (currentTheme as Theme).palette.primary.main,
+          color: (currentTheme as Theme).palette.primary.contrastText,
         }}
         placeholder="عنوان المباراة"
         onChange={handleMatchName}
@@ -144,8 +144,8 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
           width: '80%',
           p: '20px',
           border: '1px solid ',
-          borderColor: (currentTheme as Theme).palette.primary.main,
-          color: (currentTheme as Theme).palette.primary.main,
+          borderColor: (currentTheme as Theme).palette.primary.contrastText,
+          color: (currentTheme as Theme).palette.primary.contrastText,
           backgroundColor: ((currentTheme as Theme).palette as customPalette)
             .customColors.grayColor,
         }}
@@ -162,7 +162,7 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
             style: {
               textAlign: 'right',
               padding: '7px 40px',
-              color: (currentTheme as Theme).palette.primary.main,
+              color: (currentTheme as Theme).palette.primary.contrastText,
             },
           },
         }}
@@ -178,18 +178,18 @@ const CreateMatchForm: FC<CreateMatchFormProps> = ({ setOpen }) => {
             .customColors.grayColor,
           borderRadius: '5px',
           border: '1px solid ',
-          borderColor: (currentTheme as Theme).palette.primary.main,
+          borderColor: (currentTheme as Theme).palette.primary.contrastText,
         }}
         onChange={handleDescription}
       />
       <StyledAutocomplete
         sx={{
-          borderColor: (currentTheme as Theme).palette.primary.main,
-          color: (currentTheme as Theme).palette.primary.main,
+          borderColor: (currentTheme as Theme).palette.primary.contrastText,
+          color: (currentTheme as Theme).palette.primary.contrastText,
           backgroundColor: ((currentTheme as Theme).palette as customPalette)
             .customColors.grayColor,
           '& input': {
-            color: (currentTheme as Theme).palette.primary.main,
+            color: (currentTheme as Theme).palette.primary.contrastText,
             backgroundColor: ((currentTheme as Theme).palette as customPalette)
               .customColors.grayColor,
           },

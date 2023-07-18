@@ -9,10 +9,7 @@ import React, {
   ReactElement,
 } from 'react';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
-import AttachFileIcon from '@mui/icons-material/AttachFile';
 import SendIcon from '@mui/icons-material/Send';
-import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
-import VideocamOutlinedIcon from '@mui/icons-material/VideocamOutlined';
 import Typography from '@mui/material/Typography';
 import axios, { AxiosError } from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';

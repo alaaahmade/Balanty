@@ -51,16 +51,8 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
         }}
       >
         <MatchCardContainer>
-          <Box
-            sx={{
-              width: '100%',
-            }}
-          >
-            <MatchCardContent
-              sx={{
-                textAlign: 'right',
-              }}
-            >
+          <Box>
+            <MatchCardContent>
               <Typography
                 variant="h6"
                 component="h3"
@@ -74,7 +66,6 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
               </Typography>
               <Box
                 sx={{
-                  width: '100%',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'flex-end',

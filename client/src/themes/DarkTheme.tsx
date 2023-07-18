@@ -9,7 +9,7 @@ const DarkTheme = createTheme({
   palette: {
     primary: {
       main: '#2CB674',
-      contrastText: '#2CB674',
+      contrastText: '#ccc',
     },
 
     customColors: {

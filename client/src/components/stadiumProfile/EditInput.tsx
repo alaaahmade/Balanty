@@ -39,11 +39,11 @@ const EditInput: React.FC<Props> = ({
           textAlign: 'right',
 
           WebkitTextFillColor: theme =>
-            (theme.palette as customPalette).customColors.wightColor,
+            (theme.palette as customPalette).primary.contrastText,
         },
         '& .css-1x51dt5-MuiInputBase-input-MuiInput-input.Mui-disabled': {
           WebkitTextFillColor: theme =>
-            (theme.palette as customPalette).customColors.wightColor,
+            (theme.palette as customPalette).primary.contrastText,
         },
       }}
       InputProps={{

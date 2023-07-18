@@ -113,7 +113,7 @@ const StadiumsPage = (): ReactElement => {
             backgroundColor: theme =>
               (theme.palette as customPalette).customColors.grayColor,
             '& input': {
-              color: theme => theme.palette.primary.main,
+              color: theme => theme.palette.primary.contrastText,
               textAlign: 'right',
             },
           }}
@@ -122,7 +122,7 @@ const StadiumsPage = (): ReactElement => {
               <InputAdornment position="start">
                 <SearchIcon
                   sx={{
-                    color: theme => theme.palette.primary.main,
+                    color: theme => theme.palette.primary.contrastText,
                   }}
                 />
               </InputAdornment>

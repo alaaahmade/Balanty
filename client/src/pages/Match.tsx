@@ -37,7 +37,11 @@ const MatchesPage = (): React.ReactElement => {
   }, [openPage]);
 
   return (
-    <Box sx={{}}>
+    <Box
+      sx={{
+        width: '100%',
+      }}
+    >
       <TextField
         size="small"
         variant="outlined"
@@ -51,13 +55,16 @@ const MatchesPage = (): React.ReactElement => {
             (theme.palette as customPalette).customColors.grayColor,
           borderRadius: '4px',
           direction: 'right',
-          m: '6% 50% 20px',
+          // m: '6% 0 20px 0',
+          position: 'absolute',
+          top: '12%',
+          left: '50%',
           transform: 'translateX(-50%)',
-          color: theme => theme.palette.primary.main,
+          color: theme => theme.palette.primary.contrastText,
           backgroundColor: theme =>
             (theme.palette as customPalette).customColors.grayColor,
           '& input': {
-            color: theme => theme.palette.primary.main,
+            color: theme => theme.palette.primary.contrastText,
             textAlign: 'right',
           },
         }}
@@ -66,7 +73,7 @@ const MatchesPage = (): React.ReactElement => {
             <InputAdornment position="start">
               <SearchIcon
                 sx={{
-                  color: theme => theme.palette.primary.main,
+                  color: theme => theme.palette.primary.contrastText,
                 }}
               />
             </InputAdornment>
@@ -82,11 +89,17 @@ const MatchesPage = (): React.ReactElement => {
           ),
         }}
       />
-      {error ? (
-        <p>{error}</p>
-      ) : (
-        matches.map(match => <MatchCard key={match.id} match={match} />)
-      )}
+      <Box
+        sx={{
+          pt: '10.5%',
+        }}
+      >
+        {error ? (
+          <p>{error}</p>
+        ) : (
+          matches.map(match => <MatchCard key={match.id} match={match} />)
+        )}
+      </Box>
     </Box>
   );
 };
