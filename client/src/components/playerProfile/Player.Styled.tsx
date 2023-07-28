@@ -4,7 +4,7 @@ import { Box, styled } from '@mui/system';
 export const Cover = styled(Box)({
   width: '100%',
   height: 320,
-  backgroundPosition: 'top',
+  backgroundPosition: 'bottom',
   backgroundSize: 'cover',
 });
 export const AvatarWrapper = styled(Box)({
@@ -127,4 +127,17 @@ export const FollowButton = styled(Button)({
     color: '#2CB674',
     borderColor: '#2CB674',
   },
+});
+
+export const EditAvatarIcon = styled(Box)({
+  width: '100%',
+  height: '100%',
+  backgroundColor: '#00000073',
+  position: 'absolute',
+  color: '#2CB674',
+  top: '0',
+  borderRadius: '50%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 });

@@ -5,7 +5,7 @@ export {
   deleteMessage,
   editMessage,
 } from './matchChat';
-export { getMatches, createMatch } from './matches';
+export { getMatches, createMatch, JoinToMatch } from './matches';
 
 export {
   getAllStadiums,
@@ -27,5 +27,7 @@ export {
   playerMatches,
   updatePlayer,
   getPlayers,
+  updateCover,
+  updateAvatar,
 } from './player';
 export { getReview, addReview, getPlayerReview } from './reviews';

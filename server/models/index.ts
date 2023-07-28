@@ -5,6 +5,7 @@ import Message from './Message';
 import Review from './Review';
 import Gallery from './Gallery';
 import User from './User';
+import MatchPlayer from './MatchPlayer';
 
 // user has one Player
 User.hasOne(Player);
@@ -24,13 +25,13 @@ User.hasMany(Match, { foreignKey: 'stadiumId', as: 'StadiumsMatches' });
 Match.belongsTo(User, { foreignKey: 'stadiumId', as: 'stadiumMatch' });
 
 User.belongsToMany(Match, {
-  through: 'MatchPlayer',
+  through: MatchPlayer,
   as: 'Matches',
   foreignKey: 'userId',
 });
 
 Match.belongsToMany(User, {
-  through: 'MatchPlayer',
+  through: MatchPlayer,
   as: 'Players',
   foreignKey: 'matchId',
 });

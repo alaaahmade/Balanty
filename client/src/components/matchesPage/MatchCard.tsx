@@ -1,42 +1,35 @@
-import React from 'react';
-import {
-  Card,
-  CardContent,
-  Typography,
-  styled,
-  Box,
-  InputLabel,
-} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
+import { Typography, Box, InputLabel } from '@mui/material';
+
+import axios from 'axios';
+
 import { StyledButton } from '../styledRootComponent/SideComponents';
 import { customPalette } from '../../interfaces';
 import { MatchCardProps } from '../../interfaces/matches';
+import {
+  CenteredCard,
+  MatchCardContainer,
+  MatchCardContent,
+} from './Matche.styled';
 
-const CenteredCard = styled(Card)({
-  margin: 'auto',
-  marginBottom: '10px',
-  display: 'flex',
-  justifyContent: 'center',
-  width: 'calc(100% - 560px)',
-  height: '300px',
-  padding: '10px',
-  border: '1px solid ',
-});
+const MatchCard: React.FC<MatchCardProps> = ({
+  match,
+  join,
+  setJoin,
+}: MatchCardProps) => {
+  const seatsNum = match.seats - match.Players.length;
+  const navigate = useNavigate();
 
-const MatchCardContainer = styled(Box)({
-  display: 'flex',
-  gap: '40px',
-  alignItems: 'center',
-  justifyContent: 'center',
-});
+  const handleJoin = async () => {
+    try {
+      await axios.get(`/api/v1/matches/join/${match.id}`);
+      setJoin(!join);
+    } catch (error) {
+      navigate('/serverError');
+    }
+  };
 
-const MatchCardContent = styled(CardContent)({
-  display: 'flex',
-  flexDirection: 'column',
-
-  gap: '2px',
-});
-
-const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
   return (
     <Box sx={{ paddingTop: '5px' }}>
       <CenteredCard
@@ -51,16 +44,8 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
         }}
       >
         <MatchCardContainer>
-          <Box
-            sx={{
-              width: '100%',
-            }}
-          >
-            <MatchCardContent
-              sx={{
-                textAlign: 'right',
-              }}
-            >
+          <Box>
+            <MatchCardContent>
               <Typography
                 variant="h6"
                 component="h3"
@@ -68,13 +53,13 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
                   display: 'flex',
                   justifyContent: 'center',
                   color: theme => theme.palette.primary.contrastText,
+                  mr: '70px',
                 }}
               >
                 {match.title}
               </Typography>
               <Box
                 sx={{
-                  width: '100%',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'flex-end',
@@ -102,19 +87,18 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
                   </InputLabel>
                 </Typography>
                 <Typography variant="body1">
-                  {match.seats}
+                  {match.seats}/{seatsNum}
                   <InputLabel
                     sx={{
                       fontWeight: 'bold',
                       display: 'inline',
-                      ml: '10px',
                       color: theme => theme.palette.primary.contrastText,
+                      ml: '5px',
                     }}
                   >
                     : المقاعد المتاحة
                   </InputLabel>
                 </Typography>
-
                 <Typography variant="body1">
                   <InputLabel
                     sx={{
@@ -168,12 +152,13 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
               >
                 <StyledButton
                   sx={{
-                    width: '80px',
+                    width: '65px',
                     height: '30px',
                     borderRadius: '5px',
                     gap: '10px',
                     borderColor: '#2CB674',
                   }}
+                  onClick={handleJoin}
                 >
                   انضم
                 </StyledButton>
@@ -183,8 +168,11 @@ const MatchCard: React.FC<MatchCardProps> = ({ match }) => {
                     height: '30px',
                     marginBottom: '10px',
                   }}
+                  onClick={() => {
+                    navigate(`/profile/stadium/${match.stadiumId}`);
+                  }}
                 >
-                  زيارة
+                  زيارة الملعب
                 </StyledButton>
               </Box>
             </MatchCardContent>

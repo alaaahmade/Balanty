@@ -18,10 +18,24 @@ export {
   getBestStadiumsService,
 } from './stadiums';
 
-export { createMatchService, getAllMatches } from './matches';
+export {
+  createMatchService,
+  getAllMatches,
+  JoinToMatchService,
+} from './matches';
 
 export {
   getReviewService,
   addReviewService,
   getPlayerReviewService,
 } from './reviews';
+
+export {
+  getPlayerService,
+  updatePlayerService,
+  playerMatchesService,
+  playerAvatarService,
+  getPlayersService,
+  updateCoverService,
+  updateAvatarService,
+} from './player';

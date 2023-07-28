@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export interface Player {
   id: number;
   avatar: string;
@@ -26,7 +28,10 @@ export interface Match {
     username: string;
   };
   Players: Player[];
+  stadiumId: number;
 }
 export interface MatchCardProps {
   match: Match;
+  join: boolean;
+  setJoin: Dispatch<SetStateAction<boolean>>;
 }

@@ -56,7 +56,6 @@ export const AddMessageBar = styled(Box)({
   bottom: '0',
   left: '0',
   padding: '0.5rem 0',
-  background: '#fff',
   zIndex: '1000',
 });
 
@@ -131,7 +130,6 @@ export const MatchHeaderSection = styled(Box)({
   width: '100%',
   direction: 'rtl',
   padding: '0.5rem 0',
-  background: '#fff',
   borderBottom: '1px solid #eee',
   zIndex: '1000',
 });

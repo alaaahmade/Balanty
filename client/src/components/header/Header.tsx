@@ -1,5 +1,6 @@
 import { useState, FC, MouseEvent, ReactElement } from 'react';
 import { Link } from 'react-scroll';
+import { Link as RouteLink } from 'react-router-dom';
 
 import {
   AppBar,
@@ -37,14 +38,13 @@ const Header: FC = (): ReactElement => {
     <AppBar
       sx={{
         background: '#01031C',
-        width: '100%',
         padding: '0 40px',
         height: '70px',
         display: 'flex',
         justifyContent: 'center',
       }}
     >
-      <Container maxWidth="xl">
+      <Container sx={{ width: '100%' }}>
         <Toolbar disableGutters>
           <CustomizedButton to="/player/login">تسجيل دخول</CustomizedButton>
           <Box
@@ -99,15 +99,17 @@ const Header: FC = (): ReactElement => {
             }}
           >
             {pages.map(page => (
-              <ScrollLink smooth spy to={page.id}>
+              <ScrollLink key={page.id} smooth spy to={page.id}>
                 <Typography textAlign="center">{page.key}</Typography>
               </ScrollLink>
             ))}
           </Box>
-          <Logo
-            src="https://res.cloudinary.com/dtpbcx2kv/image/upload/v1688470562/pf3trycwmq9sw80w2ahf.svg"
-            alt="logo"
-          />
+          <RouteLink to="/">
+            <Logo
+              src="https://res.cloudinary.com/df3ydvucj/image/upload/v1689453636/%D8%A8%D9%84%D9%86%D8%AA%D9%8A_1-01_1_qqlmfb.svg"
+              alt="logo"
+            />
+          </RouteLink>
         </Toolbar>
       </Container>
     </AppBar>

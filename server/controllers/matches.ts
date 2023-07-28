@@ -1,6 +1,10 @@
 import { Response, Request, RequestHandler } from 'express';
+import {
+  createMatchService,
+  getAllMatches,
+  JoinToMatchService,
+} from '../services';
 import { IServiceResponse } from '../interfaces';
-import { createMatchService, getAllMatches } from '../services';
 
 export const createMatch: RequestHandler = async (
   req: Request,
@@ -14,6 +18,14 @@ export const getMatches: RequestHandler = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
-  const data = await getAllMatches();
+  const data = await getAllMatches(req);
+  res.status(data.status).json(data);
+};
+
+export const JoinToMatch: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const data = await JoinToMatchService(req);
   res.status(data.status).json(data);
 };
