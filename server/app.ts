@@ -16,7 +16,7 @@ app.use([
   urlencoded({ extended: false }),
   compression(),
   cookieParser(),
-  // cors({ origin: 'http://localhost:8080' }),
+  cors(),
 ]);
 
 app.use('/api/v1', router);
