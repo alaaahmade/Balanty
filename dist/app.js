@@ -28,6 +28,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importStar(require("express"));
 const path_1 = require("path");
+const environment_1 = require("./config/environment");
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const compression_1 = __importDefault(require("compression"));
 const cors_1 = __importDefault(require("cors"));
@@ -43,9 +44,11 @@ app.use([
     (0, cors_1.default)(),
 ]);
 app.use('/api/v1', router_1.router);
-app.use(express_1.default.static((0, path_1.join)(__dirname, '..', 'client', 'dist')));
-app.get('*', (0, utils_1.errorWrapper)((req, res) => {
-    res.sendFile((0, path_1.join)(__dirname, '..', 'client', 'dist', 'index.html'));
-}));
+if (environment_1.nodeEnv === 'production') {
+    app.use(express_1.default.static((0, path_1.join)(__dirname, '..', 'client', 'dist')));
+    app.get('*', (0, utils_1.errorWrapper)((req, res) => {
+        res.sendFile((0, path_1.join)(__dirname, '..', 'client', 'dist', 'index.html'));
+    }));
+}
 app.use(errorMiddleware_1.default);
 exports.default = app;

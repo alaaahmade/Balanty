@@ -1,4 +1,5 @@
 import { Match, Stadium } from '../models';
+import MatchPlayer from '../models/MatchPlayer';
 export interface IServiceResponse {
     status: number;
     data: string | object;
@@ -24,4 +25,5 @@ export interface matchesInterface {
     data: (Match & {
         Stadium?: Stadium;
     })[] | string;
+    playerMatches?: MatchPlayer[];
 }

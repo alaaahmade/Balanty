@@ -10,3 +10,5 @@ exports.playerRouter.get('/profile/:id', (0, utils_1.errorWrapper)(controllers_1
 exports.playerRouter.get('/profile/:id/matches', (0, utils_1.errorWrapper)(controllers_1.playerMatches));
 exports.playerRouter.get('/avatar/:id', (0, utils_1.errorWrapper)(controllers_1.playerAvatar));
 exports.playerRouter.patch('/profile/edit', (0, utils_1.errorWrapper)(controllers_1.updatePlayer));
+exports.playerRouter.patch('/cover/:playerId', (0, utils_1.errorWrapper)(controllers_1.updateCover));
+exports.playerRouter.patch('/avatar/:playerId', (0, utils_1.errorWrapper)(controllers_1.updateAvatar));

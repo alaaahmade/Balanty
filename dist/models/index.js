@@ -18,6 +18,7 @@ const Gallery_1 = __importDefault(require("./Gallery"));
 exports.Gallery = Gallery_1.default;
 const User_1 = __importDefault(require("./User"));
 exports.User = User_1.default;
+const MatchPlayer_1 = __importDefault(require("./MatchPlayer"));
 // user has one Player
 User_1.default.hasOne(Player_1.default);
 Player_1.default.belongsTo(User_1.default);
@@ -32,12 +33,12 @@ Match_1.default.belongsTo(User_1.default, { foreignKey: 'ownerId', as: 'ownerUse
 User_1.default.hasMany(Match_1.default, { foreignKey: 'stadiumId', as: 'StadiumsMatches' });
 Match_1.default.belongsTo(User_1.default, { foreignKey: 'stadiumId', as: 'stadiumMatch' });
 User_1.default.belongsToMany(Match_1.default, {
-    through: 'MatchPlayer',
+    through: MatchPlayer_1.default,
     as: 'Matches',
     foreignKey: 'userId',
 });
 Match_1.default.belongsToMany(User_1.default, {
-    through: 'MatchPlayer',
+    through: MatchPlayer_1.default,
     as: 'Players',
     foreignKey: 'matchId',
 });

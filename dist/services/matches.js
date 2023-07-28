@@ -1,9 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllMatches = exports.createMatchService = void 0;
+exports.JoinToMatchService = exports.getAllMatches = exports.createMatchService = void 0;
 const sequelize_1 = require("sequelize");
 const models_1 = require("../models");
 const validations_1 = require("../validations");
+const MatchPlayer_1 = __importDefault(require("../models/MatchPlayer"));
 const createMatchService = async (req) => {
     const { body, user } = req;
     const ownerId = user?.id;
@@ -60,10 +64,11 @@ const createMatchService = async (req) => {
     };
 };
 exports.createMatchService = createMatchService;
-const getAllMatches = async () => {
+const getAllMatches = async (req) => {
     const currentDate = Date.now();
     const currentDateObject = new Date(currentDate);
     const currentDateFormatted = currentDateObject.toISOString();
+    const userId = req.user?.id;
     const matches = await models_1.Match.findAll({
         where: {
             [sequelize_1.Op.or]: [{ startDate: { [sequelize_1.Op.gt]: currentDateFormatted } }],
@@ -83,10 +88,15 @@ const getAllMatches = async () => {
             { model: models_1.User, as: 'Players' },
         ],
     });
+    const playerMatches = await MatchPlayer_1.default.findAll({
+        where: { userId },
+        attributes: ['matchId'],
+    });
     if (matches.length > 0) {
         return {
             status: 200,
             data: matches,
+            playerMatches,
         };
     }
     else {
@@ -97,3 +107,36 @@ const getAllMatches = async () => {
     }
 };
 exports.getAllMatches = getAllMatches;
+const JoinToMatchService = async (req) => {
+    const playerId = req.user?.id;
+    const { matchId } = req.params;
+    const checkExist = await models_1.User.findOne({
+        where: { id: playerId },
+    });
+    if (!checkExist) {
+        return {
+            status: 404,
+            data: 'هذا اللاعب غير موجود',
+        };
+    }
+    const user = await models_1.User.findByPk(playerId);
+    const match = await models_1.Match.findByPk(matchId);
+    const data = await MatchPlayer_1.default.findOne({
+        where: { userId: playerId, matchId },
+    });
+    if (data) {
+        return {
+            status: 401,
+            data: 'لا يمكنك الانضمام مرتين في نفس الدوري',
+        };
+    }
+    const matchP = await MatchPlayer_1.default.create({
+        userId: user?.id,
+        matchId: match?.id,
+    });
+    return {
+        status: 200,
+        data: matchP,
+    };
+};
+exports.JoinToMatchService = JoinToMatchService;

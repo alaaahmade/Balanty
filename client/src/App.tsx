@@ -25,7 +25,9 @@ import {
 import { ThemeProviderWrapper } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
 
-const socket = io.connect('http://3.75.142.65/');
+const { VITE_BASE_URL } = import.meta.env;
+
+const socket = io.connect(VITE_BASE_URL);
 
 const router = createBrowserRouter([
   {

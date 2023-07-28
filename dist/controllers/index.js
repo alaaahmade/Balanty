@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPlayerReview = exports.addReview = exports.getReview = exports.getPlayers = exports.updatePlayer = exports.playerMatches = exports.getPlayer = exports.playerAvatar = exports.AddStadiumImage = exports.UpdateStadiumGallery = exports.deleteStadiumImage = exports.searchStadiums = exports.getBestStadiums = exports.UpdateStadiumData = exports.getStadiums = exports.getStadiumMatches = exports.getStadiumProfile = exports.getStadiumDetails = exports.getAllStadiums = exports.createMatch = exports.getMatches = exports.editMessage = exports.deleteMessage = exports.getAllMatchMessages = exports.getMessageById = exports.addMessage = void 0;
+exports.getPlayerReview = exports.addReview = exports.getReview = exports.updateAvatar = exports.updateCover = exports.getPlayers = exports.updatePlayer = exports.playerMatches = exports.getPlayer = exports.playerAvatar = exports.AddStadiumImage = exports.UpdateStadiumGallery = exports.deleteStadiumImage = exports.searchStadiums = exports.getBestStadiums = exports.UpdateStadiumData = exports.getStadiums = exports.getStadiumMatches = exports.getStadiumProfile = exports.getStadiumDetails = exports.getAllStadiums = exports.JoinToMatch = exports.createMatch = exports.getMatches = exports.editMessage = exports.deleteMessage = exports.getAllMatchMessages = exports.getMessageById = exports.addMessage = void 0;
 var matchChat_1 = require("./matchChat");
 Object.defineProperty(exports, "addMessage", { enumerable: true, get: function () { return matchChat_1.addMessage; } });
 Object.defineProperty(exports, "getMessageById", { enumerable: true, get: function () { return matchChat_1.getMessageById; } });
@@ -10,6 +10,7 @@ Object.defineProperty(exports, "editMessage", { enumerable: true, get: function 
 var matches_1 = require("./matches");
 Object.defineProperty(exports, "getMatches", { enumerable: true, get: function () { return matches_1.getMatches; } });
 Object.defineProperty(exports, "createMatch", { enumerable: true, get: function () { return matches_1.createMatch; } });
+Object.defineProperty(exports, "JoinToMatch", { enumerable: true, get: function () { return matches_1.JoinToMatch; } });
 var stadiums_1 = require("./stadiums");
 Object.defineProperty(exports, "getAllStadiums", { enumerable: true, get: function () { return stadiums_1.getAllStadiums; } });
 Object.defineProperty(exports, "getStadiumDetails", { enumerable: true, get: function () { return stadiums_1.getStadiumDetails; } });
@@ -28,6 +29,8 @@ Object.defineProperty(exports, "getPlayer", { enumerable: true, get: function ()
 Object.defineProperty(exports, "playerMatches", { enumerable: true, get: function () { return player_1.playerMatches; } });
 Object.defineProperty(exports, "updatePlayer", { enumerable: true, get: function () { return player_1.updatePlayer; } });
 Object.defineProperty(exports, "getPlayers", { enumerable: true, get: function () { return player_1.getPlayers; } });
+Object.defineProperty(exports, "updateCover", { enumerable: true, get: function () { return player_1.updateCover; } });
+Object.defineProperty(exports, "updateAvatar", { enumerable: true, get: function () { return player_1.updateAvatar; } });
 var reviews_1 = require("./reviews");
 Object.defineProperty(exports, "getReview", { enumerable: true, get: function () { return reviews_1.getReview; } });
 Object.defineProperty(exports, "addReview", { enumerable: true, get: function () { return reviews_1.addReview; } });

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPlayersService = exports.playerAvatarService = exports.playerMatchesService = exports.updatePlayerService = exports.getPlayerService = void 0;
+exports.updateAvatarService = exports.updateCoverService = exports.getPlayersService = exports.playerAvatarService = exports.playerMatchesService = exports.updatePlayerService = exports.getPlayerService = void 0;
 const sequelize_1 = require("sequelize");
 const models_1 = require("../models");
 const playerSchema_1 = __importDefault(require("../validations/playerSchema"));
@@ -30,8 +30,7 @@ const getPlayerService = async (id) => {
 };
 exports.getPlayerService = getPlayerService;
 const updatePlayerService = async (req) => {
-    // const { UserId } = req.UserData;
-    const playerId = 5;
+    const playerId = req.user?.id;
     const { body } = req;
     const isPLayerExist = await models_1.Player.findOne({ where: { UserId: playerId } });
     if (!isPLayerExist) {
@@ -134,3 +133,43 @@ const getPlayersService = async (req) => {
     };
 };
 exports.getPlayersService = getPlayersService;
+const updateCoverService = async (req) => {
+    const { newCover } = req.body;
+    const { playerId } = req.params;
+    const UserId = req.user?.id;
+    const isPLayerExist = await models_1.Player.findOne({
+        where: { UserId, id: playerId },
+    });
+    if (!isPLayerExist) {
+        return {
+            status: 401,
+            data: 'هذا اللاعب غير متاح',
+        };
+    }
+    const updateCover = await models_1.Player.update({ cover: newCover }, { where: { id: playerId } });
+    return {
+        status: 200,
+        data: +updateCover === 1 ? 'successful' : 'fail',
+    };
+};
+exports.updateCoverService = updateCoverService;
+const updateAvatarService = async (req) => {
+    const { newAvatar } = req.body;
+    const { playerId } = req.params;
+    const UserId = req.user?.id;
+    const isPLayerExist = await models_1.Player.findOne({
+        where: { UserId, id: playerId },
+    });
+    if (!isPLayerExist) {
+        return {
+            status: 401,
+            data: 'هذا اللاعب غير متاح',
+        };
+    }
+    const updateCover = await models_1.Player.update({ avatar: newAvatar }, { where: { id: playerId } });
+    return {
+        status: 200,
+        data: +updateCover === 1 ? 'successful' : 'fail',
+    };
+};
+exports.updateAvatarService = updateAvatarService;

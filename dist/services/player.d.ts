@@ -20,4 +20,12 @@ declare const getPlayersService: (req: Request) => Promise<{
     status: number;
     data: object;
 }>;
-export { getPlayerService, updatePlayerService, playerMatchesService, playerAvatarService, getPlayersService, };
+declare const updateCoverService: (req: Request) => Promise<{
+    status: number;
+    data: string;
+}>;
+declare const updateAvatarService: (req: Request) => Promise<{
+    status: number;
+    data: string;
+}>;
+export { getPlayerService, updatePlayerService, playerMatchesService, playerAvatarService, getPlayersService, updateCoverService, updateAvatarService, };

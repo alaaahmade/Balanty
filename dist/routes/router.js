@@ -18,6 +18,6 @@ exports.router = router;
 router.use('/matches', (0, utils_1.errorWrapper)(middleware_1.checkAuth), matches_1.default);
 router.use('/user', auth_1.authRouter);
 router.use('/stadiums', staduimRouter_1.stadiumRouter);
-router.use('/players', player_1.playerRouter);
+router.use('/players', (0, utils_1.errorWrapper)(middleware_1.checkAuth), player_1.playerRouter);
 router.use('/message', (0, utils_1.errorWrapper)(middleware_1.checkAuth), matchChat_1.default);
 router.use('/review', (0, utils_1.errorWrapper)(middleware_1.checkAuth), reviewRouter_1.default);

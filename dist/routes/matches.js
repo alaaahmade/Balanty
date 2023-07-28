@@ -7,4 +7,5 @@ const matchRouter = (0, express_1.Router)();
 matchRouter.get('/', (0, utils_1.errorWrapper)(controllers_1.getMatches));
 matchRouter.post('/', (0, utils_1.errorWrapper)(controllers_1.createMatch));
 matchRouter.get('/stadium/:stadiumId', (0, utils_1.errorWrapper)(controllers_1.getStadiumMatches));
+matchRouter.get('/join/:matchId', (0, utils_1.errorWrapper)(controllers_1.JoinToMatch));
 exports.default = matchRouter;

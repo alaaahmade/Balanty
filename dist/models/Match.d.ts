@@ -7,5 +7,6 @@ declare class Match extends Model {
     startDate: Date;
     endDate: Date;
     seats: number;
+    id: number;
 }
 export default Match;
