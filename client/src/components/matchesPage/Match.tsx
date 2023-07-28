@@ -4,40 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { Alert, Box } from '@mui/material';
 import MatchCard from './MatchCard';
 import { open } from '../../context';
-
-interface Match {
-  id: number;
-  title: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-  seats: number;
-  stadiumMatch: {
-    username: string;
-    Stadium: {
-      stadiumGallery: {
-        image: string;
-      }[];
-    };
-  };
-  ownerUser: {
-    username: string;
-  };
-  // eslint-disable-next-line no-use-before-define
-  Players: Player[];
-}
-
-interface Player {
-  id: number;
-  avatar: string;
-  age: number;
-  position: string;
-  cover: string;
-  bio: string;
-}
+import { MatchCardProps } from '../../interfaces/matches';
 
 const MatchesPage = (): React.ReactElement => {
-  const [matches, setMatches] = useState<Match[]>([]);
+  const [matches, setMatches] = useState<MatchCardProps['match'][]>([]);
   const [error, setError] = useState<string>('');
   const [join, setJoin] = useState<boolean>(false);
 
@@ -52,7 +22,7 @@ const MatchesPage = (): React.ReactElement => {
         (match: { matchId: number }) => match.matchId,
       );
       const filteredMatches = response.data.data.filter(
-        (math: Match) => !playerMatches.includes(math.id),
+        (math: MatchCardProps['match']) => !playerMatches.includes(math.id),
       );
       setMatches(filteredMatches);
     } catch (err) {
