@@ -64,7 +64,7 @@ const signupService = async (
       ' إذا كانت لديك أي أسئلة أو تحتاج إلى مساعدة، فلا تتردد في التواصل معنا. نحن هنا للمساعدة!',
   });
 
-  await sendEmail({
+  sendEmail({
     to: email,
     subject: '!تم تفعيل الحساب بنجاح',
     text: emailText,

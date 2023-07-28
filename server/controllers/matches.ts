@@ -1,13 +1,13 @@
-import { Response, RequestHandler } from 'express';
-import { CustomRequest, IServiceResponse } from '../interfaces';
+import { Response, Request, RequestHandler } from 'express';
 import {
-  JoinToMatchService,
   createMatchService,
   getAllMatches,
+  JoinToMatchService,
 } from '../services';
+import { IServiceResponse } from '../interfaces';
 
 export const createMatch: RequestHandler = async (
-  req: CustomRequest,
+  req: Request,
   res: Response,
 ): Promise<void> => {
   const data = (await createMatchService(req)) as IServiceResponse;
@@ -15,7 +15,7 @@ export const createMatch: RequestHandler = async (
 };
 
 export const getMatches: RequestHandler = async (
-  req: CustomRequest,
+  req: Request,
   res: Response,
 ): Promise<void> => {
   const data = await getAllMatches(req);
@@ -23,7 +23,7 @@ export const getMatches: RequestHandler = async (
 };
 
 export const JoinToMatch: RequestHandler = async (
-  req: CustomRequest,
+  req: Request,
   res: Response,
 ): Promise<void> => {
   const data = await JoinToMatchService(req);

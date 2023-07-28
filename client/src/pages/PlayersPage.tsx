@@ -72,16 +72,18 @@ const PlayersPage = (): ReactElement => {
     <Box>
       <TypeSearch searchValue={searchValue} setSearchValue={setSearchValue} />
       <CardsWrapper>
-        {playerData.length > 0 ? (
-          playerData.map(player => <Card key={player.id} playerData={player} />)
-        ) : (
-          <Alert
-            sx={{ marginTop: '30px', backgroundColor: '#2CB674' }}
-            severity="info"
-          >
-            ! لا يوجد لاعبين بهذا الاسم
-          </Alert>
-        )}
+        {playerData.length > 0
+          ? playerData.map(player => (
+              <Card key={player.id} playerData={player} />
+            ))
+          : !first && (
+              <Alert
+                sx={{ marginTop: '30px', backgroundColor: '#2CB674' }}
+                severity="info"
+              >
+                ! لا يوجد لاعبين بهذا الاسم
+              </Alert>
+            )}
       </CardsWrapper>
       {first && <SkeletonLoader />}
       {isLoading && (

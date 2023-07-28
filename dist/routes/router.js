@@ -1,0 +1,23 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.router = void 0;
+const express_1 = require("express");
+const auth_1 = require("./auth");
+const player_1 = require("./player");
+const staduimRouter_1 = require("./staduimRouter");
+const matches_1 = __importDefault(require("./matches"));
+const matchChat_1 = __importDefault(require("./matchChat"));
+const reviewRouter_1 = __importDefault(require("./reviewRouter"));
+const middleware_1 = require("../middleware");
+const utils_1 = require("../utils");
+const router = (0, express_1.Router)();
+exports.router = router;
+router.use('/matches', (0, utils_1.errorWrapper)(middleware_1.checkAuth), matches_1.default);
+router.use('/user', auth_1.authRouter);
+router.use('/stadiums', staduimRouter_1.stadiumRouter);
+router.use('/players', (0, utils_1.errorWrapper)(middleware_1.checkAuth), player_1.playerRouter);
+router.use('/message', (0, utils_1.errorWrapper)(middleware_1.checkAuth), matchChat_1.default);
+router.use('/review', (0, utils_1.errorWrapper)(middleware_1.checkAuth), reviewRouter_1.default);

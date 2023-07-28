@@ -154,7 +154,7 @@ const BioSection = ({
             width: '100%',
           }}
         >
-          <Typography variant="h5" sx={{ ml: '5px' }}>
+          <Typography variant="h5" sx={{ ml: '5px', mt: '-150px' }}>
             {username}
           </Typography>
         </FlexBox>

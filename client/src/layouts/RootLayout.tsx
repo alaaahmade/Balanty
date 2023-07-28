@@ -9,7 +9,7 @@ import CreateMatch from '../pages/CreateMatch';
 
 import { open } from '../context';
 import ProtectedProvider from '../context/ProtectedContext';
-import { customPalette } from '../interfaces';
+import { OpenContextValue, customPalette } from '../interfaces';
 
 const RootLayout: React.FC = (): ReactElement => {
   const [Profile, setProfile] = useState(false);
@@ -19,7 +19,7 @@ const RootLayout: React.FC = (): ReactElement => {
   if (!contextValue) {
     return <div>Loading...</div>;
   }
-  const { openPage, updateOpen } = contextValue;
+  const { openPage, updateOpen } = contextValue as OpenContextValue;
   useEffect(() => {
     if (pathname.startsWith('/profile')) {
       setProfile(true);

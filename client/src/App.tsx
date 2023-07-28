@@ -10,7 +10,6 @@ import MatchesPage from './pages/Match';
 import NotFoundPage from './pages/NotFound';
 import InternalServerErrorPage from './pages/ServerError';
 import PlayersPage from './pages/PlayersPage';
-import { ThemeProviderWrapper } from './context/ThemeContext';
 import RootLayout from './layouts/RootLayout';
 import { LandingPage } from './pages';
 import MatchRoomPage from './pages/MatchRoomPage';
@@ -23,9 +22,12 @@ import {
   UpdateGalleryContextProvider,
   StatsContextProvider,
 } from './context';
+import { ThemeProviderWrapper } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
 
-const socket = io.connect('http://localhost:8080');
+const { VITE_BASE_URL } = import.meta.env;
+
+const socket = io.connect(VITE_BASE_URL);
 
 const router = createBrowserRouter([
   {

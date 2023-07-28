@@ -11,6 +11,7 @@
     "lint-fix": "eslint server --fix --ext .ts",
     "dev": "cross-env NODE_ENV=development npx nodemon ./server/index.ts",
     "test": "cross-env NODE_ENV=test jest --runInBand ",
+    "production-build": "tsc && npm run buildDB-production && cd ./client && npm run build",
     "build": "tsc",
     "start": "cross-env NODE_ENV=production node ./dist",
     "prepare": "husky install",

@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.playerRouter = void 0;
+const express_1 = require("express");
+const controllers_1 = require("../controllers");
+const utils_1 = require("../utils");
+exports.playerRouter = (0, express_1.Router)();
+exports.playerRouter.get('/search/:page', (0, utils_1.errorWrapper)(controllers_1.getPlayers));
+exports.playerRouter.get('/profile/:id', (0, utils_1.errorWrapper)(controllers_1.getPlayer));
+exports.playerRouter.get('/profile/:id/matches', (0, utils_1.errorWrapper)(controllers_1.playerMatches));
+exports.playerRouter.get('/avatar/:id', (0, utils_1.errorWrapper)(controllers_1.playerAvatar));
+exports.playerRouter.patch('/profile/edit', (0, utils_1.errorWrapper)(controllers_1.updatePlayer));
+exports.playerRouter.patch('/cover/:playerId', (0, utils_1.errorWrapper)(controllers_1.updateCover));
+exports.playerRouter.patch('/avatar/:playerId', (0, utils_1.errorWrapper)(controllers_1.updateAvatar));
