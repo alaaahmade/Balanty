@@ -31,11 +31,14 @@ export const AuthContext = createContext<AuthContextData>({
     return undefined;
   },
   errorMessage: '',
+  isLoading: false,
 });
 
 export const AuthProvider: FC<ChildrenProps> = ({ children }) => {
   const token = String(document.cookie.slice(6)) || null;
   const decodedToken = token && jwt_decode(token);
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [user, setUser] = useState<User | null>(decodedToken as User);
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -46,13 +49,16 @@ export const AuthProvider: FC<ChildrenProps> = ({ children }) => {
 
   const login = useCallback(async (username: string, password: string) => {
     try {
+      setIsLoading(true);
       const response = await axios.post(`/api/v1/user/login`, {
         username,
         password,
       });
+      setIsLoading(false);
       setUser(response.data.data.user);
       localStorage.setItem('user', JSON.stringify(response.data.data.user));
     } catch (error) {
+      setIsLoading(false);
       if (isAxiosError(error)) {
         const axiosError = error as AxiosError<CustomErrorResponse>;
         if (axiosError.response) {
@@ -68,6 +74,8 @@ export const AuthProvider: FC<ChildrenProps> = ({ children }) => {
   const signup = useCallback(
     async (userData: signupProps, isplayer: string) => {
       try {
+        setIsLoading(true);
+
         const response = await axios.post(`/api/v1/user/signup`, {
           username: userData.username,
           email: userData.email,
@@ -76,9 +84,13 @@ export const AuthProvider: FC<ChildrenProps> = ({ children }) => {
           confirmPassword: userData.confirmPassword,
           role: isplayer === 'true' ? 'player' : 'stadium',
         });
+        setIsLoading(false);
+
         setUser(response.data.user);
         localStorage.setItem('user', JSON.stringify(response.data.user));
       } catch (error) {
+        setIsLoading(false);
+
         if (isAxiosError(error)) {
           const axiosError = error as AxiosError<CustomErrorResponse>;
           if (axiosError.response) {
@@ -112,8 +124,8 @@ export const AuthProvider: FC<ChildrenProps> = ({ children }) => {
   }, []);
 
   const authContextValue = useMemo(
-    () => ({ user, login, signup, logout, errorMessage }),
-    [user, login, signup, logout, errorMessage],
+    () => ({ user, login, signup, logout, errorMessage, isLoading }),
+    [user, login, signup, logout, errorMessage, isLoading],
   );
 
   return (
