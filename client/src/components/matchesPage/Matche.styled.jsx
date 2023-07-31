@@ -9,7 +9,8 @@ export const CenteredCard = styled(Card)({
   width: 'calc(100% - 560px)',
   height: '300px',
   padding: '10px',
-  border: '1px solid ',
+  borderWidth: '1px',
+  borderStyle: 'solid',
 });
 
 export const MatchCardContainer = styled(Box)({

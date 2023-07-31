@@ -9,7 +9,7 @@ import {
 } from '../components/playerProfile';
 import { FollowsInfoWrapper } from '../components/playerProfile/Player.Styled';
 import { error } from '../interfaces/PLayerProfile';
-import { UpdateGalleryContext } from '../context';
+import { AuthContext, UpdateGalleryContext } from '../context';
 
 const PlayerProfile = () => {
   const [editMode, setEditMode] = useState(false);
@@ -22,9 +22,14 @@ const PlayerProfile = () => {
   const [phone, setPhone] = useState<number>(0);
   const [playerId, setPlayerId] = useState<number>(0);
 
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const { id } = useParams();
   const { Agree } = useContext(UpdateGalleryContext);
+
+  const [EditAble, setEditAble] = useState(
+    user ? ((+user.id === +(id as string)) as boolean) : false,
+  );
 
   const fetchData = async (Id: string) => {
     try {
@@ -50,6 +55,10 @@ const PlayerProfile = () => {
     fetchData(id as string);
   }, [id, Agree]);
 
+  useEffect(() => {
+    setEditAble(user ? ((+user.id === +(id as string)) as boolean) : false);
+  }, [id]);
+
   return (
     <>
       <PlayerBackground
@@ -71,6 +80,8 @@ const PlayerProfile = () => {
           age={age}
           position={position}
           bio={bio}
+          EditAble={EditAble}
+          fetchData={fetchData}
         />
         <PlayerStats />
       </FollowsInfoWrapper>

@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { Edit } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FlexBox } from '../stadiumProfile/StadiumProfile.styled';
 import { BioBox } from './Player.Styled';
 import EditInput from '../stadiumProfile/EditInput';
@@ -23,9 +23,14 @@ const PlayerInformation = ({
   phone,
   editMode,
   setEditMode,
+  EditAble,
+  fetchData,
 }: profileInfoProps): ReactElement => {
   const [validation, setValidation] = useState<updatedValue>({});
   const [newData, setNewData] = useState<updatedValue>({});
+  const [hov, setHove] = useState<boolean>(false);
+
+  const { id } = useParams();
 
   const navigate = useNavigate();
 
@@ -42,7 +47,7 @@ const PlayerInformation = ({
       );
 
       if (response.status === 200) {
-        window.location.reload();
+        fetchData(id as string);
       }
       setEditMode(false);
       setValidation({});
@@ -63,6 +68,7 @@ const PlayerInformation = ({
 
   const handleCancel = async () => {
     setValidation({});
+    setEditMode(false);
   };
 
   return (
@@ -74,6 +80,8 @@ const PlayerInformation = ({
           alignItems: 'flex-end',
           backgroundColor: theme => theme.palette.primary.grayColor,
         }}
+        onMouseEnter={() => setHove(true)}
+        onMouseLeave={() => setHove(false)}
       >
         <FlexBox sx={{ justifyContent: 'space-between' }}>
           <InputAdornment
@@ -82,9 +90,15 @@ const PlayerInformation = ({
             }}
             position="end"
           >
-            <IconButton onClick={handleClick}>
-              <Edit />
-            </IconButton>
+            {hov && !editMode && EditAble && (
+              <IconButton onClick={handleClick}>
+                <Edit
+                  sx={{
+                    color: theme => theme.palette.primary.main,
+                  }}
+                />
+              </IconButton>
+            )}
           </InputAdornment>
 
           <Typography

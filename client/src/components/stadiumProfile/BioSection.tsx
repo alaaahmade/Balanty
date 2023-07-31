@@ -143,7 +143,11 @@ const BioSection = ({
             <InputAdornment position="end">
               {EditAble && (
                 <NewIconButton onClick={handleClick}>
-                  <Edit />
+                  <Edit
+                    sx={{
+                      color: theme => theme.palette.primary.main,
+                    }}
+                  />
                 </NewIconButton>
               )}
             </InputAdornment>
@@ -152,9 +156,16 @@ const BioSection = ({
         <FlexBox
           sx={{
             width: '100%',
+            position: 'relative',
           }}
         >
-          <Typography variant="h5" sx={{ ml: '5px', mt: '-150px' }}>
+          <Typography
+            variant="h5"
+            sx={{
+              position: 'absolute',
+              top: '-50px',
+            }}
+          >
             {username}
           </Typography>
         </FlexBox>
@@ -226,7 +237,7 @@ const BioSection = ({
               textAlign: 'right',
             }}
           >
-            : السعر الساعة
+            : سعر الساعة
           </Typography>
         </FlexBox>
 
