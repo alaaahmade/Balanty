@@ -42,6 +42,8 @@ export interface AuthContextData {
 }
 
 export interface CustomErrorResponse {
+  status: number;
+  message: string;
   data: {
     message: string;
     status: number;

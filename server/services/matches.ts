@@ -66,6 +66,7 @@ export const createMatchService = async (
     data: '! هذا الوقت محجوز',
   };
 };
+
 export const getAllMatches = async (
   req: Request,
 ): Promise<matchesInterface> => {
@@ -103,6 +104,40 @@ export const getAllMatches = async (
       status: 200,
       data: matches,
       playerMatches,
+    };
+  } else {
+    return {
+      status: 404,
+      data: 'لا يوجد مباريات',
+    };
+  }
+};
+
+export const getMyMatchesService = async (
+  req: Request,
+): Promise<matchesInterface> => {
+  const userId = req.user?.id;
+
+  const matchesIds = await MatchPlayer.findAll({
+    where: {
+      userId,
+    },
+    attributes: ['matchId'],
+  });
+  const PlayerMatchesId = matchesIds.map(matchPlayer => matchPlayer.matchId);
+
+  const matches = await Match.findAll({
+    where: {
+      id: {
+        [Op.in]: PlayerMatchesId,
+      },
+    },
+  });
+
+  if (matches.length > 0) {
+    return {
+      status: 200,
+      data: matches,
     };
   } else {
     return {

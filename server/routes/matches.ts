@@ -3,6 +3,7 @@ import {
   JoinToMatch,
   createMatch,
   getMatches,
+  getMyMatches,
   getStadiumMatches,
 } from '../controllers';
 import { errorWrapper } from '../utils';
@@ -10,6 +11,7 @@ import { errorWrapper } from '../utils';
 const matchRouter: Router = Router();
 
 matchRouter.get('/', errorWrapper(getMatches));
+matchRouter.get('/my-matches', errorWrapper(getMyMatches));
 matchRouter.post('/', errorWrapper(createMatch));
 matchRouter.get('/stadium/:stadiumId', errorWrapper(getStadiumMatches));
 matchRouter.get('/join/:matchId', errorWrapper(JoinToMatch));

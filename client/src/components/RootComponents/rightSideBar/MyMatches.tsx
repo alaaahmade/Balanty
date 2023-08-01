@@ -6,7 +6,7 @@ import { StyledButton, StyledMyMatches } from '../../index';
 
 import { MyMatchesProps } from '../../../interfaces';
 
-const MyMatches = ({ stadium }: MyMatchesProps): ReactElement => {
+const MyMatches = ({ id, title }: MyMatchesProps): ReactElement => {
   return (
     <StyledMyMatches
       sx={{
@@ -14,20 +14,13 @@ const MyMatches = ({ stadium }: MyMatchesProps): ReactElement => {
         backgroundColor: theme => theme.palette.customColors.backGroundColor,
       }}
     >
-      <StyledButton
-        sx={{
-          width: '65px',
-          height: '30px',
-        }}
-      >
-        المزيد
-      </StyledButton>
+      <StyledButton to={`/home/match/${id}`}>المزيد</StyledButton>
       <Typography
         sx={{
           fontWeight: 'bold',
         }}
       >
-        {stadium}
+        {title}
       </Typography>
     </StyledMyMatches>
   );

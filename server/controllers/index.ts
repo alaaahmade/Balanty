@@ -5,7 +5,7 @@ export {
   deleteMessage,
   editMessage,
 } from './matchChat';
-export { getMatches, createMatch, JoinToMatch } from './matches';
+export { getMatches, getMyMatches, createMatch, JoinToMatch } from './matches';
 
 export {
   getAllStadiums,

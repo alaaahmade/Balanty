@@ -23,6 +23,7 @@ export interface IResponseProps {
     match?: object;
   };
 }
+
 export interface matchesInterface {
   status: number;
   data: (Match & { Stadium?: Stadium })[] | string;
