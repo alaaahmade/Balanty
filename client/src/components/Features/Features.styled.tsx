@@ -25,10 +25,7 @@ export const StyledTitleF = styled(Typography)({
   fontWeight: 700,
   fontSize: '48px',
   marginBottom: '30px',
-  paddingTop: '60px',
   width: '100%',
-  display: 'flex',
-  alignItems: 'center',
-  padding: '20px 260px',
-  justifyContent: 'space-between',
+  padding: '20px',
+  textAlign: 'center',
 });
