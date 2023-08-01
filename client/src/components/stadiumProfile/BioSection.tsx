@@ -1,5 +1,5 @@
 import { ReactElement, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Typography, Box, InputAdornment, Button, Rating } from '@mui/material';
 
@@ -39,10 +39,11 @@ const BioSection = ({
   const [newRating, setNewRating] = useState<number>(0);
   const [playerRating, setPlayerRating] = useState<number>(0);
 
-  const { description, price, ground, address, id } = userData.Stadium;
+  const { description, price, ground, address } = userData.Stadium;
   const { username, phone } = userData;
 
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const handleClick = () => {
     setEditMode(true);
