@@ -43,6 +43,8 @@ export interface profileInfoProps {
   phone: number;
   setEditMode: Dispatch<SetStateAction<boolean>>;
   editMode: boolean;
+  EditAble: boolean;
+  fetchData: (Id: string) => Promise<void>;
 }
 
 export interface playerActionsProps {
