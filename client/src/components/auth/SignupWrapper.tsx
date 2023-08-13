@@ -1,3 +1,4 @@
+import { ThreeDots } from 'react-loader-spinner';
 import React, { FC, ReactElement, useContext } from 'react';
 
 import { Box } from '@mui/material';
@@ -38,7 +39,7 @@ const SignupWrapper: FC = (): ReactElement => {
     },
   });
   const navigate = useNavigate();
-  const { signup, errorMessage } = useContext(AuthContext);
+  const { signup, errorMessage, isLoading } = useContext(AuthContext);
 
   const { pathname } = useLocation();
   let isplayer = 'true';
@@ -114,11 +115,31 @@ const SignupWrapper: FC = (): ReactElement => {
             onClick={handleSubmit(onSubmit)}
             variant="contained"
             disableElevation
+            disabled={isLoading}
             sx={{
               color: 'white',
+              maxHeight: '44px',
+              minHeight: '44px',
+              position: 'relative',
             }}
           >
-            تسجيل دخول
+            {(isLoading && (
+              <ThreeDots
+                height="60"
+                width="60"
+                radius="9"
+                color="#2CB674"
+                ariaLabel="three-dots-loading"
+                visible
+                wrapperStyle={{
+                  position: 'absolute',
+                  top: '-7px',
+                  left: '50%',
+                  transform: 'translate(-50%)',
+                }}
+              />
+            )) ||
+              'تسجيل دخول'}
           </SignButton>
           <SignButton
             sx={{ background: '#E6E6E6 !important', color: '#868686' }}
