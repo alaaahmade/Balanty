@@ -9,6 +9,7 @@ import cors from 'cors';
 import { router } from './routes/router';
 import serverError from './middleware/errorMiddleware';
 import { errorWrapper } from './utils';
+import { apiLimiter } from './middleware/apiLimiter';
 
 const app: Express = express();
 
@@ -21,6 +22,7 @@ app.use([
 ]);
 
 app.use('/api/v1', router);
+app.use('/api/v1', apiLimiter);
 
 if (nodeEnv === 'production') {
   app.use(express.static(join(__dirname, '..', 'client', 'dist')));
