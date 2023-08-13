@@ -26,6 +26,6 @@ export interface IResponseProps {
 
 export interface matchesInterface {
   status: number;
-  data: (Match & { Stadium?: Stadium })[] | string;
+  data: (Match & { Stadium?: Stadium })[] | string | Match;
   playerMatches?: MatchPlayer[];
 }

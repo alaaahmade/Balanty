@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box } from '@mui/system';
+import { Box, useTheme } from '@mui/system';
 import { Avatar } from '@mui/material';
 import MessageOptions from './MessageOptions';
 import { CustomizeLink, MessageBox } from './MatchChat.styled';
-import { IMessageProps } from '../../interfaces';
+import { IMessageProps, customPalette } from '../../interfaces';
 
 const Message = ({
   socket,
@@ -17,10 +17,16 @@ const Message = ({
   matchMessages,
   setMatchMessages,
 }: IMessageProps) => {
+  const currentTheme = useTheme();
   return (
     <Box sx={{ mt: senderAvatar && '10px' }}>
       {senderAvatar && (
-        <CustomizeLink to={`/profile/${role}/${senderId}`}>
+        <CustomizeLink
+          to={`/profile/${role}/${senderId}`}
+          style={{
+            color: (currentTheme.palette as customPalette).primary.contrastText,
+          }}
+        >
           {senderName}
         </CustomizeLink>
       )}
