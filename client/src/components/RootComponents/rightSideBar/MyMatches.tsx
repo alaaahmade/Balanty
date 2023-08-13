@@ -2,11 +2,13 @@ import { ReactElement } from 'react';
 
 import { Typography } from '@mui/material';
 
+import { useNavigate } from 'react-router-dom';
 import { StyledButton, StyledMyMatches } from '../../index';
 
 import { MyMatchesProps } from '../../../interfaces';
 
-const MyMatches = ({ stadium }: MyMatchesProps): ReactElement => {
+const MyMatches = ({ id, title }: MyMatchesProps): ReactElement => {
+  const navigate = useNavigate();
   return (
     <StyledMyMatches
       sx={{
@@ -14,12 +16,7 @@ const MyMatches = ({ stadium }: MyMatchesProps): ReactElement => {
         backgroundColor: theme => theme.palette.customColors.backGroundColor,
       }}
     >
-      <StyledButton
-        sx={{
-          width: '65px',
-          height: '30px',
-        }}
-      >
+      <StyledButton onClick={() => navigate(`/home/match/${id}`)}>
         المزيد
       </StyledButton>
       <Typography
@@ -27,7 +24,7 @@ const MyMatches = ({ stadium }: MyMatchesProps): ReactElement => {
           fontWeight: 'bold',
         }}
       >
-        {stadium}
+        {title}
       </Typography>
     </StyledMyMatches>
   );

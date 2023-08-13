@@ -38,9 +38,9 @@ const getAllMatchMessages: RequestHandler = async (
   res: Response,
 ): Promise<void> => {
   const { id } = req.params;
-  const data = await getAllMessagesService(+id);
+  const data = await getAllMessagesService(+id, req);
 
-  res.json(data);
+  res.status(data.status).json(data);
 };
 
 const deleteMessage: RequestHandler<{ id: string }> = async (

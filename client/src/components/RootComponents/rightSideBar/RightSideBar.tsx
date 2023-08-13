@@ -1,25 +1,26 @@
-import { ReactElement } from 'react';
+import { ReactElement, useContext, useEffect, useState } from 'react';
+import { Divider, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import MyMatches from './MyMatches';
 import RightSideBarTitle from './RightSideBarTitle';
 import WorldMatch from './WorldMatch';
 import { BorderBox, SideBox } from '../../index';
-
-const matches = [
-  {
-    id: 1,
-    title: 'الساحة',
-  },
-  {
-    id: 2,
-    title: '2الساحة',
-  },
-  {
-    id: 3,
-    title: 'الساحة',
-  },
-];
+import { ThemeContext } from '../../../context/ThemeContext';
+import { MatchesContext } from '../../../context/MyMatchesContext';
 
 const RightSideBar = (): ReactElement => {
+  const { isDarkMode } = useContext(ThemeContext);
+  const { getMyMatches, myMatches } = useContext(MatchesContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    try {
+      getMyMatches();
+    } catch (error) {
+      navigate('/home');
+    }
+  }, []);
+
   return (
     <SideBox
       sx={{
@@ -39,10 +40,23 @@ const RightSideBar = (): ReactElement => {
         <RightSideBarTitle title="مبارياتي" />
       </BorderBox>
 
-      {matches.length &&
-        matches.map(match => (
-          <MyMatches key={match.id} stadium={match.title} />
-        ))}
+      {myMatches?.length ? (
+        myMatches.map(match => (
+          <MyMatches key={match.id} id={match.id} title={match.title} />
+        ))
+      ) : (
+        <>
+          <Typography
+            sx={{
+              padding: '1rem 0 0.7rem 0',
+              color: isDarkMode ? '#fff' : '#000',
+            }}
+          >
+            لا يوجد مباريات مشارك فيها حالياً
+          </Typography>
+          <Divider sx={{ height: '1px', width: '100%', background: 'white' }} />
+        </>
+      )}
 
       <BorderBox
         sx={{

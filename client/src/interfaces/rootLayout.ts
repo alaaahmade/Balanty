@@ -10,7 +10,8 @@ export interface SideBarLinkProps {
 }
 
 export interface MyMatchesProps {
-  stadium: string;
+  id: number;
+  title: string;
 }
 
 export interface RightSideBarTitleProps {

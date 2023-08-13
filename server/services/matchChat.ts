@@ -1,5 +1,7 @@
+import { Request } from 'express';
 import { IMatchMessage, IResponseProps } from '../interfaces';
 import { Match, Message, Player, Stadium, User } from '../models';
+import MatchPlayer from '../models/MatchPlayer';
 
 const addMessageService = async ({
   message,
@@ -78,53 +80,73 @@ const getMessageByIdService = async (
 
 const getAllMessagesService = async (
   matchId: number,
+  req: Request,
 ): Promise<IResponseProps> => {
-  const match = await Match.findOne({
-    where: { id: matchId },
-    include: [
-      {
-        model: Message,
-        as: 'MatchMessages',
-        include: [
-          {
-            model: User,
-            attributes: [
-              'createdAt',
-              'email',
-              'id',
-              'phone',
-              'role',
-              'updatedAt',
-              'username',
-            ],
-            include: [
-              {
-                model: Player,
-              },
-              {
-                model: Stadium,
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  });
+  const userId = req.user?.id;
 
-  if (match) {
+  const matchesIds = await MatchPlayer.findAll({
+    where: {
+      userId,
+    },
+    attributes: ['matchId'],
+  });
+  const PlayerMatchesId = matchesIds.map(matchPlayer => matchPlayer.matchId);
+
+  if (!PlayerMatchesId.includes(matchId)) {
     return {
-      status: 200,
+      status: 401,
       data: {
-        match,
+        message: 'Unauthorized',
+      },
+    };
+  } else {
+    const match = await Match.findOne({
+      where: { id: matchId },
+      include: [
+        {
+          model: Message,
+          as: 'MatchMessages',
+          include: [
+            {
+              model: User,
+              attributes: [
+                'createdAt',
+                'email',
+                'id',
+                'phone',
+                'role',
+                'updatedAt',
+                'username',
+              ],
+              include: [
+                {
+                  model: Player,
+                },
+                {
+                  model: Stadium,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+
+    if (match) {
+      return {
+        status: 200,
+        data: {
+          match,
+        },
+      };
+    }
+    return {
+      status: 404,
+      data: {
+        message: 'Match not found',
       },
     };
   }
-  return {
-    status: 404,
-    data: {
-      message: 'Match not found',
-    },
-  };
 };
 
 const deleteMessageService: (

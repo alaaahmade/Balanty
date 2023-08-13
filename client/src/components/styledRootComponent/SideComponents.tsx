@@ -1,5 +1,6 @@
 import { Button, Typography } from '@mui/material';
 import { Box, styled } from '@mui/system';
+import { Link } from 'react-router-dom';
 
 export const SideBox = styled(Box)({
   position: 'fixed',
@@ -14,16 +15,21 @@ export const SideBox = styled(Box)({
 });
 
 export const StyledButton = styled(Button)({
-  width: '135px',
-  height: '35px',
+  width: 'fit-content',
+  height: '30px',
   background: '#2CB674',
   borderRadius: '5px',
-  gap: '10px',
   color: '#fff',
+  textDecoration: 'none',
+  textAlign: 'center',
+  lineHeight: '28px',
+  padding: '0 0.5rem',
+
   '&:hover': {
     backgroundColor: 'transparent',
     color: '#2CB674',
     border: '1px solid #2CB674',
+    fontWeight: 'bold',
   },
 });
 

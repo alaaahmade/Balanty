@@ -21,6 +21,7 @@ export {
 export {
   createMatchService,
   getAllMatches,
+  getMyMatchesService,
   JoinToMatchService,
 } from './matches';
 

@@ -4,6 +4,7 @@ import { Typography, Box, InputLabel } from '@mui/material';
 
 import axios from 'axios';
 
+import { useContext } from 'react';
 import { StyledButton } from '../styledRootComponent/SideComponents';
 import { customPalette } from '../../interfaces';
 import { MatchCardProps } from '../../interfaces/matches';
@@ -12,6 +13,7 @@ import {
   MatchCardContainer,
   MatchCardContent,
 } from './Matche.styled';
+import { MatchesContext } from '../../context/MyMatchesContext';
 
 const MatchCard: React.FC<MatchCardProps> = ({
   match,
@@ -20,11 +22,13 @@ const MatchCard: React.FC<MatchCardProps> = ({
 }: MatchCardProps) => {
   const seatsNum = match.seats - match.Players.length;
   const navigate = useNavigate();
+  const { getMyMatches } = useContext(MatchesContext);
 
   const handleJoin = async () => {
     try {
       await axios.get(`/api/v1/matches/join/${match.id}`);
       setJoin(!join);
+      getMyMatches();
     } catch (error) {
       navigate('/serverError');
     }
@@ -152,10 +156,6 @@ const MatchCard: React.FC<MatchCardProps> = ({
               >
                 <StyledButton
                   sx={{
-                    width: '65px',
-                    height: '30px',
-                    borderRadius: '5px',
-                    gap: '10px',
                     borderColor: '#2CB674',
                   }}
                   onClick={handleJoin}
@@ -163,11 +163,7 @@ const MatchCard: React.FC<MatchCardProps> = ({
                   انضم
                 </StyledButton>
                 <StyledButton
-                  sx={{
-                    width: '80px',
-                    height: '30px',
-                    marginBottom: '10px',
-                  }}
+                  type="submit"
                   onClick={() => {
                     navigate(`/profile/stadium/${match.stadiumId}`);
                   }}
