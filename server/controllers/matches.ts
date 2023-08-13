@@ -38,3 +38,11 @@ export const JoinToMatch: RequestHandler = async (
   const data = await JoinToMatchService(req);
   res.status(data.status).json(data);
 };
+
+export const searchMatches: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const response = await getAllMatches(req);
+  res.status(response.status).json(response);
+};

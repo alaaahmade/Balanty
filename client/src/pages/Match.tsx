@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
@@ -16,9 +16,7 @@ const MatchesPage = (): React.ReactElement => {
   const [matches, setMatches] = useState<Match[]>([]);
   const [error, setError] = useState<string>('');
   const [join, setJoin] = useState<boolean>(false);
-
-  const { openPage } = useContext(open);
-
+  const [value, setValue] = useState<string>('');
   const navigate = useNavigate();
 
   const getMatches = async () => {
@@ -36,6 +34,31 @@ const MatchesPage = (): React.ReactElement => {
       navigate('/serverError');
     }
   };
+  const handleChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+    if (event.target.value.trim()) {
+      try {
+        const response = await axios.get(
+          `/api/v1/matches/search?search=${event.target.value.trim()}`,
+        );
+        const playerMatches = response.data.playerMatches.map(
+          (match: { matchId: number }) => match.matchId,
+        );
+        const filteredMatches = response.data.data.filter(
+          (math: Match) => !playerMatches.includes(math.id),
+        );
+        setMatches(filteredMatches);
+      } catch (err) {
+        setError('Error fetching match data');
+        navigate('/serverError');
+      }
+    } else {
+      getMatches();
+    }
+  };
+
+  const { openPage } = useContext(open);
+
   useEffect(() => {
     getMatches();
   }, [openPage, join]);
@@ -48,9 +71,9 @@ const MatchesPage = (): React.ReactElement => {
       <TextField
         size="small"
         variant="outlined"
-        // value={value}
+        value={value}
         placeholder="بحث"
-        // onChange={handleChange}
+        onChange={handleChange}
         sx={{
           width: 'calc(100% - 560px)',
           border: '1px solid ',

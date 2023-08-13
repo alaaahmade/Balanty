@@ -39,6 +39,7 @@ export interface AuthContextData {
   signup: (userData: signupProps, isplayer: string) => Promise<void>;
   logout: () => Promise<void>;
   errorMessage: string;
+  isLoading: boolean;
 }
 
 export interface CustomErrorResponse {

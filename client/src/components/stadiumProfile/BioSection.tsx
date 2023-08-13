@@ -1,5 +1,5 @@
 import { ReactElement, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Typography, Box, InputAdornment, Button, Rating } from '@mui/material';
 
@@ -39,10 +39,11 @@ const BioSection = ({
   const [newRating, setNewRating] = useState<number>(0);
   const [playerRating, setPlayerRating] = useState<number>(0);
 
-  const { description, price, ground, address, id } = userData.Stadium;
+  const { description, price, ground, address } = userData.Stadium;
   const { username, phone } = userData;
 
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const handleClick = () => {
     setEditMode(true);
@@ -143,7 +144,11 @@ const BioSection = ({
             <InputAdornment position="end">
               {EditAble && (
                 <NewIconButton onClick={handleClick}>
-                  <Edit />
+                  <Edit
+                    sx={{
+                      color: theme => theme.palette.primary.main,
+                    }}
+                  />
                 </NewIconButton>
               )}
             </InputAdornment>
@@ -152,9 +157,16 @@ const BioSection = ({
         <FlexBox
           sx={{
             width: '100%',
+            position: 'relative',
           }}
         >
-          <Typography variant="h5" sx={{ ml: '5px', mt: '-150px' }}>
+          <Typography
+            variant="h5"
+            sx={{
+              position: 'absolute',
+              top: '-50px',
+            }}
+          >
             {username}
           </Typography>
         </FlexBox>
@@ -226,7 +238,7 @@ const BioSection = ({
               textAlign: 'right',
             }}
           >
-            : السعر الساعة
+            : سعر الساعة
           </Typography>
         </FlexBox>
 

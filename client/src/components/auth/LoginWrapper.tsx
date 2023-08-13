@@ -1,4 +1,6 @@
 import React, { FC, ReactElement, useContext } from 'react';
+import { ThreeDots } from 'react-loader-spinner';
+
 import { Box } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Control, SubmitHandler, useForm } from 'react-hook-form';
@@ -37,7 +39,7 @@ const LoginWrapper: FC = (): ReactElement => {
   const navigate = useNavigate();
 
   const authContext = useContext(AuthContext);
-  const { login, errorMessage } = authContext as AuthContextData;
+  const { login, errorMessage, isLoading } = authContext as AuthContextData;
 
   const { pathname } = useLocation();
   let isplayer = 'true';
@@ -89,12 +91,32 @@ const LoginWrapper: FC = (): ReactElement => {
           <SignButton
             sx={{
               color: 'white',
+              maxHeight: '44px',
+              minHeight: '44px',
+              position: 'relative',
             }}
             onClick={handleSubmit(onSubmit)}
             variant="contained"
             disableElevation
+            disabled={isLoading}
           >
-            تسجيل دخول
+            {(isLoading && (
+              <ThreeDots
+                height="60"
+                width="60"
+                radius="9"
+                color="#2CB674"
+                ariaLabel="three-dots-loading"
+                visible
+                wrapperStyle={{
+                  position: 'absolute',
+                  top: '-7px',
+                  left: '50%',
+                  transform: 'translate(-50%)',
+                }}
+              />
+            )) ||
+              'تسجيل دخول'}
           </SignButton>
           <SignButton
             sx={{ background: '#E6E6E6 !important', color: '#868686' }}
