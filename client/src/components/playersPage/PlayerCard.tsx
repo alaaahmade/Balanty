@@ -1,5 +1,6 @@
 import React from 'react';
 import { Avatar, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { FollowButton, PlayerCard } from './PlayerPage.styled';
 import { customPalette } from '../../interfaces';
 
@@ -14,6 +15,11 @@ interface PlayerDataProps {
 }
 
 const Card: React.FC<{ playerData: PlayerDataProps }> = ({ playerData }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/profile/player/${playerData.id}`);
+  };
   return (
     <PlayerCard
       sx={{
@@ -22,7 +28,7 @@ const Card: React.FC<{ playerData: PlayerDataProps }> = ({ playerData }) => {
         color: theme => theme.palette.primary.contrastText,
       }}
     >
-      <FollowButton>متابعة</FollowButton>
+      <FollowButton onClick={handleClick}>المزيد</FollowButton>
       <Typography
         sx={{ flexGrow: '2', direction: 'rtl', mr: '20px' }}
         gutterBottom
