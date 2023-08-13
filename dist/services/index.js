@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateAvatarService = exports.updateCoverService = exports.getPlayersService = exports.playerAvatarService = exports.playerMatchesService = exports.updatePlayerService = exports.getPlayerService = exports.getPlayerReviewService = exports.addReviewService = exports.getReviewService = exports.JoinToMatchService = exports.getAllMatches = exports.createMatchService = exports.getBestStadiumsService = exports.UpdateStadiumDataService = exports.getStadiumsService = exports.getStadiumMatchesService = exports.getStadiumProfileService = exports.getStadiumDetailsService = exports.getAllStadiumsService = exports.editMessageService = exports.deleteMessageService = exports.getAllMessagesService = exports.getMessageByIdService = exports.addMessageService = exports.loginService = exports.signupService = void 0;
+exports.updateAvatarService = exports.updateCoverService = exports.getPlayersService = exports.playerAvatarService = exports.playerMatchesService = exports.updatePlayerService = exports.getPlayerService = exports.getPlayerReviewService = exports.addReviewService = exports.getReviewService = exports.JoinToMatchService = exports.getMyMatchesService = exports.getAllMatches = exports.createMatchService = exports.getBestStadiumsService = exports.UpdateStadiumDataService = exports.getStadiumsService = exports.getStadiumMatchesService = exports.getStadiumProfileService = exports.getStadiumDetailsService = exports.getAllStadiumsService = exports.editMessageService = exports.deleteMessageService = exports.getAllMessagesService = exports.getMessageByIdService = exports.addMessageService = exports.loginService = exports.signupService = void 0;
 var auth_1 = require("./auth");
 Object.defineProperty(exports, "signupService", { enumerable: true, get: function () { return auth_1.signupService; } });
 Object.defineProperty(exports, "loginService", { enumerable: true, get: function () { return auth_1.loginService; } });
@@ -21,6 +21,7 @@ Object.defineProperty(exports, "getBestStadiumsService", { enumerable: true, get
 var matches_1 = require("./matches");
 Object.defineProperty(exports, "createMatchService", { enumerable: true, get: function () { return matches_1.createMatchService; } });
 Object.defineProperty(exports, "getAllMatches", { enumerable: true, get: function () { return matches_1.getAllMatches; } });
+Object.defineProperty(exports, "getMyMatchesService", { enumerable: true, get: function () { return matches_1.getMyMatchesService; } });
 Object.defineProperty(exports, "JoinToMatchService", { enumerable: true, get: function () { return matches_1.JoinToMatchService; } });
 var reviews_1 = require("./reviews");
 Object.defineProperty(exports, "getReviewService", { enumerable: true, get: function () { return reviews_1.getReviewService; } });

@@ -20,8 +20,8 @@ const getMessageById = async (req, res) => {
 exports.getMessageById = getMessageById;
 const getAllMatchMessages = async (req, res) => {
     const { id } = req.params;
-    const data = await (0, services_1.getAllMessagesService)(+id);
-    res.json(data);
+    const data = await (0, services_1.getAllMessagesService)(+id, req);
+    res.status(data.status).json(data);
 };
 exports.getAllMatchMessages = getAllMatchMessages;
 const deleteMessage = async (req, res) => {

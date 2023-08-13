@@ -35,3 +35,8 @@ export interface MatchCardProps {
   join: boolean;
   setJoin: Dispatch<SetStateAction<boolean>>;
 }
+
+export interface matchesContextTypes {
+  getMyMatches: () => Promise<void>;
+  myMatches: Match[];
+}

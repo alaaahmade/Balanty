@@ -1,7 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.editMessageService = exports.deleteMessageService = exports.getAllMessagesService = exports.getMessageByIdService = exports.addMessageService = void 0;
 const models_1 = require("../models");
+const MatchPlayer_1 = __importDefault(require("../models/MatchPlayer"));
 const addMessageService = async ({ message, senderId, matchId, }) => {
     const newMessage = await models_1.Message.create({
         UserId: senderId,
@@ -69,52 +73,70 @@ const getMessageByIdService = async (messageId) => {
     }
 };
 exports.getMessageByIdService = getMessageByIdService;
-const getAllMessagesService = async (matchId) => {
-    const match = await models_1.Match.findOne({
-        where: { id: matchId },
-        include: [
-            {
-                model: models_1.Message,
-                as: 'MatchMessages',
-                include: [
-                    {
-                        model: models_1.User,
-                        attributes: [
-                            'createdAt',
-                            'email',
-                            'id',
-                            'phone',
-                            'role',
-                            'updatedAt',
-                            'username',
-                        ],
-                        include: [
-                            {
-                                model: models_1.Player,
-                            },
-                            {
-                                model: models_1.Stadium,
-                            },
-                        ],
-                    },
-                ],
-            },
-        ],
+const getAllMessagesService = async (matchId, req) => {
+    const userId = req.user?.id;
+    const matchesIds = await MatchPlayer_1.default.findAll({
+        where: {
+            userId,
+        },
+        attributes: ['matchId'],
     });
-    if (match) {
+    const PlayerMatchesId = matchesIds.map(matchPlayer => matchPlayer.matchId);
+    if (!PlayerMatchesId.includes(matchId)) {
         return {
-            status: 200,
+            status: 401,
             data: {
-                match,
+                message: 'Unauthorized',
             },
         };
     }
-    return {
-        status: 404,
-        data: {
-            message: 'Match not found',
-        },
-    };
+    else {
+        const match = await models_1.Match.findOne({
+            where: { id: matchId },
+            include: [
+                {
+                    model: models_1.Message,
+                    as: 'MatchMessages',
+                    include: [
+                        {
+                            model: models_1.User,
+                            attributes: [
+                                'createdAt',
+                                'email',
+                                'id',
+                                'phone',
+                                'role',
+                                'updatedAt',
+                                'username',
+                            ],
+                            include: [
+                                {
+                                    model: models_1.Player,
+                                },
+                                {
+                                    model: models_1.Stadium,
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        });
+        if (match) {
+            return {
+                status: 200,
+                data: {
+                    match,
+                },
+            };
+        }
+        return {
+            status: 404,
+            data: {
+                message: 'Match not found',
+            },
+        };
+    }
 };
 exports.getAllMessagesService = getAllMessagesService;
 const deleteMessageService = async (id) => {

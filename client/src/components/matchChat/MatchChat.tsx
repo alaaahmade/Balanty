@@ -104,10 +104,8 @@ const MatchChat: FC<{ socket: Socket }> = ({ socket }): ReactElement => {
       if (isAxiosError(error)) {
         const axiosError = error as AxiosError<CustomErrorResponse>;
         if (axiosError.response) {
-          const errorResponse = axiosError.response.data;
-          if (errorResponse?.status === 401) {
-            navigate('/home');
-          } else if (errorResponse?.status === 500) {
+          const errorResponse = axiosError.response.data.data;
+          if (errorResponse?.status === 500) {
             navigate('/servererror');
           }
           setErrorMessage(errorResponse?.message);

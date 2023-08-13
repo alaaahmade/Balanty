@@ -2,11 +2,13 @@ import { ReactElement } from 'react';
 
 import { Typography } from '@mui/material';
 
+import { useNavigate } from 'react-router-dom';
 import { StyledButton, StyledMyMatches } from '../../index';
 
 import { MyMatchesProps } from '../../../interfaces';
 
 const MyMatches = ({ id, title }: MyMatchesProps): ReactElement => {
+  const navigate = useNavigate();
   return (
     <StyledMyMatches
       sx={{
@@ -14,7 +16,9 @@ const MyMatches = ({ id, title }: MyMatchesProps): ReactElement => {
         backgroundColor: theme => theme.palette.customColors.backGroundColor,
       }}
     >
-      <StyledButton to={`/home/match/${id}`}>المزيد</StyledButton>
+      <StyledButton onClick={() => navigate(`/home/match/${id}`)}>
+        المزيد
+      </StyledButton>
       <Typography
         sx={{
           fontWeight: 'bold',

@@ -2,10 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controllers_1 = require("../controllers");
+const middleware_1 = require("../middleware");
+const utils_1 = require("../utils");
 const chatRouter = (0, express_1.Router)();
-chatRouter.get('/match/:id', controllers_1.getAllMatchMessages);
-chatRouter.get('/:id', controllers_1.getMessageById);
-chatRouter.post('/', controllers_1.addMessage);
+chatRouter.get('/match/:id', middleware_1.checkAuth, (0, utils_1.errorWrapper)(controllers_1.getAllMatchMessages));
+chatRouter.get('/:id', (0, utils_1.errorWrapper)(controllers_1.getMessageById));
+chatRouter.post('/', (0, utils_1.errorWrapper)(controllers_1.addMessage));
 chatRouter.delete('/:id', controllers_1.deleteMessage);
-chatRouter.put('/', controllers_1.editMessage);
+chatRouter.put('/', (0, utils_1.errorWrapper)(controllers_1.editMessage));
 exports.default = chatRouter;

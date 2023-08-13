@@ -1,31 +1,25 @@
 import { ReactElement, useContext, useEffect, useState } from 'react';
-import axios from 'axios';
 import { Divider, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import MyMatches from './MyMatches';
 import RightSideBarTitle from './RightSideBarTitle';
 import WorldMatch from './WorldMatch';
 import { BorderBox, SideBox } from '../../index';
-import { Match } from '../../../interfaces';
 import { ThemeContext } from '../../../context/ThemeContext';
+import { MatchesContext } from '../../../context/MyMatchesContext';
 
 const RightSideBar = (): ReactElement => {
-  const [myMatches, setMyMatches] = useState<Match[]>([]);
+  const { isDarkMode } = useContext(ThemeContext);
+  const { getMyMatches, myMatches } = useContext(MatchesContext);
   const navigate = useNavigate();
 
-  const { isDarkMode } = useContext(ThemeContext);
-  const getMyMatches = async () => {
+  useEffect(() => {
     try {
-      const response = await axios('/api/v1/matches/my-matches');
-      setMyMatches(response.data.data);
+      getMyMatches();
     } catch (error) {
       navigate('/home');
     }
-  };
-
-  useEffect(() => {
-    getMyMatches();
-  }, [setMyMatches]);
+  }, []);
 
   return (
     <SideBox

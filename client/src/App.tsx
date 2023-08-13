@@ -24,6 +24,7 @@ import {
 } from './context';
 import { ThemeProviderWrapper } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
+import { MyMatchesProvider } from './context/MyMatchesContext';
 
 const { VITE_BASE_URL } = import.meta.env;
 
@@ -82,7 +83,9 @@ const App = (): ReactElement => {
         <open.Provider value={useCustomOpen()}>
           <StatsContextProvider>
             <UpdateGalleryContextProvider>
-              <RouterProvider router={router} />
+              <MyMatchesProvider>
+                <RouterProvider router={router} />
+              </MyMatchesProvider>
             </UpdateGalleryContextProvider>
           </StatsContextProvider>
         </open.Provider>

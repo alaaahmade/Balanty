@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { Box, styled } from '@mui/system';
 import { Link } from 'react-router-dom';
 
@@ -14,8 +14,8 @@ export const SideBox = styled(Box)({
   paddingBottom: '20px',
 });
 
-export const StyledButton = styled(Link)({
-  width: '65px',
+export const StyledButton = styled(Button)({
+  width: 'fit-content',
   height: '30px',
   background: '#2CB674',
   borderRadius: '5px',
@@ -23,6 +23,7 @@ export const StyledButton = styled(Link)({
   textDecoration: 'none',
   textAlign: 'center',
   lineHeight: '28px',
+  padding: '0 0.5rem',
 
   '&:hover': {
     backgroundColor: 'transparent',
