@@ -106,7 +106,6 @@ export const getAllMatches = async (
   });
 
   if (matches.length > 0) {
-    console.log(matches[0].dataValues.Players);
     if (search) {
       const newMAtches = matches.filter(match =>
         match.dataValues.title.includes(search),
@@ -163,6 +162,51 @@ export const getMyMatchesService = async (
       data: 'لا يوجد مباريات',
     };
   }
+};
+
+export const getMatchDataService = async (
+  req: Request,
+): Promise<matchesInterface> => {
+  const currentDate = Date.now();
+  const currentDateObject = new Date(currentDate);
+  const currentDateFormatted = currentDateObject.toISOString();
+  const { matchId } = req.params;
+  const match = await Match.findOne({
+    where: {
+      [Op.or]: [{ startDate: { [Op.gt]: currentDateFormatted } }],
+      id: matchId,
+    },
+    include: [
+      { model: User, as: 'ownerUser', attributes: ['id', 'username', 'role'] },
+      {
+        model: User,
+        as: 'stadiumMatch',
+        attributes: ['id', 'username', 'role'],
+        include: [
+          {
+            model: Stadium,
+            include: [{ model: Gallery, as: 'stadiumGallery' }],
+          },
+        ],
+      },
+      {
+        model: User,
+        as: 'Players',
+        attributes: ['id', 'username', 'role'],
+      },
+    ],
+  });
+
+  if (!match) {
+    return {
+      status: 404,
+      data: 'لا يوجد مباريات',
+    };
+  }
+  return {
+    status: 200,
+    data: match,
+  };
 };
 
 export const JoinToMatchService = async (

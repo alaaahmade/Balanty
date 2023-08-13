@@ -13,7 +13,7 @@ import SendIcon from '@mui/icons-material/Send';
 import Typography from '@mui/material/Typography';
 import axios, { AxiosError } from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Box, Theme, useTheme } from '@mui/material';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import { Socket } from 'socket.io-client';
@@ -30,6 +30,7 @@ import {
   CustomErrorResponse,
   IMatchDataProps,
   IMatchMessage,
+  customPalette,
 } from '../../interfaces';
 
 import ChatImage from '../../assets/chat.svg';
@@ -40,6 +41,8 @@ import { IMessageData } from '../../interfaces/matchInterface';
 const MatchChat: FC<{ socket: Socket }> = ({ socket }): ReactElement => {
   const { pathname } = useLocation();
   const matchId = Number(pathname.split('/')[3]);
+
+  const currentTheme = useTheme();
 
   const [matchData, setMatchData] = useState<IMatchDataProps>({
     status: 0,
@@ -98,9 +101,13 @@ const MatchChat: FC<{ socket: Socket }> = ({ socket }): ReactElement => {
   const getMessageRequest = async () => {
     try {
       const response = await axios.get(`/api/v1/message/match/${matchId}`);
+
       setMatchData(response.data);
       setMatchMessages(response.data?.data?.match?.MatchMessages);
     } catch (error) {
+      if ((error as { response: { status: number } }).response.status) {
+        navigate('/home');
+      }
       if (isAxiosError(error)) {
         const axiosError = error as AxiosError<CustomErrorResponse>;
         if (axiosError.response) {
@@ -167,9 +174,22 @@ const MatchChat: FC<{ socket: Socket }> = ({ socket }): ReactElement => {
   };
 
   return (
-    <Wrapper ref={scrollContainerRef}>
+    <Wrapper
+      ref={scrollContainerRef}
+      sx={{
+        backgroundColor: (currentTheme.palette as customPalette).customColors
+          .grayColor,
+      }}
+    >
       <MatchHeaderSection>
-        <Typography variant="h4" sx={{ fontSize: '20px', fontWeight: 'bold' }}>
+        <Typography
+          variant="h4"
+          sx={{
+            fontSize: '20px',
+            fontWeight: 'bold',
+            color: (currentTheme.palette as customPalette).primary.contrastText,
+          }}
+        >
           {matchData?.data?.match?.title}
         </Typography>
       </MatchHeaderSection>
@@ -261,6 +281,11 @@ const MatchChat: FC<{ socket: Socket }> = ({ socket }): ReactElement => {
           onChange={handleInput}
           onKeyDown={handleKeyDown}
           placeholder="اكتب رسالتك"
+          style={{
+            backgroundColor: (currentTheme.palette as customPalette)
+              .customColors.grayColor,
+            color: (currentTheme.palette as customPalette).primary.contrastText,
+          }}
         />
         <IconBackground
           onClick={() => addMessage()}

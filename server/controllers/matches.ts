@@ -2,6 +2,7 @@ import { Response, Request, RequestHandler } from 'express';
 import {
   createMatchService,
   getAllMatches,
+  getMatchDataService,
   getMyMatchesService,
   JoinToMatchService,
 } from '../services';
@@ -28,6 +29,14 @@ export const getMyMatches: RequestHandler = async (
   res: Response,
 ): Promise<void> => {
   const data = await getMyMatchesService(req);
+  res.status(data.status).json(data);
+};
+
+export const getMatchData: RequestHandler = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const data = await getMatchDataService(req);
   res.status(data.status).json(data);
 };
 

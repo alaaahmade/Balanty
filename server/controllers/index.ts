@@ -11,6 +11,7 @@ export {
   createMatch,
   JoinToMatch,
   searchMatches,
+  getMatchData,
 } from './matches';
 
 export {
