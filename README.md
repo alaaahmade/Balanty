@@ -7,21 +7,28 @@ The Solution :
 
 ## **The solution** : 
 - Balanty is a cutting-edge website that connects football enthusiasts, streamlining the team formation process and enhancing the overall football experience.
+
+---
+## **Live Website** 📺
+You can see our demo website [Here](http://3.75.142.65/).
+
+---
+
 ## **User Stories**  : 
 ### Member
-- As a member i can create an account and set up a profile.
-- As a member i can browse and join available matches.
-- As a member i can book a stadium for my match.
-- As a member i can invite other players to join a match.
-- As a member i can provide a review and rating for the stadium on Balanty.
-- As a member i can communicate with other players in the match chat room.
+- As a member, I can create an account and set up a profile.
+- As a member, I can browse and join available matches.
+- As a member, I can book a stadium for my match.
+- As a member, I can invite other players to join a match.
+- As a member, I can review and rate the stadium on Balanty.
+- As a member, I can communicate with other players in the match chat room.
 
 
 ### Stadium owner
-- As a stadium owner i can register as a stadium owner and add stadium information.
-- As a stadium owner i can create a Match.
-- As a stadium owner i can Manage Booking Requests
-- As a stadium owner i can Engage with Reviews and Ratings.
+- As a stadium owner I can register as a stadium owner and add stadium information.
+- As a stadium owner I can create a Match.
+- As a stadium owner I can Manage Booking Requests
+- As a stadium owner I can Engage with Reviews and Ratings.
 
 ## **Prototype**
 [View Prototype](https://www.figma.com/file/9sp7RCGi8lRZtMDkWyidPF/football-community?type=design&t=PqEwnnR8xFvnxz65-0)
