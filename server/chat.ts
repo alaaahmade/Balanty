@@ -7,7 +7,13 @@ const server = createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:5173',
+    origin: (ori, callback) => {
+      if (/^http:\/\/localhost(:\d+)?$/.test(ori as string)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     methods: '*',
   },
 });
